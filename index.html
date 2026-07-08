@@ -17,14 +17,6 @@
     font-style:normal;
     font-display:swap;
   }
-  @font-face{
-    font-family:'Dana Yad';
-    src:url('dana-yad-alefalefalef/DanaYadAlefAlefAlef-Normal.woff') format('woff'),
-        url('dana-yad-alefalefalef/DanaYadAlefAlefAlef-Normal.otf') format('opentype');
-    font-weight:400;
-    font-style:normal;
-    font-display:swap;
-  }
   :root{
     --paper:#FFFFFF;
     --ink:#1A1C2E;
@@ -220,6 +212,14 @@
     transition:color .2s ease, border-color .2s ease, box-shadow .2s ease;
   }
   .btn-ghost:hover{ color:var(--ink); border-color:#B9BCD0; box-shadow:0 14px 30px rgba(50,62,124,.18); }
+  .btn-minor{
+    background:none; border:none; box-shadow:none;
+    padding:8px 6px;
+    font-weight:500; font-size:14px;
+    color:var(--dim);
+    text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(50,62,124,.35);
+  }
+  .btn-minor:hover{ color:var(--blue); text-decoration-color:var(--blue); }
 
   /* inline composer, opened by the ghost button */
   .composer{
@@ -323,7 +323,7 @@
     border:1px solid rgba(50,62,124,.10);
     border-radius:12px;
     padding:1em 1.6em 1.5em;
-    font-family:'Dana Yad','OH Netta Epstein','Frank Ruhl Libre',serif;
+    font-family:'OH Netta Epstein','Frank Ruhl Libre',serif;
     font-size:clamp(21px,2.3vw,28px);
     line-height:1.9;
     color:var(--ink);
@@ -358,7 +358,7 @@
     box-shadow:0 8px 22px rgba(50,62,124,.16);
   }
   .sign-name{
-    font-family:'Dana Yad','OH Netta Epstein','Frank Ruhl Libre',serif;
+    font-family:'OH Netta Epstein','Frank Ruhl Libre',serif;
     font-size:29px; margin:0; color:var(--ink);
   }
   .letter .meta{
@@ -687,6 +687,23 @@
     min-height:76px; resize:vertical; line-height:1.55;
   }
   .field textarea:focus{ border-color:var(--blue); outline:none; }
+  .field select{
+    width:100%; background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:14px 16px; font-size:16px; color:var(--ink);
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371738A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:left 14px center; background-size:18px;
+  }
+  .field select:focus{ border-color:var(--blue); outline:none; }
+  .checks{ display:flex; flex-direction:column; gap:9px; }
+  .checks label{
+    display:flex; align-items:center; gap:10px;
+    font-size:15px; font-weight:500; color:var(--ink);
+    border:1.5px solid var(--line); border-radius:12px; padding:11px 14px;
+    cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  }
+  .checks label:has(input:checked){ border-color:var(--blue); background:var(--blue-soft); }
+  .checks input{ flex:none; width:18px; height:18px; accent-color:var(--blue); }
   .cta-btn{
     width:100%; border:none; border-radius:999px; padding:18px;
     background:var(--blue); color:#fff;
@@ -856,7 +873,7 @@
     <div class="hero-center">
       <h1 class="hero-title">ישראל מלאה בבעיות.<br>הגיע הזמן להתאהב בבעיה&nbsp;— ולפתור אותה</h1>
       <div class="hero-actions">
-        <button type="button" class="btn-ghost" id="ctaProblem" aria-expanded="false" aria-controls="composer">הבעיה שלך לא כאן?</button>
+        <button type="button" class="btn-minor" id="ctaProblem" aria-expanded="false" aria-controls="composer">הבעיה שלך לא כאן?</button>
       </div>
       <div class="composer" id="composer" hidden>
         <div class="card-editor">
@@ -904,7 +921,6 @@
           <ul>
             <li>יזמים לאומיים אמיתיים שחולקים את הסיפור שלהם</li>
             <li>מינגלינג איכותי עם אנשים שחושבים כמוך</li>
-            <li>תצאו משם עם שותף לרעיון שמתבשל אצלכם</li>
           </ul>
           <a class="track-cta" href="#event">אני רוצה להגיע לערב הבא <span class="arr" aria-hidden="true">←</span></a>
         </article>
@@ -949,9 +965,10 @@
           </div>
           <p class="event-lede">מילה אחת תקבע מי ישרוד את העשור הקרוב: <b>Agency</b>. אנחנו קוראים לזה חלוציות — היכולת לקחת יוזמה, ללמוד מהר ולזוז.</p>
           <div class="event-ctas">
-            <a class="btn-primary" href="https://calendar.app.google/CgryW6iXoPm3mW9h7" target="_blank" rel="noopener">הוסיפו ליומן — שומרים לכם מקום</a>
-            <button type="button" class="btn-ghost btn-more" id="eventMoreBtn" aria-expanded="false" aria-controls="eventMore">רוצים לדעת עוד?</button>
+            <button type="button" class="btn-primary" id="signupBtn" data-signup>נרשמים לערב</button>
+            <a class="btn-ghost" href="https://calendar.app.google/CgryW6iXoPm3mW9h7" target="_blank" rel="noopener">הוסיפו ליומן</a>
           </div>
+          <button type="button" class="btn-minor btn-more" id="eventMoreBtn" aria-expanded="false" aria-controls="eventMore">רוצים לדעת עוד?</button>
           <p class="event-limit">המקומות מוגבלים — זה הסלון של בן-גוריון, לא אולם.</p>
         </div>
 
@@ -965,7 +982,7 @@
       </div>
 
       <div class="event-more" id="eventMore" hidden>
-        <p class="event-sub">לדור שלנו יש כבר Agency — חווינו את זה בצבא, במילואים, בשנתיים האחרונות. השאלה מה עושים עם זה. בערב הזה נשאל:</p>
+        <p class="event-sub">בערב הזה נשאל:</p>
         <ul class="event-qs">
           <li>איך הופכים את ישראל למעצמה טכנולוגית?</li>
           <li>איפה ההזדמנויות הענקיות שכולם מפספסים?</li>
@@ -988,7 +1005,7 @@
   <section class="ventures" id="ventures">
     <div class="wrap">
       <p class="kicker reveal">כבר התחלנו</p>
-      <h2 class="reveal" style="--d:.05s">זו לא תוכנית על נייר. <span class="hl">זה כבר עובד.</span></h2>
+      <h2 class="reveal" style="--d:.05s">שלושה אנשים שהיו בדיוק במקום שלכם, <span class="hl">ועכשיו מריצים את זה בשטח.</span></h2>
       <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו">
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דנאל בן נאמר">
           <img src="assets/f-bennamer.webp" alt="" loading="lazy">
@@ -1115,7 +1132,6 @@
     <h3 id="applyTitle">מועמדות לחממה ליזמות לאומית</h3>
     <p class="modal-sub">מ-0 ל-1, ומ-1 ל-1,000,000. ספרו לנו מי אתם — ונחזור אליכם לשיחה.</p>
     <form class="signup-form" id="applyForm" novalidate>
-      <input type="hidden" name="_subject" value="מועמדות חדשה לחממה — אתר הננו">
       <div class="field">
         <label for="fullname">שם מלא</label>
         <input type="text" id="fullname" name="שם מלא" required autocomplete="name">
@@ -1126,7 +1142,7 @@
       </div>
       <div class="field">
         <label for="email">אימייל</label>
-        <input type="email" id="email" name="email" required autocomplete="email">
+        <input type="email" id="email" name="email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com">
       </div>
       <div class="field">
         <label for="who">ספר/י לנו מי את/ה</label>
@@ -1148,6 +1164,60 @@
       <p class="form-error" id="applyError">משהו השתבש בשליחה. נסו שוב, או כתבו לנו באינסטגרם.</p>
     </form>
     <p class="success-msg" id="applySuccess">קיבלנו את המועמדות. נחזור אליכם בקרוב — בינתיים, שריינו את ה-28.7.</p>
+  </div>
+</div>
+
+<!-- ======= EVENT SIGNUP MODAL ======= -->
+<div class="modal-overlay" id="signupModal" hidden role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" id="signupClose" aria-label="סגירת החלון">✕</button>
+    <h3 id="signupTitle">הרשמה — ערב יזמות לאומית</h3>
+    <p class="modal-sub">28.7 · 19:30 · בית בן־גוריון, תל אביב. שריינו מקום — הלוז יתפרסם בקרוב.</p>
+    <form class="signup-form" id="signupForm" novalidate>
+      <div class="field">
+        <label for="sgEmail">מייל</label>
+        <input type="email" id="sgEmail" name="email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com">
+      </div>
+      <div class="field">
+        <label for="sgName">שם</label>
+        <input type="text" id="sgName" name="name" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="sgAge">גיל</label>
+        <input type="number" id="sgAge" name="age" required min="14" max="99" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="sgPhone">מס׳ טלפון</label>
+        <input type="tel" id="sgPhone" name="phone" required autocomplete="tel" inputmode="tel">
+      </div>
+      <div class="field">
+        <label for="sgGender">מגדר</label>
+        <select id="sgGender" name="gender" required>
+          <option value="" disabled selected>בחרו</option>
+          <option value="זכר">זכר</option>
+          <option value="נקבה">נקבה</option>
+          <option value="__other_option__">אחר</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>מה חשוב לך לקבל מהאירוע? *</label>
+        <div class="checks" id="sgGoal">
+          <label><input type="checkbox" value="כלים מעשיים להתחיל מיזם">כלים מעשיים להתחיל מיזם</label>
+          <label><input type="checkbox" value="היכרות עם אנשים שחושבים כמוני">היכרות עם אנשים שחושבים כמוני</label>
+          <label><input type="checkbox" value="מישהו שידחוף אותי לממש רעיון שיש לי">מישהו שידחוף אותי לממש רעיון שיש לי</label>
+          <label><input type="checkbox" value="להבין אם יזמות לאומית רלוונטית בשבילי">להבין אם יזמות לאומית רלוונטית בשבילי</label>
+          <label><input type="checkbox" value="השראה וחיבור לחזון גדול יותר">השראה וחיבור לחזון גדול יותר</label>
+        </div>
+        <p class="form-error" id="sgGoalError" style="text-align:right; margin-top:8px;">בחרו לפחות אפשרות אחת</p>
+      </div>
+      <div class="field">
+        <label for="sgSource">איך הגעת אלינו?</label>
+        <input type="text" id="sgSource" name="source">
+      </div>
+      <button type="submit" class="cta-btn">שולחים הרשמה</button>
+      <p class="form-error" id="signupError">משהו השתבש בשליחה. נסו שוב, או כתבו לנו באינסטגרם.</p>
+    </form>
+    <p class="success-msg" id="signupSuccess">נרשמתם! שריינו את ה-28.7 — נתראה שם.</p>
   </div>
 </div>
 
@@ -1184,7 +1254,31 @@
       formId: '1FAIpQLScrd9lnHd47pfLZKSmpvKRRRxMpUlDtf5VOO3ZY7gHvUjq7QQ',
       fields: { text: 'entry.404640594' }
     },
-    signups: null /* המועמדויות לחממה נשלחות ל-Formspree — ראו applyForm למטה */
+    signups: {
+      formId: '1FAIpQLSeoblr0a6ERUegTxdMjUNrI5ZGPb3IDX4t3OJ-yGp0g-Qz0ew',
+      fields: {
+        fullname: 'entry.1414884044',
+        phone: 'entry.1132574824',
+        email: 'entry.1035743984',
+        who: 'entry.2075067274',
+        pain: 'entry.1358199669',
+        dream: 'entry.1485091750',
+        doneSoFar: 'entry.1568552002'
+      }
+    },
+    eventSignup: {
+      formId: '1FAIpQLSfulOv7YqYaWmsHIdBD2dlUkwqAb5eb0S4eOroFq4wTFbUbQg',
+      fields: {
+        email: 'entry.87382333',
+        name: 'entry.428329498',
+        age: 'entry.1455670285',
+        phone: 'entry.247910243',
+        gender: 'entry.416161896',
+        genderOther: 'entry.416161896.other_option_response',
+        goal: 'entry.1715727067',
+        source: 'entry.2030636162'
+      }
+    }
   };
 
   function sendToSheet(cfg, data){
@@ -1194,7 +1288,14 @@
     }
     var body = new URLSearchParams();
     Object.keys(data).forEach(function(k){
-      if(cfg.fields[k]) body.append(cfg.fields[k], data[k]);
+      if(!cfg.fields[k]) return;
+      var val = data[k];
+      if(val === undefined || val === null) return;
+      if(Array.isArray(val)){
+        val.forEach(function(v){ body.append(cfg.fields[k], v); });
+      } else {
+        body.append(cfg.fields[k], val);
+      }
     });
     return fetch('https://docs.google.com/forms/d/e/' + cfg.formId + '/formResponse', {
       method: 'POST',
@@ -1635,7 +1736,7 @@
     });
   }
 
-  /* ---- apply modal: candidacy for the incubator (Formspree) ---- */
+  /* ---- apply modal: candidacy for the incubator (Google Form → Sheet) ---- */
   var applyModal = document.getElementById('applyModal');
   var applyForm = document.getElementById('applyForm');
   var applySuccess = document.getElementById('applySuccess');
@@ -1674,24 +1775,88 @@
     var submitBtn = applyForm.querySelector('.cta-btn');
     submitBtn.disabled = true;
     applyError.classList.remove('show');
-    fetch('https://formspree.io/f/xnjygrae', {
-      method: 'POST',
-      body: new FormData(applyForm),
-      headers: { 'Accept': 'application/json' }
-    }).then(function(res){
-      if(res.ok){
-        applyForm.style.display = 'none';
-        applySuccess.classList.add('show');
-        applySuccess.setAttribute('tabindex','-1');
-        applySuccess.focus();
-        fireConfetti(applySuccess);
-      } else {
-        applyError.classList.add('show');
-        submitBtn.disabled = false;
-      }
-    }).catch(function(){
-      applyError.classList.add('show');
-      submitBtn.disabled = false;
+    var data = {
+      fullname: applyForm.fullname.value.trim(),
+      phone: applyForm.phone.value.trim(),
+      email: applyForm.email.value.trim(),
+      who: applyForm.who.value.trim(),
+      pain: applyForm.pain.value.trim(),
+      dream: applyForm.dream.value.trim(),
+      doneSoFar: applyForm.doneSoFar.value.trim()
+    };
+    sendToSheet(SHEETS.signups, data).then(function(){
+      applyForm.style.display = 'none';
+      applySuccess.classList.add('show');
+      applySuccess.setAttribute('tabindex','-1');
+      applySuccess.focus();
+      fireConfetti(applySuccess);
+    });
+  });
+
+  /* ---- event signup modal (Google Form → Sheet) ---- */
+  var signupModal = document.getElementById('signupModal');
+  var signupForm = document.getElementById('signupForm');
+  var signupSuccess = document.getElementById('signupSuccess');
+  var signupError = document.getElementById('signupError');
+  var signupLastFocus = null;
+
+  function openSignup(){
+    signupLastFocus = document.activeElement;
+    signupModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var first = signupForm.querySelector('input:not([type="hidden"])');
+    if(first) first.focus();
+  }
+  function closeSignup(){
+    signupModal.hidden = true;
+    document.body.style.overflow = '';
+    if(signupLastFocus && signupLastFocus.focus) signupLastFocus.focus();
+  }
+  document.querySelectorAll('[data-signup]').forEach(function(btn){
+    btn.addEventListener('click', openSignup);
+  });
+  document.getElementById('signupClose').addEventListener('click', closeSignup);
+  signupModal.addEventListener('click', function(e){
+    if(e.target === signupModal) closeSignup();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !signupModal.hidden) closeSignup();
+  });
+
+  var sgGoalError = document.getElementById('sgGoalError');
+  signupForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!signupForm.checkValidity()){
+      signupForm.reportValidity();
+      return;
+    }
+    var goals = Array.prototype.slice.call(signupForm.querySelectorAll('#sgGoal input:checked')).map(function(i){ return i.value; });
+    if(goals.length === 0){
+      sgGoalError.classList.add('show');
+      signupForm.querySelector('#sgGoal input').focus();
+      return;
+    }
+    sgGoalError.classList.remove('show');
+    var submitBtn = signupForm.querySelector('.cta-btn');
+    submitBtn.disabled = true;
+    signupError.classList.remove('show');
+    var genderVal = signupForm.sgGender.value;
+    var data = {
+      email: signupForm.sgEmail.value.trim(),
+      name: signupForm.sgName.value.trim(),
+      age: signupForm.sgAge.value.trim(),
+      phone: signupForm.sgPhone.value.trim(),
+      gender: genderVal,
+      genderOther: genderVal === '__other_option__' ? 'אחר' : undefined,
+      goal: goals,
+      source: signupForm.sgSource.value.trim()
+    };
+    sendToSheet(SHEETS.eventSignup, data).then(function(){
+      signupForm.style.display = 'none';
+      signupSuccess.classList.add('show');
+      signupSuccess.setAttribute('tabindex','-1');
+      signupSuccess.focus();
+      fireConfetti(signupSuccess);
     });
   });
 
