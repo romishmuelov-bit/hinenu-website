@@ -687,14 +687,14 @@
   .vflow{ position:relative; height:530px; perspective:1400px; touch-action:pan-y; }
   .vcard{
     position:absolute; top:0; left:50%; width:320px; margin-left:-160px;
-    background:#23263E; border-radius:22px; overflow:hidden; cursor:grab;
+    background:var(--blue); border-radius:22px; overflow:hidden; cursor:grab;
     transition:transform .7s cubic-bezier(.22,.61,.36,1), filter .7s ease, opacity .7s ease;
     will-change:transform; text-align:right;
     box-shadow:0 30px 70px rgba(0,0,0,.5);
   }
   .vcard img{ width:100%; height:300px; object-fit:cover; object-position:50% 12%; pointer-events:none; display:block; }
   .vbody{ padding:20px 22px 24px; }
-  .vbody .role{ font-size:11.5px; font-weight:800; letter-spacing:.12em; color:var(--blue); margin-bottom:6px; }
+  .vbody .role{ font-size:11.5px; font-weight:800; letter-spacing:.12em; color:rgba(255,255,255,.78); margin-bottom:6px; }
   .vbody b{ display:block; font-size:20px; font-family:'Rubik',sans-serif; font-weight:800; margin-bottom:7px; color:#fff; }
   .vbody p{ margin:0; font-size:13.5px; line-height:1.55; color:rgba(255,255,255,.72); }
   .vcard.you{ background:var(--blue); }
@@ -705,7 +705,7 @@
     color:#fff; text-align:center;
   }
   .vlink{
-    display:inline-block; margin-top:10px; color:var(--blue);
+    display:inline-block; margin-top:10px; color:#fff;
     font-weight:800; font-size:14px;
     text-decoration:underline; text-underline-offset:4px;
   }
@@ -1222,8 +1222,8 @@
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דור המייסדות">
           <img src="assets/v-dor.webp" alt="" loading="lazy" style="object-position:50% 35%">
           <div class="vbody">
-            <div class="role">אומנות · קהילה</div>
-            <b>דור המייסדות</b>
+            <div class="role">מייסדות · דור המייסדות</div>
+            <b>אביגייל קרבי ואופיר גלינה</b>
             <p>שיתופי פעולה בין אומנים.ות לאומנים.ות לקהילה. אומנות נחלת הכלל.</p>
             <a class="vlink" href="https://www.instagram.com/dorhameyasdot/" target="_blank" rel="noopener">אינסטגרם ←</a>
           </div>
@@ -1231,8 +1231,8 @@
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: כיף בעוטף">
           <img src="assets/v-otef.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">הפקות · עוטף עזה</div>
-            <b>כיף בעוטף — מעיין גל</b>
+            <div class="role">מייסדת · כיף בעוטף</div>
+            <b>מעיין גל</b>
             <p>בית היוצר של ההפקות הכי מוגזמות בעוטף. עושים רעש מסוג שמח מאז 2021 — רק שטויות וערק.</p>
             <a class="vlink" href="https://www.instagram.com/kef.otef/" target="_blank" rel="noopener">אינסטגרם ←</a>
           </div>
@@ -1240,8 +1240,8 @@
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: שמונה">
           <img src="assets/v-shmona.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">תרבות · קריית שמונה</div>
-            <b>שמונה. — אסף פנחסי</b>
+            <div class="role">מייסד · שמונה.</div>
+            <b>אסף פנחסי</b>
             <p>שחקן תיאטרון ומלווה תהליכי סטוריטלינג שעלה לגליל העליון, והרים יחד עם העירייה מופע סיפורים מוזיקלי שמעלה את סיפורה של קריית שמונה דרך האנשים שחיים בה.</p>
           </div>
         </article>
