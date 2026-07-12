@@ -61,7 +61,7 @@
     --font-display:'MigdalHaemek';
     --font-mid:'Frank Ruhl Libre';
   }
-  ::selection{ background:var(--hl-blue); color:#fff; }
+  ::selection{ background:#fff; color:#000; }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
@@ -117,13 +117,13 @@
     letter-spacing:1.5px;
     transition:color .2s ease; border:none;
   }
-  .top-link:hover, .top-cta:hover{ color:var(--coral); }
+  .top-link:hover, .top-cta:hover{ color:#fff; }
   button.top-link{ background:none; border:none; padding:0; cursor:pointer; }
   .navfan{ position:relative; }
   .fan-btn{ position:relative; z-index:1; padding:6px 12px; }
   .fan-btn::before{
     content:""; position:absolute; inset:-16% -6%; z-index:-1;
-    background:var(--hl-blue); opacity:0; transition:opacity .18s ease;
+    background:#000; opacity:0; transition:opacity .18s ease;
     -webkit-mask:url('assets/hlk-3.webp') center/100% 100% no-repeat;
     mask:url('assets/hlk-3.webp') center/100% 100% no-repeat;
   }
@@ -151,7 +151,7 @@
   .fan-menu > :nth-child(3){ --fr:-14deg; --fx:-38px; }
   .fan-menu a:hover, .fan-menu button:hover{
     background:#17181C;
-    transform:rotate(0deg) translateX(var(--fx,0px)) scale(1.06);
+    transform:rotate(var(--fr,0deg)) translateX(var(--fx,0px)) scale(1.06);
   }
   .fan-menu:not([hidden]) > *{ animation:dockIn .5s cubic-bezier(.34,1.56,.64,1) both; }
   .fan-menu > :nth-child(1){ animation-delay:.02s; }
@@ -168,7 +168,7 @@
   .h5-kick{
     position:relative; z-index:2;
     font-family:'Karantina',sans-serif; font-weight:700; letter-spacing:5px;
-    font-size:clamp(15px,1.6vw,20px); color:var(--coral); margin:0 0 18px;
+    font-size:clamp(15px,1.6vw,20px); color:#fff; margin:0 0 18px;
   }
   .h5-title{
     position:relative; z-index:2;
@@ -180,7 +180,7 @@
   .hlmask{ position:relative; font-style:normal; white-space:nowrap; }
   .hlmask::before{
     content:""; position:absolute; inset:-8% -5%; z-index:-1;
-    background:var(--hl-blue);
+    background:#000;
     -webkit-mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
     mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
     opacity:.95;
@@ -353,7 +353,7 @@
     max-width:860px; margin:0 auto; padding:0 26px;
   }
   .letter .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:var(--coral);
+    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 26px; text-align:center;
   }
   .notebook{
@@ -440,7 +440,7 @@
   .tracks .wrap{ position:relative; z-index:2; }
   .tracks-head{ text-align:center; margin-bottom:54px; }
   .tracks-head .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:var(--coral);
+    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 14px;
   }
   .tracks-head h2{
@@ -453,8 +453,8 @@
   .tflow{ position:relative; perspective:1400px; }
   .track{
     background:
-      url('assets/torn-top-a.webp') top center/100% calc(100% - 68px) no-repeat,
-      url('assets/torn-btm-a.webp') bottom center/100% 70px no-repeat;
+      url('assets/torn-top-a.webp') top center/100% calc(100% - 62px) no-repeat,
+      url('assets/torn-btm-a.webp') bottom center/100% 64px no-repeat;
     padding:50px 58px 104px;
     filter:drop-shadow(0 24px 50px rgba(0,0,0,.55));
     display:flex; flex-direction:column; text-align:right;
@@ -489,10 +489,10 @@
   .track-b{
     transform:rotate(-.8deg);
     background:
-      url('assets/torn-top-b.webp') top center/100% calc(100% - 74px) no-repeat,
-      url('assets/torn-btm-b.webp') bottom center/100% 76px no-repeat;
+      url('assets/torn-top-b.webp') top center/100% calc(100% - 72px) no-repeat,
+      url('assets/torn-btm-b.webp') bottom center/100% 74px no-repeat;
   }
-  .track-b .tag{ color:var(--hl); }
+  .track-b .tag{ color:var(--blue); }
   .track-b .desc{ color:#3E405A; }
   .perks{
     list-style:none; padding:0; margin:0 0 26px;
@@ -505,7 +505,7 @@
   .perk:hover{ transform:translateX(-4px); }
   .perk .num{
     font-family:'Rubik',sans-serif; font-weight:900; font-size:14px;
-    color:var(--hl); min-width:22px; padding-top:2px;
+    color:var(--blue); min-width:22px; padding-top:2px;
     font-variant-numeric:tabular-nums;
     transition:color .35s ease, transform .35s ease;
   }
@@ -550,7 +550,7 @@
     border-top:1px solid var(--line);
   }
   .event .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:var(--coral);
+    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 12px;
   }
   .event-body h2{
@@ -613,7 +613,7 @@
     display:flex; flex-direction:column; gap:10px;
   }
   .event-qs li{ display:flex; gap:12px; font-size:16.5px; font-weight:700; color:var(--ink); }
-  .event-qs li::before{ content:"—"; color:var(--coral); flex:none; font-weight:700; }
+  .event-qs li::before{ content:"—"; color:var(--ink-dark); flex:none; font-weight:700; }
   .event-ctas{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; position:relative; }
   .event-arrow{
     display:none;
@@ -660,7 +660,7 @@
   .ev-tag.ev-future{ background:var(--hl-blue); }
   .ev-modal{ max-width:560px; }
   .ev-modal .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:var(--coral);
+    font-family:'Rubik',sans-serif; font-weight:800; color:var(--blue);
     font-size:13px; letter-spacing:3px; margin:0 0 10px;
   }
   .ev-modal h3{ font-size:26px; }
@@ -679,7 +679,7 @@
   /* ---------- VENTURES: already working ---------- */
   .ventures{ background:#000; color:#fff; padding:110px 0 100px; border-top:1px solid var(--line); overflow:clip; }
   .ventures .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:#9FA8E8;
+    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 14px; text-align:center;
   }
   .ventures h2{
@@ -736,7 +736,7 @@
     padding:64px 0 58px; text-align:center; overflow:hidden;
   }
   .backers .overline{
-    display:block; font-family:'Rubik',sans-serif; font-weight:800; color:var(--dim);
+    display:block; font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:13px; letter-spacing:3px; margin:0 0 34px; padding:0 24px;
   }
   .marquee{ position:relative; overflow:hidden; direction:ltr; }
@@ -802,15 +802,13 @@
   }
   .field textarea:focus{ border-color:var(--blue); outline:none; }
   .cta-btn{
-    width:100%; border:none; padding:22px 18px 26px;
-    background:url('assets/torn-4.webp') center/100% 100% no-repeat;
-    color:var(--board);
-    font-family:'Rubik',sans-serif; font-weight:800; font-size:20px;
-    cursor:pointer; margin-top:10px;
-    filter:drop-shadow(0 10px 18px rgba(35,36,31,.25));
-    transition:transform .15s ease;
+    width:100%; border:none; border-radius:14px;
+    background:var(--blue); color:#fff;
+    font-family:'Rubik',sans-serif; font-weight:800; font-size:18px;
+    padding:17px 18px; cursor:pointer; margin-top:10px;
+    transition:transform .15s ease, background .2s ease;
   }
-  .cta-btn:hover{ transform:translateY(-2px); }
+  .cta-btn:hover{ background:#3D4A94; transform:translateY(-1px); }
   .cta-btn:active{ transform:scale(.98); }
   .success-msg{
     display:none; text-align:center; font-weight:800; font-size:18px;
@@ -839,7 +837,7 @@
   }
   summary::-webkit-details-marker{ display:none; }
   summary .plus{
-    flex:none; width:26px; height:26px; position:relative; color:var(--coral);
+    flex:none; width:26px; height:26px; position:relative; color:#fff;
     transition:transform .3s ease;
   }
   summary .plus::before, summary .plus::after{
@@ -986,7 +984,7 @@
     font-size:13.5px; line-height:1.75; margin:0;
     color:#D8D4C6;
   }
-  .machine pre .mnote{ color:var(--coral); }
+  .machine pre .mnote{ color:#9A9C93; }
   .theme-panel{
     position:fixed; left:16px; bottom:16px; z-index:250;
     width:250px; background:#fff; border-radius:14px;
@@ -1035,7 +1033,7 @@
         <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">הנני +</button>
         <div class="fan-menu" hidden>
           <button type="button" data-apply>אני רוצה להתמודד על מקום בחממה</button>
-          <a href="#event">אני רוצה להגיע למיטאפ</a>
+          <button type="button" data-openev="0">אני רוצה להגיע למיטאפ</button>
           <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">אני רוצה עזרה לעבור לדרום או לצפון</a>
         </div>
       </div>
@@ -1243,12 +1241,12 @@
             <a class="vlink" href="https://www.instagram.com/enjoy_otef/" target="_blank" rel="noopener">אינסטגרם ←</a>
           </div>
         </article>
-        <article class="vcard vtxt" tabindex="0" role="button" aria-label="להביא קדימה: שמונה">
-          <div class="vbig vbig-sm" aria-hidden="true">שמונה.</div>
+        <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: שמונה">
+          <img src="assets/v-shmona.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">קריית שמונה</div>
-            <b>שמונה.</b>
-            <p>מיזם שמחזיר צעירים לצפון — לגור, לבנות ולהישאר.</p>
+            <div class="role">תרבות · קריית שמונה</div>
+            <b>שמונה. — אסף פנחסי</b>
+            <p>שחקן תיאטרון ומלווה תהליכי סטוריטלינג שעלה לגליל העליון, והרים יחד עם העירייה מופע סיפורים מוזיקלי שמעלה את סיפורה של קריית שמונה דרך האנשים שחיים בה.</p>
           </div>
         </article>
         <article class="vcard you" tabindex="0" role="button" aria-label="להביא קדימה: אתם — מחזור 2026">
@@ -1381,7 +1379,7 @@
         <label for="doneSoFar">מה עשית עד היום?</label>
         <textarea id="doneSoFar" name="מה עשיתי עד היום"></textarea>
       </div>
-      <button type="submit" class="cta-btn">שולחים מועמדות</button>
+      <button type="submit" class="cta-btn">לשליחת המועמדות</button>
       <p class="form-error" id="applyError">משהו השתבש בשליחה. נסו שוב, או כתבו לנו באינסטגרם.</p>
     </form>
     <p class="success-msg" id="applySuccess">קיבלנו את המועמדות. נחזור אליכם בקרוב — בינתיים, שריינו את ה-28.7.</p>
@@ -1764,6 +1762,9 @@
   function closeEv(){ if(evOverlay && !evOverlay.hidden){ evOverlay.hidden = true; document.body.style.overflow = ''; } }
   document.querySelectorAll('.ev-card').forEach(function(c){
     c.addEventListener('click', function(){ openEv(+c.dataset.ev); });
+  });
+  document.querySelectorAll('[data-openev]').forEach(function(b){
+    b.addEventListener('click', function(){ openEv(+b.dataset.openev); });
   });
   if(evOverlay){
     document.getElementById('evClose').addEventListener('click', closeEv);
