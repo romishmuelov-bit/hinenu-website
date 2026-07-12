@@ -2,3 +2,12 @@
 .vercel
 .env.local
 *.psd
+*.mov
+*upscayl*
+Fog/
+Highlights/
+arrows/
+turn paper/
+paper texure/
+Resource Boy*/
+*Sticker*Mockup*/
