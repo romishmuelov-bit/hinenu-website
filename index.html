@@ -107,7 +107,12 @@
   .top-side.start{ justify-content:flex-start; }
   .top-side.end{ justify-content:flex-end; }
   .brand{ display:flex; align-items:center; justify-content:center; text-decoration:none; justify-self:center; }
-  .brand-logo{ height:21px; width:auto; display:block; }
+  .brand-logo{
+    height:21px; width:auto; display:block;
+    opacity:0; transform:translateY(-8px);
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  header.top.brand-on .brand-logo{ opacity:1; transform:none; }
   .top-link, .top-cta{
     font-size:15.5px; font-weight:800; color:#fff; text-decoration:none;
     letter-spacing:1.5px;
@@ -1529,6 +1534,8 @@
     var firstTop = chals.length ? chals[0].getBoundingClientRect().top : 1;
     var showCta = firstTop < vh * 0.6 && lr.top > vh * 0.35;
     if(fixedCta) fixedCta.classList.toggle('show', showCta);
+    var tb = document.getElementById('topbar');
+    if(tb) tb.classList.toggle('brand-on', firstTop < 90);
   }
   window.addEventListener('scroll', function(){
     if(!ctaTick){ ctaTick = true; requestAnimationFrame(ctaFrame); }
