@@ -120,28 +120,44 @@
   .top-link:hover, .top-cta:hover{ color:var(--coral); }
   button.top-link{ background:none; border:none; padding:0; cursor:pointer; }
   .navfan{ position:relative; }
+  .fan-btn{ position:relative; z-index:1; padding:6px 12px; }
+  .fan-btn::before{
+    content:""; position:absolute; inset:-16% -6%; z-index:-1;
+    background:var(--hl-blue); opacity:0; transition:opacity .18s ease;
+    -webkit-mask:url('assets/hlk-3.webp') center/100% 100% no-repeat;
+    mask:url('assets/hlk-3.webp') center/100% 100% no-repeat;
+  }
+  .fan-btn:hover::before, .fan-btn[aria-expanded="true"]::before{ opacity:1; }
+  /* mac-dock fan: pills sweep out in an arc from the button */
   .fan-menu{
-    position:absolute; top:calc(100% + 14px); inset-inline-start:-10px;
-    display:flex; flex-direction:column; gap:2px;
-    background:#0C0C0E; border:1px solid var(--line); border-radius:14px;
-    padding:8px; min-width:270px; z-index:60;
-    box-shadow:0 24px 60px rgba(0,0,0,.6);
+    position:absolute; top:calc(100% + 14px); inset-inline-start:0;
+    display:flex; flex-direction:column; gap:10px; align-items:flex-start;
+    min-width:290px; z-index:60;
   }
   .fan-menu[hidden]{ display:none; }
   .fan-menu a, .fan-menu button{
     font-family:'Heebo',system-ui,sans-serif; letter-spacing:0;
-    text-align:right; background:none; border:none; cursor:pointer;
+    text-align:right; cursor:pointer;
+    background:#0C0C0E; border:1px solid var(--line); border-radius:13px;
+    box-shadow:0 18px 44px rgba(0,0,0,.6);
     color:#fff; font-size:14.5px; font-weight:600;
-    padding:11px 14px; border-radius:9px; text-decoration:none;
-    transition:background .15s ease;
+    padding:12px 18px; text-decoration:none;
+    transform-origin:top right;
+    transform:rotate(var(--fr,0deg)) translateX(var(--fx,0px));
+    transition:transform .18s ease, background .15s ease;
   }
-  .fan-menu a:hover, .fan-menu button:hover{ background:rgba(255,255,255,.09); color:#fff; transform:scale(1.07); }
-  .fan-menu a, .fan-menu button{ transform-origin:top center; transition:background .15s ease, transform .16s ease; }
+  .fan-menu > :nth-child(1){ --fr:-4deg; }
+  .fan-menu > :nth-child(2){ --fr:-9deg; --fx:-16px; }
+  .fan-menu > :nth-child(3){ --fr:-14deg; --fx:-38px; }
+  .fan-menu a:hover, .fan-menu button:hover{
+    background:#17181C;
+    transform:rotate(0deg) translateX(var(--fx,0px)) scale(1.06);
+  }
   .fan-menu:not([hidden]) > *{ animation:dockIn .5s cubic-bezier(.34,1.56,.64,1) both; }
-  .fan-menu > :nth-child(1){ animation-delay:.03s; }
-  .fan-menu > :nth-child(2){ animation-delay:.1s; }
-  .fan-menu > :nth-child(3){ animation-delay:.17s; }
-  @keyframes dockIn{ from{ opacity:0; transform:translateY(-16px) scale(.5); } }
+  .fan-menu > :nth-child(1){ animation-delay:.02s; }
+  .fan-menu > :nth-child(2){ animation-delay:.09s; }
+  .fan-menu > :nth-child(3){ animation-delay:.16s; }
+  @keyframes dockIn{ from{ opacity:0; transform:translateY(-28px) scale(.4); } }
 
   /* ---------- HERO v5: pitch black title (damngood) ---------- */
   .hero5{
@@ -436,9 +452,10 @@
   /* tracks cover-flow: one card front and center, click to switch */
   .tflow{ position:relative; perspective:1400px; }
   .track{
-    background:url('assets/torn-white.webp') top center/100% 100% no-repeat;
-    padding:54px 62px 200px;
-    min-height:800px;
+    background:
+      url('assets/torn-top-a.webp') top center/100% calc(100% - 68px) no-repeat,
+      url('assets/torn-btm-a.webp') bottom center/100% 70px no-repeat;
+    padding:50px 58px 104px;
     filter:drop-shadow(0 24px 50px rgba(0,0,0,.55));
     display:flex; flex-direction:column; text-align:right;
     position:absolute; top:0; left:50%;
@@ -469,7 +486,12 @@
   }
   .track-a li{ display:flex; gap:12px; font-size:15.5px; color:#3E405A; }
   .track-a li::before{ content:"—"; color:var(--blue); font-weight:700; flex:none; }
-  .track-b{ transform:rotate(-.8deg); background-image:url('assets/torn-white-b.webp'); }
+  .track-b{
+    transform:rotate(-.8deg);
+    background:
+      url('assets/torn-top-b.webp') top center/100% calc(100% - 74px) no-repeat,
+      url('assets/torn-btm-b.webp') bottom center/100% 76px no-repeat;
+  }
   .track-b .tag{ color:var(--hl); }
   .track-b .desc{ color:#3E405A; }
   .perks{
@@ -628,7 +650,7 @@
     transition:transform .25s ease, box-shadow .25s ease;
   }
   .ev-card:hover{ transform:translateY(-8px); box-shadow:0 44px 80px rgba(0,0,0,.7); }
-  .ev-card img{ width:100%; display:block; }
+  .ev-card img{ width:100%; aspect-ratio:9/10; object-fit:cover; display:block; }
   .ev-tag{
     position:absolute; top:14px; inset-inline-start:14px;
     background:#000; color:#fff; font-weight:800; font-size:13px;
@@ -1017,12 +1039,6 @@
           <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">אני רוצה עזרה לעבור לדרום או לצפון</a>
         </div>
       </div>
-    </nav>
-    <a class="brand" href="#">
-      <span class="name">הננו·</span>
-      <span class="tag">חלוצים של תקווה</span>
-    </a>
-    <div class="top-side end">
       <div class="navfan" id="fanView">
         <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">תצוגה +</button>
         <div class="fan-menu" hidden>
@@ -1030,7 +1046,12 @@
           <button type="button" id="viewMachine">בינה מלאכותית</button>
         </div>
       </div>
-    </div>
+    </nav>
+    <a class="brand" href="#">
+      <span class="name">הננו·</span>
+      <span class="tag">חלוצים של תקווה</span>
+    </a>
+    <div class="top-side end"></div>
   </div>
 </header>
 
@@ -1207,9 +1228,9 @@
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דור המייסדות">
           <img src="assets/v-dor.webp" alt="" loading="lazy" style="object-position:50% 35%">
           <div class="vbody">
-            <div class="role">קהילה · נשים מייסדות</div>
+            <div class="role">אומנות · קהילה</div>
             <b>דור המייסדות</b>
-            <p>קהילת המייסדות הצעירות של ישראל — נשים שבונות מיזמים, מהרעיון הראשון ועד ההקמה.</p>
+            <p>שיתופי פעולה בין אומנים.ות לאומנים.ות לקהילה. אומנות נחלת הכלל.</p>
             <a class="vlink" href="https://www.instagram.com/dorhameyasdot/" target="_blank" rel="noopener">אינסטגרם ←</a>
           </div>
         </article>
