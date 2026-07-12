@@ -7,7 +7,7 @@
 <meta name="description" content="ישראל מלאה בבעיות. הגיע הזמן להתאהב בבעיה — ולפתור אותה. ערב יזמות לאומית עם מייקל אייזנברג · 28.7.2026 · 19:30 · בית בן-גוריון, תל אביב.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@800;900&family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&family=Suez+One&family=Karantina:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@800;900&family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&family=Suez+One&family=Karantina:wght@400;700&family=Secular+One&family=Miriam+Libre:wght@700&family=Amatic+SC:wght@700&family=Bellefair&display=swap" rel="stylesheet">
 <style>
   @font-face{
     font-family:'OH Netta Epstein';
@@ -40,6 +40,9 @@
     --chalk-dim:rgba(35,36,31,.55);
     --coral:#D96A50;
     --bg:#F6F3EA;
+    --hl:#D96A50;
+    --font-display:'Secular One';
+    --font-mid:'Frank Ruhl Libre';
   }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
@@ -51,11 +54,6 @@
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     overflow-x:clip; /* clips the carousel fan without creating a scroll container (keeps position:sticky alive) */
-  }
-  body::before{
-    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-    background:url('assets/texture-light.webp') center/cover;
-    mix-blend-mode:multiply; opacity:.5;
   }
   a{ color:inherit; }
   button, input, textarea{ font-family:inherit; }
@@ -173,15 +171,17 @@
     cursor:pointer;
   }
   .pline .big{
-    font-family:'Suez One',serif; font-weight:400;
+    font-family:var(--font-display),'Rubik',serif; font-weight:400;
     font-size:clamp(28px,4.4vw,58px);
+    transition:color .3s ease;
   }
   .pline .mid{
-    font-family:'Dana Yad','Frank Ruhl Libre',serif;
-    font-size:clamp(22px,3vw,40px);
+    font-family:var(--font-mid),'Frank Ruhl Libre',serif;
+    font-size:clamp(20px,2.7vw,36px);
     font-weight:700;
-    color:var(--coral);
+    color:var(--hl);
     margin:0 12px;
+    transition:color .3s ease;
   }
   .pindex.has-active .pline:not(.active){ opacity:.15; filter:blur(1.6px); }
   .pline.active{ transform:scale(1.03); }
@@ -189,12 +189,14 @@
     position:absolute; left:50%; top:50%; z-index:-1;
     width:0; height:1.5em;
     transform:translate(-50%,-45%) rotate(-1.2deg);
-    background:url('assets/stroke-1.webp') center/100% 100% no-repeat;
+    background:var(--hl);
+    -webkit-mask:url('assets/stroke-1.webp') center/100% 100% no-repeat;
+    mask:url('assets/stroke-1.webp') center/100% 100% no-repeat;
     opacity:0; transition:width .35s cubic-bezier(.22,.61,.36,1), opacity .2s ease;
   }
-  .pline[data-stroke="2"] .stroke{ background-image:url('assets/stroke-2.webp'); }
-  .pline[data-stroke="3"] .stroke{ background-image:url('assets/stroke-3.webp'); }
-  .pline[data-stroke="4"] .stroke{ background-image:url('assets/stroke-4.webp'); }
+  .pline[data-stroke="2"] .stroke{ -webkit-mask-image:url('assets/stroke-2.webp'); mask-image:url('assets/stroke-2.webp'); }
+  .pline[data-stroke="3"] .stroke{ -webkit-mask-image:url('assets/stroke-3.webp'); mask-image:url('assets/stroke-3.webp'); }
+  .pline[data-stroke="4"] .stroke{ -webkit-mask-image:url('assets/stroke-4.webp'); mask-image:url('assets/stroke-4.webp'); }
   .pline.active .stroke{ width:min(97%,780px); opacity:.45; }
   .pstat{
     display:block;
@@ -206,11 +208,43 @@
     transition:max-height .4s ease, opacity .4s ease .05s;
   }
   .pline.active .pstat{ max-height:44px; opacity:.95; }
+  /* per-problem flood treatments */
+  .hero{ transition:background-color .4s ease; }
+  .hero[data-flood="dark"]{ background:#1B1C17; }
+  .hero[data-flood="coral"]{ background:var(--coral); }
+  .hero[data-flood="olive"]{ background:#5E684F; }
+  .hero[data-flood] .pline, .hero[data-flood] .pline .big{ color:#F2EFE4; }
+  .hero[data-flood="coral"] .pline .mid, .hero[data-flood="olive"] .pline .mid{ color:#20211C; }
+  .hero[data-flood] .pkicker{ color:rgba(242,239,228,.75); }
+  .hero[data-flood] .add-problem{ color:rgba(242,239,228,.65); }
+  .hero[data-flood] .pstat{ color:#F2EFE4; }
+  .hero[data-flood] .pbg-idle{ opacity:0; }
+  .hero[data-flood] .pbg-layer img{ filter:invert(.94); }
+  /* the active line inverts into a solid ink bar */
+  .pline[data-treat="bar"]{ z-index:1; }
+  .pline[data-treat="bar"].active .bar-bg{
+    content:""; position:absolute; inset:6px -22px; z-index:-1;
+    background:var(--ink);
+    transform:rotate(-.6deg);
+  }
+  .pline[data-treat="bar"].active, .pline[data-treat="bar"].active .big{ color:#F6F3EA; }
+  .bar-bg{ display:none; }
+  .pline[data-treat="bar"].active .bar-bg{ display:block; }
+  /* full-bleed art (detailed sketches) */
+  .pbg-layer .eng-full{
+    width:min(46vw,660px); right:5%; bottom:5%;
+    opacity:.55; mix-blend-mode:multiply; transform:none;
+  }
+  .hero[data-flood] .pbg-layer .eng-full{ mix-blend-mode:normal; opacity:.35; }
+  /* fog adapts to flood darkness */
+  .hero[data-flood="dark"] .fog, .hero[data-flood="olive"] .fog{ filter:none; mix-blend-mode:screen; }
+  .hero.has-active[data-flood="dark"] .fog, .hero.has-active[data-flood="olive"] .fog{ opacity:.3; }
+
   /* CTA: torn paper + chalk arrow */
   .hero-cta-row{ position:relative; display:inline-block; margin-top:40px; }
   .cta-torn{
     display:inline-block;
-    background:url('assets/torn-1.webp') center/100% 100% no-repeat;
+    background:url('assets/torn-2.webp') center/100% 100% no-repeat;
     color:var(--board); text-decoration:none;
     font-family:'Rubik',sans-serif; font-weight:800;
     font-size:clamp(16px,1.6vw,20px);
@@ -221,10 +255,14 @@
   }
   .cta-torn:hover{ transform:rotate(-.3deg) scale(1.04); }
   .cta-arrow{
-    position:absolute; width:105px; right:-125px; top:8px;
+    position:absolute; width:105px; height:70px; right:-125px; top:8px;
+    background:var(--ink);
+    -webkit-mask:url('assets/arrow-ink-1.webp') center/contain no-repeat;
+    mask:url('assets/arrow-ink-1.webp') center/contain no-repeat;
     transform:rotate(10deg);
-    opacity:.9; pointer-events:none;
+    opacity:.85; pointer-events:none;
   }
+  .hero[data-flood] .cta-arrow{ background:#F2EFE4; }
   .add-problem{
     display:block; margin:26px auto 0;
     background:none; border:none; cursor:pointer;
@@ -302,11 +340,9 @@
   }
   .notebook{
     position:relative;
-    background:url('assets/paper-crumple.webp') center/cover, #FBF9F2;
-    box-shadow:0 18px 44px rgba(35,36,31,.14);
-    border:1px solid rgba(50,62,124,.10);
-    border-radius:12px;
-    padding:1em 1.6em 1.5em;
+    background:url('assets/torn-sheet.webp') center/100% 100% no-repeat;
+    filter:drop-shadow(0 22px 34px rgba(35,36,31,.22));
+    padding:2.2em 2.6em 2.6em;
     font-family:'Dana Yad','OH Netta Epstein','Frank Ruhl Libre',serif;
     font-size:clamp(21px,2.3vw,28px);
     line-height:1.9;
@@ -398,7 +434,9 @@
   /* tracks cover-flow: one card front and center, click to switch */
   .tflow{ position:relative; perspective:1400px; }
   .track{
-    border-radius:20px; padding:38px 34px;
+    background:url('assets/sticker-card.webp') center/100% 100% no-repeat;
+    filter:drop-shadow(0 16px 26px rgba(35,36,31,.22));
+    padding:46px 44px 50px;
     display:flex; flex-direction:column; text-align:right;
     position:absolute; top:0; left:50%;
     width:min(580px,90vw); margin-left:calc(min(580px,90vw) / -2);
@@ -417,7 +455,7 @@
     font-size:clamp(24px,3vw,34px); line-height:1.2; margin:0 0 14px;
   }
   .track .desc{ font-size:16px; line-height:1.65; margin:0 0 24px; }
-  .track-a{ background:#fff; border:1.5px solid var(--line); }
+  .track-a{ transform:rotate(.6deg); }
   .track-a .tag{ color:var(--blue); }
   .track-a h3{ color:var(--ink); }
   .track-a .desc{ color:#3E405A; }
@@ -427,13 +465,9 @@
   }
   .track-a li{ display:flex; gap:12px; font-size:15.5px; color:#3E405A; }
   .track-a li::before{ content:"—"; color:var(--blue); font-weight:700; flex:none; }
-  .track-b{
-    background:var(--blue);
-    color:#fff;
-    box-shadow:0 24px 60px rgba(50,62,124,.25);
-  }
-  .track-b .tag{ color:rgba(255,255,255,.7); }
-  .track-b .desc{ color:rgba(255,255,255,.88); }
+  .track-b{ transform:rotate(-.8deg); }
+  .track-b .tag{ color:var(--hl); }
+  .track-b .desc{ color:#3E405A; }
   .perks{
     list-style:none; padding:0; margin:0 0 26px;
     display:grid; grid-template-columns:1fr 1fr; gap:14px 22px;
@@ -445,13 +479,13 @@
   .perk:hover{ transform:translateX(-4px); }
   .perk .num{
     font-family:'Rubik',sans-serif; font-weight:900; font-size:14px;
-    color:rgba(255,255,255,.5); min-width:22px; padding-top:2px;
+    color:var(--hl); min-width:22px; padding-top:2px;
     font-variant-numeric:tabular-nums;
     transition:color .35s ease, transform .35s ease;
   }
-  .perk:hover .num{ color:#fff; transform:scale(1.12); }
-  .perk b{ display:block; font-size:14.5px; }
-  .perk small{ font-size:12.5px; color:rgba(255,255,255,.65); }
+  .perk:hover .num{ color:var(--blue); transform:scale(1.12); }
+  .perk b{ display:block; font-size:14.5px; color:var(--ink); }
+  .perk small{ font-size:12.5px; color:var(--dim); }
   .perk:last-child{ grid-column:span 2; }
   .track-cta{
     margin-top:auto; align-self:flex-start;
@@ -464,8 +498,8 @@
   .track-cta:hover .arr{ transform:translateX(-5px); }
   .track-a .track-cta{ border:1.5px solid var(--blue); color:var(--blue); }
   .track-a .track-cta:hover{ background:var(--blue-soft); }
-  .track-b .track-cta{ background:#fff; color:var(--blue); }
-  .track-b .track-cta:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.18); }
+  .track-b .track-cta{ background:var(--blue); color:#fff; }
+  .track-b .track-cta:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(50,62,124,.3); }
   .tracks-note{
     margin-top:26px;
     border:1.5px dashed #D5D7E4; border-radius:20px;
@@ -500,7 +534,10 @@
   .event-body h2 .acc{ color:var(--blue); position:relative; z-index:1; }
   .event-body h2 .acc::after{
     content:""; position:absolute; inset:-4px -12px; z-index:-1;
-    background:url('assets/stroke-3.webp') center/100% 100% no-repeat; opacity:.4;
+    background:var(--hl);
+    -webkit-mask:url('assets/stroke-3.webp') center/100% 100% no-repeat;
+    mask:url('assets/stroke-3.webp') center/100% 100% no-repeat;
+    opacity:.4;
   }
   .event-meta{
     display:flex; flex-wrap:wrap; gap:10px; margin:0 0 24px;
@@ -547,8 +584,11 @@
   .event-qs li::before{ content:"—"; color:var(--blue); flex:none; font-weight:700; }
   .event-ctas{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; position:relative; }
   .event-arrow{
-    position:absolute; width:88px; left:-14px; bottom:-58px;
-    transform:rotate(-134deg); opacity:.75; pointer-events:none;
+    position:absolute; width:88px; height:88px; left:-14px; bottom:-64px;
+    background:var(--hl);
+    -webkit-mask:url('assets/arrow-coral.webp') center/contain no-repeat;
+    mask:url('assets/arrow-coral.webp') center/contain no-repeat;
+    transform:rotate(-134deg); opacity:.8; pointer-events:none;
   }
   .event-limit{ color:var(--dim); font-size:14px; margin:16px 0 0; }
   .event-more{ max-width:940px; margin:0 auto; padding-top:40px; }
@@ -578,7 +618,10 @@
   .ventures h2 .hl{ color:#9FA8E8; position:relative; z-index:1; }
   .ventures h2 .hl::after{
     content:""; position:absolute; inset:0 -10px; z-index:-1;
-    background:url('assets/stroke-1.webp') center/100% 100% no-repeat; opacity:.35;
+    background:var(--hl);
+    -webkit-mask:url('assets/stroke-1.webp') center/100% 100% no-repeat;
+    mask:url('assets/stroke-1.webp') center/100% 100% no-repeat;
+    opacity:.4;
   }
   .vflow{ position:relative; height:530px; perspective:1400px; touch-action:pan-y; }
   .vcard{
@@ -685,7 +728,7 @@
   .field textarea:focus{ border-color:var(--blue); outline:none; }
   .cta-btn{
     width:100%; border:none; padding:22px 18px 26px;
-    background:url('assets/torn-3.webp') center/100% 100% no-repeat;
+    background:url('assets/torn-4.webp') center/100% 100% no-repeat;
     color:var(--board);
     font-family:'Rubik',sans-serif; font-weight:800; font-size:20px;
     cursor:pointer; margin-top:10px;
@@ -869,6 +912,7 @@
   .theme-row{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
   .theme-row label{ font-size:12.5px; color:var(--dim); font-weight:600; }
   .theme-row input[type=color]{ width:36px; height:26px; border:1px solid var(--line); border-radius:6px; padding:1px; background:#fff; cursor:pointer; }
+  .theme-row select{ max-width:140px; border:1px solid var(--line); border-radius:6px; font-size:12px; padding:3px 4px; background:#fff; color:var(--ink); }
   .theme-presets{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
   .theme-presets button{
     border:1px solid var(--line); background:#fff; border-radius:999px;
@@ -918,8 +962,7 @@
         <img class="idle-compass" src="assets/doodles/peace.webp" alt="">
       </div>
       <div class="pbg-layer" data-theme="periphery">
-        <img class="eng eng-a" src="assets/doodles/mountains.webp" alt="" loading="lazy">
-        <img class="eng eng-b" src="assets/doodles/plane.webp" alt="" loading="lazy">
+        <img class="eng eng-full" src="assets/art/mountains.webp" alt="" loading="lazy">
       </div>
       <div class="pbg-layer" data-theme="housing">
         <img class="eng eng-a" src="assets/doodles/birdhouse.webp" alt="" loading="lazy">
@@ -952,17 +995,18 @@
           <span class="big">הפריפריה</span> <span class="mid">רחוקה יותר</span> <span class="big">מתמיד.</span>
           <span class="pstat">ילד בדרום עדיין פוגש פחות הזדמנויות מילד במרכז</span>
         </a>
-        <a class="pline" data-theme="housing" data-stroke="2" href="#event">
+        <a class="pline" data-theme="housing" data-flood="dark" href="#event">
           <span class="stroke" aria-hidden="true"></span>
           <span class="big">דור שלם</span> <span class="mid">נשאר מחוץ</span> <span class="big">למשחק הדיור.</span>
           <span class="pstat">מחירי הדירות מטפסים מהר מהמשכורות</span>
         </a>
-        <a class="pline" data-theme="food" href="#event">
+        <a class="pline" data-theme="food" data-treat="bar" href="#event">
+          <span class="bar-bg" aria-hidden="true"></span>
           <span class="stroke" aria-hidden="true"></span>
           <span class="mid">את רוב</span> <span class="big">המזון שלנו</span> <span class="mid">אנחנו</span> <span class="big">מייבאים.</span>
           <span class="pstat">מה קורה ביום שנמל נסגר?</span>
         </a>
-        <a class="pline" data-theme="hasbara" data-stroke="3" href="#event">
+        <a class="pline" data-theme="hasbara" data-flood="coral" href="#event">
           <span class="stroke" aria-hidden="true"></span>
           <span class="mid">את</span> <span class="big">מלחמת התודעה</span> <span class="mid">אנחנו</span> <span class="big">מפסידים.</span>
           <span class="pstat">העם היושב בציון נעדר משדה הקרב על הנרטיב</span>
@@ -972,7 +1016,7 @@
           <span class="big">דור שלם</span> <span class="mid">נושא</span> <span class="big">טראומה. לבד.</span>
           <span class="pstat">כ־3,000,000 ישראלים נושאים טראומה מאז ה־7.10 (מבקר המדינה)</span>
         </a>
-        <a class="pline" data-theme="nature" data-stroke="4" href="#event">
+        <a class="pline" data-theme="nature" data-flood="olive" href="#event">
           <span class="stroke" aria-hidden="true"></span>
           <span class="big">הטבע היחיד שיש לנו</span> <span class="mid">נעלם</span> <span class="big">מול העיניים.</span>
           <span class="pstat">השטחים הפתוחים מתכווצים משנה לשנה</span>
@@ -981,7 +1025,7 @@
 
       <div class="hero-cta-row">
         <a class="cta-torn" href="#event">בואו לתקן ← ערב יזמות לאומית · 28.7</a>
-        <img class="cta-arrow" src="assets/arrow-ink-1.webp" alt="" aria-hidden="true">
+        <span class="cta-arrow" aria-hidden="true"></span>
       </div>
       <button type="button" class="add-problem" id="ctaProblem" aria-expanded="false" aria-controls="composer">הבעיה שלך לא על הלוח? הוסיפו אותה +</button>
       <div class="composer" id="composer" hidden>
@@ -1077,7 +1121,7 @@
           <p class="event-lede">מילה אחת תקבע מי ישרוד את העשור הקרוב: <b>Agency</b>. אנחנו קוראים לזה חלוציות — היכולת לקחת יוזמה, ללמוד מהר ולזוז.</p>
           <div class="event-ctas">
             <a class="btn-primary" href="https://calendar.app.google/CgryW6iXoPm3mW9h7" target="_blank" rel="noopener">הוסיפו ליומן — שומרים לכם מקום</a>
-            <img class="event-arrow" src="assets/arrow-coral.webp" alt="" aria-hidden="true">
+            <span class="event-arrow" aria-hidden="true"></span>
             <button type="button" class="btn-ghost btn-more" id="eventMoreBtn" aria-expanded="false" aria-controls="eventMore">רוצים לדעת עוד?</button>
           </div>
           <p class="event-limit">המקומות מוגבלים — זה הסלון של בן-גוריון, לא אולם.</p>
@@ -1389,9 +1433,12 @@
       if(players[t]) players[t].classList.add('on');
       pindex.classList.add('has-active');
       hero.classList.add('has-active');
+      if(line.dataset.flood){ hero.setAttribute('data-flood', line.dataset.flood); }
+      else { hero.removeAttribute('data-flood'); }
     } else {
       pindex.classList.remove('has-active');
       hero.classList.remove('has-active');
+      hero.removeAttribute('data-flood');
     }
     if(pdots){
       var idx = line ? plines.indexOf(line) : -1;
@@ -1849,7 +1896,12 @@
     ['--dim','טקסט משני'],
     ['--blue','כחול מותג'],
     ['--coral','אקסנט קורל'],
+    ['--hl','הדגשות וחצים'],
     ['--board','כהה (נייר/פוטר)']
+  ];
+  var FONT_TOKENS = [
+    ['--font-display','פונט כותרות', ['Secular One','Suez One','Karantina','Miriam Libre','Rubik']],
+    ['--font-mid','פונט קישור', ['Frank Ruhl Libre','Dana Yad','Amatic SC','Bellefair','Karantina']]
   ];
   var THEME_PRESETS = {
     'מקורי':   { '--bg':'#F6F3EA','--ink':'#1A1C2E','--dim':'#71738A','--blue':'#323E7C','--coral':'#D96A50','--board':'#23241F' },
@@ -1890,6 +1942,24 @@
         try{ localStorage.setItem('hinenu-theme', JSON.stringify(saved)); }catch(e){}
       });
       row.appendChild(lab); row.appendChild(inp); themeRows.appendChild(row);
+    });
+    FONT_TOKENS.forEach(function(ft){
+      var row = document.createElement('div'); row.className = 'theme-row';
+      var lab = document.createElement('label'); lab.textContent = ft[1];
+      var sel = document.createElement('select'); sel.dataset.token = ft[0];
+      ft[2].forEach(function(f){
+        var o = document.createElement('option'); o.value = f; o.textContent = f;
+        sel.appendChild(o);
+      });
+      var curF = getComputedStyle(document.documentElement).getPropertyValue(ft[0]).trim().replace(/['"]/g,'');
+      if(curF) sel.value = ft[2].indexOf(curF) > -1 ? curF : ft[2][0];
+      sel.addEventListener('change', function(){
+        document.documentElement.style.setProperty(ft[0], "'" + sel.value + "'");
+        var saved = {}; try{ saved = JSON.parse(localStorage.getItem('hinenu-theme')) || {}; }catch(e){}
+        saved[ft[0]] = "'" + sel.value + "'";
+        try{ localStorage.setItem('hinenu-theme', JSON.stringify(saved)); }catch(e){}
+      });
+      row.appendChild(lab); row.appendChild(sel); themeRows.appendChild(row);
     });
     var presetsBox = document.getElementById('themePresets');
     Object.keys(THEME_PRESETS).forEach(function(name){
