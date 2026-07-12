@@ -41,8 +41,8 @@
     --paper:#FFFFFF;
     --ink:#F2F0E9;
     --ink-dark:#1A1C2E;
-    --blue:#323E7C;
-    --hl-blue:#4257E6;
+    --blue:#4257E6;
+    --hl-blue:var(--blue);
     --blue-soft:#EDEFF8;
     --line:rgba(242,240,233,.16);
     --line-dark:#EAE8E2;
@@ -267,11 +267,11 @@
   .cta-torn{
     position:fixed; z-index:45; bottom:22px; inset-inline-start:22px;
     display:inline-block;
-    background:url('assets/torn-2.webp') center/100% 100% no-repeat;
+    background:url('assets/torn-cta.webp') center/100% 100% no-repeat;
     color:var(--board); text-decoration:none;
     font-family:'Rubik',sans-serif; font-weight:800;
     font-size:clamp(14px,1.3vw,17px);
-    padding:22px 40px 26px;
+    padding:30px 48px 34px;
     transform:rotate(-1.6deg);
     transition:transform .25s ease, opacity .4s ease, visibility .4s;
     filter:drop-shadow(0 12px 20px rgba(0,0,0,.55));
@@ -345,7 +345,6 @@
   /* ---------- THE LETTER: scroll-inked handwriting ---------- */
   .letter{
     background:transparent;
-    border-top:1px solid var(--line);
     padding:70px 0 60px;
   }
   .letter-track{ position:relative; }
@@ -412,7 +411,7 @@
   /* ---------- TRACKS: how to continue ---------- */
   .tracks{
     position:relative; overflow:clip;
-    padding:110px 0 100px; background:transparent; border-top:1px solid var(--line);
+    padding:110px 0 100px; background:transparent;
     --mx:50%; --my:50%;
   }
   /* faint continuation of the hero grid + cursor-revealed layer */
@@ -523,10 +522,8 @@
   }
   .track-cta .arr{ transition:transform .25s ease; }
   .track-cta:hover .arr{ transform:translateX(-5px); }
-  .track-a .track-cta{ border:1.5px solid var(--blue); color:var(--blue); }
-  .track-a .track-cta:hover{ background:var(--blue-soft); }
-  .track-b .track-cta{ background:var(--blue); color:#fff; }
-  .track-b .track-cta:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(50,62,124,.3); }
+  .track-cta{ background:var(--blue); color:#fff; border:none; }
+  .track-cta:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(66,87,230,.35); }
   .tracks-note{
     margin-top:26px;
     border:1.5px dashed var(--line); border-radius:20px;
@@ -548,7 +545,6 @@
   .event{
     padding:76px 0 64px;
     background:transparent;
-    border-top:1px solid var(--line);
   }
   .event .kicker{
     font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
@@ -651,7 +647,7 @@
     transition:transform .25s ease, box-shadow .25s ease;
   }
   .ev-card:hover{ transform:translateY(-8px); box-shadow:0 44px 80px rgba(0,0,0,.7); }
-  .ev-card img{ width:100%; aspect-ratio:9/10; object-fit:cover; display:block; }
+  .ev-card img{ width:100%; aspect-ratio:9/10; object-fit:cover; display:block; border:10px solid #EFECE0; border-radius:12px; box-sizing:border-box; }
   .ev-tag{
     position:absolute; top:14px; inset-inline-start:14px;
     background:#000; color:#fff; font-weight:800; font-size:13px;
@@ -678,7 +674,7 @@
   }
 
   /* ---------- VENTURES: already working ---------- */
-  .ventures{ background:#000; color:#fff; padding:110px 0 100px; border-top:1px solid var(--line); overflow:clip; }
+  .ventures{ background:#000; color:#fff; padding:110px 0 100px; overflow:clip; }
   .ventures .kicker{
     font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 14px; text-align:center;
@@ -698,10 +694,10 @@
   }
   .vcard img{ width:100%; height:300px; object-fit:cover; object-position:50% 12%; pointer-events:none; display:block; }
   .vbody{ padding:20px 22px 24px; }
-  .vbody .role{ font-size:11.5px; font-weight:800; letter-spacing:.12em; color:#AFBCFF; margin-bottom:6px; }
+  .vbody .role{ font-size:11.5px; font-weight:800; letter-spacing:.12em; color:var(--blue); margin-bottom:6px; }
   .vbody b{ display:block; font-size:20px; font-family:'Rubik',sans-serif; font-weight:800; margin-bottom:7px; color:#fff; }
   .vbody p{ margin:0; font-size:13.5px; line-height:1.55; color:rgba(255,255,255,.72); }
-  .vcard.you{ background:linear-gradient(160deg,#3B488F,var(--blue)); }
+  .vcard.you{ background:var(--blue); }
   .vcard.vtxt{ background:#16181F; }
   .vcard .vbig-sm{
     font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
@@ -709,7 +705,7 @@
     color:#fff; text-align:center;
   }
   .vlink{
-    display:inline-block; margin-top:10px; color:#AFBCFF;
+    display:inline-block; margin-top:10px; color:var(--blue);
     font-weight:800; font-size:14px;
     text-decoration:underline; text-underline-offset:4px;
   }
@@ -733,7 +729,7 @@
 
   /* ---------- BACKERS marquee ---------- */
   .backers{
-    background:transparent; border-top:1px solid var(--line);
+    background:transparent;
     padding:64px 0 58px; text-align:center; overflow:hidden;
   }
   .backers .overline{
@@ -809,7 +805,7 @@
     padding:17px 18px; cursor:pointer; margin-top:10px;
     transition:transform .15s ease, background .2s ease;
   }
-  .cta-btn:hover{ background:#3D4A94; transform:translateY(-1px); }
+  .cta-btn:hover{ background:#5468EE; transform:translateY(-1px); }
   .cta-btn:active{ transform:scale(.98); }
   .success-msg{
     display:none; text-align:center; font-weight:800; font-size:18px;
@@ -2013,7 +2009,6 @@
     ['--blue','כחול מותג'],
     ['--coral','אקסנט קורל'],
     ['--hl','הדגשות וחצים'],
-    ['--hl-blue','כחול הדגשות'],
     ['--board','כהה (נייר/פוטר)'],
     ['--flood-dark','הצפת הירו כהה'],
     ['--flood-olive','הצפת הירו ירוקה']
@@ -2023,8 +2018,8 @@
     ['--font-mid','פונט קישור', ['Frank Ruhl Libre','Dana Yad','Amatic SC','Bellefair','Karantina']]
   ];
   var THEME_PRESETS = {
-    'מקורי (כהה)': { '--bg':'#000000','--ink':'#F2F0E9','--dim':'#9A9C93','--blue':'#323E7C','--coral':'#D96A50','--board':'#23241F','--hl-blue':'#4257E6' },
-    'בהיר (ישן)':  { '--bg':'#F4F4EE','--ink':'#1A1C2E','--dim':'#71738A','--blue':'#323E7C','--coral':'#D96A50','--board':'#23241F','--hl-blue':'#3D52E0' },
+    'מקורי (כהה)': { '--bg':'#000000','--ink':'#F2F0E9','--dim':'#9A9C93','--blue':'#4257E6','--coral':'#D96A50','--board':'#23241F' },
+    'בהיר (ישן)':  { '--bg':'#F4F4EE','--ink':'#1A1C2E','--dim':'#71738A','--blue':'#323E7C','--coral':'#D96A50','--board':'#23241F' },
     'שחור-לבן':{ '--bg':'#F5F5F3','--ink':'#161616','--dim':'#6E6E6E','--blue':'#1F1F1F','--coral':'#C4442A','--board':'#111111' },
     'זית':     { '--bg':'#F1F0E4','--ink':'#232B1E','--dim':'#6E7562','--blue':'#3E5233','--coral':'#C97B3D','--board':'#1C2117' },
     'לילה':    { '--bg':'#191A22','--ink':'#EDEAF7','--dim':'#9CA0BC','--blue':'#8E9BE8','--coral':'#E8836B','--board':'#0E0F14' }
