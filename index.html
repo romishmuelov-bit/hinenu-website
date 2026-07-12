@@ -119,6 +119,23 @@
   }
   .top-link:hover, .top-cta:hover{ color:var(--coral); }
   button.top-link{ background:none; border:none; padding:0; cursor:pointer; }
+  .navfan{ position:relative; }
+  .fan-menu{
+    position:absolute; top:calc(100% + 14px); inset-inline-start:-10px;
+    display:flex; flex-direction:column; gap:2px;
+    background:#0C0C0E; border:1px solid var(--line); border-radius:14px;
+    padding:8px; min-width:270px; z-index:60;
+    box-shadow:0 24px 60px rgba(0,0,0,.6);
+  }
+  .fan-menu[hidden]{ display:none; }
+  .fan-menu a, .fan-menu button{
+    font-family:'Heebo',system-ui,sans-serif; letter-spacing:0;
+    text-align:right; background:none; border:none; cursor:pointer;
+    color:#fff; font-size:14.5px; font-weight:600;
+    padding:11px 14px; border-radius:9px; text-decoration:none;
+    transition:background .15s ease;
+  }
+  .fan-menu a:hover, .fan-menu button:hover{ background:rgba(255,255,255,.09); color:#fff; }
 
   /* ---------- HERO v5: pitch black title (damngood) ---------- */
   .hero5{
@@ -127,10 +144,12 @@
     text-align:center; overflow:hidden; padding:110px 24px 60px;
   }
   .h5-kick{
+    position:relative; z-index:2;
     font-family:'Karantina',sans-serif; font-weight:700; letter-spacing:5px;
     font-size:clamp(15px,1.6vw,20px); color:var(--coral); margin:0 0 18px;
   }
   .h5-title{
+    position:relative; z-index:2;
     margin:0; font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
     color:#fff; line-height:.95; font-size:clamp(64px,12.5vw,190px);
     display:flex; flex-direction:column;
@@ -144,24 +163,13 @@
     mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
     opacity:.95;
   }
-  .h5-el{
-    position:absolute; width:min(17vw,230px); pointer-events:none;
-    filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));
-    z-index:1;
+  .h5-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .h5-shade{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.28) 45%, rgba(0,0,0,.7));
   }
-  .h5-el img{ width:100%; display:block; }
-  .h5-el.e1{ top:11%; right:5%; transform:rotate(8deg); }
-  .h5-el.e2{ top:13%; left:6%; transform:rotate(-7deg); }
-  .h5-el.e3{ bottom:9%; right:7%; transform:rotate(-5deg); }
-  .h5-el.e4{ bottom:8%; left:5%; transform:rotate(6deg); }
-  @media (prefers-reduced-motion: no-preference){
-    .h5-el{ animation:elFloat 7s ease-in-out infinite alternate; }
-    .h5-el.e2{ animation-duration:8.5s; }
-    .h5-el.e3{ animation-duration:9.5s; }
-    .h5-el.e4{ animation-duration:7.8s; }
-  }
-  @keyframes elFloat{ from{ translate:0 0; } to{ translate:0 -16px; } }
   .h5-scroll{
+    z-index:2;
     position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
     color:var(--dim); font-size:13px; letter-spacing:2px;
   }
@@ -266,15 +274,14 @@
   .btn-primary:active{ transform:scale(.98); }
   .btn-ghost{
     padding:14px 34px;
-    background:#fff;
-    border:1.5px solid #D5D7E4; border-radius:999px;
-    color:var(--blue);
+    background:transparent;
+    border:1.5px solid rgba(255,255,255,.38); border-radius:999px;
+    color:#fff;
     font-weight:700; font-size:17px;
     cursor:pointer;
-    box-shadow:0 10px 26px rgba(50,62,124,.12);
-    transition:color .2s ease, border-color .2s ease, box-shadow .2s ease;
+    transition:border-color .2s ease, background .2s ease;
   }
-  .btn-ghost:hover{ color:var(--ink); border-color:#B9BCD0; box-shadow:0 14px 30px rgba(50,62,124,.18); }
+  .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.06); color:#fff; }
 
   /* inline composer — chalk edition */
   .composer{
@@ -358,7 +365,7 @@
   }
   .sign-name{
     font-family:'Dana Yad','OH Netta Epstein','Frank Ruhl Libre',serif;
-    font-size:29px; margin:0; color:var(--ink-dark);
+    font-size:29px; margin:0; color:#fff;
   }
   .letter .meta{
     font-size:11px; letter-spacing:.3em;
@@ -413,15 +420,10 @@
   /* tracks cover-flow: one card front and center, click to switch */
   .tflow{ position:relative; perspective:1400px; }
   .track{
-    background:#FBFAF6;
-    -webkit-mask:url('assets/edge-a-top.webp') top center/100% 44px no-repeat,
-                 url('assets/edge-a-btm.webp') bottom center/100% 44px no-repeat,
-                 linear-gradient(#000,#000) center/100% calc(100% - 84px) no-repeat;
-    mask:url('assets/edge-a-top.webp') top center/100% 44px no-repeat,
-         url('assets/edge-a-btm.webp') bottom center/100% 44px no-repeat,
-         linear-gradient(#000,#000) center/100% calc(100% - 84px) no-repeat;
-    filter:drop-shadow(0 16px 26px rgba(0,0,0,.5));
-    padding:56px 44px 60px;
+    background:#F7F5EF;
+    border-radius:6px;
+    box-shadow:0 34px 70px rgba(0,0,0,.6);
+    padding:48px 44px 52px;
     display:flex; flex-direction:column; text-align:right;
     position:absolute; top:0; left:50%;
     width:min(580px,90vw); margin-left:calc(min(580px,90vw) / -2);
@@ -451,14 +453,18 @@
   }
   .track-a li{ display:flex; gap:12px; font-size:15.5px; color:#3E405A; }
   .track-a li::before{ content:"—"; color:var(--blue); font-weight:700; flex:none; }
-  .track-b{
-    transform:rotate(-.8deg);
-    -webkit-mask:url('assets/edge-b-top.webp') top center/100% 62px no-repeat,
-                 url('assets/edge-b-btm.webp') bottom center/100% 62px no-repeat,
-                 linear-gradient(#000,#000) center/100% calc(100% - 120px) no-repeat;
-    mask:url('assets/edge-b-top.webp') top center/100% 62px no-repeat,
-         url('assets/edge-b-btm.webp') bottom center/100% 62px no-repeat,
-         linear-gradient(#000,#000) center/100% calc(100% - 120px) no-repeat;
+  .track-b{ transform:rotate(-.8deg); }
+  .track::before{
+    content:""; position:absolute; top:-22px; inset-inline-end:40px;
+    width:170px; height:46px; z-index:1;
+    background:url('assets/torn-2.webp') center/100% 100% no-repeat;
+    transform:rotate(-2.5deg);
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));
+  }
+  .track-b::before{
+    inset-inline-end:auto; inset-inline-start:40px;
+    transform:rotate(2deg);
+    background-image:url('assets/torn-4.webp');
   }
   .track-b .tag{ color:var(--hl); }
   .track-b .desc{ color:#3E405A; }
@@ -525,13 +531,13 @@
     font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
     font-size:clamp(28px,3.8vw,46px); line-height:1.18; margin:0 0 18px;
   }
-  .event-body h2 .acc{ color:var(--hl-blue); position:relative; z-index:1; }
+  .event-body h2 .acc{ color:#fff; position:relative; z-index:1; white-space:nowrap; }
   .event-body h2 .acc::after{
-    content:""; position:absolute; inset:-4px -12px; z-index:-1;
-    background:var(--hl);
-    -webkit-mask:url('assets/stroke-3.webp') center/100% 100% no-repeat;
-    mask:url('assets/stroke-3.webp') center/100% 100% no-repeat;
-    opacity:.4;
+    content:""; position:absolute; inset:-10% -5%; z-index:-1;
+    background:var(--hl-blue);
+    -webkit-mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
+    mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
+    opacity:.95;
   }
   .event-meta{
     display:flex; flex-wrap:wrap; gap:10px; margin:0 0 24px;
@@ -547,7 +553,7 @@
   }
   /* the photo melts into the section background — no card, no frame */
   .event-photo{
-    margin:0;
+    margin:0; position:relative;
     transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));
   }
   .event-photo img{
@@ -558,6 +564,12 @@
   .tiltable{ transition:transform .9s cubic-bezier(.26,1.65,.4,1); will-change:transform; }
   .tiltable.tilting{ transition:transform .22s cubic-bezier(.2,.8,.3,1); }
   .tiltable:hover{ --s:.982; }
+  .event-photo::after{
+    content:""; position:absolute; bottom:64px; left:50%;
+    width:74%; height:34px; transform:translateX(-50%);
+    background:radial-gradient(ellipse at center, rgba(255,255,255,.11), transparent 70%);
+    filter:blur(8px); z-index:-1; pointer-events:none;
+  }
   .event-photo figcaption{ margin-top:18px; padding:0 12px; font-size:13.5px; line-height:1.55; color:var(--dim); text-align:center; position:relative; }
   .event-photo figcaption b{
     display:block; color:var(--ink); font-size:15.5px; margin-bottom:2px;
@@ -578,6 +590,7 @@
   .event-qs li::before{ content:"—"; color:var(--coral); flex:none; font-weight:700; }
   .event-ctas{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; position:relative; }
   .event-arrow{
+    display:none;
     position:absolute; width:88px; height:88px; left:-14px; bottom:-64px;
     background:var(--hl);
     -webkit-mask:url('assets/arrow-coral.webp') center/contain no-repeat;
@@ -631,6 +644,17 @@
   .vbody b{ display:block; font-size:20px; font-family:'Rubik',sans-serif; font-weight:800; margin-bottom:7px; color:#fff; }
   .vbody p{ margin:0; font-size:13.5px; line-height:1.55; color:rgba(255,255,255,.72); }
   .vcard.you{ background:linear-gradient(160deg,#3B488F,var(--blue)); }
+  .vcard.vtxt{ background:#16181F; }
+  .vcard .vbig-sm{
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
+    font-size:44px; line-height:1.1; padding:104px 22px 48px;
+    color:#fff; text-align:center;
+  }
+  .vlink{
+    display:inline-block; margin-top:10px; color:#AFBCFF;
+    font-weight:800; font-size:14px;
+    text-decoration:underline; text-underline-offset:4px;
+  }
   .vcard.you .vbig{
     font-family:'Rubik',sans-serif; font-weight:900; font-size:46px; line-height:1;
     padding:120px 22px 60px; color:#fff; text-align:center;
@@ -857,7 +881,6 @@
     .mgroup img{ height:40px; }
     .mgroup img.slim{ height:26px; }
     .modal-card{ padding:26px 20px 22px; }
-    .h5-el{ width:26vw; }
     .h5-title{ font-size:clamp(56px,17vw,90px); }
     .h5-title .t2{ font-size:clamp(28px,8.4vw,44px); }
     .chal{ scroll-snap-align:start; }
@@ -951,8 +974,14 @@
 <header class="top" id="topbar">
   <div class="top-inner">
     <nav class="top-side start" aria-label="ניווט ראשי">
-      <button class="top-link" type="button" data-apply>מועמדות לחממה</button>
-      <a class="top-link" href="#event">ערב יזמות · 28.7</a>
+      <div class="navfan" id="fanHineni">
+        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">הנני +</button>
+        <div class="fan-menu" hidden>
+          <button type="button" data-apply>אני רוצה להתמודד על מקום בחממה</button>
+          <a href="#event">אני רוצה להגיע למיטאפ</a>
+          <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">אני רוצה עזרה לעבור לדרום או לצפון</a>
+        </div>
+      </div>
     </nav>
     <a class="brand" href="#">
       <span class="name">הננו·</span>
@@ -960,7 +989,13 @@
     </a>
     <div class="top-side end">
       <a class="top-link" href="#letter">המניפסט</a>
-      <button class="mode-toggle" id="modeToggle" aria-pressed="false" title="להציג את התוכן כטקסט למכונות"><span class="mseg on" id="segHuman">[ א ] אנושי</span><span class="mseg" id="segMachine">[ מ ] מכונה</span></button>
+      <div class="navfan" id="fanView">
+        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">תצוגה +</button>
+        <div class="fan-menu" hidden>
+          <button type="button" id="viewHuman">אנושית</button>
+          <button type="button" id="viewMachine">בינה מלאכותית</button>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -968,13 +1003,11 @@
 <main>
 
   <!-- ======= 1. HERO v5: the title board ======= -->
-  <section class="hero5" id="hero" aria-label="הננו — חלוצים של תקווה">
-    <div class="h5-el e1"><img src="assets/el-usb.webp" alt="" onerror="this.parentNode.style.display='none'"></div>
-    <div class="h5-el e2"><img src="assets/el-cherry.webp" alt="" onerror="this.parentNode.style.display='none'"></div>
-    <div class="h5-el e3"><img src="assets/el-dudshemesh.webp" alt="" onerror="this.parentNode.style.display='none'"></div>
-    <div class="h5-el e4"><img src="assets/el-irondome.webp" alt="" onerror="this.parentNode.style.display='none'"></div>
+  <section class="hero5" id="hero" aria-label="הננו — חלוציות כדרך חיים">
+    <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
+    <div class="h5-shade" aria-hidden="true"></div>
     <p class="h5-kick">תנועת הצעירים שבונה את ישראל הבאה</p>
-    <h1 class="h5-title"><span>הננו</span><span class="t2">חלוצים <i class="hlmask">של תקווה</i></span></h1>
+    <h1 class="h5-title"><span>הננו</span><span class="t2">חלוציות <i class="hlmask">כדרך חיים</i></span></h1>
     <div class="h5-scroll">הבעיות של הדור שלנו</div>
   </section>
 
@@ -1025,7 +1058,6 @@
       </div>
     </div>
   </section>
-  <video id="tearV" class="tear" src="assets/tear.webm" muted playsinline preload="auto" aria-hidden="true"></video>
   <div class="fogbridge" id="fogBridge" aria-hidden="true"></div>
   <a class="cta-torn" id="fixedCta" href="#event">בואו לתקן ← ערב יזמות לאומית · 28.7</a>
 
@@ -1172,6 +1204,32 @@
             <div class="role">מייסד · Toko</div>
             <b>יובל פיטלוק</b>
             <p>יוצא נגד משבר הפוסט-טראומה ובריאות הנפש של ישראל — עם משתמשים ראשונים כבר בנגב ובגליל.</p>
+          </div>
+        </article>
+        <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דור המייסדות">
+          <img src="assets/v-dor.webp" alt="" loading="lazy" style="object-position:50% 35%">
+          <div class="vbody">
+            <div class="role">קהילה · נשים מייסדות</div>
+            <b>דור המייסדות</b>
+            <p>קהילת המייסדות הצעירות של ישראל — נשים שבונות מיזמים, מהרעיון הראשון ועד ההקמה.</p>
+            <a class="vlink" href="https://www.instagram.com/dorhameyasdot/" target="_blank" rel="noopener">אינסטגרם ←</a>
+          </div>
+        </article>
+        <article class="vcard vtxt" tabindex="0" role="button" aria-label="להביא קדימה: כיף בעוטף">
+          <div class="vbig vbig-sm" aria-hidden="true">כיף בעוטף</div>
+          <div class="vbody">
+            <div class="role">קהילה · עוטף עזה</div>
+            <b>כיף בעוטף</b>
+            <p>מחזירים את החיים, הצחוק והקהילה ליישובי העוטף — אירוע אחרי אירוע.</p>
+            <a class="vlink" href="https://www.instagram.com/enjoy_otef/" target="_blank" rel="noopener">אינסטגרם ←</a>
+          </div>
+        </article>
+        <article class="vcard vtxt" tabindex="0" role="button" aria-label="להביא קדימה: שמונה">
+          <div class="vbig vbig-sm" aria-hidden="true">שמונה.</div>
+          <div class="vbody">
+            <div class="role">קריית שמונה</div>
+            <b>שמונה.</b>
+            <p>מיזם שמחזיר צעירים לצפון — לגור, לבנות ולהישאר.</p>
           </div>
         </article>
         <article class="vcard you" tabindex="0" role="button" aria-label="להביא קדימה: אתם — מחזור 2026">
@@ -1520,12 +1578,9 @@
 
   /* ---- the letter: handwriting inked in by scroll ---- */
   var LETTER_LINES = [
-    { text: 'בואו נהיה השינוי שאנחנו רוצים לראות בישראל.' },
-    { text: 'אם הלופ של המציאות הישראלית מייצר אצלך תחושת ייאוש, ולעתים נדמה שאין אור בקצה המנהרה, יש לנו הצעה — תנועה.' },
-    { text: 'אף אחד לא יבוא לסדר את זה בשבילנו. יש אותנו. דור של בונים.' },
-    { text: 'אל תחכה לתואר, לניסיון, לאישור. הרצל היה עיתונאי עם רעיון הזוי.' },
-    { text: 'הציונות של הדור שלנו היא לא נאום. היא מיזם. בעיה אחת שבחרת — ולא הרפית עד שנפתרה.' },
-    { text: '"הננו" זו לא מילה. זו תשובה לשאלה: מי יעשה את זה? בוא. אנחנו כבר כאן.' }
+    { text: 'צעירים בישראל מסיימים את הצבא, מוכשרים ומלאי רצון, אבל רבים מהם מרגישים תקועים.' },
+    { text: 'יש מיעוט שבוחר לשחות נגד הזרם ורוצה לעשות דברים גדולים — מיעוט של חלוצים.' },
+    { text: 'אותם חלוצים לא תמיד יודעים מאיפה להתחיל, ולנו יש הצעה — תנועה.' }
   ];
 
   var magicText = document.getElementById('magicText');
@@ -1722,7 +1777,7 @@
   var vflow = document.getElementById('vflow');
   if(vflow){
     var vcards = Array.prototype.slice.call(vflow.querySelectorAll('.vcard'));
-    var vnames = ['דנאל בן נאמר', 'נועם מירוב', 'יובל פיטלוק', 'אתם — מחזור 2026'];
+    var vnames = ['דנאל בן נאמר','נועם מירוב','יובל פיטלוק','דור המייסדות','כיף בעוטף','שמונה','אתם — מחזור 2026'];
     var vstatus = document.getElementById('vflowStatus');
     var vcur = 0;
     function renderVFlow(){
@@ -1829,7 +1884,7 @@
     L.push('');
     L.push('מוזמנים להעתיק את כל הטקסט הזה ולהדביק אצל ה-AI שלכם — לתקציר מהיר, לשאלות, או כדי לבדוק אם זה בשבילכם.');
     L.push('');
-    L.push('# הננו — חלוצים של תקווה · ערב יזמות לאומית');
+    L.push('# הננו — חלוציות כדרך חיים · ערב יזמות לאומית');
     L.push('');
     L.push('## הבעיות של הדור שלנו');
     document.querySelectorAll('.chal').forEach(function(p){
@@ -1877,7 +1932,7 @@
     return L.join('\n');
   }
   var machineEl = document.getElementById('machine');
-  var modeToggle = document.getElementById('modeToggle');
+  var modeToggle = null; /* v5.1: replaced by the תצוגה fan */
   function setModeSeg(machine){
     var h = document.getElementById('segHuman'), m = document.getElementById('segMachine');
     if(h) h.classList.toggle('on', !machine);
@@ -1905,6 +1960,51 @@
       });
     });
   }
+
+  /* ---- nav fans: הנני + תצוגה ---- */
+  function setupFan(id){
+    var root = document.getElementById(id); if(!root) return null;
+    var btn = root.querySelector('.fan-btn'), menu = root.querySelector('.fan-menu');
+    function close(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+    function open(){
+      document.querySelectorAll('.fan-menu').forEach(function(m){ m.hidden = true; });
+      document.querySelectorAll('.fan-btn').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+      menu.hidden = false; btn.setAttribute('aria-expanded','true');
+    }
+    btn.addEventListener('click', function(e){ e.stopPropagation(); menu.hidden ? open() : close(); });
+    document.addEventListener('click', function(e){ if(!root.contains(e.target)) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    menu.querySelectorAll('a,button').forEach(function(it){ it.addEventListener('click', function(){ close(); }); });
+    return { close: close };
+  }
+  setupFan('fanHineni');
+  setupFan('fanView');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var hv = document.querySelector('.h5-vid');
+    if(hv){ hv.removeAttribute('autoplay'); hv.pause(); }
+  }
+  (function(){
+    var m = document.getElementById('machine');
+    var vm = document.getElementById('viewMachine'), vh = document.getElementById('viewHuman');
+    if(!m || !vm) return;
+    function openMachine(){
+      document.getElementById('machineText').textContent = buildMachineText();
+      m.hidden = false; document.body.style.overflow = 'hidden';
+    }
+    function closeMachine(){ m.hidden = true; document.body.style.overflow = ''; }
+    vm.addEventListener('click', openMachine);
+    if(vh) vh.addEventListener('click', closeMachine);
+    var mb = document.getElementById('machineBack');
+    if(mb) mb.addEventListener('click', closeMachine);
+    var mc = document.getElementById('machineCopy');
+    if(mc) mc.addEventListener('click', function(){
+      var btn = mc;
+      navigator.clipboard.writeText(document.getElementById('machineText').textContent).then(function(){
+        btn.textContent = 'הועתק! עכשיו להדביק אצל ה-AI';
+        setTimeout(function(){ btn.textContent = 'העתקת הכל ללוח'; }, 2500);
+      });
+    });
+  })();
 
   /* ---- theme panel: triple-click the logo (or ?theme in the URL) ---- */
   var THEME_TOKENS = [
