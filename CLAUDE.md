@@ -1,41 +1,42 @@
-# HINENU Hebrew Site — Claude Handoff
+# HINENU Hebrew Site — Claude Handoff (v5, dark)
 
 ## What this is
-One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוצים של תקווה**: national-entrepreneurship evenings + an incubator (חממה) for young Israelis building ventures and NGOs. Built July 2026 by Itamar + Claude.
+One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כדרך חיים**: national-entrepreneurship evenings + an incubator (חממה) for young Israelis. Built July 2026 by Itamar + Claude. Fully redesigned 12.7 to a pitch-black cinematic one-pager.
 
-- **Live:** https://hinenu-site.vercel.app
-- **Repo:** github.com/Itamargend/hinenu-site — **push to `main` auto-deploys** (Vercel Git integration, project `hinenu-site` on Itamar's Vercel account).
-- Related sites: investor site (English, separate folder, not this repo), movement site https://www.hinenupioneers.com (Wix).
+- **Live:** https://hinenu-site.vercel.app (currently serving `main`; the dark redesign lives on branch `redesign-hero` — merge when Itamar approves)
+- **Repo:** github.com/Itamargend/hinenu-site — push to `main` auto-deploys (Vercel Git integration).
+- Local preview: Itamar runs a static server on `localhost:8934` from this folder.
 
 ## Architecture — deliberately simple
-Everything lives in **one `index.html`**: one `<style>` block, one vanilla-JS IIFE. No frameworks, no build step. Optimized images in `assets/` (webp/jpg, ≤1400px wide). Local handwriting font in `dana-yad-alefalefalef/`. Keep it single-file unless Itamar says otherwise.
+Everything lives in **one `index.html`**: one `<style>` block, one vanilla-JS IIFE. No frameworks, no build step. Optimized assets in `assets/` (webp/jpg ≤1920px, hero video mp4). Local fonts in `fonts/` (Aduma, Asakim, MigdalHaemek, Heebo variable) + `dana-yad-alefalefalef/` for the manifesto handwriting.
 
 ## Page structure (top to bottom)
-1. **Header** — fixed; two CTAs: "אני רוצה להגיש מועמדות לחממה" (opens apply modal) + "אני רוצה להגיע לערב יזמות הבא" (#event).
-2. **Hero** — floating "national problems" wall + headline on a strong white halo. Problems are placed randomly but excluded from the middle band (top 26–70%) with min-distance scoring; they repel away from the cursor. User-added problems post to a Google Form (`SHEETS.problems`).
-3. **Manifesto letter (#letter)** — scroll-driven handwriting ink effect on a sticky notebook, Dana Yad font, Roee Azizi's B&W photo at the signature. **The text is placeholder — final version is awaited from Roee Azizi.**
-4. **Tracks (#tracks)** — cover-flow of 2 cards: מסלול א׳ ערבי יזמות / מסלול ב׳ החממה (solid blue, 2-col perks). Click/arrows/swipe to switch.
-5. **Event (#event)** — the next evening: Michael Eisenberg, **Tue 28.7 · 19:30 · בית בן-גוריון, תל אביב** (flyer is source of truth). Photo is a transparent Magnific-upscaled cutout (`assets/michael-cutout.webp`) with drop-shadow. Main CTA = "הוסיפו ליומן" (Google Calendar link). "רוצים לדעת עוד?" expands questions + photo gallery from the 16.6 event (Yoel Zilberman).
-6. **Ventures (#ventures)** — "כבר התחלנו" cover-flow on near-black `#101009` (matches investor site): Ben Namer / Meirov / Pitluk / "אתם?" card → apply modal.
-7. **Backers (#backers)** — auto-scrolling marquee of grayscale institution logos.
-8. **FAQ (#faq)** — sits on the *start* of the footer gradient (its background fades white→pale periwinkle).
-9. **Footer** — continues the gradient into solid blue; Instagram + hinenupioneers.com pills.
-10. **Apply modal** — full candidacy form, POSTs to **Formspree `xnjygrae`** (same endpoint as investor site) via fetch; confetti on success.
+1. **Header** — damngood-style spread: right = "הנני +" fan (3 actions: apply modal / #event / hinenupioneers.com), center = logo, left = "תצוגה +" fan (אנושית / בינה מלאכותית → machine-mode overlay). Fans animate dock-style.
+2. **Hero (`.hero5`)** — pitch black, fullscreen muted looping bg video (`assets/hero-bg.mp4`, from the "מעבר לצפון" campaign) under a dark shade; huge title "הננו / חלוציות כדרך חיים" in MigdalHaemek with a blue Highlights-mask on "כדרך חיים".
+3. **Challenges (`.chal` ×5)** — full-screen photo scenes (negev/housing/food/hasbara/trauma; Magnific-generated, unified warm grade). Big white statements with black hand-drawn highlight masks (`assets/hlk-1..5.webp`, one per scene) behind the keyword. Ken Burns zoom; text reveals via CSS scroll-driven animations (IO fallback). Fixed torn CTA appears through this range.
+4. **Manifesto (#letter)** — white torn sheet on black; scroll-inks the handwriting. Text = the "צעירים בישראל מסיימים את הצבא..." version (updated 12.7). Roee Azizi signature in white.
+5. **Tracks (#tracks)** — cover-flow of 2 cards skinned with ripped-paper strips (`torn-white.webp` / `torn-white-b.webp`, white paper with torn bottom on black). Cards min-height 915px so content stays inside the white zone; `.tflow` height is set inline by JS.
+6. **Events (#event)** — grid of 2 flyer cards (`ev-michael.webp` future 28.7 / `ev-yoel.webp` past 16.6). Click opens `#evOverlay` popup: future = chips+lede+questions+calendar CTA; past = photo gallery. Data lives in the `EV` array in JS.
+7. **Ventures (#ventures)** — cover-flow: Ben Namer / Meirov / Pitluk / dor-hameyasdot (B&W photo) / kef-baotef / shmona (typographic cards) / "אתם?".
+8. **Backers** — marquee, logos inverted to white.
+9. **FAQ + Footer** — dark navy ramp into brand blue.
+10. **Apply modal** — Formspree `xnjygrae`. **Machine mode** — full-text overlay via the תצוגה fan.
 
-## Gotchas — learned the hard way, don't regress
-- `body{overflow-x:clip}` — **never change to `hidden`**: it silently kills `position:sticky` (breaks the manifesto effect). The clip is needed because the carousel fans overflow horizontally, which in RTL creates a page-breaking scroll track.
-- Carousels are RTL-adapted: cards fan with **negative** translateX; back-card clicks are intercepted in the capture phase so their buttons stay inert until front.
-- Don't put `.reveal` on carousel cards (inline transforms conflict with the reveal transition).
-- `.tiltable` = pressed-lean hover (±7°, scale .982, springy return). Photos only, not flow cards.
-- Fade-ins look "broken" in hidden/background tabs (Chrome freezes transitions) — test in a focused tab.
-- Deploying from a Hebrew-named cwd breaks Vercel CLI (empty project slug). Auto-deploy via git avoids this; manual fallback: `rm -rf /tmp/hinenu-site && cp -R "<folder>/" /tmp/hinenu-site && cd /tmp/hinenu-site && npx vercel --prod`.
+## Design tokens & tools
+- `:root`: `--bg:#000`, `--ink` (light), `--ink-dark` (for white-paper surfaces), `--hl-blue` (bright accent + ::selection + keyword masks), `--coral`, `--blue`.
+- **Theme panel**: floating 🎨 button (localhost only), triple-click logo, or `?theme`. Color tokens + display-font switcher (MigdalHaemek default). Saved in localStorage `hinenu-theme-v5`.
+- **QA audit**: `qa-audit.js` (gitignored). In console: `eval(await (await fetch('/qa-audit.js')).text()); await hinenuAudit()` → checks assets, fonts, palette conformity, layout, wiring. Keep it green.
 
-## Conventions
-- Hebrew copy: direct, energetic, second person ("דוגרי") — match existing tone.
-- New images: optimize into `assets/` (webp, quality ~85, ≤1400px).
-- The WhatsApp/PNG files at repo root are source material, not referenced by the site.
+## Gotchas — don't regress
+- `body{overflow-x:clip}` — never `hidden` (kills the manifesto position:sticky). Carousels overflow horizontally by design; `.tracks`/`.ventures` have `overflow:clip`, `.chal` has `contain:paint`.
+- Chrome freezes transitions/rAF and defers video loading in background tabs — QA in a focused window.
+- Fonts are local TTFs; `document.fonts.load` before checking availability.
+- White-surface elements (letter paper, track cards, modals) must use `--ink-dark` text, not `--ink`.
+- Hebrew-named cwd breaks Vercel CLI — deploy via git push (or ASCII /tmp copy fallback).
+- Downloading from Freepik CDNs via automation gets blocked by Chrome — give Itamar direct links to click.
 
 ## Open items
-- Replace manifesto placeholder text when Roee Azizi delivers his letter.
-- `fonts/OHNettaEpstein*` is referenced but the folder doesn't exist (silent fallback — harmless; clean up or add the files someday).
-- Custom domain not yet configured (Vercel → Settings → Domains).
+- Letter text may still be revised by Roee Azizi.
+- "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
+- Photos/videos wanted for כיף בעוטף + שמונה venture cards; videos from the 16.6 evening can be added to the past-event popup (`EV[1].gallery`).
+- Custom domain not configured.
