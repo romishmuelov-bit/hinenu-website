@@ -58,7 +58,7 @@
     --coral:#D96A50;
     --bg:#000000;
     --hl:#D96A50;
-    --font-display:'Aduma';
+    --font-display:'MigdalHaemek';
     --font-mid:'Frank Ruhl Libre';
   }
   ::selection{ background:var(--hl-blue); color:#fff; }
@@ -135,7 +135,13 @@
     padding:11px 14px; border-radius:9px; text-decoration:none;
     transition:background .15s ease;
   }
-  .fan-menu a:hover, .fan-menu button:hover{ background:rgba(255,255,255,.09); color:#fff; }
+  .fan-menu a:hover, .fan-menu button:hover{ background:rgba(255,255,255,.09); color:#fff; transform:scale(1.07); }
+  .fan-menu a, .fan-menu button{ transform-origin:top center; transition:background .15s ease, transform .16s ease; }
+  .fan-menu:not([hidden]) > *{ animation:dockIn .5s cubic-bezier(.34,1.56,.64,1) both; }
+  .fan-menu > :nth-child(1){ animation-delay:.03s; }
+  .fan-menu > :nth-child(2){ animation-delay:.1s; }
+  .fan-menu > :nth-child(3){ animation-delay:.17s; }
+  @keyframes dockIn{ from{ opacity:0; transform:translateY(-16px) scale(.5); } }
 
   /* ---------- HERO v5: pitch black title (damngood) ---------- */
   .hero5{
@@ -151,10 +157,10 @@
   .h5-title{
     position:relative; z-index:2;
     margin:0; font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
-    color:#fff; line-height:.95; font-size:clamp(64px,12.5vw,190px);
+    color:#fff; line-height:.95; font-size:clamp(76px,15vw,230px);
     display:flex; flex-direction:column;
   }
-  .h5-title .t2{ font-size:clamp(34px,6.2vw,96px); }
+  .h5-title .t2{ font-size:clamp(42px,7.6vw,116px); }
   .hlmask{ position:relative; font-style:normal; white-space:nowrap; }
   .hlmask::before{
     content:""; position:absolute; inset:-8% -5%; z-index:-1;
@@ -194,9 +200,19 @@
     text-shadow:0 2px 26px rgba(0,0,0,.45);
   }
   .chal-txt h2 .k{
-    background:#000; color:#fff; padding:.02em .18em;
-    box-decoration-break:clone; -webkit-box-decoration-break:clone;
+    position:relative; color:#fff; padding:.06em .26em;
   }
+  .chal-txt h2 .k::before{
+    content:""; position:absolute; inset:-16% -7%; z-index:-1;
+    background:#000;
+    -webkit-mask:var(--kmask,url('assets/hlk-1.webp')) center/100% 100% no-repeat;
+    mask:var(--kmask,url('assets/hlk-1.webp')) center/100% 100% no-repeat;
+  }
+  .chal[data-theme="negev"] .k{ --kmask:url('assets/hlk-1.webp'); }
+  .chal[data-theme="housing"] .k{ --kmask:url('assets/hlk-2.webp'); }
+  .chal[data-theme="food"] .k{ --kmask:url('assets/hlk-3.webp'); }
+  .chal[data-theme="hasbara"] .k{ --kmask:url('assets/hlk-4.webp'); }
+  .chal[data-theme="trauma"] .k{ --kmask:url('assets/hlk-5.webp'); }
   .chal-stat{
     margin:0; font-family:'Karantina',sans-serif;
     font-size:clamp(17px,2vw,24px); letter-spacing:.05em;
@@ -420,10 +436,9 @@
   /* tracks cover-flow: one card front and center, click to switch */
   .tflow{ position:relative; perspective:1400px; }
   .track{
-    background:#F7F5EF;
-    border-radius:6px;
-    box-shadow:0 34px 70px rgba(0,0,0,.6);
-    padding:48px 44px 52px;
+    background:#F7F5EF url('assets/torn-white.webp') center/100% 100% no-repeat;
+    padding:74px 66px 80px;
+    filter:drop-shadow(0 24px 50px rgba(0,0,0,.55));
     display:flex; flex-direction:column; text-align:right;
     position:absolute; top:0; left:50%;
     width:min(580px,90vw); margin-left:calc(min(580px,90vw) / -2);
@@ -454,18 +469,6 @@
   .track-a li{ display:flex; gap:12px; font-size:15.5px; color:#3E405A; }
   .track-a li::before{ content:"—"; color:var(--blue); font-weight:700; flex:none; }
   .track-b{ transform:rotate(-.8deg); }
-  .track::before{
-    content:""; position:absolute; top:-22px; inset-inline-end:40px;
-    width:170px; height:46px; z-index:1;
-    background:url('assets/torn-2.webp') center/100% 100% no-repeat;
-    transform:rotate(-2.5deg);
-    filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));
-  }
-  .track-b::before{
-    inset-inline-end:auto; inset-inline-start:40px;
-    transform:rotate(2deg);
-    background-image:url('assets/torn-4.webp');
-  }
   .track-b .tag{ color:var(--hl); }
   .track-b .desc{ color:#3E405A; }
   .perks{
@@ -612,6 +615,44 @@
   .gal-grid img:first-child{ grid-row:span 2; }
   .gal-grid img:last-child{ grid-column:span 2; }
 
+  /* ---------- evenings grid + popup ---------- */
+  .events-grid{
+    display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:28px; max-width:880px; margin:46px auto 0;
+  }
+  .ev-card{
+    position:relative; border:none; background:none; padding:0; cursor:pointer;
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 30px 60px rgba(0,0,0,.55);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .ev-card:hover{ transform:translateY(-8px); box-shadow:0 44px 80px rgba(0,0,0,.7); }
+  .ev-card img{ width:100%; display:block; }
+  .ev-tag{
+    position:absolute; top:14px; inset-inline-start:14px;
+    background:#000; color:#fff; font-weight:800; font-size:13px;
+    font-family:'Rubik',sans-serif;
+    padding:8px 15px; border-radius:999px;
+  }
+  .ev-tag.ev-future{ background:var(--hl-blue); }
+  .ev-modal{ max-width:560px; }
+  .ev-modal .kicker{
+    font-family:'Rubik',sans-serif; font-weight:800; color:var(--coral);
+    font-size:13px; letter-spacing:3px; margin:0 0 10px;
+  }
+  .ev-modal h3{ font-size:26px; }
+  .ev-modal h3 .ev-guest{ color:var(--blue); }
+  .ev-modal .event-meta{ margin:14px 0 16px; }
+  .ev-modal .event-meta span{ border-color:var(--line-dark); }
+  .ev-modal .ev-lede{ color:#3E405A; font-size:16px; line-height:1.65; margin:0 0 14px; }
+  .ev-modal .event-qs{ margin-bottom:20px; }
+  .ev-modal .event-qs li{ color:var(--ink-dark); }
+  .ev-modal .ev-cal{ display:block; text-align:center; text-decoration:none; }
+  .ev-modal .gal-grid{ grid-auto-rows:130px; margin-top:8px; }
+  @media (max-width:760px){
+    .events-grid{ grid-template-columns:1fr; }
+  }
+
   /* ---------- VENTURES: already working ---------- */
   .ventures{ background:#000; color:#fff; padding:110px 0 100px; border-top:1px solid var(--line); overflow:clip; }
   .ventures .kicker{
@@ -622,14 +663,7 @@
     font-family:'Rubik',sans-serif; font-weight:900;
     font-size:clamp(28px,4.6vw,50px); line-height:1.2; margin:0 0 52px; text-align:center;
   }
-  .ventures h2 .hl{ color:#9FA8E8; position:relative; z-index:1; }
-  .ventures h2 .hl::after{
-    content:""; position:absolute; inset:0 -10px; z-index:-1;
-    background:var(--hl);
-    -webkit-mask:url('assets/stroke-1.webp') center/100% 100% no-repeat;
-    mask:url('assets/stroke-1.webp') center/100% 100% no-repeat;
-    opacity:.4;
-  }
+  .ventures h2 .hl{ color:var(--hl-blue); position:relative; z-index:1; }
   .vflow{ position:relative; height:530px; perspective:1400px; touch-action:pan-y; }
   .vcard{
     position:absolute; top:0; left:50%; width:320px; margin-left:-160px;
@@ -881,7 +915,7 @@
     .mgroup img{ height:40px; }
     .mgroup img.slim{ height:26px; }
     .modal-card{ padding:26px 20px 22px; }
-    .h5-title{ font-size:clamp(56px,17vw,90px); }
+    .h5-title{ font-size:clamp(58px,19vw,100px); }
     .h5-title .t2{ font-size:clamp(28px,8.4vw,44px); }
     .chal{ scroll-snap-align:start; }
     .chal-txt{ padding:0 7vw 13svh; }
@@ -988,7 +1022,6 @@
       <span class="tag">חלוצים של תקווה</span>
     </a>
     <div class="top-side end">
-      <a class="top-link" href="#letter">המניפסט</a>
       <div class="navfan" id="fanView">
         <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">תצוגה +</button>
         <div class="fan-menu" hidden>
@@ -1006,7 +1039,6 @@
   <section class="hero5" id="hero" aria-label="הננו — חלוציות כדרך חיים">
     <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
     <div class="h5-shade" aria-hidden="true"></div>
-    <p class="h5-kick">תנועת הצעירים שבונה את ישראל הבאה</p>
     <h1 class="h5-title"><span>הננו</span><span class="t2">חלוציות <i class="hlmask">כדרך חיים</i></span></h1>
     <div class="h5-scroll">הבעיות של הדור שלנו</div>
   </section>
@@ -1045,20 +1077,8 @@
     <div class="chal-txt">
       <h2>דור שלם נושא טראומה. <span class="k">לבד</span>.</h2>
       <p class="chal-stat">כ־3,000,000 ישראלים נושאים טראומה מאז ה־7.10 (מבקר המדינה)</p>
-      <button type="button" class="add-problem" id="ctaProblem" aria-expanded="false" aria-controls="composer">הבעיה שלך לא כאן? הוסיפו אותה +</button>
-      <div class="composer" id="composer" hidden>
-        <div class="card-editor">
-          <textarea id="composerText" maxlength="120" placeholder="הבעיה שמדירה שינה מעיניכם..." aria-label="כתיבת בעיה חדשה"></textarea>
-          <div class="actions">
-            <button type="button" class="cancel" id="composerCancel">ביטול</button>
-            <button type="button" class="send" id="composerSend">רושמים על הלוח</button>
-          </div>
-        </div>
-        <p class="sent-note" id="composerSent" hidden>נרשם על הלוח שלנו. תודה — זה בדיוק החומר שממנו מתחילים מיזמים.</p>
-      </div>
     </div>
   </section>
-  <div class="fogbridge" id="fogBridge" aria-hidden="true"></div>
   <a class="cta-torn" id="fixedCta" href="#event">בואו לתקן ← ערב יזמות לאומית · 28.7</a>
 
   <!-- ======= 2. THE LETTER ======= -->
@@ -1126,55 +1146,32 @@
     </div>
   </section>
 
-  <!-- ======= 4. THE NEXT EVENT ======= -->
+  <!-- ======= 4. OUR EVENINGS ======= -->
   <section class="event" id="event">
     <div class="wrap">
-      <div class="event-grid">
-        <div class="event-body reveal">
-          <p class="kicker">הערב הקרוב</p>
-          <h2>ערב יזמות לאומית<br><span class="acc">עם מייקל אייזנברג</span></h2>
-          <div class="event-meta">
-            <span>יום שלישי · 28.7</span>
-            <span>19:30</span>
-            <span>בית בן־גוריון, תל אביב</span>
-          </div>
-          <p class="event-lede">מילה אחת תקבע מי ישרוד את העשור הקרוב: <b>Agency</b>. אנחנו קוראים לזה חלוציות — היכולת לקחת יוזמה, ללמוד מהר ולזוז.</p>
-          <div class="event-ctas">
-            <a class="btn-primary" href="https://calendar.app.google/CgryW6iXoPm3mW9h7" target="_blank" rel="noopener">הוסיפו ליומן — שומרים לכם מקום</a>
-            <span class="event-arrow" aria-hidden="true"></span>
-            <button type="button" class="btn-ghost btn-more" id="eventMoreBtn" aria-expanded="false" aria-controls="eventMore">רוצים לדעת עוד?</button>
-          </div>
-          <p class="event-limit">המקומות מוגבלים — זה הסלון של בן-גוריון, לא אולם.</p>
-        </div>
-
-        <figure class="event-photo tiltable reveal" style="--d:.08s">
-          <img src="assets/michael-cutout.webp" alt="מייקל אייזנברג" loading="lazy">
-          <figcaption>
-            <b>מייקל אייזנברג</b>
-            מהדמויות המובילות ביזמות ובהון הסיכון בישראל · שותף-מנהל ומייסד בקרן הון הסיכון Aleph
-          </figcaption>
-        </figure>
+      <div class="tracks-head">
+        <p class="kicker reveal">הערבים שלנו</p>
+        <h2 class="reveal" style="--d:.05s">ערבי <span class="acc">יזמות לאומית</span>.</h2>
+        <p class="sub reveal" style="--d:.1s">נפגשים עם מי שכבר עשה — ויוצאים עם צעד ראשון. לחצו על ערב לכל הפרטים.</p>
       </div>
-
-      <div class="event-more" id="eventMore" hidden>
-        <p class="event-sub">לדור שלנו יש כבר Agency — חווינו את זה בצבא, במילואים, בשנתיים האחרונות. השאלה מה עושים עם זה. בערב הזה נשאל:</p>
-        <ul class="event-qs">
-          <li>איך הופכים את ישראל למעצמה טכנולוגית?</li>
-          <li>איפה ההזדמנויות הענקיות שכולם מפספסים?</li>
-          <li>מה מדינת ישראל צריכה מאיתנו, הצעירים, כדי לשגשג?</li>
-        </ul>
-        <div class="event-gallery">
-          <p class="gal-title">ככה נראה הערב הקודם — ערב יזמות ציונית עם יואל זילברמן, מייסד ומנכ״ל השומר החדש</p>
-          <div class="gal-grid">
-            <img class="tiltable" src="assets/event-1.jpg" alt="משתתפים בערב היזמות של הננו" loading="lazy">
-            <img class="tiltable" src="assets/event-2.jpg" alt="מינגלינג בערב היזמות" loading="lazy">
-            <img class="tiltable" src="assets/event-4.jpg" alt="שיחה בין משתתפים בערב היזמות" loading="lazy">
-            <img class="tiltable" src="assets/event-3.jpg" alt="מינגלינג ושיחות בערב היזמות" loading="lazy">
-          </div>
-        </div>
+      <div class="events-grid">
+        <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
+          <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג — 28.7, בית בן-גוריון תל אביב" loading="lazy">
+          <span class="ev-tag ev-future">28.7 · ההרשמה פתוחה</span>
+        </button>
+        <button type="button" class="ev-card reveal" data-ev="1" style="--d:.08s" aria-haspopup="dialog">
+          <img src="assets/ev-yoel.webp" alt="ערב יזמות ציונית עם יואל זילברמן — 16.6, הרצליה" loading="lazy">
+          <span class="ev-tag ev-past">16.6 · כבר קרה</span>
+        </button>
       </div>
     </div>
   </section>
+  <div class="modal-overlay" id="evOverlay" hidden>
+    <div class="modal-card ev-modal" role="dialog" aria-modal="true" aria-label="פרטי הערב">
+      <button class="modal-close" id="evClose" aria-label="סגירה">×</button>
+      <div id="evBody"></div>
+    </div>
+  </div>
 
   <!-- ======= 5. VENTURES: already working ======= -->
   <section class="ventures" id="ventures">
@@ -1467,7 +1464,6 @@
   /* ---- challenges: tear transition + fog bridge + fixed CTA ---- */
   var chals = Array.prototype.slice.call(document.querySelectorAll('.chal'));
   var tearV = document.getElementById('tearV');
-  var fogBridge = document.getElementById('fogBridge');
   var fixedCta = document.getElementById('fixedCta');
   var letterEl = document.getElementById('letter');
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1508,73 +1504,21 @@
   } else {
     chals.forEach(function(c){ c.classList.add('in'); });
   }
-  /* fog bridge + fixed CTA visibility */
-  var lastChal = chals[chals.length - 1] || null;
-  var fogTick = false;
-  function fogFrame(){
-    fogTick = false;
-    if(!lastChal || !letterEl){ return; }
+  /* fixed CTA visibility */
+  var ctaTick = false;
+  function ctaFrame(){
+    ctaTick = false;
+    if(!letterEl) return;
     var vh = window.innerHeight;
-    var tr = lastChal.getBoundingClientRect();
     var lr = letterEl.getBoundingClientRect();
-    /* thicken as the trauma scene leaves the viewport */
-    var p = 1 - (tr.bottom / vh);           /* 0 while fully visible, →1 as it scrolls out */
-    var op = Math.max(0, Math.min(1, p * 2.2));
-    /* fade out once the letter has arrived */
-    if(lr.top < vh * 0.25){
-      op *= Math.max(0, lr.top) / (vh * 0.25);
-    }
-    if(tr.bottom < -vh || tr.top > vh * 1.5){ op = 0; }
-    fogBridge.style.opacity = op.toFixed(3);
-    /* CTA: visible from first challenge until the letter */
     var firstTop = chals.length ? chals[0].getBoundingClientRect().top : 1;
     var showCta = firstTop < vh * 0.6 && lr.top > vh * 0.35;
     if(fixedCta) fixedCta.classList.toggle('show', showCta);
   }
   window.addEventListener('scroll', function(){
-    if(!fogTick){ fogTick = true; requestAnimationFrame(fogFrame); }
+    if(!ctaTick){ ctaTick = true; requestAnimationFrame(ctaFrame); }
   }, { passive:true });
-  fogFrame();
-
-  /* ---- composer: "your problem isn't here?" ---- */
-  var ctaProblem = document.getElementById('ctaProblem');
-  var composer = document.getElementById('composer');
-  var composerText = document.getElementById('composerText');
-
-  function openComposer(){
-    composer.hidden = false;
-    ctaProblem.setAttribute('aria-expanded', 'true');
-    composerText.focus();
-  }
-  function closeComposer(){
-    composer.hidden = true;
-    ctaProblem.setAttribute('aria-expanded', 'false');
-    composerText.value = '';
-  }
-  ctaProblem.addEventListener('click', function(){
-    if(composer.hidden){ openComposer(); } else { closeComposer(); }
-  });
-  document.getElementById('composerCancel').addEventListener('click', closeComposer);
-  document.getElementById('composerSend').addEventListener('click', function(){
-    var text = composerText.value.trim();
-    if(!text){ composerText.focus(); return; }
-    sendToSheet(SHEETS.problems, { text: text });
-    composerText.value = '';
-    var note = document.getElementById('composerSent');
-    if(note){
-      note.hidden = false;
-      setTimeout(function(){ note.hidden = true; closeComposer(); }, 2200);
-    } else {
-      closeComposer();
-    }
-  });
-  composerText.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' && !e.shiftKey){
-      e.preventDefault();
-      document.getElementById('composerSend').click();
-    }
-    if(e.key === 'Escape'){ closeComposer(); }
-  });
+  ctaFrame();
 
   /* ---- the letter: handwriting inked in by scroll ---- */
   var LETTER_LINES = [
@@ -1762,18 +1706,50 @@
   }
 
   /* ---- event: "learn more" toggle ---- */
-  var moreBtn = document.getElementById('eventMoreBtn');
-  var moreBox = document.getElementById('eventMore');
-  if(moreBtn && moreBox){
-    moreBtn.addEventListener('click', function(){
-      var opening = moreBox.hidden;
-      moreBox.hidden = !opening;
-      moreBtn.setAttribute('aria-expanded', opening ? 'true' : 'false');
-      moreBtn.textContent = opening ? 'פחות פרטים' : 'רוצים לדעת עוד?';
-    });
+  /* ---- evenings: cards open a popup ---- */
+  var EV = [
+    { title:'ערב יזמות לאומית', guest:'עם מייקל אייזנברג', status:'future',
+      chips:['יום שלישי · 28.7','19:30','בית בן־גוריון, תל אביב'],
+      lede:'מילה אחת תקבע מי ישרוד את העשור הקרוב: Agency. אנחנו קוראים לזה חלוציות — היכולת לקחת יוזמה, ללמוד מהר ולזוז. אורח: מייקל אייזנברג, מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.',
+      qs:['איך הופכים את ישראל למעצמה טכנולוגית?','איפה ההזדמנויות הענקיות שכולם מפספסים?','מה מדינת ישראל צריכה מאיתנו, הצעירים, כדי לשגשג?'],
+      cal:'https://calendar.app.google/CgryW6iXoPm3mW9h7',
+      note:'המקומות מוגבלים — זה הסלון של בן-גוריון, לא אולם.' },
+    { title:'ערב יזמות ציונית', guest:'עם יואל זילברמן', status:'past',
+      chips:['16.6','19:00','הרצליה'],
+      lede:'שיח עם יזמים מובילים — יואל זילברמן, מייסד ומנכ״ל "השומר החדש", על איך מקימים תנועה מאפס.',
+      gallery:['assets/event-1.jpg','assets/event-2.jpg','assets/event-4.jpg','assets/event-3.jpg'] }
+  ];
+  var evOverlay = document.getElementById('evOverlay');
+  var evBody = document.getElementById('evBody');
+  function escT(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+  function openEv(i){
+    var e = EV[i]; if(!e || !evOverlay) return;
+    var h = '<p class="kicker">' + (e.status==='future' ? 'הערב הקרוב' : 'כבר קרה') + '</p>';
+    h += '<h3>' + escT(e.title) + ' <span class="ev-guest">' + escT(e.guest) + '</span></h3>';
+    h += '<div class="event-meta">' + e.chips.map(function(c){ return '<span>'+escT(c)+'</span>'; }).join('') + '</div>';
+    h += '<p class="ev-lede">' + escT(e.lede) + '</p>';
+    if(e.status === 'future'){
+      if(e.qs) h += '<ul class="event-qs">' + e.qs.map(function(q){ return '<li>'+escT(q)+'</li>'; }).join('') + '</ul>';
+      h += '<a class="cta-btn ev-cal" href="' + e.cal + '" target="_blank" rel="noopener">הוסיפו ליומן — שומרים לכם מקום</a>';
+      if(e.note) h += '<p class="event-limit">' + escT(e.note) + '</p>';
+    } else if(e.gallery){
+      h += '<div class="gal-grid">' + e.gallery.map(function(g){ return '<img src="'+g+'" alt="" loading="lazy">'; }).join('') + '</div>';
+    }
+    evBody.innerHTML = h;
+    evOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeEv(){ if(evOverlay && !evOverlay.hidden){ evOverlay.hidden = true; document.body.style.overflow = ''; } }
+  document.querySelectorAll('.ev-card').forEach(function(c){
+    c.addEventListener('click', function(){ openEv(+c.dataset.ev); });
+  });
+  if(evOverlay){
+    document.getElementById('evClose').addEventListener('click', closeEv);
+    evOverlay.addEventListener('click', function(e){ if(e.target === evOverlay) closeEv(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeEv(); });
   }
 
-  /* ---- ventures cover-flow: click / swipe / arrows bring a card to the front ---- */
+    /* ---- ventures cover-flow: click / swipe / arrows bring a card to the front ---- */
   var vflow = document.getElementById('vflow');
   if(vflow){
     var vcards = Array.prototype.slice.call(vflow.querySelectorAll('.vcard'));
@@ -1906,11 +1882,9 @@
       t.querySelectorAll('li').forEach(function(li){ L.push('- ' + li.textContent.replace(/\s+/g,' ').trim()); });
     });
     L.push('');
-    L.push('## הערב הקרוב');
-    L.push('ערב יזמות לאומית עם מייקל אייזנברג · יום שלישי 28.7.2026 · 19:30 · בית בן-גוריון, תל אביב.');
-    L.push('מייקל אייזנברג: מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.');
-    L.push('הוספה ליומן: https://calendar.app.google/CgryW6iXoPm3mW9h7');
-    L.push('המקומות מוגבלים — זה הסלון של בן-גוריון, לא אולם.');
+    L.push('## הערבים שלנו');
+    L.push('הקרוב: ערב יזמות לאומית עם מייקל אייזנברג · יום שלישי 28.7.2026 · 19:30 · בית בן-גוריון, תל אביב. הוספה ליומן: https://calendar.app.google/CgryW6iXoPm3mW9h7 (המקומות מוגבלים).');
+    L.push('כבר קרה: ערב יזמות ציונית עם יואל זילברמן (מייסד ומנכ\'ל השומר החדש) · 16.6 · הרצליה.');
     L.push('');
     L.push('## מיזמים שכבר ליווינו');
     document.querySelectorAll('.vcard .vbody').forEach(function(v){
@@ -2020,7 +1994,7 @@
     ['--flood-olive','הצפת הירו ירוקה']
   ];
   var FONT_TOKENS = [
-    ['--font-display','פונט כותרות', ['Aduma','Asakim','MigdalHaemek','Secular One','Rubik']],
+    ['--font-display','פונט כותרות', ['MigdalHaemek','Aduma','Asakim','Secular One','Rubik']],
     ['--font-mid','פונט קישור', ['Frank Ruhl Libre','Dana Yad','Amatic SC','Bellefair','Karantina']]
   ];
   var THEME_PRESETS = {
