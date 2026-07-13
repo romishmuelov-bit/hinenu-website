@@ -984,16 +984,8 @@
     /* ventures */
     .ventures{ padding:76px 0 64px; }
     .ventures .wrap{ position:relative; }
-    .vflow-nav{ margin-top:14px; }
-    .vflow-nav button{
-      /* anchored from wrap bottom: nav(42+14) + vflow(520) - photo center(~120) → sits beside the card photo */
-      position:absolute; top:auto; bottom:430px; z-index:30;
-      width:42px; height:42px; font-size:16px;
-      background:rgba(0,0,0,.6); backdrop-filter:blur(4px);
-    }
-    /* RTL: prev(→) on the right, next(←) on the left */
-    #vflowPrev{ inset-inline-start:2px; }
-    #vflowNext{ inset-inline-end:2px; }
+    /* phones swipe — arrows are desktop-only (itamar 13.7) */
+    .vflow-nav{ display:none; }
     .vflow{ height:520px; }
     .vcard{ width:272px; margin-left:-136px; }
     .vcard img{ height:240px; }
