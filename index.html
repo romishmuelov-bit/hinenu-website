@@ -1939,17 +1939,12 @@
     var submitBtn = applyForm.querySelector('.cta-btn');
     submitBtn.disabled = true;
     applyError.classList.remove('show');
-    var data = {
-      fullname: document.getElementById('fullname').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      who: document.getElementById('who').value.trim(),
-      pain: document.getElementById('pain').value.trim(),
-      dream: document.getElementById('dream').value.trim(),
-      doneSoFar: document.getElementById('doneSoFar').value.trim()
-    };
-    sendToSheet(SHEETS.signups, data).then(function(ok){
-      if(ok){
+    fetch('https://formspree.io/f/xnjygrae', {
+      method: 'POST',
+      body: new FormData(applyForm),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if(res.ok){
         applyForm.style.display = 'none';
         applySuccess.classList.add('show');
         applySuccess.setAttribute('tabindex','-1');
