@@ -1466,7 +1466,31 @@
       formId: '1FAIpQLScrd9lnHd47pfLZKSmpvKRRRxMpUlDtf5VOO3ZY7gHvUjq7QQ',
       fields: { text: 'entry.404640594' }
     },
-    signups: null /* המועמדויות לחממה נשלחות ל-Formspree — ראו applyForm למטה */
+    signups: {
+      formId: '1FAIpQLSeoblr0a6ERUegTxdMjUNrI5ZGPb3IDX4t3OJ-yGp0g-Qz0ew',
+      fields: {
+        fullname: 'entry.1414884044',
+        phone: 'entry.1132574824',
+        email: 'entry.1035743984',
+        who: 'entry.2075067274',
+        pain: 'entry.1358199669',
+        dream: 'entry.1485091750',
+        doneSoFar: 'entry.1568552002'
+      }
+    },
+    eventSignup: {
+      formId: '1FAIpQLSfulOv7YqYaWmsHIdBD2dlUkwqAb5eb0S4eOroFq4wTFbUbQg',
+      fields: {
+        email: 'entry.87382333',
+        name: 'entry.428329498',
+        age: 'entry.1455670285',
+        phone: 'entry.247910243',
+        gender: 'entry.416161896',
+        genderOther: 'entry.416161896.other_option_response',
+        goal: 'entry.1715727067',
+        source: 'entry.2030636162'
+      }
+    }
   };
 
   function sendToSheet(cfg, data){
@@ -1893,12 +1917,17 @@
     var submitBtn = applyForm.querySelector('.cta-btn');
     submitBtn.disabled = true;
     applyError.classList.remove('show');
-    fetch('https://formspree.io/f/xnjygrae', {
-      method: 'POST',
-      body: new FormData(applyForm),
-      headers: { 'Accept': 'application/json' }
-    }).then(function(res){
-      if(res.ok){
+    var data = {
+      fullname: document.getElementById('fullname').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      who: document.getElementById('who').value.trim(),
+      pain: document.getElementById('pain').value.trim(),
+      dream: document.getElementById('dream').value.trim(),
+      doneSoFar: document.getElementById('doneSoFar').value.trim()
+    };
+    sendToSheet(SHEETS.signups, data).then(function(ok){
+      if(ok){
         applyForm.style.display = 'none';
         applySuccess.classList.add('show');
         applySuccess.setAttribute('tabindex','-1');
