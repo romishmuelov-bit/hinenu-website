@@ -154,6 +154,7 @@
   .fan-menu > :nth-child(1){ --fr:-4deg; }
   .fan-menu > :nth-child(2){ --fr:-9deg; --fx:-16px; }
   .fan-menu > :nth-child(3){ --fr:-14deg; --fx:-38px; }
+  .fan-menu > :nth-child(4){ --fr:-19deg; --fx:-66px; }
   .fan-menu a:hover, .fan-menu button:hover{
     background:#17181C;
     transform:rotate(var(--fr,0deg)) translateX(var(--fx,0px)) scale(1.06);
@@ -162,6 +163,7 @@
   .fan-menu > :nth-child(1){ animation-delay:.02s; }
   .fan-menu > :nth-child(2){ animation-delay:.09s; }
   .fan-menu > :nth-child(3){ animation-delay:.16s; }
+  .fan-menu > :nth-child(4){ animation-delay:.23s; }
   @keyframes dockIn{ from{ opacity:0; transform:translateY(-28px) scale(.4); } }
 
   /* ---------- HERO v5: pitch black title (damngood) ---------- */
@@ -838,6 +840,24 @@
   }
   .cta-btn:hover{ background:#5468EE; transform:translateY(-1px); }
   .cta-btn:active{ transform:scale(.98); }
+  a.cta-btn{ display:block; text-align:center; text-decoration:none; box-sizing:border-box; }
+  /* ev popup: registration (outline) above, WhatsApp (big solid blue) below */
+  .ev-reg{ background:#fff; color:var(--ink-dark); border:2px solid var(--ink-dark); padding:14px 18px; font-size:16.5px; }
+  .ev-reg:hover{ background:#F3F2FC; }
+  .ev-wa{ font-size:20px; padding:20px 18px; }
+  /* contact modal */
+  .contact-card{ max-width:400px; text-align:center; }
+  .contact-card h3{ margin:0 0 18px; }
+  .contact-name{ font-family:'Rubik',sans-serif; font-weight:800; font-size:22px; color:var(--ink-dark); margin:0; }
+  .contact-role{ color:#3E405A; font-size:14.5px; margin:4px 0 20px; }
+  .contact-rows{ display:flex; flex-direction:column; gap:10px; }
+  .contact-rows a{
+    display:block; padding:13px 16px; border-radius:12px;
+    border:1.5px solid rgba(26,28,46,.18); color:var(--ink-dark);
+    font-weight:700; font-size:16px; text-decoration:none;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .contact-rows a:hover{ border-color:var(--blue); background:#F3F2FC; }
   .success-msg{
     display:none; text-align:center; font-weight:800; font-size:18px;
     border:2px solid var(--blue); color:var(--blue); border-radius:14px; padding:22px; margin-top:20px;
@@ -925,6 +945,7 @@
     .fan-menu a, .fan-menu button{ font-size:13.5px; padding:11px 14px; }
     .fan-menu > :nth-child(2){ --fx:-8px; }
     .fan-menu > :nth-child(3){ --fx:-18px; }
+    .fan-menu > :nth-child(4){ --fx:-30px; }
 
     /* hero */
     .hero5{ padding:96px 16px 54px; }
@@ -1101,6 +1122,7 @@
           <button type="button" data-apply>אני רוצה להתמודד על מקום בחממה</button>
           <button type="button" data-openev="0">אני רוצה להגיע למיטאפ</button>
           <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">אני רוצה עזרה לעבור לדרום או לצפון</a>
+          <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener">אני רוצה לתרום לעשייה</a>
         </div>
       </div>
       <div class="navfan" id="fanView">
@@ -1110,6 +1132,7 @@
           <button type="button" id="viewMachine">בינה מלאכותית</button>
         </div>
       </div>
+      <button class="top-link fan-btn" type="button" id="contactOpen">צרו קשר</button>
     </nav>
     <a class="brand" href="#">
       <img class="brand-logo" src="assets/logo-white.webp" alt="הננו — חלוציות כדרך חיים">
@@ -1189,7 +1212,6 @@
       <div class="tracks-head">
         <p class="kicker reveal">איך ממשיכים מכאן</p>
         <h2 class="reveal" style="--d:.05s">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
-        <p class="sub reveal" style="--d:.1s">אין מסלול נכון או לא נכון — יש רק נקודת כניסה שמתאימה לך עכשיו.</p>
       </div>
 
       <div class="tflow" id="tflow" role="group" aria-roledescription="קרוסלה" aria-label="שני המסלולים">
@@ -1261,22 +1283,24 @@
   <section class="ventures" id="ventures">
     <div class="wrap">
       <p class="kicker reveal">כבר התחלנו</p>
-      <h2 class="reveal" style="--d:.05s">שלושה אנשים שהיו בדיוק במקום שלכם, <span class="hl">ועכשיו מריצים את זה בשטח.</span></h2>
+      <h2 class="reveal" style="--d:.05s">אנשים שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים בעיות לאומיות.</span></h2>
       <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו">
-        <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דנאל בן נאמר">
+        <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דנאל בן-נמר">
           <img src="assets/f-bennamer.webp" alt="" loading="lazy">
           <div class="vbody">
             <div class="role">מייסד · Iran News</div>
-            <b>דנאל בן נאמר</b>
+            <b>דנאל בן-נמר</b>
             <p>תקשורת בקוד פתוח שמסקרת את איראן בעברית, הוקמה אחרי ה-7 באוקטובר — ומגיעה היום למיליונים בחודש בטלגרם וב-X.</p>
+            <a class="vlink" href="https://t.me/hadshotiran" target="_blank" rel="noopener">טלגרם ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: נועם מירוב">
+        <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: נועם מאירוב">
           <img src="assets/f-meirov.webp" alt="" loading="lazy">
           <div class="vbody">
             <div class="role">מייסד · Abraham Executive Academy</div>
-            <b>נועם מירוב</b>
+            <b>נועם מאירוב</b>
             <p>תוכנית עמיתים שנתית שמחברת 30 מנהיגים מעולמות הפיננסים, הטק, הממשל והחברה האזרחית ממדינות הסכמי אברהם.</p>
+            <a class="vlink" href="https://www.linkedin.com/company/abraham-executive-academy-aea/" target="_blank" rel="noopener">לינקדאין ←</a>
           </div>
         </article>
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: יובל פיטלוק">
@@ -1285,6 +1309,7 @@
             <div class="role">מייסד · Toko</div>
             <b>יובל פיטלוק</b>
             <p>יוצא נגד משבר הפוסט-טראומה ובריאות הנפש של ישראל — עם משתמשים ראשונים כבר בנגב ובגליל.</p>
+            <a class="vlink" href="https://toko.health/he" target="_blank" rel="noopener">לאתר ←</a>
           </div>
         </article>
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דור המייסדות">
@@ -1311,6 +1336,7 @@
             <div class="role">מייסד · שמונה.</div>
             <b>אסף פנחסי</b>
             <p>שחקן תיאטרון ומלווה תהליכי סטוריטלינג שעלה לגליל העליון, והרים יחד עם העירייה מופע סיפורים מוזיקלי שמעלה את סיפורה של קריית שמונה דרך האנשים שחיים בה.</p>
+            <a class="vlink" href="https://www.instagram.com/asaf.pinchassi/" target="_blank" rel="noopener">אינסטגרם ←</a>
           </div>
         </article>
         <article class="vcard you" tabindex="0" role="button" aria-label="להביא קדימה: אתם — מחזור 2026">
@@ -1385,7 +1411,7 @@
 
       <details class="reveal" style="--d:.1s">
         <summary>האם זה מוגדר בזמן או במשימה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני — להתחיל להקים; נפגוש אתכם ונשמע על מה אתם עובדים. הצעד השלישי — להצטרף לחממה ליזמות לאומית, שבה נעזור לכם לעבור מ-0 ל-1, ואז מ-1 ל-1,000,000.</p>
+        <p class="a">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני — להתחיל להקים; ניפגש, ונשמע על מה אתם.ן עובדים.ות. הצעד השלישי — להצטרף לחממה ליזמות לאומית, שבה נעזור לכם לעבור מ-0 ל-1, ואז מ-1 ל-1,000,000.</p>
       </details>
 
       <details class="reveal" style="--d:.15s">
@@ -1395,7 +1421,7 @@
 
       <details class="reveal" style="--d:.2s">
         <summary>מה יוצא לי מזה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">אם אתה שואל את השאלה הזאת — זה לא בשבילך.</p>
+        <p class="a">אם את.ה שואל.ת את השאלה הזאת — זה לא בשבילך.</p>
       </details>
 
       <details class="reveal" style="--d:.25s">
@@ -1412,7 +1438,7 @@
   <div class="modal-card">
     <button type="button" class="modal-close" id="applyClose" aria-label="סגירת החלון">✕</button>
     <h3 id="applyTitle">מועמדות לחממה ליזמות לאומית</h3>
-    <p class="modal-sub">מ-0 ל-1, ומ-1 ל-1,000,000. ספרו לנו מי אתם — ונחזור אליכם לשיחה.</p>
+    <p class="modal-sub">מ-0 ל-1, ומ-1 ל-1,000,000. ספרו לנו מי אתם.ן — ונחזור אליכם.ן לשיחה.</p>
     <form class="signup-form" id="applyForm" novalidate>
       <div class="field">
         <label for="fullname">שם מלא</label>
@@ -1427,7 +1453,7 @@
         <input type="email" id="email" name="email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com">
       </div>
       <div class="field">
-        <label for="who">ספר/י לנו מי את/ה</label>
+        <label for="who">ספרו לנו מי את.ה</label>
         <textarea id="who" name="מי אני" required></textarea>
       </div>
       <div class="field">
@@ -1445,7 +1471,21 @@
       <button type="submit" class="cta-btn">לשליחת המועמדות</button>
       <p class="form-error" id="applyError">משהו השתבש בשליחה. נסו שוב, או כתבו לנו באינסטגרם.</p>
     </form>
-    <p class="success-msg" id="applySuccess">קיבלנו את המועמדות. נחזור אליכם בקרוב — בינתיים, שריינו את ה-28.7.</p>
+    <p class="success-msg" id="applySuccess">קיבלנו את המועמדות. נחזור אליכם.ן בקרוב — בינתיים, שריינו את ה-28.7.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal-card contact-card">
+    <button type="button" class="modal-close" id="contactClose" aria-label="סגירת החלון">✕</button>
+    <h3 id="contactTitle">צרו קשר</h3>
+    <p class="contact-name">רועי עזיזי</p>
+    <p class="contact-role">יזם ציוני, מייסד תנועת הננו</p>
+    <div class="contact-rows">
+      <a href="tel:0523730941">052-3730941</a>
+      <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a>
+      <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">www.hinenupioneers.com</a>
+    </div>
   </div>
 </div>
 
@@ -1481,6 +1521,7 @@
       <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">הננו · לנגב ולגליל ↖</a>
     </div>
     <p class="meta">ערב יזמות לאומית · 28.7.2026 · 19:30 · בית בן־גוריון · <a href="#event">פרטי הערב</a> · <a href="#ventures">מיזמים שליווינו</a></p>
+    <p class="meta">רועי עזיזי · יזם ציוני, מייסד תנועת הננו · <a href="tel:0523730941">052-3730941</a> · <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a></p>
   </div>
 </footer>
 
@@ -1838,7 +1879,8 @@
       chips:['יום שלישי · 28.7','19:30','בית בן־גוריון, תל אביב'],
       lede:'מילה אחת תקבע מי ישרוד את העשור הקרוב: Agency. אנחנו קוראים לזה חלוציות — היכולת לקחת יוזמה, ללמוד מהר ולזוז. אורח: מייקל אייזנברג, מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.',
       qs:['איך הופכים את ישראל למעצמה טכנולוגית?','איפה ההזדמנויות הענקיות שכולם מפספסים?','מה מדינת ישראל צריכה מאיתנו, הצעירים, כדי לשגשג?'],
-      cal:'https://calendar.app.google/CgryW6iXoPm3mW9h7',
+      reg:'https://forms.gle/fNLYrHKmYYShyfTb8',
+      wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t',
       note:'המקומות מוגבלים — זה הסלון של בן-גוריון, לא אולם.' },
     { title:'ערב יזמות ציונית', guest:'עם יואל זילברמן', status:'past',
       chips:['16.6','19:00','הרצליה'],
@@ -1856,7 +1898,8 @@
     h += '<p class="ev-lede">' + escT(e.lede) + '</p>';
     if(e.status === 'future'){
       if(e.qs) h += '<ul class="event-qs">' + e.qs.map(function(q){ return '<li>'+escT(q)+'</li>'; }).join('') + '</ul>';
-      h += '<a class="cta-btn ev-cal" href="' + e.cal + '" target="_blank" rel="noopener">הוסיפו ליומן — שומרים לכם מקום</a>';
+      if(e.reg) h += '<a class="cta-btn ev-reg" href="' + e.reg + '" target="_blank" rel="noopener">שאלון הרשמה לערב ←</a>';
+      if(e.wa)  h += '<a class="cta-btn ev-wa" href="' + e.wa + '" target="_blank" rel="noopener">אני רוצה להגיע — לקבוצת הוואטסאפ של הערב</a>';
       if(e.note) h += '<p class="event-limit">' + escT(e.note) + '</p>';
     } else if(e.gallery){
       h += '<div class="gal-grid">' + e.gallery.map(function(g){ return '<img src="'+g+'" alt="" loading="lazy">'; }).join('') + '</div>';
@@ -1882,7 +1925,7 @@
   var vflow = document.getElementById('vflow');
   if(vflow){
     var vcards = Array.prototype.slice.call(vflow.querySelectorAll('.vcard'));
-    var vnames = ['דנאל בן נאמר','נועם מירוב','יובל פיטלוק','דור המייסדות','כיף בעוטף','שמונה','אתם — מחזור 2026'];
+    var vnames = ['דנאל בן-נמר','נועם מאירוב','יובל פיטלוק','דור המייסדות','כיף בעוטף','שמונה','אתם — מחזור 2026'];
     var vstatus = document.getElementById('vflowStatus');
     var vcur = 0;
     function renderVFlow(){
@@ -1944,6 +1987,17 @@
   document.querySelectorAll('[data-apply]').forEach(function(btn){
     btn.addEventListener('click', openApply);
   });
+
+  /* contact modal */
+  var contactModal = document.getElementById('contactModal');
+  var contactOpen = document.getElementById('contactOpen');
+  if(contactModal && contactOpen){
+    var closeContact = function(){ contactModal.hidden = true; document.body.style.overflow = ''; };
+    contactOpen.addEventListener('click', function(){ contactModal.hidden = false; document.body.style.overflow = 'hidden'; });
+    document.getElementById('contactClose').addEventListener('click', closeContact);
+    contactModal.addEventListener('click', function(e){ if(e.target === contactModal) closeContact(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !contactModal.hidden) closeContact(); });
+  }
   document.getElementById('applyClose').addEventListener('click', closeApply);
   applyModal.addEventListener('click', function(e){
     if(e.target === applyModal) closeApply();
