@@ -798,6 +798,23 @@
     min-height:76px; resize:vertical; line-height:1.55;
   }
   .field textarea:focus{ border-color:var(--blue); outline:none; }
+  .field select{
+    width:100%; background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:14px 16px; font-size:16px; color:var(--ink);
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371738A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:left 14px center; background-size:18px;
+  }
+  .field select:focus{ border-color:var(--blue); outline:none; }
+  .checks{ display:flex; flex-direction:column; gap:9px; }
+  .checks label{
+    display:flex; align-items:center; gap:10px;
+    font-size:15px; font-weight:500; color:var(--ink);
+    border:1.5px solid var(--line); border-radius:12px; padding:11px 14px;
+    cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  }
+  .checks label:has(input:checked){ border-color:var(--blue); background:var(--blue-soft); }
+  .checks input{ flex:none; width:18px; height:18px; accent-color:var(--blue); }
   .cta-btn{
     width:100%; border:none; border-radius:14px;
     background:var(--blue); color:#fff;
@@ -1162,7 +1179,6 @@
           <ul>
             <li>יזמים לאומיים אמיתיים שחולקים את הסיפור שלהם</li>
             <li>מינגלינג איכותי עם אנשים שחושבים כמוך</li>
-            <li>תצאו משם עם שותף לרעיון שמתבשל אצלכם</li>
           </ul>
           <a class="track-cta" href="#event">אני רוצה להגיע לערב הבא <span class="arr" aria-hidden="true">←</span></a>
         </article>
@@ -1224,7 +1240,7 @@
   <section class="ventures" id="ventures">
     <div class="wrap">
       <p class="kicker reveal">כבר התחלנו</p>
-      <h2 class="reveal" style="--d:.05s">זו לא תוכנית על נייר. <span class="hl">זה כבר עובד.</span></h2>
+      <h2 class="reveal" style="--d:.05s">שלושה אנשים שהיו בדיוק במקום שלכם, <span class="hl">ועכשיו מריצים את זה בשטח.</span></h2>
       <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו">
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דנאל בן נאמר">
           <img src="assets/f-bennamer.webp" alt="" loading="lazy">
@@ -1377,7 +1393,6 @@
     <h3 id="applyTitle">מועמדות לחממה ליזמות לאומית</h3>
     <p class="modal-sub">מ-0 ל-1, ומ-1 ל-1,000,000. ספרו לנו מי אתם — ונחזור אליכם לשיחה.</p>
     <form class="signup-form" id="applyForm" novalidate>
-      <input type="hidden" name="_subject" value="מועמדות חדשה לחממה — אתר הננו">
       <div class="field">
         <label for="fullname">שם מלא</label>
         <input type="text" id="fullname" name="שם מלא" required autocomplete="name">
@@ -1388,7 +1403,7 @@
       </div>
       <div class="field">
         <label for="email">אימייל</label>
-        <input type="email" id="email" name="email" required autocomplete="email">
+        <input type="email" id="email" name="email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com">
       </div>
       <div class="field">
         <label for="who">ספר/י לנו מי את/ה</label>
@@ -1500,7 +1515,14 @@
     }
     var body = new URLSearchParams();
     Object.keys(data).forEach(function(k){
-      if(cfg.fields[k]) body.append(cfg.fields[k], data[k]);
+      if(!cfg.fields[k]) return;
+      var val = data[k];
+      if(val === undefined || val === null) return;
+      if(Array.isArray(val)){
+        val.forEach(function(v){ body.append(cfg.fields[k], v); });
+      } else {
+        body.append(cfg.fields[k], val);
+      }
     });
     return fetch('https://docs.google.com/forms/d/e/' + cfg.formId + '/formResponse', {
       method: 'POST',
@@ -1878,7 +1900,7 @@
     });
   }
 
-  /* ---- apply modal: candidacy for the incubator (Formspree) ---- */
+  /* ---- apply modal: candidacy for the incubator (Google Form → Sheet) ---- */
   var applyModal = document.getElementById('applyModal');
   var applyForm = document.getElementById('applyForm');
   var applySuccess = document.getElementById('applySuccess');
