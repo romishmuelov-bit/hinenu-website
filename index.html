@@ -1283,7 +1283,7 @@
   <section class="ventures" id="ventures">
     <div class="wrap">
       <p class="kicker reveal">כבר התחלנו</p>
-      <h2 class="reveal" style="--d:.05s">אנשים שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים בעיות לאומיות.</span></h2>
+      <h2 class="reveal" style="--d:.05s">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
       <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו">
         <article class="vcard" tabindex="0" role="button" aria-label="להביא קדימה: דנאל בן-נמר">
           <img src="assets/f-bennamer.webp" alt="" loading="lazy">
@@ -1345,7 +1345,7 @@
             <div class="role" style="color:rgba(255,255,255,.75)">מחזור 2026</div>
             <b>עשרים מקומות. עשור אחד.</b>
             <p style="color:rgba(255,255,255,.85)">המחזור הבא של יזמי החוסן הלאומי מתגבש עכשיו.</p>
-            <button type="button" class="apply-link" data-apply>מגישים מועמדות לחממה ←</button>
+            <button type="button" class="apply-link" data-apply>להגשת מועמדות לחממה</button>
           </div>
         </article>
       </div>
@@ -1899,7 +1899,7 @@
     if(e.status === 'future'){
       if(e.qs) h += '<ul class="event-qs">' + e.qs.map(function(q){ return '<li>'+escT(q)+'</li>'; }).join('') + '</ul>';
       if(e.reg) h += '<a class="cta-btn ev-reg" href="' + e.reg + '" target="_blank" rel="noopener">שאלון הרשמה לערב ←</a>';
-      if(e.wa)  h += '<a class="cta-btn ev-wa" href="' + e.wa + '" target="_blank" rel="noopener">אני רוצה להגיע — לקבוצת הוואטסאפ של הערב</a>';
+      if(e.wa)  h += '<a class="cta-btn ev-wa" href="' + e.wa + '" target="_blank" rel="noopener">אני רוצה להצטרף לקבוצת הוואטסאפ</a>';
       if(e.note) h += '<p class="event-limit">' + escT(e.note) + '</p>';
     } else if(e.gallery){
       h += '<div class="gal-grid">' + e.gallery.map(function(g){ return '<img src="'+g+'" alt="" loading="lazy">'; }).join('') + '</div>';
