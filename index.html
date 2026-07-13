@@ -121,7 +121,7 @@
   .top-link:hover, .top-cta:hover{ color:#fff; }
   button.top-link{ background:none; border:none; padding:0; cursor:pointer; }
   .navfan{ position:relative; }
-  .fan-btn{ position:relative; z-index:1; padding:8px 14px; }
+  .fan-btn{ position:relative; z-index:1; padding:8px 14px; touch-action:manipulation; cursor:pointer; }
   .fan-btn::before{
     content:""; position:absolute; inset:-16% -6%; z-index:-1;
     background:#000; opacity:0; transition:opacity .18s ease;
@@ -137,6 +137,7 @@
   }
   .fan-menu[hidden]{ display:none; }
   .fan-menu a, .fan-menu button{
+    touch-action:manipulation;
     font-family:'Heebo',system-ui,sans-serif; letter-spacing:0;
     text-align:right; cursor:pointer;
     background:#0C0C0E; border:1px solid var(--line); border-radius:13px;
@@ -200,6 +201,7 @@
   @keyframes hint{ 50%{ transform:translateY(6px); } }
 
   /* ---------- challenges: full-screen photo scenes ---------- */
+  .chal{ display:none; /* hidden per itamar 13.7 — restore by removing this line */ }
   .chal{ position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; contain:paint; background:#000; }
   .chal-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
   @media (prefers-reduced-motion: no-preference){
@@ -927,8 +929,12 @@
 
     /* letter */
     .letter{ padding:64px 0 56px; }
-    .notebook{ padding:1.1em 1em 1.6em; font-size:17.5px; line-height:1.85; }
-    .notebook::before{ inset:.8em .9em 1.2em; }
+    .notebook{
+      padding:1.6em 1em 2.2em; font-size:21px; line-height:2.05;
+      min-height:72svh;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    .notebook::before{ inset:1em .9em 1.4em; }
     .sign-row{ gap:14px; margin-top:24px; }
     .sign-photo{ width:58px; height:58px; }
     .sign-name{ font-size:24px; }
@@ -965,6 +971,15 @@
 
     /* ventures */
     .ventures{ padding:76px 0 64px; }
+    .ventures .wrap{ position:relative; }
+    .vflow-nav{ margin-top:14px; }
+    .vflow-nav button{
+      position:absolute; top:52%; z-index:30;
+      width:42px; height:42px; font-size:16px;
+      background:rgba(0,0,0,.6); backdrop-filter:blur(4px);
+    }
+    #vflowNext{ inset-inline-start:2px; }
+    #vflowPrev{ inset-inline-end:2px; }
     .vflow{ height:520px; }
     .vcard{ width:272px; margin-left:-136px; }
     .vcard img{ height:240px; }
@@ -1104,7 +1119,7 @@
     <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
     <div class="h5-shade" aria-hidden="true"></div>
     <h1 class="h5-title"><span>הננו</span><span class="t2">חלוציות <i class="hlmask">כדרך חיים</i></span></h1>
-    <div class="h5-scroll">הבעיות של הדור שלנו</div>
+    <div class="h5-scroll">גללו</div>
   </section>
 
   <!-- ======= 1b. the national challenges ======= -->
@@ -1604,11 +1619,12 @@
     if(!letterEl) return;
     var vh = window.innerHeight;
     var lr = letterEl.getBoundingClientRect();
-    var firstTop = chals.length ? chals[0].getBoundingClientRect().top : 1;
-    var showCta = firstTop < vh * 0.6 && lr.top > vh * 0.35;
+    var heroEl = document.getElementById('hero');
+    var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : 0;
+    var showCta = heroBottom < vh * 0.5 && lr.top > vh * 0.35;
     if(fixedCta) fixedCta.classList.toggle('show', showCta);
     var tb = document.getElementById('topbar');
-    if(tb) tb.classList.toggle('brand-on', firstTop < 90);
+    if(tb) tb.classList.toggle('brand-on', heroBottom < 90);
   }
   window.addEventListener('scroll', function(){
     if(!ctaTick){ ctaTick = true; requestAnimationFrame(ctaFrame); }
@@ -2052,8 +2068,10 @@
       document.querySelectorAll('.fan-btn').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
       menu.hidden = false; btn.setAttribute('aria-expanded','true');
     }
-    btn.addEventListener('click', function(e){ e.stopPropagation(); menu.hidden ? open() : close(); });
-    document.addEventListener('click', function(e){ if(!root.contains(e.target)) close(); });
+    var toggleFan = function(e){ e.preventDefault(); e.stopPropagation(); menu.hidden ? open() : close(); };
+    btn.addEventListener('pointerup', toggleFan);
+    btn.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') toggleFan(e); });
+    document.addEventListener('pointerdown', function(e){ if(!root.contains(e.target)) close(); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
     menu.querySelectorAll('a,button').forEach(function(it){ it.addEventListener('click', function(){ close(); }); });
     return { close: close };
