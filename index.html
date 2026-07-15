@@ -7,7 +7,7 @@
 <meta name="description" content="ישראל מלאה בבעיות. הגיע הזמן להתאהב בבעיה — ולפתור אותה. ערב יזמות לאומית עם מייקל אייזנברג · 28.7.2026 · 19:30 · בית בן-גוריון, תל אביב.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@800;900&family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&family=Suez+One&family=Karantina:wght@400;700&family=Secular+One&family=Miriam+Libre:wght@700&family=Amatic+SC:wght@700&family=Bellefair&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@300;800;900&family=Heebo:wght@200;400;500;700;800&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Suez+One&family=Karantina:wght@300;400;700&family=Secular+One&family=Miriam+Libre:wght@400;700&family=Amatic+SC:wght@700&family=Bellefair&family=Assistant:wght@200;800&family=Open+Sans:wght@300;800&family=Noto+Sans+Hebrew:wght@200;800&family=IBM+Plex+Sans+Hebrew:wght@200;700&family=Alef:wght@400;700&family=David+Libre:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
 <style>
   @font-face{
     font-family:'Dana Yad';
@@ -194,7 +194,7 @@
   }
   .h5-title{
     position:relative; z-index:2;
-    margin:0; font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
+    margin:0; font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,400);
     color:#fff; line-height:.95; font-size:clamp(76px,15vw,230px);
     display:flex; flex-direction:column;
   }
@@ -235,7 +235,7 @@
   }
   .chal-txt{ position:relative; z-index:2; padding:0 6vw 11svh; max-width:1200px; }
   .chal-txt h2{
-    margin:0 0 10px; font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
+    margin:0 0 10px; font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,400);
     color:#fff; font-size:clamp(40px,7vw,104px); line-height:1.06;
     text-shadow:0 2px 26px rgba(0,0,0,.45);
   }
@@ -737,7 +737,7 @@
   .vcard.you{ background:var(--blue); }
   .vcard.vtxt{ background:#16181F; }
   .vcard .vbig-sm{
-    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,400);
     font-size:44px; line-height:1.1; padding:104px 22px 48px;
     color:#fff; text-align:center;
   }
@@ -2267,7 +2267,30 @@
   if(themePanel){
     var themeRows = document.getElementById('themeRows');
     var TOOL_KEY = 'hinenu-title-tool';
-    var TOOL_FONTS = ['MigdalHaemek','Aduma','Asakim','Secular One','Rubik'];
+    /* [display name, css family, {label: weight}] */
+    var TOOL_FONTS = [
+      ['MigdalHaemek','MigdalHaemek',{'רגיל':400}],
+      ['Aduma','Aduma',{'רגיל':700}],
+      ['Asakim','Asakim',{'רגיל':700}],
+      ['Assistant','Assistant',{'Light':200,'Bold':800}],
+      ['Heebo','Heebo',{'Light':200,'Bold':800}],
+      ['Rubik','Rubik',{'Light':300,'Bold':800}],
+      ['Open Sans','Open Sans',{'Light':300,'Bold':800}],
+      ['Noto Sans Hebrew','Noto Sans Hebrew',{'Light':200,'Bold':800}],
+      ['IBM Plex Sans Hebrew','IBM Plex Sans Hebrew',{'Light':200,'Bold':700}],
+      ['Miriam Libre','Miriam Libre',{'רגיל':400,'Bold':700}],
+      ['Alef','Alef',{'רגיל':400,'Bold':700}],
+      ['Frank Ruhl Libre','Frank Ruhl Libre',{'Light':300,'Black':900}],
+      ['David Libre','David Libre',{'רגיל':400,'Bold':700}],
+      ['Karantina','Karantina',{'Light':300,'Bold':700}],
+      ['Varela Round','Varela Round',{'רגיל':400}],
+      ['Secular One','Secular One',{'רגיל':400}],
+      ['Suez One','Suez One',{'רגיל':400}]
+    ];
+    function fontEntry(name){
+      for(var i=0;i<TOOL_FONTS.length;i++) if(TOOL_FONTS[i][0]===name) return TOOL_FONTS[i];
+      return TOOL_FONTS[0];
+    }
     try{ localStorage.removeItem('hinenu-theme-v5'); }catch(e){} /* retire the old color tool state */
 
     function toolState(){ try{ return JSON.parse(localStorage.getItem(TOOL_KEY)) || {}; }catch(e){ return {}; } }
@@ -2292,8 +2315,13 @@
         b.style.color = b.dataset.hero === mode ? '#fff' : '#1A1C2E';
       });
     }
-    function setFont(f){
-      document.documentElement.style.setProperty('--font-display', "'" + f + "'");
+    function setFont(name, weight){
+      var e = fontEntry(name);
+      document.documentElement.style.setProperty('--font-display', "'" + e[1] + "'");
+      var ws = Object.keys(e[2]).map(function(k){ return e[2][k]; });
+      var w = ws.indexOf(+weight) > -1 ? +weight : ws[0];
+      document.documentElement.style.setProperty('--fd-weight', w);
+      return w;
     }
 
     /* row 1: hero title = text | logo */
@@ -2312,21 +2340,49 @@
     var row2 = document.createElement('div'); row2.className = 'theme-row';
     var lab2 = document.createElement('label'); lab2.textContent = 'פונט כותרות';
     var sel = document.createElement('select');
+    sel.setAttribute('aria-label','פונט כותרות');
     TOOL_FONTS.forEach(function(f){
-      var o = document.createElement('option'); o.value = f; o.textContent = f; sel.appendChild(o);
+      var o = document.createElement('option'); o.value = f[0]; o.textContent = f[0]; sel.appendChild(o);
     });
-    var curF = getComputedStyle(document.documentElement).getPropertyValue('--font-display').trim().replace(/['"]/g,'');
-    sel.value = TOOL_FONTS.indexOf(curF) > -1 ? curF : TOOL_FONTS[0];
-    sel.addEventListener('change', function(){ setFont(sel.value); toolSave({font:sel.value}); });
     row2.appendChild(lab2); row2.appendChild(sel); themeRows.appendChild(row2);
+
+    /* row 3: weight (options follow the chosen font) */
+    var row3 = document.createElement('div'); row3.className = 'theme-row';
+    var lab3 = document.createElement('label'); lab3.textContent = 'משקל';
+    var selW = document.createElement('select');
+    selW.setAttribute('aria-label','משקל הפונט');
+    function rebuildWeights(fontName, keepW){
+      selW.innerHTML = '';
+      var opts = fontEntry(fontName)[2];
+      Object.keys(opts).forEach(function(label){
+        var o = document.createElement('option');
+        o.value = opts[label]; o.textContent = label + ' (' + opts[label] + ')';
+        selW.appendChild(o);
+      });
+      if(keepW && selW.querySelector('option[value="'+keepW+'"]')) selW.value = keepW;
+    }
+    row3.appendChild(lab3); row3.appendChild(selW); themeRows.appendChild(row3);
+
+    var curF = getComputedStyle(document.documentElement).getPropertyValue('--font-display').trim().replace(/['"]/g,'');
+    sel.value = fontEntry(curF)[0];
+    rebuildWeights(sel.value);
+    sel.addEventListener('change', function(){
+      rebuildWeights(sel.value);
+      var w = setFont(sel.value, selW.value);
+      selW.value = w;
+      toolSave({font:sel.value, weight:w});
+    });
+    selW.addEventListener('change', function(){
+      setFont(sel.value, selW.value);
+      toolSave({font:sel.value, weight:+selW.value});
+    });
 
     document.getElementById('themeClose').addEventListener('click', function(){ themePanel.hidden = true; });
 
-    /* dev-only: every entry point is gated to localhost */
-    var isLocalDev = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    /* live for everyone (itamar 15.7): fab + triple-click + ?theme, state saved per visitor */
     var brandClicks = [];
     var brandEl = document.querySelector('.brand');
-    if(brandEl && isLocalDev){
+    if(brandEl){
       brandEl.addEventListener('click', function(e){
         var now = Date.now();
         brandClicks = brandClicks.filter(function(ts){ return now - ts < 900; });
@@ -2338,21 +2394,19 @@
         }
       });
     }
-    if(isLocalDev){
-      var fab = document.createElement('button');
-      fab.id = 'themeFab'; fab.type = 'button'; fab.title = 'כלי כותרת';
-      fab.textContent = 'א';
-      fab.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:240;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 10px 24px rgba(26,28,46,.18);font-size:19px;font-weight:800;cursor:pointer;';
-      fab.addEventListener('click', function(){ themePanel.hidden = !themePanel.hidden; });
-      document.body.appendChild(fab);
-    }
-    if(isLocalDev && /[?&]theme/.test(location.search)) themePanel.hidden = false;
-    if(isLocalDev){
-      var st = toolState();
-      if(st.hero) setHero(st.hero); else setHero('text');
-      if(st.font && TOOL_FONTS.indexOf(st.font) > -1){ setFont(st.font); sel.value = st.font; }
-    } else {
-      setHero('text');
+    var fab = document.createElement('button');
+    fab.id = 'themeFab'; fab.type = 'button'; fab.title = 'כלי כותרת'; fab.setAttribute('aria-label','כלי כותרת');
+    fab.textContent = 'א';
+    fab.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:240;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 10px 24px rgba(26,28,46,.18);font-size:19px;font-weight:800;cursor:pointer;';
+    fab.addEventListener('click', function(){ themePanel.hidden = !themePanel.hidden; });
+    document.body.appendChild(fab);
+    if(/[?&]theme/.test(location.search)) themePanel.hidden = false;
+    var st = toolState();
+    setHero(st.hero || 'text');
+    if(st.font){
+      var w = setFont(st.font, st.weight);
+      sel.value = fontEntry(st.font)[0];
+      rebuildWeights(sel.value, w);
     }
   }
 
