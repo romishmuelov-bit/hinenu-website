@@ -90,7 +90,8 @@
   }
   .skip-link:focus-visible{ top:0; }
   .vid-toggle{
-    position:absolute; bottom:16px; inset-inline-start:16px; z-index:6;
+    /* stacked above the title-tool fab (bottom-left); bottom-right belongs to the fixed CTA */
+    position:absolute; bottom:72px; inset-inline-end:16px; z-index:6;
     width:44px; height:44px; border-radius:50%;
     background:rgba(0,0,0,.55); border:1px solid var(--line);
     color:#fff; font-size:15px; cursor:pointer;
@@ -886,6 +887,7 @@
   .a11y-body p{ color:#3E405A; font-size:14.5px; line-height:1.7; margin:0 0 12px; }
   .a11y-body .contact-rows{ margin-bottom:12px; }
   .a11y-date{ font-size:12.5px; color:#565870; }
+  footer .name img{ height:38px; width:auto; display:inline-block; }
   .meta-link{
     background:none; border:none; padding:0; cursor:pointer;
     color:#fff; font-weight:700; font-size:inherit; font-family:inherit;
@@ -1569,7 +1571,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="name">הננו·</div>
+    <div class="name"><img src="assets/logo-white.webp" alt="הננו"></div>
     <p class="tag">חלוצים של תקווה</p>
     <div class="socials">
       <a href="https://www.instagram.com/hinenu_israel?igsh=YmF4dm9iM2FmODR0&amp;utm_source=qr" target="_blank" rel="noopener">
@@ -1724,10 +1726,8 @@
     var vh = window.innerHeight;
     var heroEl = document.getElementById('hero');
     var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : 0;
-    /* visible from hero-exit until the evenings section enters (the CTA links there) */
-    var evEl = document.getElementById('event');
-    var evTop = evEl ? evEl.getBoundingClientRect().top : Infinity;
-    var showCta = heroBottom < vh * 0.5 && evTop > vh * 0.6;
+    /* hero-only (itamar 15.7): visible while the video screen is up, gone once the manifesto arrives */
+    var showCta = heroBottom > vh * 0.2;
     if(fixedCta) fixedCta.classList.toggle('show', showCta);
     var tb = document.getElementById('topbar');
     if(tb) tb.classList.toggle('brand-on', heroBottom < 90);
