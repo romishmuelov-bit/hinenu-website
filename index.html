@@ -58,7 +58,7 @@
     --coral:#D96A50;
     --bg:#000000;
     --hl:#D96A50;
-    --font-display:'MigdalHaemek';
+    --font-display:'Aduma';
     --font-mid:'Frank Ruhl Libre';
   }
   ::selection{ background:#fff; color:#000; }
@@ -90,7 +90,7 @@
   }
   .skip-link:focus-visible{ top:0; }
   .vid-toggle{
-    position:absolute; bottom:16px; inset-inline-end:16px; z-index:6;
+    position:absolute; bottom:16px; inset-inline-start:16px; z-index:6;
     width:44px; height:44px; border-radius:50%;
     background:rgba(0,0,0,.55); border:1px solid var(--line);
     color:#fff; font-size:15px; cursor:pointer;
@@ -199,6 +199,7 @@
     display:flex; flex-direction:column;
   }
   .h5-title .t2{ font-size:clamp(38px,6.9vw,104px); }
+  .h5-logo{ display:block; width:clamp(300px,40vw,600px); height:auto; margin:0 auto 18px; }
   .hlmask{ position:relative; font-style:normal; white-space:nowrap; }
   .hlmask::before{
     content:""; position:absolute; inset:-8% -5%; z-index:-1;
@@ -980,6 +981,7 @@
     .hero5{ padding:96px 16px 54px; }
     .h5-title{ font-size:clamp(58px,20vw,96px); }
     .h5-title .t2{ font-size:clamp(23px,7.7vw,38px); }
+    .h5-logo{ width:min(72vw,340px); margin-bottom:12px; }
     .h5-scroll{ bottom:18px; font-size:11.5px; }
 
     /* challenges */
@@ -1188,7 +1190,7 @@
     <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
     <button type="button" class="vid-toggle" id="vidToggle" aria-pressed="false" aria-label="השהיית וידאו הרקע" title="השהיית וידאו הרקע">❚❚</button>
     <div class="h5-shade" aria-hidden="true"></div>
-    <h1 class="h5-title"><span>הננו</span><span class="t2">חלוציות <i class="hlmask">כדרך חיים</i></span></h1>
+    <h1 class="h5-title"><img class="h5-logo" src="assets/logo-white.webp" alt="הננו"><span class="t2">חלוציות <i class="hlmask">כדרך חיים</i></span></h1>
     <div class="h5-scroll">גללו</div>
   </section>
 
