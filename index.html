@@ -1562,14 +1562,9 @@
   </div>
 </div>
 
-<aside class="theme-panel" id="themePanel" hidden dir="rtl" aria-label="לוח צבעים">
-  <h4>לוח צבעים <button id="themeClose" type="button" aria-label="סגירה">✕</button></h4>
+<aside class="theme-panel" id="themePanel" hidden dir="rtl" aria-label="כלי כותרת">
+  <h4>כלי כותרת <button id="themeClose" type="button" aria-label="סגירה">✕</button></h4>
   <div id="themeRows"></div>
-  <div class="theme-presets" id="themePresets"></div>
-  <div class="theme-actions">
-    <button class="t-copy" id="themeCopy" type="button">העתקת CSS</button>
-    <button class="t-reset" id="themeReset" type="button">איפוס</button>
-  </div>
 </aside>
 
 <footer>
@@ -2267,101 +2262,67 @@
     });
   })();
 
-  /* ---- theme panel: triple-click the logo (or ?theme in the URL) ---- */
-  var THEME_TOKENS = [
-    ['--bg','רקע ראשי'],
-    ['--ink','טקסט ראשי'],
-    ['--dim','טקסט משני'],
-    ['--blue','כחול מותג'],
-    ['--coral','אקסנט קורל'],
-    ['--hl','הדגשות וחצים'],
-    ['--board','כהה (נייר/פוטר)'],
-    ['--flood-dark','הצפת הירו כהה'],
-    ['--flood-olive','הצפת הירו ירוקה']
-  ];
-  var FONT_TOKENS = [
-    ['--font-display','פונט כותרות', ['MigdalHaemek','Aduma','Asakim','Secular One','Rubik']],
-    ['--font-mid','פונט קישור', ['Frank Ruhl Libre','Dana Yad','Amatic SC','Bellefair','Karantina']]
-  ];
-  var THEME_PRESETS = {
-    'מקורי (כהה)': { '--bg':'#000000','--ink':'#F2F0E9','--dim':'#9A9C93','--blue':'#4257E6','--coral':'#D96A50','--board':'#23241F' },
-    'בהיר (ישן)':  { '--bg':'#F4F4EE','--ink':'#1A1C2E','--dim':'#71738A','--blue':'#323E7C','--coral':'#D96A50','--board':'#23241F' },
-    'שחור-לבן':{ '--bg':'#F5F5F3','--ink':'#161616','--dim':'#6E6E6E','--blue':'#1F1F1F','--coral':'#C4442A','--board':'#111111' },
-    'זית':     { '--bg':'#F1F0E4','--ink':'#232B1E','--dim':'#6E7562','--blue':'#3E5233','--coral':'#C97B3D','--board':'#1C2117' },
-    'לילה':    { '--bg':'#191A22','--ink':'#EDEAF7','--dim':'#9CA0BC','--blue':'#8E9BE8','--coral':'#E8836B','--board':'#0E0F14' }
-  };
+  /* ---- title tool (dev-only): hero text/logo toggle + display font. that's it. ---- */
   var themePanel = document.getElementById('themePanel');
-  var themeRows = document.getElementById('themeRows');
-  function applyTheme(map, save){
-    Object.keys(map).forEach(function(k){ document.documentElement.style.setProperty(k, map[k]); });
-    if(save){ try{ localStorage.setItem('hinenu-theme-v5', JSON.stringify(map)); }catch(e){} }
-    if(themeRows){
-      Array.prototype.forEach.call(themeRows.querySelectorAll('input'), function(inp){
-        if(map[inp.dataset.token]) inp.value = map[inp.dataset.token];
+  if(themePanel){
+    var themeRows = document.getElementById('themeRows');
+    var TOOL_KEY = 'hinenu-title-tool';
+    var TOOL_FONTS = ['MigdalHaemek','Aduma','Asakim','Secular One','Rubik'];
+    try{ localStorage.removeItem('hinenu-theme-v5'); }catch(e){} /* retire the old color tool state */
+
+    function toolState(){ try{ return JSON.parse(localStorage.getItem(TOOL_KEY)) || {}; }catch(e){ return {}; } }
+    function toolSave(patch){
+      var st = toolState(); Object.keys(patch).forEach(function(k){ st[k] = patch[k]; });
+      try{ localStorage.setItem(TOOL_KEY, JSON.stringify(st)); }catch(e){}
+    }
+    function setHero(mode){
+      var slot = document.querySelector('.h5-title > :first-child');
+      if(!slot) return;
+      if(mode === 'logo' && slot.tagName !== 'IMG'){
+        var img = document.createElement('img');
+        img.className = 'h5-logo'; img.src = 'assets/logo-white.webp'; img.alt = 'הננו';
+        slot.replaceWith(img);
+      } else if(mode === 'text' && slot.tagName === 'IMG'){
+        var sp = document.createElement('span'); sp.textContent = 'הננו';
+        slot.replaceWith(sp);
+      }
+      Array.prototype.forEach.call(themeRows.querySelectorAll('[data-hero]'), function(b){
+        b.setAttribute('aria-pressed', b.dataset.hero === mode ? 'true' : 'false');
+        b.style.background = b.dataset.hero === mode ? '#4257E6' : '#fff';
+        b.style.color = b.dataset.hero === mode ? '#fff' : '#1A1C2E';
       });
     }
-  }
-  function currentTheme(){
-    var out = {};
-    THEME_TOKENS.forEach(function(t){
-      out[t[0]] = getComputedStyle(document.documentElement).getPropertyValue(t[0]).trim();
+    function setFont(f){
+      document.documentElement.style.setProperty('--font-display', "'" + f + "'");
+    }
+
+    /* row 1: hero title = text | logo */
+    var row1 = document.createElement('div'); row1.className = 'theme-row';
+    var lab1 = document.createElement('label'); lab1.textContent = 'כותרת הירו';
+    var seg = document.createElement('div'); seg.style.cssText = 'display:flex;gap:6px;';
+    [['text','טקסט'],['logo','לוגו']].forEach(function(opt){
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = opt[1]; b.dataset.hero = opt[0];
+      b.style.cssText = 'padding:7px 14px;border:1px solid rgba(26,28,46,.25);border-radius:9px;cursor:pointer;font-weight:700;background:#fff;color:#1A1C2E;';
+      b.addEventListener('click', function(){ setHero(opt[0]); toolSave({hero:opt[0]}); });
+      seg.appendChild(b);
     });
-    return out;
-  }
-  if(themePanel){
-    THEME_TOKENS.forEach(function(t){
-      var row = document.createElement('div'); row.className = 'theme-row';
-      var lab = document.createElement('label'); lab.textContent = t[1];
-      var inp = document.createElement('input'); inp.type = 'color'; inp.dataset.token = t[0];
-      var cur = getComputedStyle(document.documentElement).getPropertyValue(t[0]).trim();
-      if(/^#([0-9a-f]{6})$/i.test(cur)) inp.value = cur;
-      inp.addEventListener('input', function(){
-        var m = {}; m[t[0]] = inp.value;
-        var saved = {}; try{ saved = JSON.parse(localStorage.getItem('hinenu-theme-v5')) || {}; }catch(e){}
-        saved[t[0]] = inp.value;
-        applyTheme(m, false);
-        try{ localStorage.setItem('hinenu-theme-v5', JSON.stringify(saved)); }catch(e){}
-      });
-      row.appendChild(lab); row.appendChild(inp); themeRows.appendChild(row);
+    row1.appendChild(lab1); row1.appendChild(seg); themeRows.appendChild(row1);
+
+    /* row 2: display font */
+    var row2 = document.createElement('div'); row2.className = 'theme-row';
+    var lab2 = document.createElement('label'); lab2.textContent = 'פונט כותרות';
+    var sel = document.createElement('select');
+    TOOL_FONTS.forEach(function(f){
+      var o = document.createElement('option'); o.value = f; o.textContent = f; sel.appendChild(o);
     });
-    FONT_TOKENS.forEach(function(ft){
-      var row = document.createElement('div'); row.className = 'theme-row';
-      var lab = document.createElement('label'); lab.textContent = ft[1];
-      var sel = document.createElement('select'); sel.dataset.token = ft[0];
-      ft[2].forEach(function(f){
-        var o = document.createElement('option'); o.value = f; o.textContent = f;
-        sel.appendChild(o);
-      });
-      var curF = getComputedStyle(document.documentElement).getPropertyValue(ft[0]).trim().replace(/['"]/g,'');
-      if(curF) sel.value = ft[2].indexOf(curF) > -1 ? curF : ft[2][0];
-      sel.addEventListener('change', function(){
-        document.documentElement.style.setProperty(ft[0], "'" + sel.value + "'");
-        var saved = {}; try{ saved = JSON.parse(localStorage.getItem('hinenu-theme-v5')) || {}; }catch(e){}
-        saved[ft[0]] = "'" + sel.value + "'";
-        try{ localStorage.setItem('hinenu-theme-v5', JSON.stringify(saved)); }catch(e){}
-      });
-      row.appendChild(lab); row.appendChild(sel); themeRows.appendChild(row);
-    });
-    var presetsBox = document.getElementById('themePresets');
-    Object.keys(THEME_PRESETS).forEach(function(name){
-      var b = document.createElement('button'); b.type = 'button'; b.textContent = name;
-      b.addEventListener('click', function(){ applyTheme(THEME_PRESETS[name], true); });
-      presetsBox.appendChild(b);
-    });
+    var curF = getComputedStyle(document.documentElement).getPropertyValue('--font-display').trim().replace(/['"]/g,'');
+    sel.value = TOOL_FONTS.indexOf(curF) > -1 ? curF : TOOL_FONTS[0];
+    sel.addEventListener('change', function(){ setFont(sel.value); toolSave({font:sel.value}); });
+    row2.appendChild(lab2); row2.appendChild(sel); themeRows.appendChild(row2);
+
     document.getElementById('themeClose').addEventListener('click', function(){ themePanel.hidden = true; });
-    document.getElementById('themeReset').addEventListener('click', function(){
-      try{ localStorage.removeItem('hinenu-theme-v5'); }catch(e){}
-      applyTheme(THEME_PRESETS['מקורי (כהה)'], false);
-    });
-    document.getElementById('themeCopy').addEventListener('click', function(){
-      var t = currentTheme(), css = ':root{\n';
-      Object.keys(t).forEach(function(k){ css += '  ' + k + ':' + t[k] + ';\n'; });
-      css += '}';
-      navigator.clipboard.writeText(css);
-      this.textContent = 'הועתק!';
-      var btn = this; setTimeout(function(){ btn.textContent = 'העתקת CSS'; }, 2000);
-    });
-    /* dev-only color tool: every entry point is gated to localhost */
+
+    /* dev-only: every entry point is gated to localhost */
     var isLocalDev = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
     var brandClicks = [];
     var brandEl = document.querySelector('.brand');
@@ -2379,17 +2340,20 @@
     }
     if(isLocalDev){
       var fab = document.createElement('button');
-      fab.id = 'themeFab'; fab.type = 'button'; fab.title = 'לוח צבעים ופונטים';
-      fab.textContent = '🎨';
-      fab.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:240;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 10px 24px rgba(26,28,46,.18);font-size:19px;cursor:pointer;';
+      fab.id = 'themeFab'; fab.type = 'button'; fab.title = 'כלי כותרת';
+      fab.textContent = 'א';
+      fab.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:240;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 10px 24px rgba(26,28,46,.18);font-size:19px;font-weight:800;cursor:pointer;';
       fab.addEventListener('click', function(){ themePanel.hidden = !themePanel.hidden; });
       document.body.appendChild(fab);
     }
     if(isLocalDev && /[?&]theme/.test(location.search)) themePanel.hidden = false;
-    try{
-      var savedTheme = isLocalDev ? JSON.parse(localStorage.getItem('hinenu-theme-v5')) : null;
-      if(savedTheme) applyTheme(savedTheme, false);
-    }catch(e){}
+    if(isLocalDev){
+      var st = toolState();
+      if(st.hero) setHero(st.hero); else setHero('text');
+      if(st.font && TOOL_FONTS.indexOf(st.font) > -1){ setFont(st.font); sel.value = st.font; }
+    } else {
+      setHero('text');
+    }
   }
 
 })();
