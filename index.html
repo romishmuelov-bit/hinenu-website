@@ -381,12 +381,12 @@
   }
   .notebook{
     position:relative;
-    /* paper 3: stretchy clean body; torn bottom edge lives in ::after at fixed aspect */
-    background:url('assets/letter-top.webp') center/100% 100% no-repeat;
+    /* paper 3: uniform scale (no morphing) anchored to the bottom — excess crops at the top */
+    background:url('assets/letter-top.webp') center bottom/cover no-repeat;
     filter:drop-shadow(0 22px 34px rgba(0,0,0,.6));
     padding:2.2em 2.6em 2.6em;
     font-family:'Dana Yad','OH Netta Epstein','Frank Ruhl Libre',serif;
-    font-size:clamp(24px,2.6vw,34px);
+    font-size:clamp(22px,2.35vw,29px); /* compact enough to share the frame with the signature */
     line-height:1.75;
     color:var(--ink-dark);
     -webkit-text-stroke:.4px currentColor;
