@@ -393,7 +393,9 @@
   }
   .notebook::before{
     content:"";
-    position:absolute; inset:1em 1.6em 1.5em;
+    /* top inset puts each rule exactly on the Dana Yad baseline:
+       pad-top(2.2) + half-leading((1.75-1.2)/2) + ascent(.95) - step(1.75) = 1.675em */
+    position:absolute; inset:1.675em 1.6em 1.5em;
     pointer-events:none;
     background-image:repeating-linear-gradient(
       to bottom,
@@ -999,7 +1001,8 @@
       display:flex; flex-direction:column; justify-content:center;
     }
     .notebook::before{
-      inset:1em .9em 1.4em;
+      /* 1.6 + (1.85-1.2)/2 + .95 - 1.85 = 1.025em */
+      inset:1.025em .9em 1.4em;
       background-image:repeating-linear-gradient(
         to bottom,
         transparent,
