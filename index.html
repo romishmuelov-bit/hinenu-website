@@ -58,7 +58,7 @@
     --coral:#D96A50;
     --bg:#000000;
     --hl:#D96A50;
-    --font-display:'MigdalHaemek';
+    --font-display:'Alef';
     --font-mid:'Frank Ruhl Libre';
   }
   ::selection{ background:#fff; color:#000; }
@@ -201,14 +201,7 @@
   }
   .h5-title .t2{ font-size:clamp(38px,6.9vw,104px); }
   .h5-logo{ display:block; width:clamp(300px,40vw,600px); height:auto; margin:0 auto 18px; }
-  .hlmask{ position:relative; font-style:normal; white-space:nowrap; }
-  .hlmask::before{
-    content:""; position:absolute; inset:-8% -5%; z-index:-1;
-    background:#000;
-    -webkit-mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
-    mask:url('assets/hl-1.webp') center/100% 100% no-repeat;
-    opacity:.95;
-  }
+  .h5-logo-en{ display:block; font-family:'Alef','Rubik',sans-serif; font-weight:700; }
   .h5-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
   .h5-shade{
     position:absolute; inset:0; z-index:1;
@@ -392,6 +385,7 @@
     color:var(--ink-dark);
     -webkit-text-stroke:.4px currentColor;
   }
+  .notebook .english-line{ font-family:'Frank Ruhl Libre',serif; }
   .notebook::before{
     content:"";
     /* top inset puts each rule exactly on the Dana Yad baseline:
@@ -829,13 +823,13 @@
     width:100%; background:#fff; border:1.5px solid var(--line-dark); border-radius:12px;
     padding:14px 16px; font-size:16px; color:var(--ink-dark);
   }
-  .field input:focus{ border-color:var(--blue); outline:none; }
+  .field input:focus{ border-color:var(--blue); }
   .field textarea{
     width:100%; background:#fff; border:1.5px solid var(--line-dark); border-radius:12px;
     padding:14px 16px; font-size:16px; color:var(--ink-dark);
     min-height:76px; resize:vertical; line-height:1.55;
   }
-  .field textarea:focus{ border-color:var(--blue); outline:none; }
+  .field textarea:focus{ border-color:var(--blue); }
   .field select{
     width:100%; background:#fff; border:1.5px solid var(--line); border-radius:12px;
     padding:14px 16px; font-size:16px; color:var(--ink);
@@ -843,7 +837,7 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371738A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat:no-repeat; background-position:left 14px center; background-size:18px;
   }
-  .field select:focus{ border-color:var(--blue); outline:none; }
+  .field select:focus{ border-color:var(--blue); }
   .checks{ display:flex; flex-direction:column; gap:9px; }
   .checks label{
     display:flex; align-items:center; gap:10px;
@@ -934,6 +928,10 @@
     padding:0 2px 24px;
     color:var(--dim); font-size:16.5px; max-width:56ch;
   }
+  details ul.a{ list-style:none; margin:0; }
+  details ul.a li{ position:relative; padding-inline-start:20px; margin-bottom:10px; }
+  details ul.a li::before{ content:"—"; position:absolute; inset-inline-start:0; }
+  details ul.a li:last-child{ margin-bottom:0; }
 
   /* ---------- footer ---------- */
   footer{
@@ -1070,7 +1068,6 @@
     }
     footer .name{ font-size:28px; }
     .modal-card{ padding:26px 18px 22px; }
-    .theme-panel{ left:10px; bottom:10px; width:236px; }
   }
 
   /* short landscape phones: keep hero content visible */
@@ -1118,34 +1115,6 @@
     color:#D8D4C6;
   }
   .machine pre .mnote{ color:#9A9C93; }
-  .theme-panel{
-    position:fixed; left:16px; bottom:16px; z-index:250;
-    width:250px; background:#fff; border-radius:14px;
-    box-shadow:0 24px 60px rgba(26,28,46,.35);
-    padding:16px 16px 14px; text-align:right;
-  }
-  .theme-panel[hidden]{ display:none; }
-  .theme-panel h4{
-    margin:0 0 12px; font-size:15px; font-weight:800; color:var(--ink-dark);
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .theme-panel h4 button{ background:none; border:none; cursor:pointer; color:var(--dim); font-size:15px; }
-  .theme-row{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
-  .theme-row label{ font-size:12.5px; color:#63656E; font-weight:600; }
-  .theme-row input[type=color]{ width:36px; height:26px; border:1px solid var(--line-dark); border-radius:6px; padding:1px; background:#fff; cursor:pointer; }
-  .theme-row select{ max-width:140px; border:1px solid var(--line-dark); border-radius:6px; font-size:12px; padding:3px 4px; background:#fff; color:var(--ink-dark); }
-  .theme-presets{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
-  .theme-presets button{
-    border:1px solid var(--line-dark); background:#fff; border-radius:999px;
-    font-size:11.5px; font-weight:700; color:var(--ink-dark); padding:5px 10px; cursor:pointer;
-  }
-  .theme-actions{ display:flex; gap:8px; }
-  .theme-actions button{
-    flex:1; border:none; border-radius:8px; padding:8px; font-size:12px; font-weight:700; cursor:pointer;
-  }
-  .theme-actions .t-copy{ background:var(--blue); color:#fff; }
-  .theme-actions .t-reset{ background:var(--blue-soft); color:var(--blue); }
-
   /* ---------- reduced motion ---------- */
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
@@ -1159,45 +1128,48 @@
 </head>
 <body>
 
-<a class="skip-link" href="#letter">דילוג לתוכן המרכזי</a>
+<a class="skip-link" href="#letter" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
 
 <header class="top" id="topbar">
   <div class="top-inner">
-    <nav class="top-side start" aria-label="ניווט ראשי">
+    <nav class="top-side start" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
       <div class="navfan" id="fanHineni">
-        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">הנני +</button>
+        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
         <div class="fan-menu" hidden>
-          <button type="button" data-apply>אני רוצה להתמודד על מקום בחממה</button>
-          <button type="button" data-openev="0">אני רוצה להגיע למיטאפ</button>
-          <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">אני רוצה עזרה לעבור לדרום או לצפון</a>
-          <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener">אני רוצה לתרום לעשייה</a>
+          <button type="button" data-apply data-en="I want to apply to the incubator">אני רוצה להתמודד על מקום בחממה</button>
+          <button type="button" data-openev="0" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</button>
+          <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener" data-en="I want help relocating south or north">אני רוצה עזרה לעבור לדרום או לצפון</a>
+          <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
         </div>
       </div>
       <div class="navfan" id="fanView">
-        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true">תצוגה +</button>
+        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="View +">תצוגה +</button>
         <div class="fan-menu" hidden>
-          <button type="button" id="viewHuman">אנושית</button>
-          <button type="button" id="viewMachine">בינה מלאכותית</button>
+          <button type="button" id="viewHuman" data-en="Human">אנושית</button>
+          <button type="button" id="viewMachine" data-en="AI">בינה מלאכותית</button>
         </div>
       </div>
-      <button class="top-link fan-btn" type="button" id="contactOpen">צרו קשר</button>
+      <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
     </nav>
     <a class="brand" href="#">
-      <img class="brand-logo" src="assets/logo-white.webp" alt="הננו — חלוציות כדרך חיים">
+      <img class="brand-logo" src="assets/logo-white.webp" alt="הננו — חלוציות כדרך חיים" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu — Pioneers of Hope">
     </a>
-    <div class="top-side end"></div>
+    <div class="top-side end">
+      <button class="top-link fan-btn" type="button" id="a11yFab" aria-label="נגישות" data-en="Accessibility" data-en-aria-label="Accessibility">נגישות</button>
+      <button class="top-link fan-btn" type="button" id="langToggle" aria-label="Switch to English">EN</button>
+    </div>
   </div>
 </header>
 
 <main>
 
   <!-- ======= 1. HERO v5: the title board ======= -->
-  <section class="hero5" id="hero" aria-label="הננו — חלוציות כדרך חיים">
+  <section class="hero5" id="hero" aria-label="הננו — חלוציות כדרך חיים" data-en-aria-label="Hinenu — Pioneering as a way of life">
     <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
-    <button type="button" class="vid-toggle" id="vidToggle" aria-pressed="false" aria-label="השהיית וידאו הרקע" title="השהיית וידאו הרקע">❚❚</button>
+    <button type="button" class="vid-toggle" id="vidToggle" aria-pressed="false" aria-label="השהיית וידאו הרקע" title="השהיית וידאו הרקע" data-en-aria-label="Pause background video" data-en-title="Pause background video">❚❚</button>
     <div class="h5-shade" aria-hidden="true"></div>
-    <h1 class="h5-title"><span>הננו</span><span class="t2">חלוציות <i class="hlmask">כדרך חיים</i></span></h1>
-    <div class="h5-scroll">גללו</div>
+    <h1 class="h5-title"><img class="h5-logo" id="heroLogo" src="assets/logo-white.webp" alt="הננו"><span class="t2" data-en="Pioneering as a way of life">חלוציות כדרך חיים</span></h1>
+    <div class="h5-scroll" data-en="Scroll">גללו</div>
   </section>
 
   <!-- ======= 1b. the national challenges ======= -->
@@ -1245,10 +1217,10 @@
         <p class="sr-only" id="letterPlain"></p>
         <div class="notebook" id="magicText" dir="rtl" aria-hidden="true"></div>
         <div class="sign-row">
-          <img class="sign-photo" src="assets/roee-azizi.jpg" alt="רועי עזיזי" loading="lazy">
+          <img class="sign-photo" src="assets/roee-azizi.jpg" alt="רועי עזיזי" data-en-alt="Roee Azizi" loading="lazy">
           <div>
-            <p class="sign-name">— רועי עזיזי</p>
-            <p class="meta">מייסד · תנועת הננו</p>
+            <p class="sign-name" data-en="— Roee Azizi">— רועי עזיזי</p>
+            <p class="meta" data-en="Founder · the Hinenu movement">מייסד · תנועת הננו</p>
           </div>
         </div>
       </div>
@@ -1259,43 +1231,43 @@
   <section class="tracks" id="tracks">
     <div class="wrap">
       <div class="tracks-head">
-        <p class="kicker reveal">איך ממשיכים מכאן</p>
-        <h2 class="reveal" style="--d:.05s">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
+        <p class="kicker reveal" data-en="How to continue from here">איך ממשיכים מכאן</p>
+        <h2 class="reveal" style="--d:.05s" data-en-html="Choose your <span class='acc'>track</span>.">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
       </div>
 
-      <div class="tflow" id="tflow" role="group" aria-roledescription="קרוסלה" aria-label="שני המסלולים">
+      <div class="tflow" id="tflow" role="group" aria-roledescription="קרוסלה" aria-label="שני המסלולים" data-en-aria-label="Two tracks">
         <article class="track track-a" tabindex="0">
-          <p class="tag">מסלול א׳ · להיכנס לעולם היזמות הלאומית</p>
-          <h3>ערבי יזמות חודשיים</h3>
-          <p class="desc">לאנשים שרוצים להיכנס לעולם, לפגוש אנשים ולהתחיל לחשוב בגדול — בלי התחייבות.</p>
+          <p class="tag" data-en="Track A · entering the world of national entrepreneurship">מסלול א׳ · להיכנס לעולם היזמות הלאומית</p>
+          <h3 data-en="Monthly entrepreneurship evenings">ערבי יזמות חודשיים</h3>
+          <p class="desc" data-en="For people who want to enter the world, meet people, and start thinking big — no commitment.">לאנשים שרוצים להיכנס לעולם, לפגוש אנשים ולהתחיל לחשוב בגדול — בלי התחייבות.</p>
           <ul>
-            <li>יזמים לאומיים אמיתיים שחולקים את הסיפור שלהם</li>
-            <li>מינגלינג איכותי עם אנשים שחושבים כמוך</li>
+            <li data-en="Real national entrepreneurs sharing their story">יזמים לאומיים אמיתיים שחולקים את הסיפור שלהם</li>
+            <li data-en="Quality mingling with people who think like you">מינגלינג איכותי עם אנשים שחושבים כמוך</li>
           </ul>
-          <a class="track-cta" href="#event">אני רוצה להגיע לערב הבא <span class="arr" aria-hidden="true">←</span></a>
+          <a class="track-cta" href="#event" data-en-html="I want to come to the next evening <span class='arr' aria-hidden='true'>←</span>">אני רוצה להגיע לערב הבא <span class="arr" aria-hidden="true">←</span></a>
         </article>
 
         <article class="track track-b" tabindex="0">
-          <p class="tag">מסלול ב׳ · לשנות את המציאות</p>
-          <h3>החממה ליזמות לאומית</h3>
-          <p class="desc">תוכנית של 3 חודשים שנותנת לך את כל מה שצריך כדי לעבור מרעיון למציאות.</p>
+          <p class="tag" data-en="Track B · changing reality">מסלול ב׳ · לשנות את המציאות</p>
+          <h3 data-en="The national entrepreneurship incubator">החממה ליזמות לאומית</h3>
+          <p class="desc" data-en="A 3-month program giving you everything you need to go from idea to reality.">תוכנית של 3 חודשים שנותנת לך את כל מה שצריך כדי לעבור מרעיון למציאות.</p>
           <ul class="perks">
-            <li class="perk"><span class="num" aria-hidden="true">01</span><span><b>מעטפת משפטית</b><small>תתמקדו במיזם, לא בבירוקרטיה</small></span></li>
-            <li class="perk"><span class="num" aria-hidden="true">02</span><span><b>הכשרה לגיוס כסף</b><small>איך מגייסים, ממי ומתי</small></span></li>
-            <li class="perk"><span class="num" aria-hidden="true">03</span><span><b>מנטורים וליווי אישי</b><small>לאורך כל הדרך</small></span></li>
-            <li class="perk"><span class="num" aria-hidden="true">04</span><span><b>מענק פתיחה</b><small>כדי שתוכלו להתמסר למיזם</small></span></li>
-            <li class="perk"><span class="num" aria-hidden="true">05</span><span><b>חבורה</b><small>אנשים שיהפכו לשותפים למשימה ולחיים</small></span></li>
+            <li class="perk"><span class="num" aria-hidden="true">01</span><span><b data-en="Legal support">מעטפת משפטית</b><small data-en="Focus on the venture, not the paperwork">תתמקדו במיזם, לא בבירוקרטיה</small></span></li>
+            <li class="perk"><span class="num" aria-hidden="true">02</span><span><b data-en="Fundraising training">הכשרה לגיוס כסף</b><small data-en="How to raise money, from whom, and when">איך מגייסים, ממי ומתי</small></span></li>
+            <li class="perk"><span class="num" aria-hidden="true">03</span><span><b data-en="Mentors and personal guidance">מנטורים וליווי אישי</b><small data-en="All along the way">לאורך כל הדרך</small></span></li>
+            <li class="perk"><span class="num" aria-hidden="true">04</span><span><b data-en="Seed grant">מענק פתיחה</b><small data-en="So you can commit fully to the venture">כדי שתוכלו להתמסר למיזם</small></span></li>
+            <li class="perk"><span class="num" aria-hidden="true">05</span><span><b data-en="A crew">חבורה</b><small data-en="People who become partners for the mission and for life">אנשים שיהפכו לשותפים למשימה ולחיים</small></span></li>
           </ul>
-          <button type="button" class="track-cta" data-apply>אני רוצה להגיש מועמדות לחממה <span class="arr" aria-hidden="true">←</span></button>
+          <button type="button" class="track-cta" data-apply data-en-html="I want to apply to the incubator <span class='arr' aria-hidden='true'>←</span>">אני רוצה להגיש מועמדות לחממה <span class="arr" aria-hidden="true">←</span></button>
         </article>
       </div>
       <div class="vflow-nav">
-        <button id="tflowPrev" aria-label="המסלול הקודם" type="button">→</button>
-        <button id="tflowNext" aria-label="המסלול הבא" type="button">←</button>
+        <button id="tflowPrev" aria-label="המסלול הקודם" type="button" data-en-aria-label="Previous track">→</button>
+        <button id="tflowNext" aria-label="המסלול הבא" type="button" data-en-aria-label="Next track">←</button>
       </div>
 
       <div class="tracks-note reveal">
-        <p><b>לא בטוחים איפה אתם נמצאים?</b> זה בסדר גמור — רוב האנשים מגיעים בלי לדעת בדיוק מה הם מחפשים. התחילו מערב יזמות: זו גם הדרך הכי טבעית להגיע לחממה.</p>
+        <p data-en-html="<b>Not sure where you stand?</b> That's completely fine — most people arrive without knowing exactly what they're looking for. Start with an entrepreneurship evening: it's also the most natural way to reach the incubator."><b>לא בטוחים איפה אתם נמצאים?</b> זה בסדר גמור — רוב האנשים מגיעים בלי לדעת בדיוק מה הם מחפשים. התחילו מערב יזמות: זו גם הדרך הכי טבעית להגיע לחממה.</p>
         <span class="flow" aria-hidden="true">מסלול א׳ ← מסלול ב׳</span>
       </div>
     </div>
@@ -1305,24 +1277,24 @@
   <section class="event" id="event">
     <div class="wrap">
       <div class="tracks-head">
-        <p class="kicker reveal">הערבים שלנו</p>
-        <h2 class="reveal" style="--d:.05s">ערבי <span class="acc">יזמות לאומית</span>.</h2>
+        <p class="kicker reveal" data-en="Our evenings">הערבים שלנו</p>
+        <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>entrepreneurship</span> evenings.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
       </div>
       <div class="events-grid">
         <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
-          <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג — 28.7, בית בן-גוריון תל אביב" loading="lazy">
-          <span class="ev-tag ev-future">28.7 · ההרשמה פתוחה</span>
+          <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג — 28.7, בית בן-גוריון תל אביב" data-en-alt="National entrepreneurship evening with Michael Eisenberg — 28.7, Beit Ben-Gurion Tel Aviv" loading="lazy">
+          <span class="ev-tag ev-future" data-en="28.7 · Registration open">28.7 · ההרשמה פתוחה</span>
         </button>
         <button type="button" class="ev-card reveal" data-ev="1" style="--d:.08s" aria-haspopup="dialog">
-          <img src="assets/ev-yoel.webp" alt="ערב יזמות ציונית עם יואל זילברמן — 16.6, הרצליה" loading="lazy">
-          <span class="ev-tag ev-past">16.6 · כבר קרה</span>
+          <img src="assets/ev-yoel.webp" alt="ערב יזמות ציונית עם יואל זילברמן — 16.6, הרצליה" data-en-alt="Zionist entrepreneurship evening with Yoel Zilberman — 16.6, Herzliya" loading="lazy">
+          <span class="ev-tag ev-past" data-en="16.6 · Already happened">16.6 · כבר קרה</span>
         </button>
       </div>
     </div>
   </section>
   <div class="modal-overlay" id="evOverlay" hidden>
-    <div class="modal-card ev-modal" role="dialog" aria-modal="true" aria-label="פרטי הערב">
-      <button class="modal-close" id="evClose" aria-label="סגירה">×</button>
+    <div class="modal-card ev-modal" role="dialog" aria-modal="true" aria-label="פרטי הערב" data-en-aria-label="Event details">
+      <button class="modal-close" id="evClose" aria-label="סגירה" data-en-aria-label="Close">×</button>
       <div id="evBody"></div>
     </div>
   </div>
@@ -1330,84 +1302,84 @@
   <!-- ======= 5. VENTURES: already working ======= -->
   <section class="ventures" id="ventures">
     <div class="wrap">
-      <p class="kicker reveal">כבר התחלנו</p>
-      <h2 class="reveal" style="--d:.05s">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
-      <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו">
-        <article class="vcard" tabindex="0" role="group" aria-label="דנאל בן-נמר">
+      <p class="kicker reveal" data-en="Already started">כבר התחלנו</p>
+      <h2 class="reveal" style="--d:.05s" data-en-html="People we've mentored, who stood exactly where you stand, <span class='hl'>and today are solving national challenges.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
+      <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו" data-en-aria-label="Ventures we've mentored">
+        <article class="vcard" tabindex="0" role="group" aria-label="דנאל בן-נמר" data-en-aria-label="Danel Ben-Namer">
           <img src="assets/f-bennamer.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">מייסד · Iran News</div>
-            <b>דנאל בן-נמר</b>
-            <p>תקשורת בקוד פתוח שמסקרת את איראן בעברית, הוקמה אחרי ה-7 באוקטובר — ומגיעה היום למיליונים בחודש בטלגרם וב-X.</p>
-            <a class="vlink" href="https://t.me/hadshotiran" target="_blank" rel="noopener">טלגרם ←</a>
+            <div class="role" data-en="Founder · Iran News">מייסד · Iran News</div>
+            <b data-en="Danel Ben-Namer">דנאל בן-נמר</b>
+            <p data-en="Open-source media covering Iran in Hebrew, founded after October 7 — now reaching millions a month on Telegram and X.">תקשורת בקוד פתוח שמסקרת את איראן בעברית, הוקמה אחרי ה-7 באוקטובר — ומגיעה היום למיליונים בחודש בטלגרם וב-X.</p>
+            <a class="vlink" href="https://t.me/hadshotiran" target="_blank" rel="noopener" data-en="Telegram ←">טלגרם ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="group" aria-label="דור המייסדות">
+        <article class="vcard" tabindex="0" role="group" aria-label="דור המייסדות" data-en-aria-label="Dor HaMeyasdot">
           <img src="assets/v-dor.webp" alt="" loading="lazy" style="object-position:50% 35%">
           <div class="vbody">
-            <div class="role">מייסדות · דור המייסדות</div>
-            <b>אביגייל קרבי ואופיר גלינה</b>
-            <p>שיתופי פעולה בין אומנים.ות לאומנים.ות לקהילה. אומנות נחלת הכלל.</p>
-            <a class="vlink" href="https://www.instagram.com/dorhameyasdot/" target="_blank" rel="noopener">אינסטגרם ←</a>
+            <div class="role" data-en="Founders · Dor HaMeyasdot">מייסדות · דור המייסדות</div>
+            <b data-en="Avigail Karbi and Ofir Galina">אביגייל קרבי ואופיר גלינה</b>
+            <p data-en="Collaborations between artists and community. Art as common heritage.">שיתופי פעולה בין אומנים.ות לאומנים.ות לקהילה. אומנות נחלת הכלל.</p>
+            <a class="vlink" href="https://www.instagram.com/dorhameyasdot/" target="_blank" rel="noopener" data-en="Instagram ←">אינסטגרם ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="group" aria-label="נועם מאירוב">
+        <article class="vcard" tabindex="0" role="group" aria-label="נועם מאירוב" data-en-aria-label="Noam Meirov">
           <img src="assets/f-meirov.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">מייסד · Abraham Executive Academy</div>
-            <b>נועם מאירוב</b>
-            <p>תוכנית עמיתים שנתית שמחברת 30 מנהיגים מעולמות הפיננסים, הטק, הממשל והחברה האזרחית ממדינות הסכמי אברהם.</p>
-            <a class="vlink" href="https://www.linkedin.com/company/abraham-executive-academy-aea/" target="_blank" rel="noopener">לינקדאין ←</a>
+            <div class="role" data-en="Founder · Abraham Executive Academy">מייסד · Abraham Executive Academy</div>
+            <b data-en="Noam Meirov">נועם מאירוב</b>
+            <p data-en="A year-long fellowship connecting 30 leaders from finance, tech, government, and civil society across Abraham Accords countries.">תוכנית עמיתים שנתית שמחברת 30 מנהיגים מעולמות הפיננסים, הטק, הממשל והחברה האזרחית ממדינות הסכמי אברהם.</p>
+            <a class="vlink" href="https://www.linkedin.com/company/abraham-executive-academy-aea/" target="_blank" rel="noopener" data-en="LinkedIn ←">לינקדאין ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="group" aria-label="כיף בעוטף">
+        <article class="vcard" tabindex="0" role="group" aria-label="כיף בעוטף" data-en-aria-label="Kef BaOtef">
           <img src="assets/v-otef.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">מייסדת · כיף בעוטף</div>
-            <b>מעיין גל</b>
-            <p>בית היוצר של ההפקות הכי מוגזמות בעוטף. עושים רעש מסוג שמח מאז 2021 — רק שטויות וערק.</p>
-            <a class="vlink" href="https://www.instagram.com/kef.otef/" target="_blank" rel="noopener">אינסטגרם ←</a>
+            <div class="role" data-en="Founder · Kef BaOtef">מייסדת · כיף בעוטף</div>
+            <b data-en="Maayan Gal">מעיין גל</b>
+            <p data-en="The home of the most over-the-top productions in the Gaza-border region. Making happy noise since 2021 — just fun and arak.">בית היוצר של ההפקות הכי מוגזמות בעוטף. עושים רעש מסוג שמח מאז 2021 — רק שטויות וערק.</p>
+            <a class="vlink" href="https://www.instagram.com/kef.otef/" target="_blank" rel="noopener" data-en="Instagram ←">אינסטגרם ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="group" aria-label="יובל פיטלוק">
+        <article class="vcard" tabindex="0" role="group" aria-label="יובל פיטלוק" data-en-aria-label="Yuval Pitluk">
           <img src="assets/f-pitluk.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">מייסד · Toko</div>
-            <b>יובל פיטלוק</b>
-            <p>יוצא נגד משבר הפוסט-טראומה ובריאות הנפש של ישראל — עם משתמשים ראשונים כבר בנגב ובגליל.</p>
-            <a class="vlink" href="https://toko.health/he" target="_blank" rel="noopener">לאתר ←</a>
+            <div class="role" data-en="Founder · Toko">מייסד · Toko</div>
+            <b data-en="Yuval Pitluk">יובל פיטלוק</b>
+            <p data-en="Taking on Israel's post-trauma and mental-health crisis — with first users already in the Negev and the Galilee.">יוצא נגד משבר הפוסט-טראומה ובריאות הנפש של ישראל — עם משתמשים ראשונים כבר בנגב ובגליל.</p>
+            <a class="vlink" href="https://toko.health/he" target="_blank" rel="noopener" data-en="To the website ←">לאתר ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="group" aria-label="שמונה">
+        <article class="vcard" tabindex="0" role="group" aria-label="שמונה" data-en-aria-label="Shmona">
           <img src="assets/v-shmona.webp" alt="" loading="lazy">
           <div class="vbody">
-            <div class="role">מייסד · שמונה.</div>
-            <b>אסף פנחסי</b>
-            <p>שחקן תיאטרון ומלווה תהליכי סטוריטלינג שעלה לגליל העליון, והרים יחד עם העירייה מופע סיפורים מוזיקלי שמעלה את סיפורה של קריית שמונה דרך האנשים שחיים בה.</p>
-            <a class="vlink" href="https://www.instagram.com/asaf.pinchassi/" target="_blank" rel="noopener">אינסטגרם ←</a>
+            <div class="role" data-en="Founder · Shmona.">מייסד · שמונה.</div>
+            <b data-en="Asaf Pinchasi">אסף פנחסי</b>
+            <p data-en="A theater actor and storytelling facilitator who moved to the Upper Galilee, and together with the municipality staged a musical storytelling show that tells the story of Kiryat Shmona through the people who live there.">שחקן תיאטרון ומלווה תהליכי סטוריטלינג שעלה לגליל העליון, והרים יחד עם העירייה מופע סיפורים מוזיקלי שמעלה את סיפורה של קריית שמונה דרך האנשים שחיים בה.</p>
+            <a class="vlink" href="https://www.instagram.com/asaf.pinchassi/" target="_blank" rel="noopener" data-en="Instagram ←">אינסטגרם ←</a>
           </div>
         </article>
-        <article class="vcard you" tabindex="0" role="group" aria-label="אתם — מחזור 2026">
-          <div class="vbig" aria-hidden="true">אתם?</div>
+        <article class="vcard you" tabindex="0" role="group" aria-label="אתם — מחזור 2026" data-en-aria-label="You — 2026 cohort">
+          <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
           <div class="vbody">
-            <div class="role" style="color:rgba(255,255,255,.75)">מחזור 2026</div>
-            <b>מחפשים את מי שעתיד המדינה בוער בו — וכבר לא מוכן לחכות.</b>
-            <p style="color:rgba(255,255,255,.85)">המחזור הבא של יזמי החוסן הלאומי מתגבש עכשיו.</p>
-            <button type="button" class="apply-link" data-apply>להגשת מועמדות לחממה</button>
+            <div class="role" style="color:rgba(255,255,255,.75)" data-en="2026 cohort">מחזור 2026</div>
+            <b data-en="Looking for whoever has the country's future burning in them — and isn't willing to wait anymore.">מחפשים את מי שעתיד המדינה בוער בו — וכבר לא מוכן לחכות.</b>
+            <p style="color:rgba(255,255,255,.85)" data-en="The next cohort of national-resilience entrepreneurs is forming now.">המחזור הבא של יזמי החוסן הלאומי מתגבש עכשיו.</p>
+            <button type="button" class="apply-link" data-apply data-en="Apply to the incubator">להגשת מועמדות לחממה</button>
           </div>
         </article>
       </div>
       <p class="sr-only" aria-live="polite" id="vflowStatus"></p>
       <div class="vflow-nav">
-        <button id="vflowPrev" aria-label="הכרטיס הקודם" type="button">→</button>
-        <button id="vflowNext" aria-label="הכרטיס הבא" type="button">←</button>
+        <button id="vflowPrev" aria-label="הכרטיס הקודם" type="button" data-en-aria-label="Previous card">→</button>
+        <button id="vflowNext" aria-label="הכרטיס הבא" type="button" data-en-aria-label="Next card">←</button>
       </div>
     </div>
   </section>
 
   <!-- ======= 6. BACKERS ======= -->
-  <section class="backers" id="backers" aria-label="הגופים שתומכים בנו">
-    <span class="overline">מגובים על ידי מוסדות שבונים לטווח ארוך</span>
+  <section class="backers" id="backers" aria-label="הגופים שתומכים בנו" data-en-aria-label="The institutions that back us">
+    <span class="overline" data-en="Backed by institutions building for the long term">מגובים על ידי מוסדות שבונים לטווח ארוך</span>
     <div class="marquee">
       <div class="mtrack" aria-hidden="false">
         <div class="mgroup">
@@ -1422,7 +1394,7 @@
           <img class="slim" src="assets/l-hapoalim.svg" alt="בנק הפועלים" title="בנק הפועלים">
           <img src="assets/l-rothschild.webp" alt="Edmond de Rothschild Foundation" title="Edmond de Rothschild">
           <img src="assets/l-berkowitz.webp" alt="Berkowitz Family Foundation" title="Berkowitz Family Foundation">
-          <span>+ תורמים פרטיים</span>
+          <span data-en="+ private donors">+ תורמים פרטיים</span>
         </div>
         <div class="mgroup" aria-hidden="true">
           <img src="assets/l-pershing.webp" alt="">
@@ -1436,7 +1408,7 @@
           <img class="slim" src="assets/l-hapoalim.svg" alt="">
           <img src="assets/l-rothschild.webp" alt="">
           <img src="assets/l-berkowitz.webp" alt="">
-          <span>+ תורמים פרטיים</span>
+          <span data-en="+ private donors">+ תורמים פרטיים</span>
         </div>
       </div>
     </div>
@@ -1445,36 +1417,40 @@
   <!-- ======= 4. FAQ ======= -->
   <section class="faq" id="faq">
     <div class="faq-inner">
-      <h2 class="reveal">שאלות ישירות. <span class="acc">תשובות ישירות.</span></h2>
+      <h2 class="reveal" data-en-html="Direct questions. <span class='acc'>Direct answers.</span>">שאלות ישירות. <span class="acc">תשובות ישירות.</span></h2>
 
       <details class="reveal">
-        <summary>אז זה בעצם אקסלרטור? מכינה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">לא. אנחנו מרימים מיטאפים עם יזמים לאומיים שהקימו מיזמים וחברות שמשנות את מדינת ישראל.</p>
+        <summary data-en-html="So is this basically an accelerator? A prep program? <span class='plus' aria-hidden='true'></span>">אז זה בעצם אקסלרטור? מכינה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="No. We run meetups with national entrepreneurs who've built ventures and companies that are changing the State of Israel.">לא. אנחנו מרימים מיטאפים עם יזמים לאומיים שהקימו מיזמים וחברות שמשנות את מדינת ישראל.</p>
       </details>
 
       <details class="reveal" style="--d:.05s">
-        <summary>האם זה קשור למעבר לעוטף / לצפון? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">לא. זהו פרויקט נוסף של תנועת "הננו".</p>
+        <summary data-en-html="Is this connected to relocating to the Gaza-border region / the north? <span class='plus' aria-hidden='true'></span>">האם זה קשור למעבר לעוטף / לצפון? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="No. This is a separate project of the Hinenu movement.">לא. זהו פרויקט נוסף של תנועת "הננו".</p>
       </details>
 
       <details class="reveal" style="--d:.1s">
-        <summary>האם זה מוגדר בזמן או במשימה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני — להתחיל להקים; ניפגש, ונשמע על מה אתם.ן עובדים.ות. הצעד השלישי — להצטרף לחממה ליזמות לאומית, שבה נעזור לכם לעבור מ-0 ל-1, ואז מ-1 ל-1,000,000.</p>
+        <summary data-en-html="Is this defined by a timeline or a mission? <span class='plus' aria-hidden='true'></span>">האם זה מוגדר בזמן או במשימה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="The first step is to show up, get to know people, and start thinking big. The second step — start building; we'll meet and hear what you're working on. The third step — join the national entrepreneurship incubator, where we'll help you go from 0 to 1, and then from 1 to 1,000,000.">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני — להתחיל להקים; ניפגש, ונשמע על מה אתם.ן עובדים.ות. הצעד השלישי — להצטרף לחממה ליזמות לאומית, שבה נעזור לכם לעבור מ-0 ל-1, ואז מ-1 ל-1,000,000.</p>
       </details>
 
       <details class="reveal" style="--d:.15s">
-        <summary>למי זה מיועד? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">צעירות וצעירים אחרי שירות או עשייה משמעותית, שרוצים להקים מיזמים שיפתרו בעיות לאומיות.</p>
+        <summary data-en-html="Who is this for? <span class='plus' aria-hidden='true'></span>">למי זה מיועד? <span class="plus" aria-hidden="true"></span></summary>
+        <ul class="a">
+          <li data-en="Commanders and combat soldiers who initiated and built valuable projects in their service, in the face of pressure and during the war.">מפקדות/מפקדים ולוחמות/לוחמים שיזמו והקימו בשירות פרויקטים בעלי ערך נוכח הדוחק ובזמן המלחמה.</li>
+          <li data-en="Entrepreneurs and social activists who live real problems and want to build infrastructural solutions themselves.">יזמות ויזמים ופעילות ופעילים חברתיים שחיים בעיות אמיתיות ורוצים לבנות פתרונות תשתיתיים בעצמם.</li>
+          <li data-en="Young people who turned a formative experience into an engine and a drive to change reality on a big scale.">צעירות וצעירים שהפכו חוויה מעצבת למנוע בעירה ודחף לשנות מציאות בגדול.</li>
+        </ul>
       </details>
 
       <details class="reveal" style="--d:.2s">
-        <summary>מה יוצא לי מזה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">אם את.ה שואל.ת את השאלה הזאת — זה לא בשבילך.</p>
+        <summary data-en-html="What do I get out of it? <span class='plus' aria-hidden='true'></span>">מה יוצא לי מזה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="If you're asking that question — this isn't for you.">אם את.ה שואל.ת את השאלה הזאת — זה לא בשבילך.</p>
       </details>
 
       <details class="reveal" style="--d:.25s">
-        <summary>מה המטרה בקצה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a">תמצאו אחד את השנייה, תקבלו מאיתנו מעטפת והכשרה, ותקימו מיזמים חברתיים-לאומיים מפחידים.</p>
+        <summary data-en-html="What's the end goal? <span class='plus' aria-hidden='true'></span>">מה המטרה בקצה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="You'll find each other, get support and training from us, and build daunting social-national ventures.">תמצאו אחד את השנייה, תקבלו מאיתנו מעטפת והכשרה, ותקימו מיזמים חברתיים-לאומיים מפחידים.</p>
       </details>
     </div>
   </section>
@@ -1484,68 +1460,68 @@
 <!-- ======= APPLY MODAL ======= -->
 <div class="modal-overlay" id="applyModal" hidden role="dialog" aria-modal="true" aria-labelledby="applyTitle">
   <div class="modal-card">
-    <button type="button" class="modal-close" id="applyClose" aria-label="סגירת החלון">✕</button>
-    <h3 id="applyTitle">מועמדות לחממה ליזמות לאומית</h3>
-    <p class="modal-sub">מ-0 ל-1, ומ-1 ל-1,000,000. ספרו לנו מי אתם.ן — ונחזור אליכם.ן לשיחה.</p>
+    <button type="button" class="modal-close" id="applyClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
+    <h3 id="applyTitle" data-en="Apply to the National Entrepreneurship Incubator">מועמדות לחממה ליזמות לאומית</h3>
+    <p class="modal-sub" data-en="From 0 to 1, and from 1 to 1,000,000. Tell us who you are — and we'll get back to you for a conversation.">מ-0 ל-1, ומ-1 ל-1,000,000. ספרו לנו מי אתם.ן — ונחזור אליכם.ן לשיחה.</p>
     <form class="signup-form" id="applyForm" novalidate>
       <div class="field">
-        <label for="fullname">שם מלא</label>
+        <label for="fullname" data-en="Full name">שם מלא</label>
         <input type="text" id="fullname" name="שם מלא" required autocomplete="name">
       </div>
       <div class="field">
-        <label for="phone">טלפון</label>
+        <label for="phone" data-en="Phone">טלפון</label>
         <input type="tel" id="phone" name="טלפון" required autocomplete="tel" inputmode="tel">
       </div>
       <div class="field">
-        <label for="email">אימייל</label>
-        <input type="email" id="email" name="email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com">
+        <label for="email" data-en="Email">אימייל</label>
+        <input type="email" id="email" name="email" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com" data-en-title="A valid email address, e.g. name@example.com">
       </div>
       <div class="field">
-        <label for="who">ספרו לנו מי את.ה</label>
+        <label for="who" data-en="Tell us who you are">ספרו לנו מי את.ה</label>
         <textarea id="who" name="מי אני" required></textarea>
       </div>
       <div class="field">
-        <label for="pain">מה הבעיה הלאומית שכואבת לך?</label>
+        <label for="pain" data-en="What's the national problem that bothers you?">מה הבעיה הלאומית שכואבת לך?</label>
         <textarea id="pain" name="הבעיה הלאומית שכואבת לי" required></textarea>
       </div>
       <div class="field">
-        <label for="dream">מה החלום שלך? התחלת להגשים אותו?</label>
+        <label for="dream" data-en="What's your dream? Have you started making it happen?">מה החלום שלך? התחלת להגשים אותו?</label>
         <textarea id="dream" name="החלום שלי"></textarea>
       </div>
       <div class="field">
-        <label for="doneSoFar">מה עשית עד היום?</label>
+        <label for="doneSoFar" data-en="What have you done so far?">מה עשית עד היום?</label>
         <textarea id="doneSoFar" name="מה עשיתי עד היום"></textarea>
       </div>
-      <button type="submit" class="cta-btn">לשליחת המועמדות</button>
-      <p class="form-error" id="applyError">משהו השתבש בשליחה. נסו שוב, או כתבו לנו באינסטגרם.</p>
+      <button type="submit" class="cta-btn" data-en="Submit application">לשליחת המועמדות</button>
+      <p class="form-error" id="applyError" data-en="Something went wrong sending this. Try again, or message us on Instagram.">משהו השתבש בשליחה. נסו שוב, או כתבו לנו באינסטגרם.</p>
     </form>
-    <p class="success-msg" id="applySuccess">קיבלנו את המועמדות. נחזור אליכם.ן בקרוב — בינתיים, שריינו את ה-28.7.</p>
+    <p class="success-msg" id="applySuccess" data-en="We got your application. We'll be in touch soon — in the meantime, save the date, 28.7.">קיבלנו את המועמדות. נחזור אליכם.ן בקרוב — בינתיים, שריינו את ה-28.7.</p>
   </div>
 </div>
 
 <div class="modal-overlay" id="a11yModal" hidden role="dialog" aria-modal="true" aria-labelledby="a11yTitle">
   <div class="modal-card a11y-card">
-    <button type="button" class="modal-close" id="a11yClose" aria-label="סגירת החלון">✕</button>
-    <h3 id="a11yTitle">הצהרת נגישות</h3>
+    <button type="button" class="modal-close" id="a11yClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
+    <h3 id="a11yTitle" data-en="Accessibility Statement">הצהרת נגישות</h3>
     <div class="a11y-body">
-      <p>תנועת הננו רואה חשיבות עליונה בהנגשת האתר לאנשים עם מוגבלות. האתר הונגש בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ולתקן הישראלי ת"י 5568 ברמה AA (בהתבסס על הנחיות WCAG 2.1).</p>
-      <p>התאמות באתר: ניווט מלא במקלדת (כולל תפריטים, קרוסלות וחלוניות), קישור דילוג לתוכן, סימון פוקוס בולט, טקסט חלופי לתמונות, ניגודיות צבעים תקינה, תוויות טפסים, אפשרות השהיית וידאו הרקע, ותמיכה בהעדפת צמצום תנועה של מערכת ההפעלה. בנוסף קיימת תצוגת "בינה מלאכותית" עם כל תוכן העמוד כטקסט פשוט.</p>
-      <p>מצאתם.ן רכיב שאינו נגיש? נשמח לתקן:</p>
+      <p data-en="The Hinenu movement sees great importance in making the site accessible to people with disabilities. The site was made accessible in accordance with the Equal Rights for Persons with Disabilities Regulations (Accessibility Adjustments for Service), 2013, and Israeli Standard 5568 at level AA (based on WCAG 2.1 guidelines).">תנועת הננו רואה חשיבות עליונה בהנגשת האתר לאנשים עם מוגבלות. האתר הונגש בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ולתקן הישראלי ת"י 5568 ברמה AA (בהתבסס על הנחיות WCAG 2.1).</p>
+      <p data-en="Site adaptations: full keyboard navigation (including menus, carousels, and dialogs), skip-to-content link, visible focus indication, alt text for images, valid color contrast, form labels, the option to pause the background video, and support for the operating system's reduced-motion preference. There is also an “AI view” showing all page content as plain text.">התאמות באתר: ניווט מלא במקלדת (כולל תפריטים, קרוסלות וחלוניות), קישור דילוג לתוכן, סימון פוקוס בולט, טקסט חלופי לתמונות, ניגודיות צבעים תקינה, תוויות טפסים, אפשרות השהיית וידאו הרקע, ותמיכה בהעדפת צמצום תנועה של מערכת ההפעלה. בנוסף קיימת תצוגת "בינה מלאכותית" עם כל תוכן העמוד כטקסט פשוט.</p>
+      <p data-en="Found an inaccessible component? We'd love to fix it:">מצאתם.ן רכיב שאינו נגיש? נשמח לתקן:</p>
       <div class="contact-rows">
-        <a href="tel:0523730941">רועי עזיזי · 052-3730941</a>
+        <a href="tel:0523730941" data-en="Roee Azizi · 052-3730941">רועי עזיזי · 052-3730941</a>
         <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a>
       </div>
-      <p class="a11y-date">ההצהרה עודכנה: 15.7.2026</p>
+      <p class="a11y-date" data-en="Statement last updated: 15.7.2026">ההצהרה עודכנה: 15.7.2026</p>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="contactTitle">
   <div class="modal-card contact-card">
-    <button type="button" class="modal-close" id="contactClose" aria-label="סגירת החלון">✕</button>
-    <h3 id="contactTitle">צרו קשר</h3>
-    <p class="contact-name">רועי עזיזי</p>
-    <p class="contact-role">יזם ציוני, מייסד תנועת הננו</p>
+    <button type="button" class="modal-close" id="contactClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
+    <h3 id="contactTitle" data-en="Contact us">צרו קשר</h3>
+    <p class="contact-name" data-en="Roee Azizi">רועי עזיזי</p>
+    <p class="contact-role" data-en="Zionist entrepreneur, founder of the Hinenu movement">יזם ציוני, מייסד תנועת הננו</p>
     <div class="contact-rows">
       <a href="tel:0523730941">052-3730941</a>
       <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a>
@@ -1564,24 +1540,19 @@
   </div>
 </div>
 
-<aside class="theme-panel" id="themePanel" hidden dir="rtl" aria-label="כלי כותרת">
-  <h4>כלי כותרת <button id="themeClose" type="button" aria-label="סגירה">✕</button></h4>
-  <div id="themeRows"></div>
-</aside>
-
 <footer>
   <div class="wrap">
-    <div class="name"><img src="assets/logo-white.webp" alt="הננו"></div>
-    <p class="tag">חלוצים של תקווה</p>
+    <div class="name"><img src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"></div>
+    <p class="tag" data-en="Pioneers of hope">חלוצים של תקווה</p>
     <div class="socials">
       <a href="https://www.instagram.com/hinenu_israel?igsh=YmF4dm9iM2FmODR0&amp;utm_source=qr" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor" stroke="none"/></svg>
-        אינסטגרם
+        <span data-en="Instagram">אינסטגרם</span>
       </a>
-      <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">הננו · לנגב ולגליל ↖</a>
+      <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener" data-en="Hinenu · to the Negev and the Galilee ↖">הננו · לנגב ולגליל ↖</a>
     </div>
-    <p class="meta">ערב יזמות לאומית · 28.7.2026 · 19:30 · בית בן־גוריון · <a href="#event">פרטי הערב</a> · <a href="#ventures">מיזמים שליווינו</a></p>
-    <p class="meta">רועי עזיזי · יזם ציוני, מייסד תנועת הננו · <a href="tel:0523730941">052-3730941</a> · <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a> · <button type="button" class="meta-link" id="a11yOpen">הצהרת נגישות</button></p>
+    <p class="meta"><span data-en="National Entrepreneurship Evening">ערב יזמות לאומית</span> · 28.7.2026 · 19:30 · <span data-en="Beit Ben-Gurion">בית בן־גוריון</span> · <a href="#event" data-en="Event details">פרטי הערב</a> · <a href="#ventures" data-en="Ventures we've mentored">מיזמים שליווינו</a></p>
+    <p class="meta"><span data-en="Roee Azizi">רועי עזיזי</span> · <span data-en="Zionist entrepreneur, founder of the Hinenu movement">יזם ציוני, מייסד תנועת הננו</span> · <a href="tel:0523730941">052-3730941</a> · <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a> · <button type="button" class="meta-link" id="a11yOpen" data-en="Accessibility statement">הצהרת נגישות</button></p>
   </div>
 </footer>
 
@@ -1589,6 +1560,7 @@
 (function(){
   "use strict";
 
+  var LANG = 'he'; /* current UI language, flipped by the EN/עב toggle */
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ================================================================
@@ -1743,64 +1715,84 @@
     { text: 'יש מיעוט שעתיד ישראל הוא המצפן שלו — כאלה שרואים בכל משבר הזדמנות, ובוחרים לשחות נגד הזרם. מיעוט של חלוצים.' },
     { text: 'אותם חלוצים לא תמיד יודעים מאיפה להתחיל, ולנו יש הצעה — תנועה.' }
   ];
+  var LETTER_LINES_EN = [
+    { text: 'Young Israelis finish their military service, skilled and full of drive, but many of them feel stuck.', en:true },
+    { text: 'There is a minority for whom Israel’s future is the compass — the ones who see opportunity in every crisis, and choose to swim against the current. A minority of pioneers.', en:true },
+    { text: 'Those pioneers don’t always know where to start, and we have a proposal — a movement.', en:true }
+  ];
 
   var magicText = document.getElementById('magicText');
   var letterTrack = document.getElementById('letterTrack');
   var letterPlain = document.getElementById('letterPlain');
   var inks = [];
-
-  /* full text for screen readers; the char-split copy is aria-hidden */
-  letterPlain.textContent = LETTER_LINES.map(function(l){ return l.text; }).join(' ');
-
-  LETTER_LINES.forEach(function(line, li){
-    if(li > 0) magicText.appendChild(document.createElement('br'));
-    var wrapper = document.createElement('span');
-    if(line.en) wrapper.className = 'english-line';
-    line.text.split(' ').forEach(function(word, wi){
-      if(wi > 0) wrapper.appendChild(document.createTextNode(' '));
-      var w = document.createElement('span');
-      w.className = 'word';
-      word.split('').forEach(function(ch){
-        var c = document.createElement('span');
-        c.className = 'letter-char';
-        var g = document.createElement('span');
-        g.className = 'ghost';
-        g.textContent = ch;
-        var k = document.createElement('span');
-        k.className = 'ink';
-        k.textContent = ch;
-        k.style.transform =
-          'rotate(' + ((Math.random() - 0.5) * 5).toFixed(2) + 'deg)' +
-          ' translateY(' + ((Math.random() - 0.5) * 2).toFixed(2) + 'px)';
-        c.appendChild(g);
-        c.appendChild(k);
-        w.appendChild(c);
-        inks.push(k);
-      });
-      wrapper.appendChild(w);
-    });
-    magicText.appendChild(wrapper);
-  });
-
   var letterStatic = reducedMotion;
-  if(letterStatic){
-    /* reduced motion gets the letter fully written */
-    inks.forEach(function(k){ k.style.opacity = 1; });
-  } else {
-    var mob_ = window.innerWidth <= 760;
-    letterTrack.style.minHeight = Math.min(mob_ ? 430 : 650, 160 + inks.length * (mob_ ? 0.42 : 0.65)) + 'vh';
+  var letterTicking = false;
 
-    var letterTicking = false;
-    function updateLetter(){
-      var rect = letterTrack.getBoundingClientRect();
-      var scrollable = letterTrack.offsetHeight - window.innerHeight;
-      if(scrollable < 1) scrollable = 1;
-      var p = Math.max(0, Math.min(1, -rect.top / scrollable));
-      var lit = p * inks.length;
-      for(var i = 0; i < inks.length; i++){
-        inks[i].style.opacity = Math.max(0, Math.min(1, lit - i));
-      }
+  function updateLetter(){
+    var rect = letterTrack.getBoundingClientRect();
+    var scrollable = letterTrack.offsetHeight - window.innerHeight;
+    if(scrollable < 1) scrollable = 1;
+    var p = Math.max(0, Math.min(1, -rect.top / scrollable));
+    var lit = p * inks.length;
+    for(var i = 0; i < inks.length; i++){
+      inks[i].style.opacity = Math.max(0, Math.min(1, lit - i));
     }
+  }
+  window.__updateLetter = updateLetter; /* qa hook */
+
+  function buildLetter(){
+    var lines = LANG === 'en' ? LETTER_LINES_EN : LETTER_LINES;
+    magicText.innerHTML = '';
+    magicText.setAttribute('dir', LANG === 'en' ? 'ltr' : 'rtl');
+    inks = [];
+
+    /* full text for screen readers; the char-split copy is aria-hidden */
+    letterPlain.textContent = lines.map(function(l){ return l.text; }).join(' ');
+    letterPlain.setAttribute('dir', LANG === 'en' ? 'ltr' : 'rtl');
+
+    lines.forEach(function(line, li){
+      if(li > 0) magicText.appendChild(document.createElement('br'));
+      var wrapper = document.createElement('span');
+      if(line.en) wrapper.className = 'english-line';
+      line.text.split(' ').forEach(function(word, wi){
+        if(wi > 0) wrapper.appendChild(document.createTextNode(' '));
+        var w = document.createElement('span');
+        w.className = 'word';
+        word.split('').forEach(function(ch){
+          var c = document.createElement('span');
+          c.className = 'letter-char';
+          var g = document.createElement('span');
+          g.className = 'ghost';
+          g.textContent = ch;
+          var k = document.createElement('span');
+          k.className = 'ink';
+          k.textContent = ch;
+          k.style.transform =
+            'rotate(' + ((Math.random() - 0.5) * 5).toFixed(2) + 'deg)' +
+            ' translateY(' + ((Math.random() - 0.5) * 2).toFixed(2) + 'px)';
+          c.appendChild(g);
+          c.appendChild(k);
+          w.appendChild(c);
+          inks.push(k);
+        });
+        wrapper.appendChild(w);
+      });
+      magicText.appendChild(wrapper);
+    });
+
+    if(letterStatic){
+      /* reduced motion gets the letter fully written */
+      inks.forEach(function(k){ k.style.opacity = 1; });
+    } else {
+      var mob_ = window.innerWidth <= 760;
+      letterTrack.style.minHeight = Math.min(mob_ ? 430 : 650, 160 + inks.length * (mob_ ? 0.42 : 0.65)) + 'vh';
+      updateLetter();
+    }
+  }
+  window.__buildLetter = buildLetter; /* re-run on language toggle */
+  buildLetter();
+
+  if(!letterStatic){
     window.addEventListener('scroll', function(){
       if(!letterTicking){
         requestAnimationFrame(function(){ updateLetter(); letterTicking = false; });
@@ -1808,8 +1800,6 @@
       }
     }, { passive:true });
     window.addEventListener('resize', updateLetter);
-    window.__updateLetter = updateLetter; /* qa hook */
-    updateLetter();
   }
 
   /* ---- tracks: cursor grid, tilt, magnetic buttons ---- */
@@ -1946,19 +1936,38 @@
       lede:'שיח עם יזמים מובילים — יואל זילברמן, מייסד ומנכ״ל "השומר החדש", על איך מקימים תנועה מאפס.',
       gallery:['assets/event-1.jpg','assets/event-2.jpg','assets/event-4.jpg','assets/event-3.jpg'] }
   ];
+  var EV_EN = [
+    { title:'National Entrepreneurship Evening', guest:'with Michael Eisenberg', status:'future',
+      chips:['Tuesday · 28.7','19:30','Beit Ben-Gurion, Tel Aviv'],
+      lede:'One word will decide who survives the next decade: Agency. We call it pioneering — the ability to take initiative, learn fast, and move. Guest: Michael Eisenberg, one of Israel’s leading entrepreneurship and venture-capital figures, managing partner and founder at Aleph.',
+      qs:['How do we turn Israel into a technological superpower?','Where are the huge opportunities everyone is missing?','What does the State of Israel need from us, the young generation, in order to thrive?'],
+      reg:'https://forms.gle/fNLYrHKmYYShyfTb8',
+      wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t',
+      note:'Spots are limited — it’s Ben-Gurion’s living room, not a hall.' },
+    { title:'Zionist Entrepreneurship Evening', guest:'with Yoel Zilberman', status:'past',
+      chips:['16.6','19:00','Herzliya'],
+      lede:'A conversation with leading entrepreneurs — Yoel Zilberman, founder and CEO of "HaShomer HaChadash," on building a movement from scratch.',
+      gallery:['assets/event-1.jpg','assets/event-2.jpg','assets/event-4.jpg','assets/event-3.jpg'] }
+  ];
   var evOverlay = document.getElementById('evOverlay');
   var evBody = document.getElementById('evBody');
   function escT(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+  var evLastIndex = null;
   function openEv(i){
-    var e = EV[i]; if(!e || !evOverlay) return;
-    var h = '<p class="kicker">' + (e.status==='future' ? 'הערב הקרוב' : 'כבר קרה') + '</p>';
+    var list = LANG === 'en' ? EV_EN : EV;
+    var e = list[i]; if(!e || !evOverlay) return;
+    evLastIndex = i;
+    var kickerUp = LANG === 'en' ? (e.status==='future' ? 'Coming up' : 'Already happened') : (e.status==='future' ? 'הערב הקרוב' : 'כבר קרה');
+    var regLabel = LANG === 'en' ? 'Registration form ←' : 'שאלון הרשמה לערב ←';
+    var waLabel = LANG === 'en' ? 'I want to join the WhatsApp group' : 'אני רוצה להצטרף לקבוצת הוואטסאפ';
+    var h = '<p class="kicker">' + kickerUp + '</p>';
     h += '<h3>' + escT(e.title) + ' <span class="ev-guest">' + escT(e.guest) + '</span></h3>';
     h += '<div class="event-meta">' + e.chips.map(function(c){ return '<span>'+escT(c)+'</span>'; }).join('') + '</div>';
     h += '<p class="ev-lede">' + escT(e.lede) + '</p>';
     if(e.status === 'future'){
       if(e.qs) h += '<ul class="event-qs">' + e.qs.map(function(q){ return '<li>'+escT(q)+'</li>'; }).join('') + '</ul>';
-      if(e.reg) h += '<a class="cta-btn ev-reg" href="' + e.reg + '" target="_blank" rel="noopener">שאלון הרשמה לערב ←</a>';
-      if(e.wa)  h += '<a class="cta-btn ev-wa" href="' + e.wa + '" target="_blank" rel="noopener">אני רוצה להצטרף לקבוצת הוואטסאפ</a>';
+      if(e.reg) h += '<a class="cta-btn ev-reg" href="' + e.reg + '" target="_blank" rel="noopener">' + regLabel + '</a>';
+      if(e.wa)  h += '<a class="cta-btn ev-wa" href="' + e.wa + '" target="_blank" rel="noopener">' + waLabel + '</a>';
       if(e.note) h += '<p class="event-limit">' + escT(e.note) + '</p>';
     } else if(e.gallery){
       h += '<div class="gal-grid">' + e.gallery.map(function(g){ return '<img src="'+g+'" alt="" loading="lazy">'; }).join('') + '</div>';
@@ -1985,6 +1994,7 @@
   if(vflow){
     var vcards = Array.prototype.slice.call(vflow.querySelectorAll('.vcard'));
     var vnames = ['דנאל בן-נמר','דור המייסדות','נועם מאירוב','כיף בעוטף','יובל פיטלוק','שמונה','אתם — מחזור 2026'];
+    var vnamesEn = ['Danel Ben-Namer','Dor HaMeyasdot','Noam Meirov','Kef BaOtef','Yuval Pitluk','Shmona','You — 2026 cohort'];
     var vstatus = document.getElementById('vflowStatus');
     var vcur = 0;
     function renderVFlow(){
@@ -1996,9 +2006,12 @@
         c.style.transform = 'translateX(' + (d * -240) + 'px) rotateY(' + (d * 16) + 'deg) scale(' + (1 - ad * 0.12) + ')';
         c.style.filter = ad ? 'brightness(.55)' : 'none';
       });
-      if(vstatus) vstatus.textContent = 'כרטיס ' + (vcur + 1) + ' מתוך ' + vcards.length + ': ' + (vnames[vcur] || '');
+      var names = LANG === 'en' ? vnamesEn : vnames;
+      var cardWord = LANG === 'en' ? ('Card ' + (vcur + 1) + ' of ' + vcards.length + ': ') : ('כרטיס ' + (vcur + 1) + ' מתוך ' + vcards.length + ': ');
+      if(vstatus) vstatus.textContent = cardWord + (names[vcur] || '');
     }
     function goVFlow(n){ vcur = (n + vcards.length) % vcards.length; renderVFlow(); }
+    window.__renderVFlow = renderVFlow; /* re-run on language toggle */
     renderVFlow();
     document.getElementById('vflowNext').addEventListener('click', function(){ goVFlow(vcur + 1); });
     document.getElementById('vflowPrev').addEventListener('click', function(){ goVFlow(vcur - 1); });
@@ -2050,26 +2063,100 @@
   });
 
   /* contact + accessibility modals (shared pattern: open/close, focus restore) */
-  function wireModal(modalId, openId, closeId){
+  function wireModal(modalId, openIds, closeId){
     var modal = document.getElementById(modalId);
-    var openBtn = document.getElementById(openId);
-    if(!modal || !openBtn) return;
+    var openBtns = openIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+    if(!modal || !openBtns.length) return;
     var last = null;
     var close = function(){
       modal.hidden = true; document.body.style.overflow = '';
       if(last && last.focus) last.focus();
     };
-    openBtn.addEventListener('click', function(){
-      last = document.activeElement;
-      modal.hidden = false; document.body.style.overflow = 'hidden';
-      modal.querySelector('.modal-close').focus();
+    openBtns.forEach(function(openBtn){
+      openBtn.addEventListener('click', function(){
+        last = document.activeElement;
+        modal.hidden = false; document.body.style.overflow = 'hidden';
+        modal.querySelector('.modal-close').focus();
+      });
     });
     document.getElementById(closeId).addEventListener('click', close);
     modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
   }
-  wireModal('contactModal', 'contactOpen', 'contactClose');
-  wireModal('a11yModal', 'a11yOpen', 'a11yClose');
+  wireModal('contactModal', ['contactOpen'], 'contactClose');
+  wireModal('a11yModal', ['a11yOpen', 'a11yFab'], 'a11yClose');
+
+  /* ---- language toggle: Hebrew ⇄ English ---- */
+  (function(){
+    var LANG_KEY = 'hinenu-lang';
+    var langToggleBtn = document.getElementById('langToggle');
+    var ATTRS = ['aria-label', 'alt', 'title', 'placeholder', 'src'];
+    if(!langToggleBtn) return;
+
+    function applyLang(lang){
+      LANG = lang === 'en' ? 'en' : 'he';
+      document.documentElement.setAttribute('lang', LANG);
+      document.documentElement.setAttribute('dir', LANG === 'en' ? 'ltr' : 'rtl');
+
+      document.querySelectorAll('[data-en]').forEach(function(el){
+        if(LANG === 'en'){
+          if(!el.hasAttribute('data-he-text')) el.setAttribute('data-he-text', el.textContent);
+          el.textContent = el.getAttribute('data-en');
+        } else if(el.hasAttribute('data-he-text')){
+          el.textContent = el.getAttribute('data-he-text');
+        }
+      });
+
+      document.querySelectorAll('[data-en-html]').forEach(function(el){
+        if(LANG === 'en'){
+          if(!el.hasAttribute('data-he-html')) el.setAttribute('data-he-html', el.innerHTML);
+          el.innerHTML = el.getAttribute('data-en-html');
+        } else if(el.hasAttribute('data-he-html')){
+          el.innerHTML = el.getAttribute('data-he-html');
+        }
+      });
+
+      ATTRS.forEach(function(attr){
+        document.querySelectorAll('[data-en-' + attr + ']').forEach(function(el){
+          var heKey = 'data-he-' + attr;
+          if(LANG === 'en'){
+            if(!el.hasAttribute(heKey)) el.setAttribute(heKey, el.getAttribute(attr) || '');
+            el.setAttribute(attr, el.getAttribute('data-en-' + attr));
+          } else if(el.hasAttribute(heKey)){
+            el.setAttribute(attr, el.getAttribute(heKey));
+          }
+        });
+      });
+
+      langToggleBtn.textContent = LANG === 'en' ? 'עב' : 'EN';
+      langToggleBtn.setAttribute('aria-label', LANG === 'en' ? 'החלפה לעברית' : 'Switch to English');
+
+      var heroLogo = document.getElementById('heroLogo');
+      if(heroLogo){
+        if(LANG === 'en' && heroLogo.tagName === 'IMG'){
+          var heroText = document.createElement('span');
+          heroText.id = 'heroLogo'; heroText.className = 'h5-logo-en'; heroText.textContent = 'Hinenu';
+          heroLogo.replaceWith(heroText);
+        } else if(LANG === 'he' && heroLogo.tagName !== 'IMG'){
+          var heroImg = document.createElement('img');
+          heroImg.id = 'heroLogo'; heroImg.className = 'h5-logo'; heroImg.src = 'assets/logo-white.webp'; heroImg.alt = 'הננו';
+          heroLogo.replaceWith(heroImg);
+        }
+      }
+
+      if(window.__buildLetter) window.__buildLetter();
+      if(window.__renderVFlow) window.__renderVFlow();
+      if(typeof evOverlay !== 'undefined' && evOverlay && !evOverlay.hidden && evLastIndex !== null) openEv(evLastIndex);
+
+      try{ localStorage.setItem(LANG_KEY, LANG); }catch(e){}
+    }
+
+    langToggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+
+    var savedLang = null;
+    try{ savedLang = localStorage.getItem(LANG_KEY); }catch(e){}
+    if(savedLang === 'en') applyLang('en');
+  })();
 
   /* focus trap: keep Tab inside whichever modal is open (תקן 5568 / WCAG 2.1.2) */
   document.addEventListener('keydown', function(e){
@@ -2262,153 +2349,6 @@
     });
   })();
 
-  /* ---- title tool (dev-only): hero text/logo toggle + display font. that's it. ---- */
-  var themePanel = document.getElementById('themePanel');
-  if(themePanel){
-    var themeRows = document.getElementById('themeRows');
-    var TOOL_KEY = 'hinenu-title-tool';
-    /* [display name, css family, {label: weight}] */
-    var TOOL_FONTS = [
-      ['MigdalHaemek','MigdalHaemek',{'רגיל':400}],
-      ['Aduma','Aduma',{'רגיל':700}],
-      ['Asakim','Asakim',{'רגיל':700}],
-      ['Assistant','Assistant',{'Light':200,'Bold':800}],
-      ['Heebo','Heebo',{'Light':200,'Bold':800}],
-      ['Rubik','Rubik',{'Light':300,'Bold':800}],
-      ['Open Sans','Open Sans',{'Light':300,'Bold':800}],
-      ['Noto Sans Hebrew','Noto Sans Hebrew',{'Light':200,'Bold':800}],
-      ['IBM Plex Sans Hebrew','IBM Plex Sans Hebrew',{'Light':200,'Bold':700}],
-      ['Miriam Libre','Miriam Libre',{'רגיל':400,'Bold':700}],
-      ['Alef','Alef',{'רגיל':400,'Bold':700}],
-      ['Frank Ruhl Libre','Frank Ruhl Libre',{'Light':300,'Black':900}],
-      ['David Libre','David Libre',{'רגיל':400,'Bold':700}],
-      ['Karantina','Karantina',{'Light':300,'Bold':700}],
-      ['Varela Round','Varela Round',{'רגיל':400}],
-      ['Secular One','Secular One',{'רגיל':400}],
-      ['Suez One','Suez One',{'רגיל':400}]
-    ];
-    function fontEntry(name){
-      for(var i=0;i<TOOL_FONTS.length;i++) if(TOOL_FONTS[i][0]===name) return TOOL_FONTS[i];
-      return TOOL_FONTS[0];
-    }
-    try{ localStorage.removeItem('hinenu-theme-v5'); }catch(e){} /* retire the old color tool state */
-
-    function toolState(){ try{ return JSON.parse(localStorage.getItem(TOOL_KEY)) || {}; }catch(e){ return {}; } }
-    function toolSave(patch){
-      var st = toolState(); Object.keys(patch).forEach(function(k){ st[k] = patch[k]; });
-      try{ localStorage.setItem(TOOL_KEY, JSON.stringify(st)); }catch(e){}
-    }
-    function setHero(mode){
-      var slot = document.querySelector('.h5-title > :first-child');
-      if(!slot) return;
-      if(mode === 'logo' && slot.tagName !== 'IMG'){
-        var img = document.createElement('img');
-        img.className = 'h5-logo'; img.src = 'assets/logo-white.webp'; img.alt = 'הננו';
-        slot.replaceWith(img);
-      } else if(mode === 'text' && slot.tagName === 'IMG'){
-        var sp = document.createElement('span'); sp.textContent = 'הננו';
-        slot.replaceWith(sp);
-      }
-      Array.prototype.forEach.call(themeRows.querySelectorAll('[data-hero]'), function(b){
-        b.setAttribute('aria-pressed', b.dataset.hero === mode ? 'true' : 'false');
-        b.style.background = b.dataset.hero === mode ? '#4257E6' : '#fff';
-        b.style.color = b.dataset.hero === mode ? '#fff' : '#1A1C2E';
-      });
-    }
-    function setFont(name, weight){
-      var e = fontEntry(name);
-      document.documentElement.style.setProperty('--font-display', "'" + e[1] + "'");
-      var ws = Object.keys(e[2]).map(function(k){ return e[2][k]; });
-      var w = ws.indexOf(+weight) > -1 ? +weight : ws[0];
-      document.documentElement.style.setProperty('--fd-weight', w);
-      return w;
-    }
-
-    /* row 1: hero title = text | logo */
-    var row1 = document.createElement('div'); row1.className = 'theme-row';
-    var lab1 = document.createElement('label'); lab1.textContent = 'כותרת הירו';
-    var seg = document.createElement('div'); seg.style.cssText = 'display:flex;gap:6px;';
-    [['text','טקסט'],['logo','לוגו']].forEach(function(opt){
-      var b = document.createElement('button'); b.type = 'button'; b.textContent = opt[1]; b.dataset.hero = opt[0];
-      b.style.cssText = 'padding:7px 14px;border:1px solid rgba(26,28,46,.25);border-radius:9px;cursor:pointer;font-weight:700;background:#fff;color:#1A1C2E;';
-      b.addEventListener('click', function(){ setHero(opt[0]); toolSave({hero:opt[0]}); });
-      seg.appendChild(b);
-    });
-    row1.appendChild(lab1); row1.appendChild(seg); themeRows.appendChild(row1);
-
-    /* row 2: display font */
-    var row2 = document.createElement('div'); row2.className = 'theme-row';
-    var lab2 = document.createElement('label'); lab2.textContent = 'פונט כותרות';
-    var sel = document.createElement('select');
-    sel.setAttribute('aria-label','פונט כותרות');
-    TOOL_FONTS.forEach(function(f){
-      var o = document.createElement('option'); o.value = f[0]; o.textContent = f[0]; sel.appendChild(o);
-    });
-    row2.appendChild(lab2); row2.appendChild(sel); themeRows.appendChild(row2);
-
-    /* row 3: weight (options follow the chosen font) */
-    var row3 = document.createElement('div'); row3.className = 'theme-row';
-    var lab3 = document.createElement('label'); lab3.textContent = 'משקל';
-    var selW = document.createElement('select');
-    selW.setAttribute('aria-label','משקל הפונט');
-    function rebuildWeights(fontName, keepW){
-      selW.innerHTML = '';
-      var opts = fontEntry(fontName)[2];
-      Object.keys(opts).forEach(function(label){
-        var o = document.createElement('option');
-        o.value = opts[label]; o.textContent = label + ' (' + opts[label] + ')';
-        selW.appendChild(o);
-      });
-      if(keepW && selW.querySelector('option[value="'+keepW+'"]')) selW.value = keepW;
-    }
-    row3.appendChild(lab3); row3.appendChild(selW); themeRows.appendChild(row3);
-
-    var curF = getComputedStyle(document.documentElement).getPropertyValue('--font-display').trim().replace(/['"]/g,'');
-    sel.value = fontEntry(curF)[0];
-    rebuildWeights(sel.value);
-    sel.addEventListener('change', function(){
-      rebuildWeights(sel.value);
-      var w = setFont(sel.value, selW.value);
-      selW.value = w;
-      toolSave({font:sel.value, weight:w});
-    });
-    selW.addEventListener('change', function(){
-      setFont(sel.value, selW.value);
-      toolSave({font:sel.value, weight:+selW.value});
-    });
-
-    document.getElementById('themeClose').addEventListener('click', function(){ themePanel.hidden = true; });
-
-    /* live for everyone (itamar 15.7): fab + triple-click + ?theme, state saved per visitor */
-    var brandClicks = [];
-    var brandEl = document.querySelector('.brand');
-    if(brandEl){
-      brandEl.addEventListener('click', function(e){
-        var now = Date.now();
-        brandClicks = brandClicks.filter(function(ts){ return now - ts < 900; });
-        brandClicks.push(now);
-        if(brandClicks.length >= 3){
-          e.preventDefault();
-          try{ window.getSelection().removeAllRanges(); }catch(err){}
-          themePanel.hidden = false; brandClicks = [];
-        }
-      });
-    }
-    var fab = document.createElement('button');
-    fab.id = 'themeFab'; fab.type = 'button'; fab.title = 'כלי כותרת'; fab.setAttribute('aria-label','כלי כותרת');
-    fab.textContent = 'א';
-    fab.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:240;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 10px 24px rgba(26,28,46,.18);font-size:19px;font-weight:800;cursor:pointer;';
-    fab.addEventListener('click', function(){ themePanel.hidden = !themePanel.hidden; });
-    document.body.appendChild(fab);
-    if(/[?&]theme/.test(location.search)) themePanel.hidden = false;
-    var st = toolState();
-    setHero(st.hero || 'text');
-    if(st.font){
-      var w = setFont(st.font, st.weight);
-      sel.value = fontEntry(st.font)[0];
-      rebuildWeights(sel.value, w);
-    }
-  }
 
 })();
 </script>
