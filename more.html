@@ -878,7 +878,7 @@
   .blogo span{ font-weight:700; color:var(--dim); font-size:12px; white-space:nowrap; letter-spacing:.02em; }
 
   /* ---------- scroll-end: partners bar rises from below, then pins; "pick a track" follows ---------- */
-  .scroll-end{ position:relative; height:180vh; }
+  .scroll-end{ position:relative; height:230vh; }
   .scroll-end .backers{
     position:fixed; left:0; right:0; bottom:0; z-index:40;
     background:var(--bg); border-top:1px solid rgba(255,255,255,.12);
@@ -888,7 +888,7 @@
   }
   .scroll-end .backers.active{ pointer-events:auto; }
   .scroll-msg{
-    position:fixed; left:0; right:50%; transform:translate(50%,16px); bottom:190px; z-index:41;
+    position:fixed; left:0; right:50%; transform:translate(50%,16px); bottom:150px; z-index:41;
     display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;
     opacity:0; pointer-events:none; transition:opacity .5s ease, transform .5s ease;
     padding:0 24px;
@@ -1276,7 +1276,7 @@
 <body>
 <div class="grain" aria-hidden="true"></div>
 
-<a class="skip-link" href="#letter" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
+<a class="skip-link" href="#event" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
 
 <header class="top" id="topbar">
   <div class="top-inner">
@@ -1292,7 +1292,7 @@
       </div>
       <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
     </nav>
-    <a class="brand" href="#">
+    <a class="brand" href="index.html">
       <img class="brand-logo" src="assets/logo-white.webp" alt="הננו - חלוציות כדרך חיים" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu - Pioneers of Hope">
     </a>
     <div class="top-side end">
@@ -1311,193 +1311,153 @@
 
 <main>
 
-  <!-- ======= 1. HERO v5: the title board ======= -->
-  <div class="hero-letter-pin">
-    <div class="pin-vid-wrap" aria-hidden="true">
-      <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
-    </div>
-  <section class="hero5" id="hero" aria-label="הננו - חלוציות כדרך חיים" data-en-aria-label="Hinenu - Pioneering as a way of life">
-    <button type="button" class="vid-toggle" id="vidToggle" aria-pressed="false" aria-label="השהיית וידאו הרקע" title="השהיית וידאו הרקע" data-en-aria-label="Pause background video" data-en-title="Pause background video">❚❚</button>
-    <div class="h5-shade" aria-hidden="true"></div>
-    <h1 class="h5-title"><img class="h5-logo" id="heroLogo" src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"><span class="t2" data-en="Pioneering as a way of life">חלוציות כדרך חיים</span></h1>
-    <div class="h5-scroll" data-en="Scroll">גללו</div>
-  </section>
-
-  <!-- ======= 1b. the national challenges ======= -->
-  <section class="chal" data-theme="negev" id="challenges" aria-label="הפריפריה">
-    <img class="chal-bg" src="assets/ch-negev.webp" alt="">
-    <div class="chal-txt">
-      <h2>הפריפריה <span class="k">רחוקה יותר</span> מתמיד.</h2>
-      <p class="chal-stat">ילד בדרום עדיין פוגש פחות הזדמנויות מילד במרכז</p>
-    </div>
-  </section>
-  <section class="chal" data-theme="housing" aria-label="הדיור">
-    <img class="chal-bg" src="assets/ch-housing.webp" alt="">
-    <div class="chal-txt">
-      <h2>דור שלם נשאר <span class="k">מחוץ</span> למשחק הדיור.</h2>
-      <p class="chal-stat">מחירי הדירות מטפסים מהר מהמשכורות</p>
-    </div>
-  </section>
-  <section class="chal" data-theme="food" aria-label="המזון">
-    <img class="chal-bg" src="assets/ch-food.webp" alt="">
-    <div class="chal-txt">
-      <h2>את רוב המזון שלנו אנחנו <span class="k">מייבאים</span>.</h2>
-      <p class="chal-stat">מה קורה ביום שנמל נסגר?</p>
-    </div>
-  </section>
-  <section class="chal" data-theme="hasbara" aria-label="התודעה">
-    <img class="chal-bg" src="assets/ch-hasbara.webp" alt="">
-    <div class="chal-txt">
-      <h2>את מלחמת התודעה אנחנו <span class="k">מפסידים</span>.</h2>
-      <p class="chal-stat">העם היושב בציון נעדר משדה הקרב על הנרטיב</p>
-    </div>
-  </section>
-  <section class="chal" data-theme="trauma" id="traumaChal" aria-label="הטראומה">
-    <img class="chal-bg" src="assets/ch-trauma.webp" alt="">
-    <div class="chal-txt">
-      <h2>דור שלם נושא טראומה. <span class="k">לבד</span>.</h2>
-      <p class="chal-stat">כ־3,000,000 ישראלים נושאים טראומה מאז ה־7.10 (מבקר המדינה)</p>
-    </div>
-  </section>
-
-  <!-- ======= 2. THE LETTER ======= -->
-  <div class="letter-zone">
-    <section class="mission-intro">
-      <p data-en-html="Hinenu is a social movement advancing <span class='acc'>pioneering</span> through community building on the frontier and national startups.">הננוּ היא תנועה חברתית המקדמת <span class="acc">חלוציות</span> דרך התיישבות בגבולות ויזמות לאומית.</p>
-    </section>
-
-    <section class="letter" id="letter">
-      <div class="letter-track" id="letterTrack">
-        <div class="letter-sticky">
-          <p class="sr-only" id="letterPlain"></p>
-          <div class="notebook" id="magicText" dir="rtl" aria-hidden="true"></div>
-          <div class="sign-row">
-            <img class="sign-photo" src="assets/roee-azizi.jpg" alt="רועי עזיזי" data-en-alt="Roee Azizi" loading="lazy">
-            <div>
-              <p class="sign-name" data-en="- Roee Azizi">- רועי עזיזי</p>
-              <p class="meta" data-en="Founder and Executive Director · Hinenu">מייסד ומנכ"ל · הננו</p>
-            </div>
-          </div>
-          <p class="meta font-credit" data-en-html="Handwriting: Aner Shapira · <a href=&quot;https://www.ot-hayim.co.il/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ot Chaim project</a>">כתב היד: יפתח יעבץ ז"ל · <a href="https://www.ot-hayim.co.il/fonts/iftah-yavetz/" target="_blank" rel="noopener">מיזם אות חיים</a></p>
-        </div>
-      </div>
-    </section>
-  </div>
-  </div>
-
-  <!-- ======= 3. TRACKS: how to continue ======= -->
-  <section class="tracks" id="tracks">
+  <!-- ======= 4. OUR EVENINGS ======= -->
+  <section class="event" id="event">
     <div class="wrap">
       <div class="tracks-head">
-        <p class="kicker reveal" data-en="Where should I go from here?">הנני. אבל לאן?</p>
-        <h2 class="reveal" style="--d:.05s" data-en-html="Choose your <span class='acc'>track</span>.">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
+        <p class="kicker reveal" data-en="Our meet-ups">הערבים שלנו</p>
+        <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>startups</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
       </div>
+      <div class="events-grid">
+        <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
+          <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג - 3.8, בית בן-גוריון תל אביב" data-en-alt="National startups meet-up with Michael Eisenberg - 3.8, Beit Ben-Gurion Tel Aviv" loading="lazy">
+          <span class="ev-tag ev-past" data-en="3.8 · Already happened">3.8 · כבר קרה</span>
+        </button>
+        <button type="button" class="ev-card reveal" data-ev="1" style="--d:.08s" aria-haspopup="dialog">
+          <img src="assets/ev-yoel.webp" alt="ערב יזמות ציונית עם יואל זילברמן - 16.6, הרצליה" data-en-alt="Zionist entrepreneurship meet-up with Yoel Zilberman - 16.6, Herzliya" loading="lazy">
+          <span class="ev-tag ev-past" data-en="16.6 · Already happened">16.6 · כבר קרה</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  <div class="modal-overlay" id="evOverlay" hidden>
+    <div class="modal-card ev-modal" role="dialog" aria-modal="true" aria-label="פרטי הערב" data-en-aria-label="Event details">
+      <button class="modal-close" id="evClose" aria-label="סגירה" data-en-aria-label="Close">×</button>
+      <div id="evBody"></div>
+    </div>
+  </div>
 
-      <div class="tflow" id="tflow" role="group" aria-label="שני המסלולים" data-en-aria-label="Two tracks">
-        <article class="track track-a">
-          <div class="track-a-panel">
-            <div class="track-summary" role="button" tabindex="0" aria-expanded="false">
-              <div class="track-summary-text">
-                <p class="tag" data-en="Track A · national startups">מסלול א׳ · יזמות לאומית</p>
-                <h3 data-en-html="National startups<br>as a way of life">יזמות לאומית<br>כדרך חיים</h3>
-              </div>
-              <span class="track-chevron" aria-hidden="true"></span>
-            </div>
-            <div class="track-body">
-              <p class="desc" data-en-html="We're looking for young people who want to solve national problems and are drawn to the startup world, or entrepreneurs just starting out - come to the meet-ups we run, get inspired, and find partners for the road. <b>And for those who want to go all the way:</b> we're building a national startup accelerator, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מחפשים צעירים שרוצים לפתור בעיות לאומיות ומתעניינים בעולם היזמות, או יזמים בתחילת דרכם - בואו לערבי היזמות שאנחנו מרימים, תתמלאו השראה ותמצאו שותפים ושותפות לדרך. <b>ולמי שרוצה ללכת עד הסוף:</b> אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
-              <div class="track-contact">
-                <span data-en="For more details:">לפרטים נוספים:</span>
-                <span class="tc-name" data-en="Roee">רועי</span>
-                <a class="tc-email" href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a>
-              </div>
-              <div class="track-actions">
-                <a class="track-cta track-cta-mini" href="more.html#event" data-en-html="Meet-up <span class='arr' aria-hidden='true'>→</span>">ערב יזמות <span class="arr" aria-hidden="true">←</span></a>
-                <button type="button" class="track-cta track-cta-mini" data-apply data-en-html="Join the accelerator <span class='arr' aria-hidden='true'>→</span>">הצטרפות למאיץ <span class="arr" aria-hidden="true">←</span></button>
-              </div>
-            </div>
+  <!-- ======= 5. VENTURES: already working ======= -->
+  <section class="ventures" id="ventures">
+    <div class="wrap">
+      <p class="kicker reveal" data-en="Already started">כבר התחלנו</p>
+      <h2 class="reveal" style="--d:.05s" data-en-html="Our <span class='hl'>Entrepreneurs.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
+      <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו" data-en-aria-label="Ventures we've mentored">
+        <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
+          <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
+          <div class="vbody">
+            <button type="button" class="apply-link" data-apply data-en="Apply to the accelerator">הגשת מועמדות למאיץ</button>
           </div>
         </article>
-
-        <article class="track track-c">
-          <div class="track-c-panel">
-            <div class="track-summary" role="button" tabindex="0" aria-expanded="false">
-              <div class="track-summary-text">
-                <p class="tag" data-en="Track B · community building on the frontier">מסלול ב׳ · התיישבות בנגב ובגליל</p>
-                <h3 data-en-html="Pioneering the frontier<br>as a way of life">חלוציות בַּסְּפָר<br>כדרך חיים</h3>
-              </div>
-              <span class="track-chevron" aria-hidden="true"></span>
-            </div>
-            <div class="track-body">
-              <p class="desc" data-en="In the last two years, hundreds of young people have moved and built thriving, flourishing communities in the Negev and Galilee. We invite you to come to the Pioneering Center we built at Mitzpe Gvulot, where we'll train and guide you to move, live, and act in the frontier communities.">בשנתיים האחרונות מאות צעירים עברו ובנו קהילות פורחות ומשגשגות בנגב ובגליל. אנחנו מזמינים אתכם לבוא למרכז לחלוציות שהקמנו במצפה גבולות, שם נכשיר ונלווה אתכם לעבור, לחיות ולפעול בישובי הסְּפָר.</p>
-              <div class="track-contact">
-                <span data-en="For more details:">לפרטים נוספים:</span>
-                <span class="tc-name" data-en="Shaked, Pioneering Center">שקד, מרכז לחלוציות</span>
-                <a class="tc-email" href="mailto:shaked@hinenu.org.il">shaked@hinenu.org.il</a>
-              </div>
-              <a class="track-cta" href="https://www.hinenupioneers.com" target="_blank" rel="noopener" data-en-html="Negev &amp; Galilee page <span class='arr' aria-hidden='true'>→</span>">לדף הנגב והגליל <span class="arr" aria-hidden="true">←</span></a>
-            </div>
+        <article class="vcard" tabindex="0" role="group" aria-label="דנאל בן-נמר" data-en-aria-label="Danel Ben-Namer">
+          <img src="assets/f-bennamer.webp" alt="" loading="lazy">
+          <div class="vbody">
+            <div class="role" data-en="Founder · Iran News">מייסד · Iran News</div>
+            <b data-en="Danel Ben-Namer">דנאל בן-נמר</b>
+            <p data-en="Open-source media covering Iran in Hebrew, founded after October 7 - now reaching millions a month on Telegram and X.">תקשורת בקוד פתוח שמסקרת את איראן בעברית, הוקמה אחרי ה-7 באוקטובר - ומגיעה היום למיליונים בחודש בטלגרם וב-X.</p>
+            <a class="vlink" href="https://t.me/hadshotiran" target="_blank" rel="noopener" data-en="Telegram →">טלגרם ←</a>
           </div>
         </article>
+        <article class="vcard" tabindex="0" role="group" aria-label="דור המייסדות" data-en-aria-label="Dor HaMeyasdot">
+          <img src="assets/v-dor.webp" alt="" loading="lazy" style="object-position:50% 35%">
+          <div class="vbody">
+            <div class="role" data-en="Founders · Dor HaMeyasdot">מייסדות · דור המייסדות</div>
+            <b data-en="Avigail Karbi and Ofir Galina">אביגייל קרבי ואופיר גלינה</b>
+            <p data-en="Art as common heritage - building cultural infrastructure across the country.">אומנות נחלת הכלל - פיתוח תשתיות תרבות ברחבי הארץ.</p>
+            <a class="vlink" href="https://www.instagram.com/dorhameyasdot/" target="_blank" rel="noopener" data-en="Instagram →">אינסטגרם ←</a>
+          </div>
+        </article>
+        <article class="vcard" tabindex="0" role="group" aria-label="נעם מאירוב" data-en-aria-label="Noam Meirov">
+          <img src="assets/f-meirov.webp" alt="" loading="lazy">
+          <div class="vbody">
+            <div class="role" data-en="Founder · Abraham Executive Academy">מייסד · Abraham Executive Academy</div>
+            <b data-en="Noam Meirov">נעם מאירוב</b>
+            <p data-en="A year-long fellowship connecting 30 leaders from finance, tech, government, and civil society across Abraham Accords countries.">תוכנית עמיתים שנתית שמחברת 30 מנהיגים מעולמות הפיננסים, הטק, הממשל והחברה האזרחית ממדינות הסכמי אברהם.</p>
+            <a class="vlink" href="https://www.linkedin.com/company/abraham-executive-academy-aea/" target="_blank" rel="noopener" data-en="LinkedIn →">לינקדאין ←</a>
+          </div>
+        </article>
+        <article class="vcard" tabindex="0" role="group" aria-label="כיף בעוטף" data-en-aria-label="Kef BaOtef">
+          <img src="assets/v-otef.webp" alt="" loading="lazy">
+          <div class="vbody">
+            <div class="role" data-en="Founder · Kef BaOtef">מייסדת · כיף בעוטף</div>
+            <b data-en="Maayan Gal">מעיין גל</b>
+            <p data-en="The home of the most over-the-top productions in the Gaza-border region. Making happy noise since 2021 - just fun and arak.">בית היוצר של ההפקות הכי מוגזמות בעוטף. עושים רעש מסוג שמח מאז 2021 - רק שטויות וערק.</p>
+            <a class="vlink" href="https://www.instagram.com/kef.otef/" target="_blank" rel="noopener" data-en="Instagram →">אינסטגרם ←</a>
+          </div>
+        </article>
+        <article class="vcard" tabindex="0" role="group" aria-label="יובל פיטלוק" data-en-aria-label="Yuval Pitluk">
+          <img src="assets/f-pitluk.webp" alt="" loading="lazy">
+          <div class="vbody">
+            <div class="role" data-en="Founder · Toko">מייסד · Toko</div>
+            <b data-en="Yuval Pitluk">יובל פיטלוק</b>
+            <p data-en="Taking on Israel's post-trauma and mental-health crisis - with first users already in the Negev and the Galilee.">יוצא נגד משבר הפוסט-טראומה ובריאות הנפש של ישראל - עם משתמשים ראשונים כבר בנגב ובגליל.</p>
+            <a class="vlink" href="https://toko.health/he" target="_blank" rel="noopener" data-en="To the website →">לאתר ←</a>
+          </div>
+        </article>
+        <article class="vcard" tabindex="0" role="group" aria-label="שמונה" data-en-aria-label="Shmona">
+          <img src="assets/v-shmona.webp" alt="" loading="lazy">
+          <div class="vbody">
+            <div class="role" data-en="Founder · Shmona.">מייסד · שמונה.</div>
+            <b data-en="Asaf Pinchasi">אסף פנחסי</b>
+            <p data-en="A theater actor and storytelling facilitator who moved to the Upper Galilee, and together with the municipality staged a musical storytelling show that tells the story of Kiryat Shmona through the people who live there.">שחקן תיאטרון ומלווה תהליכי סטוריטלינג שעלה לגליל העליון, והרים יחד עם העירייה מופע סיפורים מוזיקלי שמעלה את סיפורה של קריית שמונה דרך האנשים שחיים בה.</p>
+            <a class="vlink" href="https://www.instagram.com/asaf.pinchassi/" target="_blank" rel="noopener" data-en="Instagram →">אינסטגרם ←</a>
+          </div>
+        </article>
+        <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
+          <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
+          <div class="vbody">
+            <button type="button" class="apply-link" data-apply data-en="Apply to the accelerator">הגשת מועמדות למאיץ</button>
+          </div>
+        </article>
+      </div>
+      <p class="sr-only" aria-live="polite" id="vflowStatus"></p>
+      <div class="vflow-nav">
+        <button id="vflowPrev" aria-label="הכרטיס הקודם" type="button" data-en-aria-label="Previous card">→</button>
+        <button id="vflowNext" aria-label="הכרטיס הבא" type="button" data-en-aria-label="Next card">←</button>
       </div>
     </div>
   </section>
 
-  <!-- ======= 4. SCROLL END: partners rise from below and pin, then "pick a track" ======= -->
-  <div class="scroll-end" id="scrollEnd">
-    <section class="backers" id="backers" aria-label="השותפים שלנו" data-en-aria-label="Our partners">
-      <span class="overline" data-en="Our partners">השותפים שלנו</span>
-      <div class="marquee">
-        <div class="mtrack" aria-hidden="false">
-          <div class="mgroup">
-            <div class="blogo"><img src="assets/b-pershing.png" alt="Pershing Square Philanthropies"><span>Pershing Square Philanthropies</span></div>
-            <div class="blogo"><img class="slim" src="assets/l-uja.svg" alt="UJA-Federation of New York"><span>UJA-Federation of New York</span></div>
-            <div class="blogo"><img src="assets/b-juf.jpg" alt="Jewish United Fund"><span>Jewish United Fund</span></div>
-            <div class="blogo"><img src="assets/l-bayarea.webp" alt="JCF Bay Area"><span>JCF Bay Area</span></div>
-            <div class="blogo"><img src="assets/l-jfedla.webp" alt="Jewish Federation of Los Angeles"><span>Jewish Federation of Los Angeles</span></div>
-            <div class="blogo"><img src="assets/l-metrowest.webp" alt="JCF MetroWest"><span>JCF MetroWest</span></div>
-            <div class="blogo"><img src="assets/l-natan.webp" alt="Natan Fund"><span>Natan Fund</span></div>
-            <div class="blogo"><img src="assets/l-anfield.webp" alt="Anfield Ltd"><span>Anfield Ltd</span></div>
-            <div class="blogo"><img class="slim" src="assets/l-hapoalim.svg" alt="בנק הפועלים"><span>בנק הפועלים</span></div>
-            <div class="blogo"><img src="assets/b-rothschild.png" alt="Edmond de Rothschild Foundation"><span>Edmond de Rothschild Foundation</span></div>
-            <div class="blogo"><img src="assets/l-berkowitz.webp" alt="Berkowitz Family Foundation"><span>Berkowitz Family Foundation</span></div>
-            <div class="blogo"><img src="assets/b-pershing.png" alt="Pershing Square Philanthropies"><span>Pershing Square Philanthropies</span></div>
-            <div class="blogo"><img src="assets/p-president.png" alt="בית הנשיא"><span>בית הנשיא</span></div>
-            <div class="blogo"><img src="assets/p-hashomer.png" alt="השומר החדש"><span>השומר החדש</span></div>
-            <div class="blogo"><img src="assets/p-lev-echad.png" alt="לב אחד"><span>לב אחד</span></div>
-            <div class="blogo"><img src="assets/p-machlifim.png" alt="מחליפים מילה"><span>מחליפים מילה</span></div>
-            <div class="blogo"><img src="assets/p-homeward.png" alt="Homeward - הביתה"><span>Homeward - הביתה</span></div>
-            <div class="blogo"><img src="assets/p-tkuma.png" alt="מנהלת תקומה"><span>מנהלת תקומה</span></div>
-            <div class="blogo"><img src="assets/p-honey.jpg" alt="The Honey Foundation for Israel"><span>The Honey Foundation for Israel</span></div>
-          </div>
-          <div class="mgroup" aria-hidden="true">
-            <div class="blogo"><img src="assets/b-pershing.png" alt=""><span>Pershing Square Philanthropies</span></div>
-            <div class="blogo"><img class="slim" src="assets/l-uja.svg" alt=""><span>UJA-Federation of New York</span></div>
-            <div class="blogo"><img src="assets/b-juf.jpg" alt=""><span>Jewish United Fund</span></div>
-            <div class="blogo"><img src="assets/l-bayarea.webp" alt=""><span>JCF Bay Area</span></div>
-            <div class="blogo"><img src="assets/l-jfedla.webp" alt=""><span>Jewish Federation of Los Angeles</span></div>
-            <div class="blogo"><img src="assets/l-metrowest.webp" alt=""><span>JCF MetroWest</span></div>
-            <div class="blogo"><img src="assets/l-natan.webp" alt=""><span>Natan Fund</span></div>
-            <div class="blogo"><img src="assets/l-anfield.webp" alt=""><span>Anfield Ltd</span></div>
-            <div class="blogo"><img class="slim" src="assets/l-hapoalim.svg" alt=""><span>בנק הפועלים</span></div>
-            <div class="blogo"><img src="assets/b-rothschild.png" alt=""><span>Edmond de Rothschild Foundation</span></div>
-            <div class="blogo"><img src="assets/l-berkowitz.webp" alt=""><span>Berkowitz Family Foundation</span></div>
-            <div class="blogo"><img src="assets/b-pershing.png" alt=""><span>Pershing Square Philanthropies</span></div>
-            <div class="blogo"><img src="assets/p-president.png" alt=""><span>בית הנשיא</span></div>
-            <div class="blogo"><img src="assets/p-hashomer.png" alt=""><span>השומר החדש</span></div>
-            <div class="blogo"><img src="assets/p-lev-echad.png" alt=""><span>לב אחד</span></div>
-            <div class="blogo"><img src="assets/p-machlifim.png" alt=""><span>מחליפים מילה</span></div>
-            <div class="blogo"><img src="assets/p-homeward.png" alt=""><span>Homeward - הביתה</span></div>
-            <div class="blogo"><img src="assets/p-tkuma.png" alt=""><span>מנהלת תקומה</span></div>
-            <div class="blogo"><img src="assets/p-honey.jpg" alt=""><span>The Honey Foundation for Israel</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <div class="scroll-msg" id="scrollMsg">
-      <p data-en="Enough scrolling - choose a track.">די לגלול, תבחרו מסלול.</p>
-      <a href="#tracks" data-en="Back to the tracks ↑">חזרה למסלולים ↑</a>
+  <!-- ======= 4. FAQ ======= -->
+  <section class="faq" id="faq">
+    <div class="faq-inner">
+      <h2 class="reveal" data-en-html="Direct questions. <span class='acc'>Direct answers.</span>">שאלות ישירות. <span class="acc">תשובות ישירות.</span></h2>
+
+      <details class="reveal">
+        <summary data-en-html="So what is this, exactly? <span class='plus' aria-hidden='true'></span>">אז מה זה בעצם? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="We build platforms that let young people shape Israel's future.">אנחנו בונים פלטפורמות שמאפשרות לצעירים להשפיע על עתיד ישראל.</p>
+      </details>
+
+      <details class="reveal" style="--d:.05s">
+        <summary data-en-html="Is this connected to relocating to the Gaza-border region / the north? <span class='plus' aria-hidden='true'></span>">האם זה קשור למעבר לעוטף / לצפון? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="Yes - we advance pioneering through community building, and now also through national startups.">כן, אנחנו מניעים חלוציות דרך התיישבות ועכשיו גם דרך יזמות לאומית.</p>
+      </details>
+
+      <details class="reveal" style="--d:.1s">
+        <summary data-en-html="Is this defined by a timeline or a mission? <span class='plus' aria-hidden='true'></span>">האם זה מוגדר בזמן או במשימה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="The first step is to show up, get to know people, and start thinking big. The second step - start building; we'll meet and hear what you're working on. The third step - join the national startup accelerator, where we'll help you go from an idea taking shape to a venture that changes reality.">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני - להתחיל להקים; ניפגש, ונשמע על מה אתם עובדים. הצעד השלישי - להצטרף למאיץ ליזמות לאומית, שבו נעזור לכם לעבור מרעיון בהתהוות למיזם שמשנה מציאות.</p>
+      </details>
+
+      <details class="reveal" style="--d:.15s">
+        <summary data-en-html="Who is this for? <span class='plus' aria-hidden='true'></span>">למי זה מיועד? <span class="plus" aria-hidden="true"></span></summary>
+        <ul class="a">
+          <li data-en="Young people who turned a formative experience into an engine and a drive to change reality on a big scale.">צעירות וצעירים שהפכו חוויה מעצבת למנוע בעירה ודחף לשנות מציאות בגדול.</li>
+          <li data-en="Commanders and combat soldiers who initiated and built valuable projects in their service, in the face of pressure and during the war.">מפקדות/מפקדים ולוחמות/לוחמים שיזמו והקימו בשירות פרויקטים בעלי ערך נוכח הדוחק ובזמן המלחמה.</li>
+          <li data-en="Entrepreneurs and social activists who live real problems and want to build infrastructural solutions themselves.">יזמות ויזמים ופעילות ופעילים חברתיים שחיים בעיות אמיתיות ורוצים לבנות פתרונות תשתיתיים בעצמם.</li>
+        </ul>
+      </details>
+
+      <details class="reveal" style="--d:.2s">
+        <summary data-en-html="What do I get out of it? <span class='plus' aria-hidden='true'></span>">מה יוצא לי מזה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="If you're asking that question - this isn't for you.">אם אתם שואלים את השאלה הזאת - זה לא בשבילכם.</p>
+      </details>
+
+      <details class="reveal" style="--d:.25s">
+        <summary data-en-html="What's the end goal? <span class='plus' aria-hidden='true'></span>">מה המטרה בקצה? <span class="plus" aria-hidden="true"></span></summary>
+        <p class="a" data-en="You'll find each other, get support and training from us, and build daunting social-national ventures.">תמצאו אחד את השנייה, תקבלו מאיתנו מעטפת והכשרה, ותקימו מיזמים חברתיים-לאומיים מפחידים.</p>
+      </details>
     </div>
-  </div>
+  </section>
 
 </main>
 
@@ -1580,6 +1540,22 @@
     <pre id="machineText"></pre>
   </div>
 </div>
+
+<footer>
+  <div class="wrap">
+    <div class="name"><img src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"></div>
+    <p class="tag" data-en="Pioneers of hope">חלוצים של תקווה</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/hinenu_israel?igsh=YmF4dm9iM2FmODR0&amp;utm_source=qr" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor" stroke="none"/></svg>
+        <span data-en="Instagram">אינסטגרם</span>
+      </a>
+      <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener" data-en="Hinenu · to the Negev and the Galilee ↖">הננו · לנגב ולגליל ↖</a>
+    </div>
+    <p class="meta"><span data-en="National Startups Meet-up">ערב יזמות לאומית</span> · 3.8.2026 · 19:30 · <span data-en="Beit Ben-Gurion">בית בן־גוריון</span> · <a href="#event" data-en="Event details">פרטי הערב</a> · <a href="#ventures" data-en="Ventures we've mentored">מיזמים שליווינו</a></p>
+    <p class="meta"><span data-en="Roee Azizi">רועי עזיזי</span> · <span data-en="Zionist entrepreneur, founder of the Hinenu movement">יזם ציוני, מייסד תנועת הננו</span> · <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a> · <button type="button" class="meta-link" id="a11yOpen" data-en="Accessibility statement">הצהרת נגישות</button></p>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -1824,43 +1800,6 @@
       }
     }, { passive:true });
     window.addEventListener('resize', updateLetter);
-  }
-
-  /* ---- scroll-end: partners bar rises from below and pins, then the "pick a track" message ---- */
-  var scrollEnd = document.getElementById('scrollEnd');
-  var scrollBar = document.getElementById('backers');
-  var scrollMsg = document.getElementById('scrollMsg');
-  if(scrollEnd && scrollBar){
-    var seTicking = false;
-    var updateScrollEnd = function(){
-      var rect = scrollEnd.getBoundingClientRect();
-      var revealRange = window.innerHeight * 0.3;
-      var started = Math.max(0, -rect.top);
-      var revealP = Math.max(0, Math.min(1, started / revealRange));
-      if(reducedMotion){
-        scrollBar.style.opacity = started > 0 ? 1 : 0;
-        scrollBar.style.transform = 'none';
-      } else {
-        scrollBar.style.opacity = revealP;
-        scrollBar.style.transform = 'translateY(' + (100 - revealP * 100) + '%)';
-      }
-      scrollBar.classList.toggle('active', revealP >= 1);
-      if(scrollMsg){
-        var msgStart = revealRange + window.innerHeight * 0.15;
-        var msgRange = window.innerHeight * 0.25;
-        var msgP = Math.max(0, Math.min(1, (started - msgStart) / msgRange));
-        scrollMsg.classList.toggle('show', msgP >= 0.5);
-      }
-    };
-    window.addEventListener('scroll', function(){
-      if(!seTicking){
-        requestAnimationFrame(function(){ updateScrollEnd(); seTicking = false; });
-        seTicking = true;
-      }
-    }, { passive:true });
-    window.addEventListener('resize', updateScrollEnd);
-    window.__updateScrollEnd = updateScrollEnd; /* qa hook */
-    updateScrollEnd();
   }
 
   /* ---- tracks: cursor grid, tilt, magnetic buttons ---- */
