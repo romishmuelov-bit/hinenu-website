@@ -772,6 +772,17 @@
     filter:grayscale(1); transition:filter .4s ease;
   }
   .ev-card:hover img, .ev-card:focus-visible img{ filter:grayscale(0); }
+  .ev-card::after{
+    content:'לפרטים נוספים ←';
+    position:absolute; inset-inline:10px; bottom:10px;
+    padding:9px 14px; border-radius:10px;
+    background:rgba(0,0,0,.55); backdrop-filter:blur(2px);
+    color:#fff; font-family:'Rubik',sans-serif; font-weight:700; font-size:12.5px;
+    text-align:center; letter-spacing:.02em;
+    transition:background .25s ease, transform .25s ease;
+  }
+  html[lang="en"] .ev-card::after{ content:'More details →'; }
+  .ev-card:hover::after{ background:var(--hl-blue); transform:translateY(-2px); }
   .ev-tag{
     position:absolute; top:14px; inset-inline-start:14px;
     background:#000; color:#fff; font-weight:800; font-size:13px;
@@ -882,7 +893,7 @@
   .scroll-end{ position:relative; height:180vh; }
   .scroll-end .backers{
     position:fixed; left:0; right:0; bottom:0; z-index:40;
-    background:radial-gradient(ellipse 70% 160% at 50% 100%, rgba(66,87,230,.14), transparent 60%), var(--bg);
+    background:var(--bg);
     border-top:1px solid transparent;
     background-clip:padding-box;
     padding:26px 0 22px; margin:0;
