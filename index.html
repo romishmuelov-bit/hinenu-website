@@ -399,7 +399,7 @@
   .letter-zone{ position:relative; }
   .letter-zone::before{
     content:''; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(7,11,22,0) 0%, rgba(7,11,22,.6) 22%, rgba(7,11,22,.78) 100%);
+    background:linear-gradient(180deg, rgba(7,11,22,0) 0%, rgba(7,11,22,.5) 22%, rgba(7,11,22,.68) 100%);
   }
   .letter{
     position:relative; z-index:2;
@@ -466,8 +466,8 @@
     flex:none; width:118px; height:118px; border-radius:50%;
     object-fit:cover;
     object-position:50% 12%;
-    border:2px solid rgba(50,62,124,.22);
-    box-shadow:0 8px 22px rgba(50,62,124,.16);
+    border:2px solid rgba(217,106,80,.45);
+    box-shadow:0 8px 26px rgba(217,106,80,.22);
   }
   .sign-name{
     font-family:'OH Iftah Yavetz','Frank Ruhl Libre',serif;
@@ -860,7 +860,7 @@
     padding:64px 0 58px; text-align:center; overflow:hidden;
   }
   .backers .overline{
-    display:block; font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
+    display:block; font-family:'Rubik',sans-serif; font-weight:800; color:var(--hl-blue);
     font-size:13px; letter-spacing:3px; margin:0 0 34px; padding:0 24px;
   }
   .marquee{ position:relative; overflow:hidden; direction:ltr; }
@@ -882,10 +882,16 @@
   .scroll-end{ position:relative; height:180vh; }
   .scroll-end .backers{
     position:fixed; left:0; right:0; bottom:0; z-index:40;
-    background:var(--bg); border-top:1px solid rgba(255,255,255,.12);
+    background:radial-gradient(ellipse 70% 160% at 50% 100%, rgba(66,87,230,.14), transparent 60%), var(--bg);
+    border-top:1px solid transparent;
+    background-clip:padding-box;
     padding:26px 0 22px; margin:0;
     opacity:0; transform:translateY(100%); pointer-events:none;
     will-change:transform, opacity;
+  }
+  .scroll-end .backers::before{
+    content:''; position:absolute; top:-1px; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, var(--blue), var(--coral));
   }
   .scroll-end .backers.active{ pointer-events:auto; }
   .scroll-msg{
@@ -1810,7 +1816,7 @@
       inks.forEach(function(k){ k.style.opacity = 1; });
     } else {
       var mob_ = window.innerWidth <= 760;
-      letterTrack.style.minHeight = Math.min(mob_ ? 430 : 650, 160 + inks.length * (mob_ ? 0.42 : 0.65)) + 'vh';
+      letterTrack.style.minHeight = Math.min(mob_ ? 320 : 480, 130 + inks.length * (mob_ ? 0.3 : 0.46)) + 'vh';
       updateLetter();
     }
   }
