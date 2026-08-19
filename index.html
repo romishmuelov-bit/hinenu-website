@@ -80,7 +80,7 @@
     --chalk:#EDE9DC;
     --chalk-dim:rgba(35,36,31,.55);
     --coral:#D96A50;
-    --bg:#000000;
+    --bg:#070b16;
     --hl:#D96A50;
     --font-display:'Alef';
     --font-mid:'Frank Ruhl Libre';
@@ -218,7 +218,7 @@
     position:sticky; top:0; height:100svh;
     margin-bottom:-100svh;
     overflow:hidden; z-index:0; pointer-events:none;
-    background:#000;
+    background:var(--bg);
   }
   .hero5{
     position:relative; min-height:100svh;
@@ -491,7 +491,7 @@
   .tracks{
     position:relative; overflow:clip;
     padding:110px 0 100px;
-    background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(66,87,230,.09), transparent 70%), #000;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(66,87,230,.09), transparent 70%), var(--bg);
     --mx:50%; --my:50%;
   }
   /* faint continuation of the hero grid + cursor-revealed layer */
@@ -653,7 +653,7 @@
   .event{
     position:relative; overflow:hidden;
     padding:76px 0 64px;
-    background:radial-gradient(ellipse 70% 50% at 50% 100%, rgba(217,106,80,.07), transparent 70%), #000;
+    background:radial-gradient(ellipse 70% 50% at 50% 100%, rgba(217,106,80,.07), transparent 70%), var(--bg);
   }
   .event::before{
     content:''; position:absolute; inset:0; z-index:0;
@@ -799,7 +799,7 @@
 
   /* ---------- VENTURES: already working ---------- */
   .ventures{
-    background:radial-gradient(ellipse 75% 55% at 50% 50%, rgba(217,106,80,.06), transparent 70%), #000;
+    background:radial-gradient(ellipse 75% 55% at 50% 50%, rgba(217,106,80,.06), transparent 70%), var(--bg);
     color:#fff; padding:110px 0 100px; overflow:clip;
   }
   .ventures .kicker{
@@ -1014,7 +1014,7 @@
 
   /* ---------- FAQ: floats on the start of the footer gradient ---------- */
   .faq{
-    background:linear-gradient(180deg, #000000 0%, #05060D 45%, #0B0F26 78%, #10152F 100%);
+    background:linear-gradient(180deg, var(--bg) 0%, #05060D 45%, #0B0F26 78%, #10152F 100%);
     padding:100px 0 90px;
   }
   .faq-inner{ max-width:680px; margin:0 auto; padding:0 26px; }
@@ -1320,7 +1320,7 @@
   <section class="hero5" id="hero" aria-label="הננו - חלוציות כדרך חיים" data-en-aria-label="Hinenu - Pioneering as a way of life">
     <button type="button" class="vid-toggle" id="vidToggle" aria-pressed="false" aria-label="השהיית וידאו הרקע" title="השהיית וידאו הרקע" data-en-aria-label="Pause background video" data-en-title="Pause background video">❚❚</button>
     <div class="h5-shade" aria-hidden="true"></div>
-    <h1 class="h5-title"><img class="h5-logo" id="heroLogo" src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"><span class="t2" data-en="Pioneering as a way of life">חלוציות כדרך חיים</span></h1>
+    <h1 class="h5-title"><img class="h5-logo" id="heroLogo" src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"><span class="t2" data-en="Here We Are">חלוציות כדרך חיים</span></h1>
     <div class="h5-scroll" data-en="Scroll">גללו</div>
   </section>
 
