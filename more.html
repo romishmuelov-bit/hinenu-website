@@ -129,6 +129,27 @@
   }
   .vid-toggle:hover{ background:rgba(0,0,0,.8); }
 
+  /* ---------- floating quick-signup for the next meet-up ---------- */
+  .float-rsvp{
+    position:fixed; z-index:150; bottom:22px; inset-inline-end:22px;
+    display:flex; align-items:center; gap:9px;
+    background:var(--blue); color:#fff; text-decoration:none;
+    font-family:'Rubik',sans-serif; font-weight:800; font-size:14px;
+    padding:14px 20px; border-radius:999px;
+    box-shadow:0 14px 34px rgba(66,87,230,.45);
+    transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  }
+  .float-rsvp:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(66,87,230,.6); }
+  .float-rsvp.hide{ opacity:0; pointer-events:none; transform:translateY(14px); }
+  .float-rsvp .dot{
+    width:8px; height:8px; border-radius:50%; background:#fff; flex:none;
+    animation:rsvpPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes rsvpPulse{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(.7); } }
+  @media (max-width:560px){
+    .float-rsvp{ bottom:16px; inset-inline-end:16px; padding:12px 16px; font-size:12.5px; }
+  }
+
   /* ---------- scroll reveal ---------- */
   .reveal{
     opacity:0;
@@ -754,9 +775,10 @@
   .gal-grid img:last-child{ grid-column:span 2; }
 
   /* ---------- evenings grid + popup ---------- */
+  .ev-featured{ max-width:400px; margin:46px auto 0; }
   .events-grid{
     display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:28px; max-width:880px; margin:46px auto 0;
+    gap:28px; max-width:880px; margin:28px auto 0;
   }
   .ev-card{
     position:relative; border:none; background:none; padding:0; cursor:pointer;
@@ -1287,11 +1309,17 @@
     .track{ transform:none; }
     .reveal{ opacity:1; transform:none; transition:none; }
     .scroll-msg{ transition:none; }
+    .float-rsvp .dot{ animation:none; }
   }
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+
+<a class="float-rsvp" id="floatRsvp" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener">
+  <span class="dot" aria-hidden="true"></span>
+  <span data-en="Next meet-up · quick sign-up ←">הערב הבא · הרשמה מהירה ←</span>
+</a>
 
 <a class="skip-link" href="#event" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
 
@@ -1335,12 +1363,18 @@
         <p class="kicker reveal" data-en="Our meet-ups">הערבים שלנו</p>
         <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>startups</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
       </div>
-      <div class="events-grid">
+      <div class="ev-featured">
         <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
+          <img src="assets/ev-orit.png" alt="ערב יזמות לאומית עם אורית קורמן נגרי - 7.9, תל אביב" data-en-alt="National startups meet-up with Orit Korman Nagari - 7.9, Tel Aviv" loading="lazy">
+          <span class="ev-tag ev-future" data-en="7.9 · Coming up">7.9 · הערב הקרוב</span>
+        </button>
+      </div>
+      <div class="events-grid">
+        <button type="button" class="ev-card reveal" data-ev="1" aria-haspopup="dialog">
           <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג - 3.8, בית בן-גוריון תל אביב" data-en-alt="National startups meet-up with Michael Eisenberg - 3.8, Beit Ben-Gurion Tel Aviv" loading="lazy">
           <span class="ev-tag ev-past" data-en="3.8 · Already happened">3.8 · כבר קרה</span>
         </button>
-        <button type="button" class="ev-card reveal" data-ev="1" style="--d:.08s" aria-haspopup="dialog">
+        <button type="button" class="ev-card reveal" data-ev="2" style="--d:.08s" aria-haspopup="dialog">
           <img src="assets/ev-yoel.webp" alt="ערב יזמות ציונית עם יואל זילברמן - 16.6, הרצליה" data-en-alt="Zionist entrepreneurship meet-up with Yoel Zilberman - 16.6, Herzliya" loading="lazy">
           <span class="ev-tag ev-past" data-en="16.6 · Already happened">16.6 · כבר קרה</span>
         </button>
@@ -1906,6 +1940,11 @@
   /* ---- event: "learn more" toggle ---- */
   /* ---- evenings: cards open a popup ---- */
   var EV = [
+    { title:'ערב יזמות לאומית', guest:'עם אורית קורמן נגרי', status:'future',
+      chips:['יום שני · 7.9','19:00','תל אביב'],
+      lede:'ישראל גידלה דור מדהים מתוך משברים. עכשיו צריך לתת לו מסלול לבנות עתיד, ולא להיעלם בו. הננו מארחת את אורית קורמן נגרי, סמנכ"לית במטה הלאומי לבינה מלאכותית.',
+      qs:['התוכנית הלאומית ל-AI','מחשב קוונטי כחול-לבן','שדה ניסויים ל-Physical AI','איפה יזמים יכולים להיכנס לתמונה?'],
+      wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t' },
     { title:'ערב יזמות לאומית', guest:'עם מייקל אייזנברג', status:'past',
       chips:['יום שני · 3.8','19:30','בית בן־גוריון, תל אביב'],
       lede:'מילה אחת תקבע מי ישרוד את העשור הקרוב: Agency. אנחנו קוראים לזה חלוציות - היכולת לקחת יוזמה, ללמוד מהר ולזוז. אורח: מייקל אייזנברג, מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.',
@@ -1916,6 +1955,11 @@
       gallery:['assets/event-1.jpg','assets/event-2.jpg','assets/event-4.jpg','assets/event-3.jpg'] }
   ];
   var EV_EN = [
+    { title:'Meet-Up', guest:'with Orit Korman Nagari', status:'future',
+      chips:['Monday · 7.9','19:00','Tel Aviv'],
+      lede:'Israel raised an incredible generation out of crises. Now it needs a path to build the future with it, not disappear into it. Hinenu hosts Orit Korman Nagari, deputy director at the National AI Program.',
+      qs:['The national AI program','Israel’s blue-and-white quantum computer','A Physical AI testing ground','Where can entrepreneurs step in?'],
+      wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t' },
     { title:'Meet-Up', guest:'with Michael Eisenberg', status:'past',
       chips:['Monday · 3.8','19:30','Beit Ben-Gurion, Tel Aviv'],
       lede:'One word will decide who survives the next decade: Agency. We call it pioneering - the ability to take initiative, learn fast, and move. Guest: Michael Eisenberg, one of Israel’s leading entrepreneurship and venture-capital figures, managing partner and founder at Aleph.',
