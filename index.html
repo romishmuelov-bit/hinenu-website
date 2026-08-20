@@ -899,8 +899,8 @@
   .marquee::before, .marquee::after{
     content:""; position:absolute; top:0; bottom:0; width:90px; z-index:2; pointer-events:none;
   }
-  .marquee::before{ left:0; background:linear-gradient(to right,var(--bg),transparent); }
-  .marquee::after{ right:0; background:linear-gradient(to left,var(--bg),transparent); }
+  .marquee::before{ left:0; background:linear-gradient(to right,#000,transparent); }
+  .marquee::after{ right:0; background:linear-gradient(to left,#000,transparent); }
   .mtrack{ display:flex; width:max-content; animation:marq 42s linear infinite; }
   .marquee:hover .mtrack{ animation-play-state:paused; }
   @keyframes marq{ to{ transform:translateX(-50%); } }
@@ -914,7 +914,7 @@
   .scroll-end{ position:relative; height:180vh; }
   .scroll-end .backers{
     position:fixed; left:0; right:0; bottom:0; z-index:40;
-    background:var(--bg);
+    background:#000;
     border-top:1px solid transparent;
     background-clip:padding-box;
     padding:26px 0 22px; margin:0;
@@ -1776,16 +1776,22 @@
 
   /* ---- the letter: handwriting inked in by scroll ---- */
   var LETTER_LINES = [
-    { text: 'צעירים בישראל משתחררים משירות עם כישרון וניסיון שאין לאף חברה בעולם, ועם רעב לעשות.' },
-    { text: 'הבעיה היא לא היכולת. גם לא המוטיבציה.' },
-    { text: 'הבעיה היא שלא ברור לאן לקחת אותן. בין הרצון להשפיע לבין ההשפעה עצמה חסרים מסלולים.' },
-    { text: 'אז באנו לסלול אותם.' }
+    { text: 'בישראל קם דור יוצא דופן' },
+    { text: 'ומולו ניצבים אתגרים לאומיים עצומים.' },
+    { text: 'הפער בין היכולת שלנו להתמודד איתם' },
+    { text: 'לבין ההשפעה שלנו בפועל' },
+    { text: 'עדיין גדול מדי.' },
+    { text: 'אנחנו כאן כדי לסגור אותו.' },
+    { text: 'הננו.' }
   ];
   var LETTER_LINES_EN = [
-    { text: 'Young Israelis finish their service with talent and experience no society in the world has, and with a hunger to make things happen.', en:true },
-    { text: 'The problem isn’t the ability. It isn’t the motivation either.', en:true },
-    { text: 'The problem is that it’s not clear where to take them. Between the will to make an impact and the impact itself, paths are missing.', en:true },
-    { text: 'So we came to pave them.', en:true }
+    { text: 'An extraordinary generation is rising in Israel,', en:true },
+    { text: 'facing immense national challenges.', en:true },
+    { text: 'The gap between our ability to tackle them', en:true },
+    { text: 'and our actual impact', en:true },
+    { text: 'is too wide.', en:true },
+    { text: 'We are here to close it.', en:true },
+    { text: 'Hinenu.', en:true }
   ];
 
   var magicText = document.getElementById('magicText');
