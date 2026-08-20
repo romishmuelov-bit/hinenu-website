@@ -129,27 +129,6 @@
   }
   .vid-toggle:hover{ background:rgba(0,0,0,.8); }
 
-  /* ---------- floating quick-signup for the next meet-up ---------- */
-  .float-rsvp{
-    position:fixed; z-index:150; bottom:22px; inset-inline-end:22px;
-    display:flex; align-items:center; gap:9px;
-    background:var(--blue); color:#fff; text-decoration:none;
-    font-family:'Rubik',sans-serif; font-weight:800; font-size:14px;
-    padding:14px 20px; border-radius:999px;
-    box-shadow:0 14px 34px rgba(66,87,230,.45);
-    transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
-  }
-  .float-rsvp:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(66,87,230,.6); }
-  .float-rsvp.hide{ opacity:0; pointer-events:none; transform:translateY(14px); }
-  .float-rsvp .dot{
-    width:8px; height:8px; border-radius:50%; background:#fff; flex:none;
-    animation:rsvpPulse 1.8s ease-in-out infinite;
-  }
-  @keyframes rsvpPulse{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(.7); } }
-  @media (max-width:560px){
-    .float-rsvp{ bottom:16px; inset-inline-end:16px; padding:12px 16px; font-size:12.5px; }
-  }
-
   /* ---------- scroll reveal ---------- */
   .reveal{
     opacity:0;
@@ -802,6 +781,7 @@
     filter:grayscale(1); transition:filter .4s ease;
   }
   .ev-card:hover img, .ev-card:focus-visible img{ filter:grayscale(0); }
+  .ev-featured .ev-card img{ filter:grayscale(0); }
   .ev-card::after{
     content:'לפרטים נוספים ←';
     position:absolute; inset-inline:10px; bottom:10px;
@@ -1231,6 +1211,7 @@
 
     /* evenings */
     .event{ padding:76px 0 64px; }
+    .event-wa-cta{ font-size:13px; padding:11px 16px; max-width:280px; }
     .events-grid{ grid-template-columns:1fr; gap:22px; max-width:430px; }
     .ev-card img{ border-width:8px; }
     .ev-tag{ font-size:12px; padding:7px 12px; }
@@ -1318,17 +1299,11 @@
     .track{ transform:none; }
     .reveal{ opacity:1; transform:none; transition:none; }
     .scroll-msg{ transition:none; }
-    .float-rsvp .dot{ animation:none; }
   }
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
-
-<a class="float-rsvp" id="floatRsvp" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener">
-  <span class="dot" aria-hidden="true"></span>
-  <span data-en="Join for updates on the next meet-up ←">הצטרפות לעדכונים על הערב הבא ←</span>
-</a>
 
 <a class="skip-link" href="#event" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
 
