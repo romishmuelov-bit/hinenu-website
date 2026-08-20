@@ -775,6 +775,15 @@
   .gal-grid img:last-child{ grid-column:span 2; }
 
   /* ---------- evenings grid + popup ---------- */
+  .event-wa-cta{
+    display:inline-flex; align-items:center; gap:8px; margin:18px auto 0;
+    background:var(--blue); color:#fff; text-decoration:none;
+    font-family:'Rubik',sans-serif; font-weight:800; font-size:14px;
+    padding:12px 20px; border-radius:999px;
+    box-shadow:0 10px 26px rgba(66,87,230,.35);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .event-wa-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 32px rgba(66,87,230,.5); }
   .ev-featured{ max-width:400px; margin:46px auto 0; }
   .events-grid{
     display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1318,7 +1327,7 @@
 
 <a class="float-rsvp" id="floatRsvp" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener">
   <span class="dot" aria-hidden="true"></span>
-  <span data-en="Next meet-up · quick sign-up ←">הערב הבא · הרשמה מהירה ←</span>
+  <span data-en="Join for updates on the next meet-up ←">הצטרפות לעדכונים על הערב הבא ←</span>
 </a>
 
 <a class="skip-link" href="#event" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
@@ -1362,6 +1371,7 @@
       <div class="tracks-head">
         <p class="kicker reveal" data-en="Our meet-ups">הערבים שלנו</p>
         <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>startups</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
+        <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-en="Join the WhatsApp group for updates on the next meet-up ←">הצטרפות לקבוצת הוואטסאפ - עדכונים על הערב הבא ←</a>
       </div>
       <div class="ev-featured">
         <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
