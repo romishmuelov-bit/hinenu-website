@@ -1,0 +1,19 @@
+{
+ "dune/desktop": {
+  "frames": 130,
+  "mb": 7.6,
+  "q": 50
+ },
+ "dune/mobile": {
+  "frames": 78,
+  "mb": 2.05
+ },
+ "zoom/desktop": {
+  "frames": 110,
+  "mb": 5.04
+ },
+ "zoom/mobile": {
+  "frames": 66,
+  "mb": 1.1
+ }
+}
