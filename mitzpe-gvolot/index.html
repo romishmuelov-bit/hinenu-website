@@ -7,7 +7,7 @@
 <meta name="description" content="פעם היה פה רק חול. המרכז לחלוציות במצפה גבולות — הנגב המערבי.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 /* Reisinger Yonatan ships in a single weight, so every level of hierarchy
    on this page comes from size and colour - never from font-weight. */
@@ -20,10 +20,10 @@
 :root{
   /* the palette, exactly as supplied */
   --navy:#133458; --olive:#838921; --amber:#D99B21; --pale:#FAF7BB; --red:#C1272D;
-  --bg:var(--navy); --ink:var(--pale); --dim:#8FA6BC;
-  --display:'Reisinger Yonatan','Heebo',system-ui,sans-serif;
-  --sans:'Heebo',system-ui,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --wine:#8E2230;
+  --bg:var(--navy); --ink:var(--pale); --dim:#A8BACB;
+  --display:'Reisinger Yonatan','Rubik',system-ui,sans-serif;
+  --sans:'Rubik',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -35,7 +35,7 @@ body{
 }
 body.locked{overflow:hidden}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--amber); outline-offset:3px}
+:focus-visible{outline:3px solid var(--amber); outline-offset:3px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 .skip{
@@ -56,10 +56,33 @@ a{color:inherit}
   display:flex; align-items:center; justify-content:space-between;
   padding:18px 24px; pointer-events:none; transition:opacity .4s ease;
 }
+.hdr::before{
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,24,43,.55), transparent);
+}
 .hdr.gone{opacity:0}
 .hdr.gone > *{pointer-events:none}
 .hdr > *{pointer-events:auto}
-.mark{font-family:var(--mono); font-size:11px; letter-spacing:.22em; color:var(--dim); text-decoration:none}
+/* nav stays quiet: small, spaced, low contrast until you reach for it */
+.hdr-nav{display:flex; align-items:center; gap:22px}
+.hdr-nav a{
+  font-size:12.5px; font-weight:400; letter-spacing:.03em;
+  color:rgba(250,247,187,.78); text-decoration:none;
+  padding:6px 0 4px; text-shadow:0 1px 3px rgba(8,24,43,.9);
+  padding-bottom:2px; border-bottom:1px solid transparent;
+  transition:color .2s ease, border-color .2s ease;
+}
+.hdr-nav a:hover{color:var(--pale)}
+.hdr-nav a[aria-current="page"]{color:var(--pale); border-bottom-color:rgba(217,155,33,.55)}
+
+.hdr-logo{
+  position:absolute; inset-inline-start:50%; transform:translateX(50%);
+  display:block; line-height:0;
+}
+.hdr-logo img{
+  width:auto; height:26px; display:block; opacity:.95;
+  filter:drop-shadow(0 1px 4px rgba(8,24,43,.85));
+}
 .hdr-right{display:flex; align-items:center; gap:10px}
 .book{
   font-family:var(--sans); font-weight:700; font-size:13.5px;
@@ -70,7 +93,7 @@ a{color:inherit}
 }
 .book:hover{background:rgba(217,155,33,.14); border-color:var(--amber)}
 .audio-btn{
-  font-family:var(--mono); font-size:10px; letter-spacing:.15em;
+  font-family:var(--sans); font-size:10px; letter-spacing:.15em;
   background:transparent; color:var(--dim); border:1px solid rgba(143,166,188,.35);
   border-radius:100px; padding:9px 14px; cursor:pointer;
 }
@@ -161,17 +184,36 @@ a{color:inherit}
 }
 .card:hover,.card:focus-visible{transform:translate(3px,3px); box-shadow:4px 4px 0 var(--navy)}
 .card .poster{position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--pale)}
-.card .poster img{width:100%; height:100%; object-fit:cover; display:block}
+.card .poster img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:sepia(.20) contrast(1.05) saturate(.90) brightness(.98);
+}
+/* aged paper grain over the art. Static - no animation, so it composites once
+   and never costs anything after first paint. */
+.card .poster::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.55'/></svg>");
+  mix-blend-mode:multiply; opacity:.30;
+}
+/* scrim so the title reads over whatever the art is doing underneath */
+.card .poster::before{
+  content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(180deg, rgba(19,52,88,.10) 0%, transparent 34%,
+             rgba(19,52,88,.24) 62%, rgba(8,24,43,.80) 100%);
+}
+.card .poster h3{
+  position:absolute; z-index:3; inset-inline:0; bottom:0;
+  margin:0; padding:0 20px 16px; text-align:center;
+  font-family:var(--display); font-weight:400; line-height:1;
+  font-size:clamp(38px,4.8vw,56px); color:var(--pale);
+  text-shadow:0 1px 2px rgba(8,24,43,.8), 0 2px 18px rgba(8,24,43,.9);
+}
 .card .body{border-top:2px solid var(--navy); padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
-.card .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.24em; color:#5C7387; margin:0 0 6px}
-.card h3{font-family:var(--display); font-weight:400; font-size:clamp(36px,4.4vw,52px); line-height:1; margin:0 0 8px; color:var(--red)}
-.card.blue h3{color:var(--navy)}
-.card.gold h3{color:#8A6208}
-.card .who{font-size:13px; color:#5C7387; margin:0 0 16px; font-weight:500}
+.card .who{font-size:13px; color:#485C70; margin:0 0 14px; font-weight:500}
 .card ul{margin:0 0 18px; padding:0; list-style:none; display:grid; gap:9px}
 .card li{font-size:15px; line-height:1.5; color:#22405E; padding-inline-start:15px; position:relative}
-.card li::before{content:''; position:absolute; inset-inline-start:0; top:.6em; width:6px; height:6px; background:var(--amber)}
-.card .go{margin-top:auto; font-family:var(--sans); font-weight:700; font-size:14.5px; color:var(--red)}
+.card li::before{content:''; position:absolute; inset-inline-start:0; top:.6em; width:6px; height:6px; background:var(--wine)}
+.card .go{margin-top:auto; font-family:var(--sans); font-weight:700; font-size:14.5px; color:var(--wine)}
 .card .go::after{content:' \2190'}
 .card.blue .go{color:var(--navy)}
 .card.gold .go{color:#8A6208}
@@ -186,6 +228,11 @@ a{color:inherit}
   border-top:2px solid var(--navy); padding-top:40px;
   display:grid; grid-template-columns:1.1fr 1fr; gap:44px; align-items:start;
 }
+.shared-in.one{grid-template-columns:1fr}
+.quote.lead{
+  max-width:34ch; margin:0 0 44px;
+  font-size:clamp(23px,3vw,34px);
+}
 .shared h3{font-family:var(--display); font-weight:400; font-size:clamp(24px,3vw,34px); margin:0 0 16px}
 .shared ul{margin:0; padding:0; list-style:none; display:grid; gap:11px}
 .shared li{font-size:16px; line-height:1.6; color:#22405E; padding-inline-start:16px; position:relative}
@@ -195,7 +242,7 @@ a{color:inherit}
   font-size:clamp(21px,2.6vw,29px); line-height:1.35; margin:0; color:var(--navy);
   border-inline-start:3px solid var(--amber); padding-inline-start:20px;
 }
-.quote cite{display:block; margin-top:14px; font-family:var(--sans); font-style:normal; font-size:13.5px; color:#5C7387; font-weight:500}
+.quote cite{display:block; margin-top:14px; font-family:var(--sans); font-style:normal; font-size:13.5px; color:#485C70; font-weight:500}
 
 /* ---------- closing ---------- */
 .closing{
@@ -228,19 +275,36 @@ a{color:inherit}
   transition:transform .15s ease, box-shadow .2s ease;
 }
 .submit:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(217,155,33,.28)}
-.micro{margin:12px 0 0; text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--dim)}
+.micro{margin:12px 0 0; text-align:center; font-family:var(--sans); font-size:11px; letter-spacing:.1em; color:var(--dim)}
 
 /* ---------- partners + footer ---------- */
-.partners{position:relative; z-index:3; background:var(--bg); border-top:1px solid rgba(250,247,187,.14); padding:44px 24px; text-align:center}
-.partners .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.26em; color:var(--dim); margin:0 0 18px}
-.partners .row{display:flex; flex-wrap:wrap; justify-content:center; gap:10px 26px; max-width:840px; margin:0 auto}
-.partners .row span{font-size:14px; color:var(--dim)}
+.partners{
+  position:relative; z-index:3; background:var(--pale); color:var(--navy);
+  padding:52px 24px 46px; text-align:center;
+}
+.partners .lbl{font-family:var(--sans); font-size:10px; letter-spacing:.26em; color:var(--dim); margin:0 0 18px}
+.partners .lbl{color:#485C70}
+.partners .row{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:22px 34px; max-width:1120px; margin:0 auto;
+}
+.partners .row img{
+  height:32px; width:auto; display:block;
+  opacity:.78; transition:opacity .2s ease;
+}
+.partners .row img:hover{opacity:1}
+.partners .support{border-top:2px solid rgba(142,34,48,.35); padding-top:26px; max-width:420px; margin-inline:auto;
+  margin:34px 0 0; font-size:13.5px; color:#485C70; letter-spacing:.02em;
+}
+@media (max-width:820px){ .partners .row img{height:26px} .partners .row{gap:18px 22px} }
 footer{position:relative; z-index:3; background:var(--bg); border-top:1px solid rgba(250,247,187,.14); padding:30px 24px 44px; text-align:center}
 footer p{margin:0 0 7px; font-size:13px; color:var(--dim)}
-footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
+footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em}
 
 /* ---------- mobile ---------- */
 @media (max-width:820px){
+  .hdr-nav{display:none}
+  .hdr-logo img{height:22px}
   .cards{grid-template-columns:1fr; gap:18px}
   .card{box-shadow:5px 5px 0 var(--navy)}
   .shared-in{grid-template-columns:1fr; gap:32px}
@@ -271,7 +335,15 @@ footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
 <div id="boot"><i></i></div>
 
 <header class="hdr" id="hdr">
-  <a class="mark" href="#">מצפה גבולות</a>
+  <!-- CONFIRM the two outward links: they are best guesses, not supplied -->
+  <nav class="hdr-nav" aria-label="ניווט ראשי">
+    <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">התיישבות</a>
+    <a href="lomdim.html">מצפה גבולות</a>
+    <a href="../">יוזמות במרחב</a>
+  </nav>
+  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי">
+    <img src="assets/logo-hinenu.webp" alt="הננו" width="1500" height="530">
+  </a>
   <div class="hdr-right">
     <button class="audio-btn" id="audioBtn" type="button" aria-pressed="false" hidden>אודיו</button>
     <a class="book" href="#booking">להזמין יום</a>
@@ -305,17 +377,15 @@ footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
 <section class="flyers" id="tracks">
   <div class="flyers-in">
     <h2>שלוש דרכים להגיד הננו</h2>
-    <p class="lede">כל אחת מתחילה במקום אחר. כולן מתחילות כאן.</p>
 
     <div class="cards">
       <a class="card red" href="overim.html">
         <div class="poster">
-          <img src="posters/overim.webp" width="900" height="1125"
+          <img src="posters/overim.webp" width="900" height="900"
                alt="כרזה: זוג חלוצים עם מזוודה ותוכנית בית" loading="lazy" decoding="async">
+          <h3>עוברים</h3>
         </div>
         <div class="body">
-          <p class="tag">01</p>
-          <h3>עוברים</h3>
           <p class="who">חבורות התיישבות · גילאי 21–35 · זוגות ומשפחות</p>
           <ul>
             <li>סמינרים לחלוציות לחבורות</li>
@@ -328,12 +398,11 @@ footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
 
       <a class="card blue" href="poalim.html">
         <div class="poster">
-          <img src="posters/poalim.webp" width="900" height="1125"
+          <img src="posters/poalim.webp" width="900" height="1273"
                alt="כרזה: זוג צעירים מביטים אל לוויין ושבב" loading="lazy" decoding="async">
+          <h3>פועלים</h3>
         </div>
         <div class="body">
-          <p class="tag">02</p>
-          <h3>פועלים</h3>
           <p class="who">יזמים ומובילי שינוי צעירים</p>
           <ul>
             <li>המאיץ ליזמות לאומית בנגב</li>
@@ -347,12 +416,11 @@ footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
 
       <a class="card gold" href="lomdim.html">
         <div class="poster">
-          <img src="posters/lomdim.webp" width="900" height="1125"
+          <img src="posters/lomdim.webp" width="900" height="900"
                alt="כרזה: זוג חלוצים עם שיבולים וספרים מול מגדל המצפה" loading="lazy" decoding="async">
+          <h3>לומדים</h3>
         </div>
         <div class="body">
-          <p class="tag">03</p>
-          <h3>לומדים</h3>
           <p class="who">אנשי מערכת הביטחון</p>
           <ul>
             <li>חיבור מחודש לסיפור הישראלי</li>
@@ -363,23 +431,6 @@ footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
         </div>
       </a>
     </div>
-  </div>
-</section>
-
-<section class="shared">
-  <div class="shared-in">
-    <div>
-      <h3>משותף לכל המסלולים</h3>
-      <ul>
-        <li>כל יום נבנה מותאם לקבוצה. אין תוכן קבוע.</li>
-        <li>אפשר לשלב דגשים על חלוציות, מנהיגות, יזמות חברתית, ציונות וחוסן.</li>
-        <li>מפגש אישי לפני שיוצאים לדרך.</li>
-      </ul>
-    </div>
-    <blockquote class="quote">
-      חלוציות אינה נחלת יחידי-סגולה, היא גנוזה בנפש כל אדם ואדם.
-      <cite>דוד בן־גוריון</cite>
-    </blockquote>
   </div>
 </section>
 
@@ -451,16 +502,26 @@ footer .mono{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em}
 </section>
 
 <section class="partners">
-  <p class="lbl">שותפים</p>
+  <p class="lbl">השותפים שלנו</p>
   <div class="row">
-    <span>מנהלת תקומה</span><span>בית הנשיא</span><span>השומר החדש</span>
-    <span>לב אחד</span><span>הביתה</span><span>מחליפים מיל</span><span>HONEY</span>
+      <img src="partners/partner-02.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-03.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-04.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-05.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-06.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-07.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-08.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-09.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-10.webp" alt="" loading="lazy" height="120">
+      <img src="partners/partner-11.webp" alt="" loading="lazy" height="120">
   </div>
+  <p class="support">בתמיכת כבוד נשיא המדינה ורעייתו</p>
 </section>
 
 <footer>
-  <p class="mono">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</p>
+  <p class="markline">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</p>
   <p>תנועת הננו</p>
+  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px">הצהרת נגישות</a>
 </footer>
 
 </main>

@@ -1,0 +1,11 @@
+# Source media - not fetched at runtime (the site uses frames/ and posters/ instead),
+# and together they're 60MB+ that git would keep forever. See README.md.
+assets/dune.mp4
+assets/סרטון גלילה זום אין.mp4
+assets/1.svg
+assets/2.svg
+assets/3.svg
+assets/תמונת אמצע.png
+assets/desktop.ini
+posters/_old_watermarked/
+photos/community/

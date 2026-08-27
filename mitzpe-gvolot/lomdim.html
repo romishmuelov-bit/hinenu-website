@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>לומדים · מצפה גבולות</title>
+<title>לומדים · המרכז לחלוציות במצפה גבולות</title>
+<meta name="description" content="קטלוג התכניות של המרכז לחלוציות במצפה גבולות — הרצאות, ימי תוכן וסמינרים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 @font-face{
   font-family:'Reisinger Yonatan';
@@ -16,77 +17,441 @@
 }
 :root{
   --navy:#133458; --olive:#838921; --amber:#D99B21; --pale:#FAF7BB; --red:#C1272D;
-  --display:'Reisinger Yonatan','Heebo',system-ui,sans-serif;
-  --sans:'Heebo',system-ui,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --wine:#8E2230;
+  --dim:#A8BACB;
+  --display:'Reisinger Yonatan','Rubik',system-ui,sans-serif;
+  --sans:'Rubik',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0; background:var(--navy); color:var(--pale);
-  font-family:var(--sans); font-weight:300; -webkit-font-smoothing:antialiased}
+html,body{margin:0;padding:0}
+body{background:var(--navy); color:var(--pale); font-family:var(--sans);
+  font-weight:300; -webkit-font-smoothing:antialiased; overflow-x:hidden}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--amber); outline-offset:3px}
-.wrap{max-width:780px; margin:0 auto; padding:34px 24px 110px}
-.back{display:inline-block; font-family:var(--mono); font-size:11px;
-  letter-spacing:.2em; color:#8FA6BC; text-decoration:none; margin-bottom:54px}
+:focus-visible{outline:3px solid var(--amber); outline-offset:3px}
+
+/* ---------- header ---------- */
+.skip{position:absolute; top:-100px; inset-inline-start:12px; z-index:99;
+  background:var(--amber); color:var(--navy); padding:10px 16px;
+  border-radius:6px; font-weight:700; text-decoration:none}
+.skip:focus{top:12px}
+.hdr{position:absolute; top:0; inset-inline:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between; padding:18px 24px}
+.hdr::before{content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,24,43,.55), transparent)}
+.hdr-nav{display:flex; align-items:center; gap:22px}
+.hdr-nav a{font-size:12.5px; letter-spacing:.03em; color:rgba(250,247,187,.72);
+  text-decoration:none; padding:6px 0 4px; border-bottom:1px solid transparent;
+  text-shadow:0 1px 3px rgba(8,24,43,.9);
+  transition:color .2s ease, border-color .2s ease}
+.hdr-nav a:hover{color:var(--pale)}
+.hdr-nav a[aria-current="page"]{color:var(--pale); border-bottom-color:rgba(217,155,33,.55)}
+.hdr-logo{position:absolute; inset-inline-start:50%; transform:translateX(50%); line-height:0}
+.hdr-logo img{height:26px; width:auto; display:block; opacity:.95;
+  filter:drop-shadow(0 1px 4px rgba(8,24,43,.85))}
+.book{font-weight:700; font-size:13.5px; color:var(--amber); text-decoration:none;
+  border:1px solid rgba(217,155,33,.45); border-radius:100px; padding:9px 20px;
+  transition:background .2s ease, border-color .2s ease}
+.book:hover{background:rgba(217,155,33,.14); border-color:var(--amber)}
+
+/* ---------- hero ---------- */
+.hero{position:relative; min-height:62svh; display:grid; align-items:end; overflow:hidden}
+.hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.hero::after{content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(8,24,43,.72) 0%, rgba(8,24,43,.30) 42%, rgba(19,52,88,.94) 100%)}
+.hero-in{position:relative; z-index:2; max-width:1080px; margin:0 auto; padding:0 24px 54px; width:100%}
+.hero h1{font-family:var(--display); font-weight:400; margin:0 0 10px;
+  font-size:clamp(52px,10vw,120px); line-height:.95}
+.hero .sub{margin:0 0 16px; font-size:clamp(19px,2.6vw,26px); color:var(--amber); font-weight:400}
+.hero .lede{margin:0; max-width:46ch; font-size:clamp(16px,2.1vw,19px); line-height:1.6}
+
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+.intro{padding:58px 0 0; font-size:clamp(17px,2.2vw,19px); line-height:1.75; max-width:74ch}
+.intro p{margin:0 0 18px}
+h2{font-family:var(--display); font-weight:400; font-size:clamp(30px,4.6vw,46px);
+  line-height:1.05; margin:62px 0 24px; padding-inline-start:16px;
+  border-inline-start:3px solid var(--wine);}
+
+/* ---------- programmes as plans ---------- */
+.plans{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch}
+.plan{
+  display:flex; flex-direction:column;
+  border:1px solid rgba(250,247,187,.20); border-radius:16px; overflow:hidden;
+  background:rgba(250,247,187,.04);
+  transition:border-color .2s ease, transform .2s ease;
+}
+.plan:hover{border-color:rgba(217,155,33,.5); transform:translateY(-3px)}
+.plan.featured{border-color:rgba(217,155,33,.55); background:rgba(217,155,33,.07)}
+.plan img{width:100%; height:150px; object-fit:cover; display:block}
+.plan .p-in{padding:22px 22px 24px; display:flex; flex-direction:column; flex:1}
+.plan .len{
+  align-self:flex-start; font-size:11.5px; font-weight:500; letter-spacing:.1em;
+  color:var(--navy); background:var(--amber); border-radius:100px;
+  padding:5px 13px; margin:0 0 14px;
+}
+.plan.featured .len::after{content:' · מומלץ'}
+.plan h3{font-family:var(--display); font-weight:400; font-size:clamp(26px,3vw,34px);
+  line-height:1.05; margin:0 0 6px}
+.plan .tag{color:var(--amber); font-size:14.5px; font-weight:500; margin:0 0 14px}
+.plan .desc{font-size:15px; line-height:1.7; margin:0 0 18px; color:rgba(250,247,187,.88)}
+.plan h4{font-size:12.5px; font-weight:700; letter-spacing:.06em; color:var(--dim);
+  margin:0 0 10px; text-transform:none}
+.plan ul{margin:0 0 18px; padding:0; list-style:none; display:grid; gap:9px}
+.plan li{position:relative; padding-inline-start:16px; font-size:14.5px; line-height:1.55}
+.plan li::before{content:''; position:absolute; inset-inline-start:0; top:.58em;
+  width:6px; height:6px; background:var(--amber)}
+.plan .out{
+  margin:auto 0 0; padding-top:16px; border-top:2px solid var(--wine);
+  font-size:14.5px; line-height:1.6;
+}
+.plan .out b{font-weight:700}
+.plan .pick{
+  margin-top:16px; display:block; text-align:center; text-decoration:none;
+  font-weight:700; font-size:14.5px; padding:12px; border-radius:8px;
+  border:1px solid rgba(217,155,33,.5); color:var(--amber);
+  transition:background .2s ease;
+}
+.plan .pick:hover{background:rgba(217,155,33,.14)}
+.plan.featured .pick{background:var(--amber); color:var(--navy); border-color:var(--amber)}
+.plan.featured .pick:hover{filter:brightness(1.07)}
+
+/* speakers */
+.plan ul.speakers{display:flex; flex-wrap:wrap; gap:7px; margin:0 0 18px; padding:0; list-style:none}
+.plan ul.speakers li{padding:6px 11px; font-size:12.5px; line-height:1.3;
+  border:1px solid rgba(250,247,187,.22); border-radius:100px}
+.plan ul.speakers li::before{display:none}
+
+/* ---------- audiences ---------- */
+.aud{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:0}
+.aud div{
+  border:1px solid rgba(250,247,187,.18); border-inline-start:3px solid var(--wine);
+  border-radius:12px; padding:24px 26px;
+}
+.aud h3{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(26px,3.2vw,34px); line-height:1.1;
+  color:var(--pale); margin:0 0 10px;
+}
+.aud p{font-size:15.5px; line-height:1.7; margin:0; color:rgba(250,247,187,.86)}
+
+.strip{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:34px 0 0}
+.strip img{width:100%; height:190px; object-fit:cover; display:block; border-radius:10px}
+
+/* team */
+.team{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+.team .who{border-top:2px solid var(--wine); padding-top:18px}
+.team .who img{
+  width:96px; height:96px; border-radius:50%; object-fit:cover;
+  display:block; margin:0 0 14px; border:2px solid rgba(250,247,187,.25);
+}
+.team h3{font-size:18px; font-weight:700; margin:0 0 6px; color:var(--amber)}
+.team p{font-size:15px; line-height:1.6; margin:0; color:rgba(250,247,187,.85)}
+
+/* ---------- booking ---------- */
+.booking{
+  margin:70px 0 0; border:1px solid rgba(250,247,187,.2); border-radius:18px;
+  overflow:hidden; display:grid; grid-template-columns:.85fr 1.15fr;
+}
+.booking .side{
+  padding:38px 32px; background:rgba(250,247,187,.05);
+  border-inline-end:1px solid rgba(250,247,187,.18);
+  border-top:3px solid var(--wine);
+}
+.booking .side h2{margin:0 0 12px; font-size:clamp(30px,3.6vw,42px)}
+.booking .side p{font-size:15.5px; line-height:1.7; margin:0 0 22px; color:rgba(250,247,187,.86)}
+.booking .side .row{font-size:15.5px; line-height:2}
+.booking .side .row b{font-weight:700}
+.booking .side a{color:var(--amber); text-decoration:none}
+.booking .side a:hover{text-decoration:underline}
+.booking .form{padding:34px 32px 36px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.field{margin-bottom:12px}
+.field label{display:block; font-size:12px; font-weight:500; color:var(--dim);
+  margin-bottom:5px; letter-spacing:.03em}
+.field input,.field select,.field textarea{
+  width:100%; font-family:var(--sans); font-size:15px; color:var(--pale);
+  background:rgba(250,247,187,.06); border:1px solid rgba(250,247,187,.18);
+  border-radius:8px; padding:11px 13px;
+  transition:border-color .2s ease, background .2s ease;
+}
+.field textarea{min-height:74px; resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+  background:rgba(250,247,187,.1); border-color:var(--amber); outline:none}
+.field select option{background:var(--navy); color:var(--pale)}
+.submit{width:100%; margin-top:6px; cursor:pointer; font-family:var(--sans);
+  font-weight:700; font-size:16px; background:var(--amber); color:var(--navy);
+  border:none; border-radius:8px; padding:14px;
+  transition:transform .15s ease, box-shadow .2s ease}
+.submit:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(217,155,33,.28)}
+.micro{margin:11px 0 0; text-align:center; font-size:11.5px; letter-spacing:.05em; color:var(--dim)}
+
+.back{display:inline-block; font-size:12px; letter-spacing:.12em;
+  color:var(--dim); text-decoration:none; margin:56px 0 0}
 .back:hover{color:var(--amber)}
-.tag{font-family:var(--mono); font-size:11px; letter-spacing:.24em; color:var(--amber); margin:0 0 12px}
-h1{font-family:var(--display); font-weight:400; margin:0 0 10px;
-  font-size:clamp(46px,9vw,104px); line-height:1}
-.who{font-size:14px; color:#8FA6BC; margin:0 0 26px; letter-spacing:.02em}
-.lede{font-size:clamp(18px,2.6vw,23px); line-height:1.6; margin:0 0 44px; max-width:46ch}
-.hero-poster{width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
-  border:2px solid var(--pale); margin:0 0 48px}
-h2{font-family:var(--display); font-weight:400; font-size:clamp(26px,4vw,38px); margin:48px 0 14px}
-p{font-size:16.5px; line-height:1.75; margin:0 0 16px}
-ul{margin:0 0 26px; padding:0; list-style:none; display:grid; gap:13px}
-li{position:relative; padding-inline-start:18px; font-size:16.5px; line-height:1.6}
-li::before{content:''; position:absolute; inset-inline-start:0; top:.62em;
-  width:7px; height:7px; background:var(--amber)}
-li b{font-weight:700; color:var(--pale)}
-.todo{color:#8FA6BC; font-style:italic}
-.shared{margin-top:56px; border-top:1px solid rgba(250,247,187,.2); padding-top:32px}
-.shared li::before{background:var(--red)}
-.quote{font-family:var(--display); font-weight:400; font-size:clamp(20px,2.6vw,27px);
-  line-height:1.35; margin:32px 0 0; border-inline-start:3px solid var(--amber);
-  padding-inline-start:20px}
-.quote cite{display:block; margin-top:12px; font-family:var(--sans); font-style:normal;
-  font-size:13px; color:#8FA6BC; font-weight:500}
-.cta{display:inline-block; margin-top:36px; text-decoration:none;
-  background:var(--amber); color:var(--navy); font-weight:700; font-size:16px;
-  padding:14px 30px; border-radius:8px}
-.cta:hover{filter:brightness(1.07)}
+footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13px}
+
+@media (max-width:900px){
+  .plans{grid-template-columns:1fr}
+  .booking{grid-template-columns:1fr}
+  .booking .side{border-inline-end:none; border-bottom:1px solid rgba(250,247,187,.18)}
+  .aud{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr}
+  .strip{grid-template-columns:1fr 1fr}
+  .hdr-nav{display:none}
+  .hdr-logo img{height:22px}
+  .grid2{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← חזרה</a>
-  <p class="tag">03</p>
-  <h1>לומדים</h1>
-  <p class="who">אנשי מערכת הביטחון</p>
-  <p class="lede">יום לאנשי ביטחון שה״למה״ שלהם עלול ללכת לאיבוד בתוך השגרה המבצעית.</p>
-  <img class="hero-poster" src="posters/lomdim.webp" alt="כרזה: זוג חלוצים עם שיבולים וספרים מול מגדל המצפה" onerror="this.style.display='none'">
-  <h2>יום חלוציות לארגוני ביטחון</h2>
-  <p>היום בנוי סביב שלושה ערכים:</p>
-  <ul>
-    <li><b>חיבור מחודש לסיפור הישראלי</b> — שייכות ואחריות לאומית</li>
-    <li><b>חשיבה יוזמת ומעשית</b> — זיהוי אתגרים, פתרונות והובלת שינוי</li>
-    <li><b>מנהיגות מתוך אחריות</b> — כלים להובלה ולקבלת החלטות</li>
-  </ul>
-  <p>המוקד הוא חיבור מחדש ל״למה״ שמאחורי הבחירה בדרך — ושליחות היא בחירה יומיומית, לא רק תפקיד.</p>
 
-  <div class="shared">
-    <h2>משותף לכל המסלולים</h2>
-    <ul>
-      <li>כל יום נבנה מותאם לקבוצה. אין תוכן קבוע.</li>
-      <li>אפשר לשלב דגשים על חלוציות, מנהיגות, יזמות חברתית, ציונות וחוסן.</li>
-      <li>מפגש אישי לפני שיוצאים לדרך.</li>
-    </ul>
-    <blockquote class="quote">
-      חלוציות אינה נחלת יחידי-סגולה, היא גנוזה בנפש כל אדם ואדם.
-      <cite>דוד בן־גוריון</cite>
-    </blockquote>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="hdr">
+  <nav class="hdr-nav" aria-label="ניווט ראשי">
+    <a href="https://www.hinenupioneers.com" target="_blank" rel="noopener">התיישבות</a>
+    <a href="lomdim.html">מצפה גבולות</a>
+    <a href="../">יוזמות במרחב</a>
+  </nav>
+  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי">
+    <img src="assets/logo-hinenu.webp" alt="הננו" width="1500" height="530">
+  </a>
+  <a class="book" href="#booking">להזמין יום</a>
+</header>
+
+<section class="hero">
+  <img src="photos/night-crowd.webp" alt="" width="1400" height="1054">
+  <div class="hero-in">
+    <h1>לומדים</h1>
+    <p class="sub">המרכז לחלוציות במצפה גבולות</p>
+    <p class="lede">המרכז מארח קבוצות מישראל ומהעולם למפגש חווייתי עם רעיון החלוציות — דרך סיורים, תוכן, סדנאות ומפגשים.</p>
   </div>
-  <a class="cta" href="index.html#booking">להשאיר פרטים</a>
-</div>
+</section>
+
+<main class="wrap" id="main">
+
+  <div class="intro">
+    <p>המרכז לחלוציות פועל במצפה גבולות, אחד מאתרי החלוציות ההיסטוריים והמשמעותיים בישראל, ומקום שמחבר באופן טבעי בין הסיפור שעליו נבנתה המדינה לבין האתגרים שהיא פוגשת היום.</p>
+    <p>הפעילות מזמינה את המשתתפים לעסוק בשאלות של ציונות, מנהיגות, אחריות אישית ולאומית ובניית קהילה — ולשאול מהי חלוציות בדור שלנו, ואיזה תפקיד אנחנו בוחרים לקחת בעיצוב עתידה של ישראל.</p>
+  </div>
+
+  <h2>התכניות</h2>
+
+  <div class="plans">
+
+    <article class="plan">
+      <img src="photos/indoor-session.webp" alt="הרצאה במצפה גבולות" width="684" height="912" loading="lazy">
+      <div class="p-in">
+        <p class="len">60–90 דקות</p>
+        <h3>הרצאות השראה</h3>
+        <p class="tag">מהי חלוציות כיום?</p>
+        <p class="desc">הרצאות של מנהיגות ומנהיגים מהנגב ומכל הארץ שחיים דרך חיים חלוצית של לקיחת אחריות בזמן משבר — לפני ואחרי השבעה באוקטובר.</p>
+
+        <h4>מה נפגוש</h4>
+        <ul>
+          <li>חלוצים פורצי דרך ששינו מציאות בישראל</li>
+          <li>דילמות של אחריות ובחירה</li>
+          <li>אתגרי החברה הישראלית כיום</li>
+        </ul>
+
+        <h4>דוברים לדוגמה</h4>
+        <ul class="speakers">
+          <li>אלירן אוחיון</li>
+          <li>ג׳ניפר שוורץ</li>
+          <li>מיכל עוזיהו</li>
+          <li>מיה אוחנה מורנו</li>
+        </ul>
+
+        <p class="out">נצא עם מבט חדש על חלוציות, ועם השאלה: <b>מה ביכולתי לעשות מול האתגרים הלאומיים בימינו?</b></p>
+        <a class="pick" href="#booking">להזמין הרצאה</a>
+      </div>
+    </article>
+
+    <article class="plan featured">
+      <img src="photos/group-trees.webp" alt="פעילות קבוצתית במצפה גבולות" width="730" height="548" loading="lazy">
+      <div class="p-in">
+        <p class="len">חצי יום / יום מלא</p>
+        <h3>המפעל החלוצי אז והיום</h3>
+        <p class="tag">משימה בונה חברה</p>
+        <p class="desc">יום שהופך סיפור היסטורי לדיון על האחריות שלנו היום. דרך סיפורם של החלוצים שהקימו את מצפה גבולות נפגוש אנשים שפעלו בתוך מחסור וחוסר ודאות — ובחרו ליצור פתרונות. משם נחזור אל המציאות הישראלית ונשאל אילו אתגרים מחכים לדור שלנו.</p>
+
+        <h4>מה קורה במהלך היום</h4>
+        <ul>
+          <li>סיור במצפה גבולות</li>
+          <li>סיפורי חלוציות</li>
+          <li>שיח על אתגרי הנגב המערבי</li>
+          <li>משימות ופעילות קבוצתית</li>
+          <li>עיבוד ומבט לעתיד</li>
+        </ul>
+
+        <p class="out">נצא עם הבנה מעמיקה של תכונות וערכי החלוצים, <b>ותפקידנו להמשיך את דרכם כיום.</b></p>
+        <a class="pick" href="#booking">להזמין יום</a>
+      </div>
+    </article>
+
+    <article class="plan">
+      <img src="photos/campfire.webp" alt="מפגש לילה סביב המדורה" width="816" height="615" loading="lazy">
+      <div class="p-in">
+        <p class="len">2–4 ימים</p>
+        <h3>סמינר חלוציות</h3>
+        <p class="tag">איזה תפקיד נבחר לקחת</p>
+        <p class="desc">מסע עומק מהסיפור שעיצב את הנגב אל האחריות לעצב את מה שיבוא אחרינו. סיורים בנגב המערבי, מסע לילי, מפגשים עם מנהיגים מקומיים, סדנאות ועבודה קבוצתית.</p>
+
+        <h4>המסע שלנו</h4>
+        <ul>
+          <li><b>עבר</b> — הבחירות והמעשים שעליהם נבנתה המדינה</li>
+          <li><b>הווה</b> — האתגרים, הצרכים והאנשים שפועלים מולם</li>
+          <li><b>עתיד</b> — היכולות והערכים שלנו מול המקום שבו נבחר לקחת אחריות</li>
+        </ul>
+
+        <p class="out">נצא עם חוויה שונה, והיכרות מעמיקה עם השאלה: <b>איזה תפקיד אני רוצה לקחת בסיפור הישראלי של הדור שלי?</b></p>
+        <a class="pick" href="#booking">להזמין סמינר</a>
+      </div>
+    </article>
+
+  </div>
+
+  <h2>למי זה מתאים</h2>
+  <div class="aud">
+    <div>
+      <h3>ארגוני ביטחון</h3>
+      <p>יום לאנשי מערכת הביטחון שה״למה״ שלהם עלול ללכת לאיבוד בשגרה המבצעית — חיבור מחודש לסיפור הישראלי, חשיבה יוזמת ומעשית, ומנהיגות מתוך אחריות.</p>
+    </div>
+    <div>
+      <h3>קבוצות וקהילות</h3>
+      <p>למי שרוצה לצאת לרגע מהשגרה, להרגיש את הנגב המערבי, לפגוש את סיפור החלוציות ההיסטורי ולשאול מה המשמעות שלו בימינו.</p>
+    </div>
+    <div>
+      <h3>צוותים וארגונים</h3>
+      <p>מפגש שמחבר בין רעיונות וערכים לבין עשייה, ומחזיר השראה וכלים להפוך חזון למציאות.</p>
+    </div>
+    <div>
+      <h3>מכינות ובתי ספר</h3>
+      <p>שכבות וחניכים שעסוקים ממילא בשאלות של זהות ואחריות — כאן הן מקבלות מקום, זמן ושטח.</p>
+    </div>
+  </div>
+
+  <div class="strip">
+    <img src="photos/seminar-mats.webp" alt="קבוצה במצפה גבולות" width="1400" height="931" loading="lazy">
+    <img src="photos/tower-night.webp" alt="מגדל המצפה בלילה" width="1400" height="931" loading="lazy">
+    <img src="photos/mitzpe-day.webp" alt="מצפה גבולות ביום" width="1400" height="1050" loading="lazy">
+  </div>
+
+  <h2>מי אנחנו</h2>
+  <div class="team">
+    <div class="who">
+      <img src="photos/team-jo.webp" alt="ג׳ו קולבה" width="420" height="420" loading="lazy">
+      <h3>ג׳ו קולבה</h3>
+      <p>הלב הפועם והידיים העובדות במצפה גבולות כבר 14 שנה.</p>
+    </div>
+    <div class="who">
+      <img src="photos/team-shaked.webp" alt="שקד וולק" width="420" height="420" loading="lazy">
+      <h3>שקד וולק</h3>
+      <p>מנהלת המרכז לחלוציות, תושבת העוטף. מאמינה שעשייה מתחילה מלראות מה צריך ולהבין מה אני יכול לתת.</p>
+    </div>
+    <div class="who">
+      <img src="photos/team-roee.webp" alt="רועי עזיזי" width="420" height="420" loading="lazy">
+      <h3>רועי עזיזי</h3>
+      <p>מייסד ומנכ״ל תנועת הננוּ. מאמין שחלוציות היא תנאי קיומי לשגשוגה של מדינת ישראל.</p>
+    </div>
+  </div>
+
+  <!-- ============ booking ============ -->
+  <section class="booking" id="booking">
+    <div class="side">
+      <h2 style="margin-top:0">מצפים לראותכם</h2>
+      <p>ספרו לנו מי הקבוצה, כמה אתם ומתי נוח לכם. נחזור אליכם עם הצעה ליום שמתאים בדיוק לכם.</p>
+      <p class="row">
+        <b>שקד וולק</b><br>
+        מנהלת המרכז לחלוציות<br>
+        <a href="mailto:shaked@hinenu.org.il">shaked@hinenu.org.il</a><br>
+        <a href="tel:0509072001">050-9072001</a>
+      </p>
+    </div>
+
+    <div class="form">
+      <form id="bookForm" novalidate>
+        <div class="grid2">
+          <div class="field">
+            <label for="f-name">שם</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="f-org">ארגון / מוסד</label>
+            <input id="f-org" name="org" type="text" required autocomplete="organization">
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label for="f-role">תפקיד</label>
+            <input id="f-role" name="role" type="text" autocomplete="organization-title">
+          </div>
+          <div class="field">
+            <label for="f-phone">טלפון</label>
+            <input id="f-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-mail">מייל</label>
+          <input id="f-mail" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label for="f-prog">איזו תכנית</label>
+            <select id="f-prog" name="programme">
+              <option>הרצאת השראה · 60–90 דקות</option>
+              <option>המפעל החלוצי אז והיום · חצי יום / יום מלא</option>
+              <option>סמינר חלוציות · 2–4 ימים</option>
+              <option>עוד לא בטוח/ה</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-size">גודל משוער</label>
+            <input id="f-size" name="size" type="number" min="1" inputmode="numeric">
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label for="f-type">סוג הקבוצה</label>
+            <select id="f-type" name="type">
+              <option>ארגון ביטחון</option>
+              <option>קבוצה או קהילה</option>
+              <option>צוות בארגון</option>
+              <option>מכינה או בית ספר</option>
+              <option>אחר</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-when">חודש רצוי</label>
+            <input id="f-when" name="when" type="text" placeholder="למשל: נובמבר">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-note">משהו שכדאי שנדע</label>
+          <textarea id="f-note" name="note"></textarea>
+        </div>
+        <button class="submit" type="submit">שליחה</button>
+        <p class="micro">נחזור אליכם תוך יום עבודה</p>
+      </form>
+    </div>
+  </section>
+
+  <a class="back" href="index.html">← חזרה</a>
+</main>
+
+<footer>
+  המרכז לחלוציות · מצפה גבולות · בתמיכת כבוד נשיא המדינה ורעייתו
+  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px">הצהרת נגישות</a>
+</footer>
+
+<script>
+/* the form has no endpoint yet - keep the data rather than drop it silently */
+document.getElementById('bookForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var data = {};
+  new FormData(e.target).forEach(function(v,k){ data[k] = v; });
+  console.log('booking submitted', data);
+  alert('הטופס עדיין לא מחובר ליעד. הפרטים נרשמו לקונסולה.');
+});
+</script>
 </body>
 </html>
