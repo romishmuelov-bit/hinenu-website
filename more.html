@@ -245,7 +245,7 @@
   }
   .h5-shade{
     position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.46) 20%, rgba(0,0,0,.32) 38%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.22) 100%);
+    background:linear-gradient(180deg, rgba(7,11,22,.62) 0%, rgba(7,11,22,.46) 20%, rgba(7,11,22,.32) 38%, rgba(7,11,22,.25) 55%, rgba(7,11,22,.22) 100%);
   }
   .h5-jump{
     position:relative; z-index:2; display:flex; gap:14px; flex-wrap:wrap;
@@ -416,7 +416,7 @@
   .letter-zone{ position:relative; }
   .letter-zone::before{
     content:''; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(7,11,22,0) 0%, rgba(7,11,22,.5) 22%, rgba(7,11,22,.68) 100%);
+    background:linear-gradient(180deg, rgba(7,11,22,.22) 0%, rgba(7,11,22,.42) 20%, rgba(7,11,22,.6) 45%, rgba(7,11,22,.68) 100%);
   }
   .letter{
     position:relative; z-index:2;
@@ -788,6 +788,12 @@
     transition:transform .2s ease, box-shadow .2s ease;
   }
   .event-wa-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 32px rgba(66,87,230,.5); }
+  button.event-wa-cta{ border:none; cursor:pointer; }
+  .accel-bridge{
+    max-width:620px; margin:0 auto; padding:0 26px 90px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+  }
+  .accel-bridge .sub{ color:var(--dim); font-size:17px; margin:0; }
   .ev-featured{ max-width:400px; margin:46px auto 0; }
   .events-grid{
     display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1374,7 +1380,6 @@
       <div class="tracks-head">
         <p class="kicker reveal" data-en="Our meet-ups">הערבים שלנו</p>
         <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>entrepreneurship</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
-        <p class="sub reveal" style="--d:.06s; max-width:620px; margin:0 auto 4px" data-en="We're building a national entrepreneurship accelerator for beginning entrepreneurs, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
         <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-en="Join the WhatsApp group for updates on the next meet-up ←">הצטרפות לקבוצת הוואטסאפ - עדכונים על הערב הבא ←</a>
       </div>
       <div class="ev-featured">
@@ -1400,6 +1405,12 @@
       <button class="modal-close" id="evClose" aria-label="סגירה" data-en-aria-label="Close">×</button>
       <div id="evBody"></div>
     </div>
+  </div>
+
+  <!-- ======= accelerator bridge: events -> ventures ======= -->
+  <div class="accel-bridge">
+    <p class="sub reveal" data-en="We're building a national entrepreneurship accelerator for beginning entrepreneurs, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
+    <button type="button" class="event-wa-cta reveal" style="--d:.06s" data-apply data-en="Apply to the accelerator ←">הגשת מועמדות למאיץ ←</button>
   </div>
 
   <!-- ======= 5. VENTURES: already working ======= -->
