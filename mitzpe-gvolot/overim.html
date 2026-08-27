@@ -47,6 +47,13 @@ a{color:inherit}
   border:1px solid rgba(217,155,33,.45); border-radius:100px; padding:9px 20px;
   transition:background .2s ease, border-color .2s ease}
 .book:hover{background:rgba(217,155,33,.14); border-color:var(--amber)}
+.hdr-right{display:flex; align-items:center; gap:10px}
+.lang-toggle{
+  font-family:var(--sans); font-weight:700; font-size:12.5px; color:var(--pale);
+  background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
+  padding:8px 15px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
+}
+.lang-toggle:hover{border-color:var(--pale); background:rgba(250,247,187,.08)}
 
 .hero{position:relative; min-height:66svh; display:grid; align-items:end; overflow:hidden}
 .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
@@ -111,74 +118,122 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
 </head>
 <body>
 
-<a class="skip" href="#main">דילוג לתוכן</a>
+<a class="skip" href="#main" data-en="Skip to content">דילוג לתוכן</a>
 
 <header class="hdr">
-  <nav class="hdr-nav" aria-label="ניווט ראשי">
-    <a href="overim.html">התיישבות</a>
-    <a href="lomdim.html">מצפה גבולות</a>
-    <a href="../">יוזמות במרחב</a>
+  <nav class="hdr-nav" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
+    <a href="overim.html" aria-current="page" data-en="Relocating">התיישבות</a>
+    <a href="lomdim.html" data-en="Mitzpe Gvulot">מצפה גבולות</a>
+    <a href="../" data-en="Ventures in the region">יוזמות במרחב</a>
   </nav>
-  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי">
-    <img src="assets/logo-hinenu.webp" alt="הננו" width="1500" height="530">
+  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
+    <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
   </a>
-  <a class="book" href="index.html#booking">להזמין יום</a>
+  <div class="hdr-right">
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <a class="book" href="index.html#booking" data-en="Book a day">להזמין יום</a>
+  </div>
 </header>
 
 <section class="hero">
   <img src="photos/seminar-mats.webp" alt="" width="1400" height="931">
   <div class="hero-in">
-    <p class="kicker">חבורות התיישבות · גילאי 21–35</p>
-    <h1>עוברים</h1>
-    <p class="lede">מי שכבר מרגיש שהוא רוצה לזוז — ומחפש לאן, ועם מי.</p>
+    <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21–35</p>
+    <h1 data-en="Relocating">עוברים</h1>
+    <p class="lede" data-en="For people who already feel ready to move - and are looking for where, and with whom.">מי שכבר מרגיש שהוא רוצה לזוז — ומחפש לאן, ועם מי.</p>
   </div>
 </section>
 
 <main class="wrap" id="main">
 
   <div class="intro">
-    <p>סמינרים להכשרת חבורות התיישבות של צעירים בגילאי 21–35, זוגות ומשפחות, המאורגנים כחלק מקהילות בוגרי יחידות קרביות, מוסדות אקדמיים ותוכניות מנהיגות.</p>
-    <p>התוכנית מתמקדת בהכשרתם כגרעיני התיישבות, המשתלבים וחיים בקיבוצי החבל.</p>
+    <p data-en="Seminars training relocation groups of young people aged 21-35, couples and families, organised as part of communities of combat-unit veterans, academic institutions and leadership programmes.">סמינרים להכשרת חבורות התיישבות של צעירים בגילאי 21–35, זוגות ומשפחות, המאורגנים כחלק מקהילות בוגרי יחידות קרביות, מוסדות אקדמיים ותוכניות מנהיגות.</p>
+    <p data-en="The programme focuses on training them as settlement cores, who integrate into and live in the region's kibbutzim.">התוכנית מתמקדת בהכשרתם כגרעיני התיישבות, המשתלבים וחיים בקיבוצי החבל.</p>
   </div>
 
-  <h2>מה יש כאן</h2>
+  <h2 data-en="What's here">מה יש כאן</h2>
   <ul>
-    <li>סמינרים לחלוציות לחבורות</li>
-    <li>סמינרי תעסוקה וחיבור למשרות קריטיות</li>
-    <li>מקהילות בוגרים לקהילות חיים</li>
+    <li data-en="Pioneering seminars for groups">סמינרים לחלוציות לחבורות</li>
+    <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
+    <li data-en="From alumni communities to communities of life">מקהילות בוגרים לקהילות חיים</li>
   </ul>
 
-  <h2>הקהילה</h2>
-  <p class="sec-note">מהמצפה, מהסמינרים, ומהערבים שבאמצע.</p>
+  <h2 data-en="The community">הקהילה</h2>
+  <p class="sec-note" data-en="From the lookout, from the seminars, and from the evenings in between.">מהמצפה, מהסמינרים, ומהערבים שבאמצע.</p>
 
   <div class="gal">
     <figure class="tall">
-      <img src="photos/community-group.webp" alt="קהילת הננו מתכנסת מול מגדל המצפה" width="1600" height="784" loading="lazy">
-      <figcaption>קהילת הננו במצפה גבולות</figcaption>
+      <img src="photos/community-group.webp" alt="קהילת הננו מתכנסת מול מגדל המצפה" data-en-alt="The Hinenu community gathers before the lookout tower" width="1600" height="784" loading="lazy">
+      <figcaption data-en="The Hinenu community at Mitzpe Gvulot">קהילת הננו במצפה גבולות</figcaption>
     </figure>
     <figure>
-      <img src="photos/community-fire.webp" alt="מעגל סביב המדורה בערב" width="1600" height="1200" loading="lazy">
-      <figcaption>מעגל לילה</figcaption>
+      <img src="photos/community-fire.webp" alt="מעגל סביב המדורה בערב" data-en-alt="A circle around the campfire at night" width="1600" height="1200" loading="lazy">
+      <figcaption data-en="Night circle">מעגל לילה</figcaption>
     </figure>
     <figure>
-      <img src="photos/community-hall.webp" alt="מפגש קהילה באולם האבן" width="1204" height="1600" loading="lazy">
-      <figcaption>מפגש קהילה</figcaption>
+      <img src="photos/community-hall.webp" alt="מפגש קהילה באולם האבן" data-en-alt="A community gathering in the stone hall" width="1204" height="1600" loading="lazy">
+      <figcaption data-en="Community gathering">מפגש קהילה</figcaption>
     </figure>
     <figure>
-      <img src="photos/group-trees.webp" alt="סמינר בצל העצים" width="730" height="548" loading="lazy">
-      <figcaption>סמינר במצפה</figcaption>
+      <img src="photos/group-trees.webp" alt="סמינר בצל העצים" data-en-alt="A seminar in the shade of the trees" width="730" height="548" loading="lazy">
+      <figcaption data-en="Seminar at the lookout">סמינר במצפה</figcaption>
     </figure>
   </div>
 
-  <a class="cta" href="index.html#booking">להשאיר פרטים</a>
+  <a class="cta" href="index.html#booking" data-en="Leave your details">להשאיר פרטים</a>
 
-  <a class="back" href="index.html">← חזרה</a>
+  <a class="back" href="index.html" data-en="← Back">← חזרה</a>
 </main>
 
 <footer>
-  המרכז לחלוציות · מצפה גבולות · הנגב המערבי
-  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px">הצהרת נגישות</a>
+  <span data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</span>
+  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px" data-en="Accessibility statement">הצהרת נגישות</a>
 </footer>
-
+<script>
+(function(){
+  "use strict";
+  var LANG = 'he';
+  try{ LANG = localStorage.getItem('mg-lang') || 'he'; }catch(e){}
+  function applyLang(lang){
+    LANG = lang === 'en' ? 'en' : 'he';
+    document.documentElement.setAttribute('lang', LANG);
+    document.documentElement.setAttribute('dir', LANG === 'en' ? 'ltr' : 'rtl');
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      if(LANG === 'en'){
+        if(!el.hasAttribute('data-he-text')) el.setAttribute('data-he-text', el.textContent);
+        el.textContent = el.getAttribute('data-en');
+      } else if(el.hasAttribute('data-he-text')){
+        el.textContent = el.getAttribute('data-he-text');
+      }
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      if(LANG === 'en'){
+        if(!el.hasAttribute('data-he-html')) el.setAttribute('data-he-html', el.innerHTML);
+        el.innerHTML = el.getAttribute('data-en-html');
+      } else if(el.hasAttribute('data-he-html')){
+        el.innerHTML = el.getAttribute('data-he-html');
+      }
+    });
+    ['alt','placeholder','aria-label','title'].forEach(function(attr){
+      document.querySelectorAll('[data-en-' + attr + ']').forEach(function(el){
+        var heKey = 'data-he-' + attr;
+        if(LANG === 'en'){
+          if(!el.hasAttribute(heKey)) el.setAttribute(heKey, el.getAttribute(attr) || '');
+          el.setAttribute(attr, el.getAttribute('data-en-' + attr));
+        } else if(el.hasAttribute(heKey)){
+          el.setAttribute(attr, el.getAttribute(heKey));
+        }
+      });
+    });
+    var btn = document.getElementById('langToggle');
+    if(btn) btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    try{ localStorage.setItem('mg-lang', LANG); }catch(e){}
+  }
+  window.__mgApplyLang = applyLang;
+  var toggleBtn = document.getElementById('langToggle');
+  if(toggleBtn) toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  if(LANG === 'en') applyLang('en');
+})();
+</script>
 </body>
 </html>

@@ -48,47 +48,101 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
 .back{display:inline-block; font-size:12.5px; letter-spacing:.1em; color:var(--dim);
   text-decoration:none; margin-top:48px}
 .back:hover{color:var(--amber)}
+.lang-toggle{
+  position:absolute; top:20px; inset-inline-end:24px;
+  font-family:var(--sans); font-weight:700; font-size:12.5px; color:var(--pale);
+  background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
+  padding:8px 15px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
+}
+.lang-toggle:hover{border-color:var(--pale); background:rgba(250,247,187,.08)}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">דילוג לתוכן</a>
+<a class="skip" href="#main" data-en="Skip to content">דילוג לתוכן</a>
+<button class="lang-toggle" id="langToggle" type="button">EN</button>
 <div class="wrap">
 <main id="main">
-  <h1>הצהרת נגישות</h1>
-  <p class="upd">עודכן לאחרונה: אוגוסט 2026</p>
+  <h1 data-en="Accessibility Statement">הצהרת נגישות</h1>
+  <p class="upd" data-en="Last updated: August 2026">עודכן לאחרונה: אוגוסט 2026</p>
 
-  <p>המרכז לחלוציות במצפה גבולות, מיסודה של תנועת הננוּ, רואה חשיבות רבה במתן שירות שוויוני לכלל הציבור, ופועל להנגשת האתר לאנשים עם מוגבלות.</p>
+  <p data-en="The Pioneering Center at Mitzpe Gvulot, founded by the Hinenu movement, places great importance on providing equal service to the public, and works to make the site accessible to people with disabilities.">המרכז לחלוציות במצפה גבולות, מיסודה של תנועת הננוּ, רואה חשיבות רבה במתן שירות שוויוני לכלל הציבור, ופועל להנגשת האתר לאנשים עם מוגבלות.</p>
 
-  <h2>רמת ההנגשה</h2>
-  <p>האתר הונגש בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע״ג-2013, ולתקן הישראלי ת״י 5568 ברמה AA, המבוסס על הנחיות <span lang="en">WCAG 2.1</span> של ארגון <span lang="en">W3C</span>.</p>
+  <h2 data-en="Level of accessibility">רמת ההנגשה</h2>
+  <p data-en-html="The site was made accessible in accordance with the Equal Rights for Persons with Disabilities Regulations (Accessibility Adjustments for Service), 2013, and Israeli Standard 5568 at level AA, based on the <span lang=&quot;en&quot;>WCAG 2.1</span> guidelines of the <span lang=&quot;en&quot;>W3C</span>.">האתר הונגש בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע״ג-2013, ולתקן הישראלי ת״י 5568 ברמה AA, המבוסס על הנחיות <span lang="en">WCAG 2.1</span> של ארגון <span lang="en">W3C</span>.</p>
 
-  <h2>מה הונגש באתר</h2>
+  <h2 data-en="What was made accessible on the site">מה הונגש באתר</h2>
   <ul>
-    <li>ניווט מלא באמצעות מקלדת, כולל קישור דילוג לתוכן בראש כל עמוד.</li>
-    <li>סימון פוקוס בולט לכל רכיב שניתן להגיע אליו במקלדת.</li>
-    <li>טקסט חלופי לתמונות בעלות משמעות; תמונות דקורטיביות מסומנות כך שקוראי מסך ידלגו עליהן.</li>
-    <li>מבנה כותרות היררכי ותקין, ותוויות מפורשות לכל שדה בטופס.</li>
-    <li>ניגודיות צבעים העומדת בדרישות התקן.</li>
-    <li>הגדרת שפה ומבנה מימין לשמאל בקוד העמוד.</li>
-    <li>תמיכה בהעדפת המערכת לצמצום תנועה: כאשר ההעדפה פעילה, אנימציית הגלילה מוחלפת בעמוד סטטי קריא במלואו.</li>
-    <li>האתר ניתן להגדלה עד 200% בלי אובדן תוכן או תפקוד.</li>
+    <li data-en="Full keyboard navigation, including a skip-to-content link at the top of every page.">ניווט מלא באמצעות מקלדת, כולל קישור דילוג לתוכן בראש כל עמוד.</li>
+    <li data-en="Visible focus indication for every element reachable by keyboard.">סימון פוקוס בולט לכל רכיב שניתן להגיע אליו במקלדת.</li>
+    <li data-en="Alt text for meaningful images; decorative images are marked so screen readers skip them.">טקסט חלופי לתמונות בעלות משמעות; תמונות דקורטיביות מסומנות כך שקוראי מסך ידלגו עליהן.</li>
+    <li data-en="A proper, hierarchical heading structure, and explicit labels for every form field.">מבנה כותרות היררכי ותקין, ותוויות מפורשות לכל שדה בטופס.</li>
+    <li data-en="Colour contrast meeting the standard's requirements.">ניגודיות צבעים העומדת בדרישות התקן.</li>
+    <li data-en="Language and right-to-left structure defined in the page code.">הגדרת שפה ומבנה מימין לשמאל בקוד העמוד.</li>
+    <li data-en="Support for the operating system's reduced-motion preference: when active, the scroll animation is replaced with a static page presenting the full content.">תמיכה בהעדפת המערכת לצמצום תנועה: כאשר ההעדפה פעילה, אנימציית הגלילה מוחלפת בעמוד סטטי קריא במלואו.</li>
+    <li data-en="The site can be zoomed up to 200% without loss of content or function.">האתר ניתן להגדלה עד 200% בלי אובדן תוכן או תפקוד.</li>
   </ul>
 
-  <h2>מגבלות ידועות</h2>
-  <p>העמוד הראשי כולל רצף תמונות המונע בגלילה. משתמשים שהגדירו במערכת ההפעלה שלהם צמצום תנועה יקבלו במקומו עמוד סטטי הכולל את מלוא התוכן. ייתכנו חלקים באתר שטרם הונגשו במלואם, ואנו ממשיכים לשפר אותם באופן שוטף.</p>
+  <h2 data-en="Known limitations">מגבלות ידועות</h2>
+  <p data-en="The main page includes a scroll-driven image sequence. Users who have set reduced motion in their operating system will instead get a static page with the full content. Some parts of the site may not yet be fully accessible, and we continue to improve them on an ongoing basis.">העמוד הראשי כולל רצף תמונות המונע בגלילה. משתמשים שהגדירו במערכת ההפעלה שלהם צמצום תנועה יקבלו במקומו עמוד סטטי הכולל את מלוא התוכן. ייתכנו חלקים באתר שטרם הונגשו במלואם, ואנו ממשיכים לשפר אותם באופן שוטף.</p>
 
-  <h2>יצירת קשר בנושא נגישות</h2>
+  <h2 data-en="Contact us about accessibility">יצירת קשר בנושא נגישות</h2>
   <div class="box">
-    <p>נתקלתם ברכיב שאינו נגיש, או שיש לכם הצעה לשיפור? נשמח לשמוע ונטפל בפנייה בהקדם.</p>
+    <p data-en="Found an inaccessible component, or have a suggestion for improvement? We'd love to hear from you and will handle it promptly.">נתקלתם ברכיב שאינו נגיש, או שיש לכם הצעה לשיפור? נשמח לשמוע ונטפל בפנייה בהקדם.</p>
     <p>
-      רכזת הנגישות: שקד וולק<br>
-      דוא״ל: <a href="mailto:shaked@hinenu.org.il">shaked@hinenu.org.il</a><br>
-      טלפון: <a href="tel:0509072001">050-9072001</a>
+      <span data-en="Accessibility coordinator: Shaked Wolk">רכזת הנגישות: שקד וולק</span><br>
+      <span data-en="Email:">דוא״ל:</span> <a href="mailto:shaked@hinenu.org.il">shaked@hinenu.org.il</a><br>
+      <span data-en="Phone:">טלפון:</span> <a href="tel:0509072001">050-9072001</a>
     </p>
   </div>
 
-  <a class="back" href="index.html">← חזרה לאתר</a>
+  <a class="back" href="index.html" data-en="← Back to the site">← חזרה לאתר</a>
 </main>
 </div>
+<script>
+(function(){
+  "use strict";
+  var LANG = 'he';
+  try{ LANG = localStorage.getItem('mg-lang') || 'he'; }catch(e){}
+  function applyLang(lang){
+    LANG = lang === 'en' ? 'en' : 'he';
+    document.documentElement.setAttribute('lang', LANG);
+    document.documentElement.setAttribute('dir', LANG === 'en' ? 'ltr' : 'rtl');
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      if(LANG === 'en'){
+        if(!el.hasAttribute('data-he-text')) el.setAttribute('data-he-text', el.textContent);
+        el.textContent = el.getAttribute('data-en');
+      } else if(el.hasAttribute('data-he-text')){
+        el.textContent = el.getAttribute('data-he-text');
+      }
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      if(LANG === 'en'){
+        if(!el.hasAttribute('data-he-html')) el.setAttribute('data-he-html', el.innerHTML);
+        el.innerHTML = el.getAttribute('data-en-html');
+      } else if(el.hasAttribute('data-he-html')){
+        el.innerHTML = el.getAttribute('data-he-html');
+      }
+    });
+    ['alt','placeholder','aria-label','title'].forEach(function(attr){
+      document.querySelectorAll('[data-en-' + attr + ']').forEach(function(el){
+        var heKey = 'data-he-' + attr;
+        if(LANG === 'en'){
+          if(!el.hasAttribute(heKey)) el.setAttribute(heKey, el.getAttribute(attr) || '');
+          el.setAttribute(attr, el.getAttribute('data-en-' + attr));
+        } else if(el.hasAttribute(heKey)){
+          el.setAttribute(attr, el.getAttribute(heKey));
+        }
+      });
+    });
+    var btn = document.getElementById('langToggle');
+    if(btn) btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    try{ localStorage.setItem('mg-lang', LANG); }catch(e){}
+  }
+  window.__mgApplyLang = applyLang;
+  var toggleBtn = document.getElementById('langToggle');
+  if(toggleBtn) toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  if(LANG === 'en') applyLang('en');
+})();
+</script>
 </body>
 </html>

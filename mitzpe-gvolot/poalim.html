@@ -78,6 +78,13 @@ li b{font-weight:700; color:var(--pale)}
   border:1px solid rgba(217,155,33,.45); border-radius:100px; padding:9px 20px;
   transition:background .2s ease, border-color .2s ease}
 .book:hover{background:rgba(217,155,33,.14); border-color:var(--amber)}
+.hdr-right{display:flex; align-items:center; gap:10px}
+.lang-toggle{
+  font-family:var(--sans); font-weight:700; font-size:12.5px; color:var(--pale);
+  background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
+  padding:8px 15px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
+}
+.lang-toggle:hover{border-color:var(--pale); background:rgba(250,247,187,.08)}
 
 .hero{position:relative; min-height:60svh; display:grid; align-items:end; overflow:hidden}
 .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
@@ -94,47 +101,96 @@ li b{font-weight:700; color:var(--pale)}
 </head>
 <body>
 
-<a class="skip" href="#main">דילוג לתוכן</a>
+<a class="skip" href="#main" data-en="Skip to content">דילוג לתוכן</a>
 
 <header class="hdr">
-  <nav class="hdr-nav" aria-label="ניווט ראשי">
-    <a href="overim.html">התיישבות</a>
-    <a href="lomdim.html">מצפה גבולות</a>
-    <a href="../">יוזמות במרחב</a>
+  <nav class="hdr-nav" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
+    <a href="overim.html" data-en="Relocating">התיישבות</a>
+    <a href="lomdim.html" data-en="Mitzpe Gvulot">מצפה גבולות</a>
+    <a href="../" data-en="Ventures in the region">יוזמות במרחב</a>
   </nav>
-  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי">
-    <img src="assets/logo-hinenu.webp" alt="הננו" width="1500" height="530">
+  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
+    <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
   </a>
-  <a class="book" href="index.html#booking">להזמין יום</a>
+  <div class="hdr-right">
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <a class="book" href="index.html#booking" data-en="Book a day">להזמין יום</a>
+  </div>
 </header>
 
 <section class="hero">
   <img src="photos/indoor-table.webp" alt="" width="1400" height="1866">
   <div class="hero-in">
-    <h1>פועלים</h1>
-    <p class="who">יזמים ומובילי שינוי צעירים</p>
-    <p class="lede">מי שכבר בונה משהו, או שיש לו בעיה שהוא רוצה לפתור.</p>
+    <h1 data-en="Doers">פועלים</h1>
+    <p class="who" data-en="Young entrepreneurs and change-makers">יזמים ומובילי שינוי צעירים</p>
+    <p class="lede" data-en="For people already building something, or who have a problem they want to solve.">מי שכבר בונה משהו, או שיש לו בעיה שהוא רוצה לפתור.</p>
   </div>
 </section>
 
 <main class="wrap" id="main">
-  <h2>המאיץ ליזמות לאומית בנגב</h2>
-  <p>תוכנית יזמות חלוצית המקדמת יזמים ומובילי שינוי צעירים. המאיץ ממוקד בהאצת מיזמים יישומיים ובני־קיימא, בתחומי ליבה קריטיים לשיקום האזור:</p>
+  <h2 data-en="The national entrepreneurship accelerator in the Negev">המאיץ ליזמות לאומית בנגב</h2>
+  <p data-en="A pioneering entrepreneurship programme for young entrepreneurs and change-makers. The accelerator focuses on scaling applied, sustainable ventures in core fields critical to the region's recovery:">תוכנית יזמות חלוצית המקדמת יזמים ומובילי שינוי צעירים. המאיץ ממוקד בהאצת מיזמים יישומיים ובני־קיימא, בתחומי ליבה קריטיים לשיקום האזור:</p>
   <ul>
-    <li><b>חינוך משלים</b></li>
-    <li><b>חקלאות מקיימת</b></li>
-    <li><b>רווחה וחוסן</b></li>
+    <li data-en="Supplementary education"><b>חינוך משלים</b></li>
+    <li data-en="Sustainable agriculture"><b>חקלאות מקיימת</b></li>
+    <li data-en="Welfare and resilience"><b>רווחה וחוסן</b></li>
   </ul>
-  <a class="cta" href="../index.html#track-a">להצטרפות למאיץ ליזמות לאומית ←</a>
+  <a class="cta" href="../index.html#track-a" data-en="Apply to the national entrepreneurship accelerator ←">להצטרפות למאיץ ליזמות לאומית ←</a>
 
-  <a class="cta" href="index.html#booking">להשאיר פרטים</a>
+  <a class="cta" href="index.html#booking" data-en="Leave your details">להשאיר פרטים</a>
 
-  <a class="back" href="index.html">← חזרה</a>
+  <a class="back" href="index.html" data-en="← Back">← חזרה</a>
 </main>
 
 <footer style="padding:40px 24px 60px;text-align:center;color:var(--dim);font-size:13px">
-  המרכז לחלוציות · מצפה גבולות · הנגב המערבי
-  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px">הצהרת נגישות</a>
+  <span data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</span>
+  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px" data-en="Accessibility statement">הצהרת נגישות</a>
 </footer>
+<script>
+(function(){
+  "use strict";
+  var LANG = 'he';
+  try{ LANG = localStorage.getItem('mg-lang') || 'he'; }catch(e){}
+  function applyLang(lang){
+    LANG = lang === 'en' ? 'en' : 'he';
+    document.documentElement.setAttribute('lang', LANG);
+    document.documentElement.setAttribute('dir', LANG === 'en' ? 'ltr' : 'rtl');
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      if(LANG === 'en'){
+        if(!el.hasAttribute('data-he-text')) el.setAttribute('data-he-text', el.textContent);
+        el.textContent = el.getAttribute('data-en');
+      } else if(el.hasAttribute('data-he-text')){
+        el.textContent = el.getAttribute('data-he-text');
+      }
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      if(LANG === 'en'){
+        if(!el.hasAttribute('data-he-html')) el.setAttribute('data-he-html', el.innerHTML);
+        el.innerHTML = el.getAttribute('data-en-html');
+      } else if(el.hasAttribute('data-he-html')){
+        el.innerHTML = el.getAttribute('data-he-html');
+      }
+    });
+    ['alt','placeholder','aria-label','title'].forEach(function(attr){
+      document.querySelectorAll('[data-en-' + attr + ']').forEach(function(el){
+        var heKey = 'data-he-' + attr;
+        if(LANG === 'en'){
+          if(!el.hasAttribute(heKey)) el.setAttribute(heKey, el.getAttribute(attr) || '');
+          el.setAttribute(attr, el.getAttribute('data-en-' + attr));
+        } else if(el.hasAttribute(heKey)){
+          el.setAttribute(attr, el.getAttribute(heKey));
+        }
+      });
+    });
+    var btn = document.getElementById('langToggle');
+    if(btn) btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    try{ localStorage.setItem('mg-lang', LANG); }catch(e){}
+  }
+  window.__mgApplyLang = applyLang;
+  var toggleBtn = document.getElementById('langToggle');
+  if(toggleBtn) toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  if(LANG === 'en') applyLang('en');
+})();
+</script>
 </body>
 </html>
