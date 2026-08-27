@@ -478,7 +478,8 @@
     text-shadow:0 0 1px rgba(50,62,124,.4), 0 0 10px rgba(50,62,124,.18);
   }
   /* clears the torn edge hanging below the notebook (width/8.6) */
-  .sign-row{ display:flex; align-items:center; gap:20px; margin-top:calc((min(1100px,100vw) - 52px)/8.6 + 22px); }
+  .letter-signoff{ margin-top:calc((min(1100px,100vw) - 52px)/8.6 + 22px); }
+  .sign-row{ display:flex; align-items:center; gap:20px; }
   .sign-photo{
     flex:none; width:118px; height:118px; border-radius:50%;
     object-fit:cover;
@@ -499,6 +500,13 @@
   .letter .font-credit{ margin-top:14px; letter-spacing:.05em; opacity:.85; }
   .letter .font-credit a{ color:inherit; text-decoration:none; }
   .letter .font-credit a:hover{ text-decoration:underline; }
+  /* desktop: a narrower letter with the signature standing beside it instead of below it */
+  @media (min-width:980px){
+    .letter-sticky{ display:flex; align-items:center; gap:64px; justify-content:center; }
+    .notebook{ flex:0 1 620px; max-width:620px; }
+    .letter-signoff{ flex:0 0 260px; max-width:260px; margin-top:0; }
+    .sign-row{ flex-direction:column; align-items:flex-start; text-align:start; gap:14px; }
+  }
   .sr-only{
     position:absolute; width:1px; height:1px; padding:0; margin:-1px;
     overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
@@ -924,7 +932,7 @@
   .scroll-end .backers.active{ pointer-events:auto; }
   .scroll-msg{
     position:fixed; left:0; right:50%; transform:translate(50%,16px); bottom:190px; z-index:41;
-    display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center;
     opacity:0; pointer-events:none; transition:opacity .5s ease, transform .5s ease;
     padding:0 24px;
   }
@@ -1164,7 +1172,8 @@
         rgba(50,62,124,.09) 1.85em
       );
     }
-    .sign-row{ gap:14px; margin-top:calc((100vw - 52px)/8.6 + 16px); }
+    .sign-row{ gap:14px; }
+    .letter-signoff{ margin-top:calc((100vw - 52px)/8.6 + 16px); }
     .sign-photo{ width:86px; height:86px; }
     .sign-name{ font-size:36px; }
 
@@ -1358,8 +1367,8 @@
     <div class="h5-shade" aria-hidden="true"></div>
     <h1 class="h5-title"><img class="h5-logo" id="heroLogo" src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"><span class="t2" data-en="Here We Are">חלוציות כדרך חיים</span></h1>
     <div class="h5-jump" aria-label="קפיצה מהירה למסלולים" data-en-aria-label="Jump to a track">
-      <a class="h5-jump-btn h5-jump-c" href="#track-c" data-en="Pioneering">התיישבות</a>
-      <a class="h5-jump-btn h5-jump-a" href="#track-a" data-en="Entrepreneurship">יזמות</a>
+      <a class="h5-jump-btn h5-jump-c" href="mitzpe-gvolot/" data-en="Pioneering">התיישבות</a>
+      <a class="h5-jump-btn h5-jump-a" href="more.html#event" data-en="Entrepreneurship">יזמות</a>
     </div>
     <div class="h5-scroll" data-en="Scroll to the story of &quot;Hinenu&quot;">גללו לסיפור של "הננו"</div>
   </section>
@@ -1412,14 +1421,16 @@
         <div class="letter-sticky">
           <p class="sr-only" id="letterPlain"></p>
           <div class="notebook" id="magicText" dir="rtl" aria-hidden="true"></div>
-          <div class="sign-row">
-            <img class="sign-photo" src="assets/roee-azizi.jpg" alt="רועי עזיזי" data-en-alt="Roee Azizi" loading="lazy">
-            <div>
-              <p class="sign-name" data-en="- Roee Azizi">- רועי עזיזי</p>
-              <p class="meta" data-en="Founder and Executive Director · Hinenu">מייסד ומנכ"ל · הננו</p>
+          <div class="letter-signoff">
+            <div class="sign-row">
+              <img class="sign-photo" src="assets/roee-azizi.jpg" alt="רועי עזיזי" data-en-alt="Roee Azizi" loading="lazy">
+              <div>
+                <p class="sign-name" data-en="- Roee Azizi">- רועי עזיזי</p>
+                <p class="meta" data-en="Founder and Executive Director · Hinenu">מייסד ומנכ"ל · הננו</p>
+              </div>
             </div>
+            <p class="meta font-credit" data-en-html="Handwriting: Aner Shapira · <a href=&quot;https://www.ot-hayim.co.il/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ot Chaim project</a>">כתב היד: יפתח יעבץ ז"ל · <a href="https://www.ot-hayim.co.il/fonts/iftah-yavetz/" target="_blank" rel="noopener">מיזם אות חיים</a></p>
           </div>
-          <p class="meta font-credit" data-en-html="Handwriting: Aner Shapira · <a href=&quot;https://www.ot-hayim.co.il/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ot Chaim project</a>">כתב היד: יפתח יעבץ ז"ל · <a href="https://www.ot-hayim.co.il/fonts/iftah-yavetz/" target="_blank" rel="noopener">מיזם אות חיים</a></p>
         </div>
       </div>
     </section>
@@ -1445,7 +1456,7 @@
               <span class="track-chevron" aria-hidden="true"></span>
             </div>
             <div class="track-body">
-              <p class="desc" data-en-html="We're looking for young people who want to solve national problems and are drawn to the startup world, or entrepreneurs just starting out - come to the meet-ups we run, get inspired, and find partners for the road. <b>And for those who want to go all the way:</b> we're building a national startup accelerator, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מחפשים צעירים שרוצים לפתור בעיות לאומיות ומתעניינים בעולם היזמות, או יזמים בתחילת דרכם - בואו לערבי היזמות שאנחנו מרימים, תתמלאו השראה ותמצאו שותפים ושותפות לדרך. <b>ולמי שרוצה ללכת עד הסוף:</b> אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
+              <p class="desc" data-en-html="We're looking for young people who want to solve national problems and are drawn to the startup world, or entrepreneurs just starting out - come to the meet-ups we run, get inspired, and find partners for the road. <b>And for those who want to go all the way:</b> we're building a national entrepreneurship accelerator, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מחפשים צעירים שרוצים לפתור בעיות לאומיות ומתעניינים בעולם היזמות, או יזמים בתחילת דרכם - בואו לערבי היזמות שאנחנו מרימים, תתמלאו השראה ותמצאו שותפים ושותפות לדרך. <b>ולמי שרוצה ללכת עד הסוף:</b> אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
               <div class="track-contact">
                 <span data-en="For more details:">לפרטים נוספים:</span>
                 <span class="tc-name" data-en="Roee">רועי</span>
@@ -1548,6 +1559,7 @@
     <button type="button" class="modal-close" id="applyClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
     <h3 id="applyTitle" data-en="Apply to the Accelerator">מועמדות למאיץ ליזמות לאומית</h3>
     <p class="modal-sub" data-en="Tell us who you are - and we'll get back to you for a conversation.">ספרו לנו מי אתם - ונחזור אליכם לשיחה.</p>
+    <p class="modal-sub" data-en="We're building a national entrepreneurship accelerator for beginning entrepreneurs, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
     <form class="signup-form" id="applyForm" novalidate>
       <div class="field">
         <label for="fullname" data-en="Full name">שם מלא</label>
@@ -1628,6 +1640,29 @@
 
   var LANG = 'he'; /* current UI language, flipped by the EN/עב toggle */
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- hero pin: the sticky video wrap assumes hero5 is exactly one viewport tall.
+     On short/wide windows the hero's own content (title + jump buttons + scroll hint)
+     can grow past 100svh, leaving an uncovered strip below the video with a hard seam
+     where the plain page background shows through. Sync the wrap's height to hero5's
+     real rendered height instead of hardcoding 100svh. ---- */
+  (function(){
+    var pinVidWrap = document.querySelector('.pin-vid-wrap');
+    var heroEl = document.getElementById('hero');
+    if(!pinVidWrap || !heroEl) return;
+    function syncHeroPinHeight(){
+      var h = Math.max(heroEl.offsetHeight, window.innerHeight);
+      pinVidWrap.style.height = h + 'px';
+      pinVidWrap.style.marginBottom = (-h) + 'px';
+    }
+    syncHeroPinHeight();
+    if('ResizeObserver' in window){
+      new ResizeObserver(syncHeroPinHeight).observe(heroEl);
+    }
+    window.addEventListener('resize', syncHeroPinHeight);
+    window.addEventListener('load', syncHeroPinHeight);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(syncHeroPinHeight);
+  })();
 
   /* ================================================================
      איסוף נתונים → Google Sheets (דרך Google Forms)

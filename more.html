@@ -478,7 +478,8 @@
     text-shadow:0 0 1px rgba(50,62,124,.4), 0 0 10px rgba(50,62,124,.18);
   }
   /* clears the torn edge hanging below the notebook (width/8.6) */
-  .sign-row{ display:flex; align-items:center; gap:20px; margin-top:calc((min(1100px,100vw) - 52px)/8.6 + 22px); }
+  .letter-signoff{ margin-top:calc((min(1100px,100vw) - 52px)/8.6 + 22px); }
+  .sign-row{ display:flex; align-items:center; gap:20px; }
   .sign-photo{
     flex:none; width:118px; height:118px; border-radius:50%;
     object-fit:cover;
@@ -495,9 +496,16 @@
     font-size:11px; letter-spacing:.3em;
     color:var(--dim); margin:4px 0 0; font-weight:700;
   }
-  .letter .font-credit{ margin-top:14px; letter-spacing:.05em; opacity:.6; }
+  .letter .font-credit{ margin-top:14px; letter-spacing:.05em; opacity:.85; }
   .letter .font-credit a{ color:inherit; text-decoration:none; }
   .letter .font-credit a:hover{ text-decoration:underline; }
+  /* desktop: a narrower letter with the signature standing beside it instead of below it */
+  @media (min-width:980px){
+    .letter-sticky{ display:flex; align-items:center; gap:64px; justify-content:center; }
+    .notebook{ flex:0 1 620px; max-width:620px; }
+    .letter-signoff{ flex:0 0 260px; max-width:260px; margin-top:0; }
+    .sign-row{ flex-direction:column; align-items:flex-start; text-align:start; gap:14px; }
+  }
   .sr-only{
     position:absolute; width:1px; height:1px; padding:0; margin:-1px;
     overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
@@ -934,7 +942,7 @@
   .scroll-end .backers.active{ pointer-events:auto; }
   .scroll-msg{
     position:fixed; left:0; right:50%; transform:translate(50%,16px); bottom:150px; z-index:41;
-    display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center;
     opacity:0; pointer-events:none; transition:opacity .5s ease, transform .5s ease;
     padding:0 24px;
   }
@@ -1174,7 +1182,8 @@
         rgba(50,62,124,.09) 1.85em
       );
     }
-    .sign-row{ gap:14px; margin-top:calc((100vw - 52px)/8.6 + 16px); }
+    .sign-row{ gap:14px; }
+    .letter-signoff{ margin-top:calc((100vw - 52px)/8.6 + 16px); }
     .sign-photo{ width:86px; height:86px; }
     .sign-name{ font-size:36px; }
 
@@ -1365,6 +1374,7 @@
       <div class="tracks-head">
         <p class="kicker reveal" data-en="Our meet-ups">הערבים שלנו</p>
         <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>entrepreneurship</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
+        <p class="sub reveal" style="--d:.06s; max-width:620px; margin:0 auto 4px" data-en="We're building a national entrepreneurship accelerator for beginning entrepreneurs, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
         <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-en="Join the WhatsApp group for updates on the next meet-up ←">הצטרפות לקבוצת הוואטסאפ - עדכונים על הערב הבא ←</a>
       </div>
       <div class="ev-featured">
@@ -1490,7 +1500,7 @@
 
       <details class="reveal" style="--d:.1s">
         <summary data-en-html="Is this defined by a timeline or a mission? <span class='plus' aria-hidden='true'></span>">האם זה מוגדר בזמן או במשימה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a" data-en="The first step is to show up, get to know people, and start thinking big. The second step - start building; we'll meet and hear what you're working on. The third step - join the national startup accelerator, where we'll help you go from an idea taking shape to a venture that changes reality.">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני - להתחיל להקים; ניפגש, ונשמע על מה אתם עובדים. הצעד השלישי - להצטרף למאיץ ליזמות לאומית, שבו נעזור לכם לעבור מרעיון בהתהוות למיזם שמשנה מציאות.</p>
+        <p class="a" data-en="The first step is to show up, get to know people, and start thinking big. The second step - start building; we'll meet and hear what you're working on. The third step - join the national entrepreneurship accelerator, where we'll help you go from an idea taking shape to a venture that changes reality.">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני - להתחיל להקים; ניפגש, ונשמע על מה אתם עובדים. הצעד השלישי - להצטרף למאיץ ליזמות לאומית, שבו נעזור לכם לעבור מרעיון בהתהוות למיזם שמשנה מציאות.</p>
       </details>
 
       <details class="reveal" style="--d:.15s">
@@ -1522,6 +1532,7 @@
     <button type="button" class="modal-close" id="applyClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
     <h3 id="applyTitle" data-en="Apply to the Accelerator">מועמדות למאיץ ליזמות לאומית</h3>
     <p class="modal-sub" data-en="Tell us who you are - and we'll get back to you for a conversation.">ספרו לנו מי אתם - ונחזור אליכם לשיחה.</p>
+    <p class="modal-sub" data-en="We're building a national entrepreneurship accelerator for beginning entrepreneurs, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
     <form class="signup-form" id="applyForm" novalidate>
       <div class="field">
         <label for="fullname" data-en="Full name">שם מלא</label>
@@ -1618,6 +1629,29 @@
 
   var LANG = 'he'; /* current UI language, flipped by the EN/עב toggle */
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- hero pin: the sticky video wrap assumes hero5 is exactly one viewport tall.
+     On short/wide windows the hero's own content (title + jump buttons + scroll hint)
+     can grow past 100svh, leaving an uncovered strip below the video with a hard seam
+     where the plain page background shows through. Sync the wrap's height to hero5's
+     real rendered height instead of hardcoding 100svh. ---- */
+  (function(){
+    var pinVidWrap = document.querySelector('.pin-vid-wrap');
+    var heroEl = document.getElementById('hero');
+    if(!pinVidWrap || !heroEl) return;
+    function syncHeroPinHeight(){
+      var h = Math.max(heroEl.offsetHeight, window.innerHeight);
+      pinVidWrap.style.height = h + 'px';
+      pinVidWrap.style.marginBottom = (-h) + 'px';
+    }
+    syncHeroPinHeight();
+    if('ResizeObserver' in window){
+      new ResizeObserver(syncHeroPinHeight).observe(heroEl);
+    }
+    window.addEventListener('resize', syncHeroPinHeight);
+    window.addEventListener('load', syncHeroPinHeight);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(syncHeroPinHeight);
+  })();
 
   /* ================================================================
      איסוף נתונים → Google Sheets (דרך Google Forms)
