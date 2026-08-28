@@ -1407,8 +1407,7 @@
   <section class="event" id="event">
     <div class="wrap">
       <div class="tracks-head">
-        <p class="kicker reveal" data-en="Our meet-ups">הערבים שלנו</p>
-        <h2 class="reveal" style="--d:.05s" data-en-html="National <span class='acc'>entrepreneurship</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
+        <h2 class="reveal" data-en-html="National <span class='acc'>entrepreneurship</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
         <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-en="Join the WhatsApp group for updates on the next meet-up ←">הצטרפות לקבוצת הוואטסאפ - עדכונים על הערב הבא ←</a>
       </div>
       <div class="ev-featured">
@@ -1448,8 +1447,7 @@
   <!-- ======= 5. VENTURES: already working ======= -->
   <section class="ventures" id="ventures">
     <div class="wrap">
-      <p class="kicker reveal" data-en="Already started">כבר התחלנו</p>
-      <h2 class="reveal" style="--d:.05s" data-en-html="Our <span class='hl'>Entrepreneurs.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
+      <h2 class="reveal" data-en-html="Our <span class='hl'>Entrepreneurs.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
       <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו" data-en-aria-label="Ventures we've mentored">
         <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
           <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
@@ -2061,11 +2059,9 @@
     var list = LANG === 'en' ? EV_EN : EV;
     var e = list[i]; if(!e || !evOverlay) return;
     evLastIndex = i;
-    var kickerUp = LANG === 'en' ? (e.status==='future' ? 'Coming up' : 'Already happened') : (e.status==='future' ? 'הערב הקרוב' : 'כבר קרה');
     var regLabel = LANG === 'en' ? 'Registration form →' : 'שאלון הרשמה לערב ←';
     var waLabel = LANG === 'en' ? 'I want to join the WhatsApp group' : 'אני רוצה להצטרף לקבוצת הוואטסאפ';
-    var h = '<p class="kicker">' + kickerUp + '</p>';
-    h += '<h3>' + escT(e.title) + ' <span class="ev-guest">' + escT(e.guest) + '</span></h3>';
+    var h = '<h3>' + escT(e.title) + ' <span class="ev-guest">' + escT(e.guest) + '</span></h3>';
     h += '<div class="event-meta">' + e.chips.map(function(c){ return '<span>'+escT(c)+'</span>'; }).join('') + '</div>';
     h += '<p class="ev-lede">' + escT(e.lede) + '</p>';
     if(e.status === 'future'){

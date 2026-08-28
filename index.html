@@ -1444,8 +1444,7 @@
   <section class="tracks" id="tracks">
     <div class="wrap">
       <div class="tracks-head">
-        <p class="kicker tracks-kicker-lg reveal" data-en="Where should I go from here?">הנני. אבל לאן?</p>
-        <h2 class="reveal" style="--d:.05s" data-en-html="Choose your <span class='acc'>track</span>.">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
+        <h2 class="reveal" data-en-html="Choose your <span class='acc'>track</span>.">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
       </div>
 
       <div class="tflow" id="tflow" role="group" aria-label="שני המסלולים" data-en-aria-label="Two tracks">
@@ -1453,7 +1452,6 @@
           <div class="track-a-panel">
             <div class="track-summary" role="button" tabindex="0" aria-expanded="false">
               <div class="track-summary-text">
-                <p class="tag" data-en="Track A · national entrepreneurship">מסלול א׳ · יזמות לאומית</p>
                 <h3 data-en-html="National entrepreneurship<br>as a way of life">יזמות לאומית<br>כדרך חיים</h3>
               </div>
               <span class="track-chevron" aria-hidden="true"></span>
@@ -1477,7 +1475,6 @@
           <div class="track-c-panel">
             <div class="track-summary" role="button" tabindex="0" aria-expanded="false">
               <div class="track-summary-text">
-                <p class="tag" data-en="Track B · community building on the frontier">מסלול ב׳ · התיישבות בנגב ובגליל</p>
                 <h3 data-en-html="Pioneering<br>as a way of life">חלוציות בַּסְפָר<br>כדרך חיים</h3>
               </div>
               <span class="track-chevron" aria-hidden="true"></span>
@@ -2061,11 +2058,9 @@
     var list = LANG === 'en' ? EV_EN : EV;
     var e = list[i]; if(!e || !evOverlay) return;
     evLastIndex = i;
-    var kickerUp = LANG === 'en' ? (e.status==='future' ? 'Coming up' : 'Already happened') : (e.status==='future' ? 'הערב הקרוב' : 'כבר קרה');
     var regLabel = LANG === 'en' ? 'Registration form →' : 'שאלון הרשמה לערב ←';
     var waLabel = LANG === 'en' ? 'I want to join the WhatsApp group' : 'אני רוצה להצטרף לקבוצת הוואטסאפ';
-    var h = '<p class="kicker">' + kickerUp + '</p>';
-    h += '<h3>' + escT(e.title) + ' <span class="ev-guest">' + escT(e.guest) + '</span></h3>';
+    var h = '<h3>' + escT(e.title) + ' <span class="ev-guest">' + escT(e.guest) + '</span></h3>';
     h += '<div class="event-meta">' + e.chips.map(function(c){ return '<span>'+escT(c)+'</span>'; }).join('') + '</div>';
     h += '<p class="ev-lede">' + escT(e.lede) + '</p>';
     if(e.status === 'future'){
