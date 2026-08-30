@@ -492,9 +492,9 @@
   }
   html[lang="en"] .sign-name{ font-family:'OH Aner Shapiro','Frank Ruhl Libre',serif; }
   .letter .meta{
-    font-family:'Frank Ruhl Libre',serif; font-style:italic;
+    font-family:'Heebo',sans-serif;
     font-size:14px; letter-spacing:.02em;
-    color:var(--dim); margin:4px 0 0; font-weight:500;
+    color:var(--dim); margin:4px 0 0; font-weight:400;
   }
   /* opacity raised from .6 → AA contrast on black for 11px bold (was 3.19:1) */
   .letter .font-credit{ margin-top:14px; letter-spacing:.05em; opacity:.85; }
@@ -555,7 +555,7 @@
     font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
     font-size:clamp(30px,5vw,54px); line-height:1.15; margin:0 0 14px;
   }
-  .tracks-head h2 .acc{ color:var(--hl-blue); }
+  .tracks-head h2 .acc, .tracks-head .sub .acc{ color:var(--hl-blue); }
   .tracks-head .sub{ color:var(--dim); font-size:17px; margin:0; }
   /* tracks: both shown side by side, hover to highlight */
   .tflow{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:stretch; }
@@ -1331,7 +1331,8 @@
         <div class="fan-menu" hidden>
           <button type="button" data-apply data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</button>
           <a href="more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
-          <a href="mitzpe-gvolot/index.html" data-en="I want guidance relocating south or north">אני רוצה הכוונה לעבור לדרום או לצפון</a>
+          <a href="mitzpe-gvolot/lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+          <a href="mitzpe-gvolot/overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
         </div>
       </div>
@@ -1440,7 +1441,8 @@
   <section class="tracks" id="tracks">
     <div class="wrap">
       <div class="tracks-head">
-        <h2 class="reveal" data-en-html="Choose your <span class='acc'>track</span>.">בחרו את <span class="acc">המסלול</span> שלכם.</h2>
+        <h2 class="reveal" data-en="Here we are. But where to?">הנני. אבל לאן?</h2>
+        <p class="sub reveal" style="--d:.05s" data-en-html="Choose your <span class='acc'>track</span>.">בחרו את <span class="acc">המסלול</span> שלכם.</p>
       </div>
 
       <div class="tflow" id="tflow" role="group" aria-label="שני המסלולים" data-en-aria-label="Two tracks">
