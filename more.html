@@ -1746,19 +1746,23 @@
       pinVidWrap.style.marginBottom = (-h) + 'px';
     }
     syncHeroPinHeight();
-    if('ResizeObserver' in window){
-      new ResizeObserver(syncHeroPinHeight).observe(heroEl);
-    }
     /* mobile browsers change window.innerHeight (not width) as the address bar
        shows/hides while scrolling - recalculating on that alone reflows the sticky
        height mid-scroll and can make the pinned video appear to drag past where it
-       should release. Only resync on a real width change (rotation/resize). */
+       should release / peek through under the next section. Only resync on a real
+       width change (rotation/resize). This guard has to cover BOTH the resize
+       listener AND the ResizeObserver below, since hero5's own height is driven by
+       svh units and will itself change size on every address-bar toggle. */
     var lastW = window.innerWidth;
-    window.addEventListener('resize', function(){
+    function syncHeroPinHeightOnWidthChange(){
       if(window.innerWidth === lastW) return;
       lastW = window.innerWidth;
       syncHeroPinHeight();
-    });
+    }
+    if('ResizeObserver' in window){
+      new ResizeObserver(syncHeroPinHeightOnWidthChange).observe(heroEl);
+    }
+    window.addEventListener('resize', syncHeroPinHeightOnWidthChange);
     window.addEventListener('load', syncHeroPinHeight);
     if(document.fonts && document.fonts.ready) document.fonts.ready.then(syncHeroPinHeight);
   })();
