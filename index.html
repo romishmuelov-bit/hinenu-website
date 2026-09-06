@@ -287,7 +287,12 @@
   /* the bg video is pinned in place from the hero through the end of Roee's letter,
      then scrolls away naturally: a sticky layer with a matching negative margin
      so it doesn't push the real content down, which scrolls over it normally */
-  .hero-letter-pin{ position:relative; }
+  /* clip the sticky video to its own zone: once this block scrolls out the parked
+     video wrap otherwise extends its full height downward and shows through the
+     transparent scroll-end region below the (short, collapsed) tracks on mobile.
+     `clip` (not hidden/auto) doesn't create a scroll container, so the letter's
+     inner position:sticky keeps working. */
+  .hero-letter-pin{ position:relative; overflow:clip; }
   .pin-vid-wrap{
     position:sticky; top:0; height:100svh;
     margin-bottom:-100svh;
