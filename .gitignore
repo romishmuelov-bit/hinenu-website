@@ -27,3 +27,13 @@ WhatsApp Image*
 Screenshot *.png
 paper 3.png
 הננו LOGO_upscayl*
+
+# raw source material + local exports, kept out of the repo
+MitzpeGvolot/
+*MitzpeGvolot - עותק*/
+שותפים/
+assets/ערב יזמות*/
+fonts/*.zip
+content-export.*
+hinenu-landing-single-file.html
+.claude/

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>עוברים · מצפה גבולות</title>
-<meta name="description" content="סמינרים לחלוציות לחבורות התיישבות — מקהילות בוגרים לקהילות חיים.">
+<meta name="description" content="סמינרים לחלוציות לחבורות התיישבות - מקהילות בוגרים לקהילות חיים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -41,6 +41,40 @@ a{color:inherit}
   transition:color .2s ease, border-color .2s ease}
 .hdr-nav a:hover{color:var(--pale)}
 .hdr-nav a[aria-current="page"]{color:var(--pale); border-bottom-color:rgba(217,155,33,.55)}
+
+.navfan{ position:relative; }
+.fan-btn{
+  font-family:var(--sans); font-weight:800; font-size:15.5px; color:var(--pale);
+  letter-spacing:1.5px; background:none; border:none; padding:8px 14px;
+  cursor:pointer; text-decoration:none;
+  transition:color .2s ease;
+}
+.fan-btn:hover{ color:#fff; }
+.fan-menu{
+  position:absolute; top:calc(100% + 10px); inset-inline-start:0;
+  display:flex; flex-direction:column; gap:8px; min-width:230px; z-index:60;
+}
+.fan-menu[hidden]{ display:none; }
+.fan-menu a{
+  display:block; font-family:var(--sans); font-weight:500; font-size:14px; text-align:start;
+  background:var(--navy); border:1px solid rgba(250,247,187,.22); border-radius:12px;
+  box-shadow:0 16px 36px rgba(8,24,43,.6);
+  color:var(--pale); padding:11px 16px; text-decoration:none;
+  transform-origin:top right;
+  animation:fanDockIn .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+html[dir="ltr"] .fan-menu a{ transform-origin:top left; }
+.fan-menu a:hover{ background:#1a4066; }
+.fan-menu a.fan-special{ font-weight:800; }
+.fan-menu > :nth-child(1){ animation-delay:.02s; }
+.fan-menu > :nth-child(2){ animation-delay:.08s; }
+.fan-menu > :nth-child(3){ animation-delay:.14s; }
+.fan-menu > :nth-child(4){ animation-delay:.2s; }
+.fan-menu > :nth-child(5){ animation-delay:.26s; }
+.fan-menu > :nth-child(6){ animation-delay:.32s; }
+.fan-menu > :nth-child(7){ animation-delay:.38s; }
+@keyframes fanDockIn{ from{ opacity:0; transform:translateY(-22px) scale(.5); } }
+
 .hdr-logo{position:absolute; inset-inline-start:50%; transform:translateX(50%); line-height:0}
 .hdr-logo img{height:26px; width:auto; display:block; opacity:.95}
 .book{font-weight:700; font-size:13.5px; color:var(--amber); text-decoration:none;
@@ -48,6 +82,7 @@ a{color:inherit}
   transition:background .2s ease, border-color .2s ease}
 .book:hover{background:rgba(217,155,33,.14); border-color:var(--amber)}
 .hdr-right{display:flex; align-items:center; gap:10px}
+.hdr-left{display:flex; align-items:center; gap:10px}
 .lang-toggle{
   font-family:var(--sans); font-weight:700; font-size:12.5px; color:var(--pale);
   background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
@@ -55,6 +90,14 @@ a{color:inherit}
 }
 .lang-toggle:hover{border-color:var(--pale); background:rgba(250,247,187,.08)}
 
+/* the bar itself stays pinned RTL (dir="rtl" in the markup) so the menu never
+   swaps sides with the language; only the label text reads LTR in English */
+html[lang="en"] .fan-btn,
+html[lang="en"] .fan-menu a,
+html[lang="en"] .drawer a,
+html[lang="en"] .drawer-section-lbl,
+html[lang="en"] .lang-toggle,
+html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .menu-btn{ display:none; }
 .drawer-backdrop{
   position:fixed; inset:0; z-index:199; background:rgba(8,24,43,.6);
@@ -80,6 +123,17 @@ a{color:inherit}
   color:var(--pale); text-decoration:none; border-bottom:1px solid rgba(250,247,187,.14);
 }
 .drawer .drawer-book{ color:var(--amber); font-weight:700; }
+.drawer-section-lbl{
+  font-family:var(--sans); font-weight:800; font-size:11px; letter-spacing:2px;
+  color:var(--dim); margin:16px 0 6px;
+}
+.drawer-section-lbl:first-of-type{ margin-top:4px; }
+.drawer .drawer-lang{
+  margin-top:16px; align-self:flex-start;
+  font-family:var(--sans); font-weight:700; font-size:13px; color:var(--pale);
+  background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
+  padding:9px 18px; cursor:pointer;
+}
 @media (max-width:760px){
   .menu-btn{
     display:flex; align-items:center; justify-content:center;
@@ -87,13 +141,15 @@ a{color:inherit}
     background:transparent; color:var(--pale); cursor:pointer; font-size:16px;
   }
   .book{ display:none; }
+  .hdr-left{ display:none; }
+  .hdr-right > *:not(.menu-btn){ display:none; }
 }
 
 .hero{position:relative; min-height:66svh; display:grid; align-items:end; overflow:hidden}
 .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
 .hero::after{content:''; position:absolute; inset:0;
   background:linear-gradient(180deg, rgba(8,24,43,.72) 0%, rgba(8,24,43,.28) 42%, rgba(19,52,88,.94) 100%)}
-.hero-in{position:relative; z-index:2; max-width:900px; margin:0 auto; padding:0 24px 54px; width:100%}
+.hero-in{position:relative; z-index:2; max-width:900px; margin:0 auto; padding:88px 24px 54px; width:100%}
 .hero .kicker{font-family:var(--sans); font-size:11px; letter-spacing:.24em; color:var(--amber); margin:0 0 12px}
 .hero h1{font-family:var(--display); font-weight:400; margin:0 0 14px;
   font-size:clamp(52px,10vw,120px); line-height:.95}
@@ -142,8 +198,9 @@ p.body{font-size:16.5px; line-height:1.75; margin:0 0 16px}
 footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13px}
 
 @media (max-width:760px){
-  .hdr-nav{display:none}
   .hdr-logo img{height:22px}
+  .fan-menu{ min-width:0; width:max-content; max-width:calc(100vw - 28px); }
+  .fan-menu a{ font-size:13.5px; padding:10px 14px; }
   .gal{grid-template-columns:1fr}
   .gal .tall{grid-row:auto}
   .gal .tall img,.gal figure:not(.tall) img{height:230px}
@@ -154,18 +211,38 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
 
 <a class="skip" href="#main" data-en="Skip to content">דילוג לתוכן</a>
 
-<header class="hdr">
-  <nav class="hdr-nav" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
-    <a href="overim.html" aria-current="page" data-en="Relocating">התיישבות</a>
-    <a href="lomdim.html" data-en="Mitzpe Gvulot">מצפה גבולות</a>
-    <a href="../more.html#event" data-en="Ventures in the region">יוזמות במרחב</a>
-  </nav>
-  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
+<header class="hdr" dir="rtl">
+  <div class="hdr-left">
+    <div class="navfan" id="fanHineni">
+      <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
+      <div class="fan-menu" hidden>
+        <a href="../index.html#track-a" data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</a>
+        <a href="../more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
+        <a href="lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+        <a href="overim.html" aria-current="page" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+        <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
+        <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+      </div>
+    </div>
+    <div class="navfan" id="navFan">
+      <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
+      <div class="fan-menu" hidden>
+        <a href="../index.html" data-en="Hinenu">הננו</a>
+        <a href="lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
+        <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
+        <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
+        <a class="fan-special" href="overim.html" aria-current="page" data-en="Relocating →">התיישבות ←</a>
+        <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
+      </div>
+    </div>
+    <a class="fan-btn" href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  </div>
+  <a class="hdr-logo" href="index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
     <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
   </a>
   <div class="hdr-right">
+    <a class="fan-btn" href="accessibility.html" aria-label="נגישות" data-en="Accessibility" data-en-aria-label="Accessibility">נגישות</a>
     <button class="lang-toggle" id="langToggle" type="button">EN</button>
-    <a class="book" href="index.html#booking" data-en="Book a day">להזמין יום</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="תפריט" data-en-aria-label="Menu" aria-expanded="false" aria-controls="drawer">☰</button>
   </div>
 </header>
@@ -173,26 +250,40 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <nav class="drawer" id="drawer" aria-label="תפריט נייד" data-en-aria-label="Mobile menu">
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
-  <a href="overim.html" data-en="Relocating">התיישבות</a>
-  <a href="lomdim.html" data-en="Mitzpe Gvulot">מצפה גבולות</a>
-  <a href="../more.html#event" data-en="Ventures in the region">יוזמות במרחב</a>
-  <a class="drawer-book" href="index.html#booking" data-en="Book a day">להזמין יום</a>
+  <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
+  <a href="../index.html#track-a" data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</a>
+  <a href="../more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
+  <a href="lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <a href="overim.html" aria-current="page" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+  <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
+  <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+  <p class="drawer-section-lbl" data-en="Navigate">ניווט</p>
+  <a href="../index.html" data-en="Hinenu">הננו</a>
+  <a href="lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
+  <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
+  <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
+  <a class="drawer-book" href="overim.html" aria-current="page" data-en="Relocating">התיישבות</a>
+  <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
+  <p class="drawer-section-lbl" data-en="More">עוד</p>
+  <a href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  <a href="accessibility.html" data-en="Accessibility">נגישות</a>
+  <button class="drawer-lang" id="drawerLangToggle" type="button">EN</button>
 </nav>
 
 <section class="hero">
   <img src="photos/pioneers-night.jpg" alt="קבוצה גדולה מצטלמת בלילה מול מגדל מצפה גבולות עם הכיתוב חלוצים של תקווה" data-en-alt="A large group photographed at night before the Mitzpe Gvulot tower, painted with Pioneers of Hope" width="4000" height="1960">
   <div class="hero-in">
-    <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21–35</p>
+    <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21-35</p>
     <h1 data-en="Relocating">עוברים</h1>
-    <p class="lede" data-en="For people who already feel ready to move - and are looking for where, and with whom.">מי שכבר מרגיש שהוא רוצה לזוז — ומחפש לאן, ועם מי.</p>
+    <p class="lede" data-en="From communities of graduates to communities of life.">מקהילות בוגרים לקהילות חיים.</p>
   </div>
 </section>
 
 <main class="wrap" id="main">
 
   <div class="intro">
-    <p data-en="Seminars training relocation groups of young people aged 21-35, couples and families, organised as part of communities of combat-unit veterans, academic institutions and leadership programmes.">סמינרים להכשרת חבורות התיישבות של צעירים בגילאי 21–35, זוגות ומשפחות, המאורגנים כחלק מקהילות בוגרי יחידות קרביות, מוסדות אקדמיים ותוכניות מנהיגות.</p>
-    <p data-en="The programme focuses on training them as settlement cores, who integrate into and live in the region's kibbutzim.">התוכנית מתמקדת בהכשרתם כגרעיני התיישבות, המשתלבים וחיים בקיבוצי החבל.</p>
+    <p data-en="Seminars training relocation groups of young people aged 21-35, couples and families, organised as part of communities of combat-unit veterans, academic institutions and leadership programmes - or just groups of friends.">סמינרים להכשרת חבורות התיישבות של צעירים בגילאי 21-35, זוגות ומשפחות, המאורגנים כחלק מקהילות בוגרי יחידות קרביות, מוסדות אקדמיים ותוכניות מנהיגות - או סתם חבורות של חברים.</p>
+    <p data-en="The programme focuses on training them as settlement cores, who integrate into and live in Negev communities.">התוכנית מתמקדת בהכשרתם כגרעיני התיישבות, המשתלבים וחיים ביישובי הנגב.</p>
   </div>
 
   <h2 data-en="What's here">מה יש כאן</h2>
@@ -201,6 +292,11 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
     <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
     <li data-en="From alumni communities to communities of life">מקהילות בוגרים לקהילות חיים</li>
   </ul>
+
+  <h2 data-en="The groups model">מודל החבורות</h2>
+  <p data-en="A group of friends who come from the same framework and move to live together in the Gaza-border region or the Galilee. You get our support building the core group and finding the place that suits you - friends from the same unit, degree, pre-military academy, and so on.">קבוצה של חברים, שמגיעים מאותה מסגרת ועוברים לגור ביחד בעוטף או בגליל. מקבלים מאיתנו ליווי בבניית הגרעין ומציאת המקום המתאים להם. חברים מאותו צוות/תואר/מכינה וכו'.</p>
+  <p data-en="Coordinating an alumni programme? Book us.">רכזי תוכניות בוגרים? תזמינו אותנו.</p>
+  <p class="quote" data-en="In short - you bring the group, we help kick-start the beginning.">ולסיכום - אתם מביאים את החבורה, אנחנו עוזרים להתניע את ההתחלה.</p>
 
   <h2 data-en="The community">הקהילה</h2>
   <p class="sec-note" data-en="From the lookout, from the seminars, and from the evenings in between.">מהמצפה, מהסמינרים, ומהערבים שבאמצע.</p>
@@ -229,6 +325,29 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
   <span data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</span>
   <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px" data-en="Accessibility statement">הצהרת נגישות</a>
 </footer>
+<script>
+/* ---------- nav fan: same dropdown mechanic as the main site's הנני+/תצוגה+ ---------- */
+(function(){
+  function setupFan(id){
+    var root = document.getElementById(id); if(!root) return null;
+    var btn = root.querySelector('.fan-btn'), menu = root.querySelector('.fan-menu');
+    function close(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+    function open(){
+      document.querySelectorAll('.fan-menu').forEach(function(m){ m.hidden = true; });
+      document.querySelectorAll('.fan-btn').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+      menu.hidden = false; btn.setAttribute('aria-expanded','true');
+    }
+    var toggleFan = function(e){ e.preventDefault(); e.stopPropagation(); menu.hidden ? open() : close(); };
+    btn.addEventListener('pointerup', toggleFan);
+    btn.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') toggleFan(e); });
+    document.addEventListener('pointerdown', function(e){ if(!root.contains(e.target)) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    menu.querySelectorAll('a,button').forEach(function(it){ it.addEventListener('click', function(){ close(); }); });
+  }
+  setupFan('fanHineni');
+  setupFan('navFan');
+})();
+</script>
 <script>
 /* ---------- mobile drawer: everything the desktop header nav shows ---------- */
 (function(){
@@ -288,13 +407,15 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
         }
       });
     });
-    var btn = document.getElementById('langToggle');
-    if(btn) btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    document.querySelectorAll('#langToggle, #drawerLangToggle').forEach(function(btn){
+      btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    });
     try{ localStorage.setItem('mg-lang', LANG); }catch(e){}
   }
   window.__mgApplyLang = applyLang;
-  var toggleBtn = document.getElementById('langToggle');
-  if(toggleBtn) toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  document.querySelectorAll('#langToggle, #drawerLangToggle').forEach(function(toggleBtn){
+    toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  });
   if(LANG === 'en') applyLang('en');
 })();
 </script>

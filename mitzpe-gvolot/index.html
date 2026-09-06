@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>המרכז לחלוציות · מצפה גבולות</title>
-<meta name="description" content="פעם היה פה רק חול. המרכז לחלוציות במצפה גבולות — הנגב המערבי.">
+<meta name="description" content="פעם היה פה רק חול. המרכז לחלוציות במצפה גבולות - הנגב המערבי.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -75,6 +75,39 @@ a{color:inherit}
 .hdr-nav a:hover{color:var(--pale)}
 .hdr-nav a[aria-current="page"]{color:var(--pale); border-bottom-color:rgba(217,155,33,.55)}
 
+.navfan{ position:relative; }
+.fan-btn{
+  font-family:var(--sans); font-weight:800; font-size:15.5px; color:var(--pale);
+  letter-spacing:1.5px; background:none; border:none; padding:8px 14px;
+  cursor:pointer; text-decoration:none;
+  transition:color .2s ease;
+}
+.fan-btn:hover{ color:#fff; }
+.fan-menu{
+  position:absolute; top:calc(100% + 10px); inset-inline-start:0;
+  display:flex; flex-direction:column; gap:8px; min-width:230px; z-index:60;
+}
+.fan-menu[hidden]{ display:none; }
+.fan-menu a{
+  display:block; font-family:var(--sans); font-weight:500; font-size:14px; text-align:start;
+  background:var(--navy); border:1px solid rgba(250,247,187,.22); border-radius:12px;
+  box-shadow:0 16px 36px rgba(8,24,43,.6);
+  color:var(--pale); padding:11px 16px; text-decoration:none;
+  transform-origin:top right;
+  animation:fanDockIn .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+html[dir="ltr"] .fan-menu a{ transform-origin:top left; }
+.fan-menu a:hover{ background:#1a4066; }
+.fan-menu a.fan-special{ font-weight:800; }
+.fan-menu > :nth-child(1){ animation-delay:.02s; }
+.fan-menu > :nth-child(2){ animation-delay:.08s; }
+.fan-menu > :nth-child(3){ animation-delay:.14s; }
+.fan-menu > :nth-child(4){ animation-delay:.2s; }
+.fan-menu > :nth-child(5){ animation-delay:.26s; }
+.fan-menu > :nth-child(6){ animation-delay:.32s; }
+.fan-menu > :nth-child(7){ animation-delay:.38s; }
+@keyframes fanDockIn{ from{ opacity:0; transform:translateY(-22px) scale(.5); } }
+
 .hdr-logo{
   position:absolute; inset-inline-start:50%; transform:translateX(50%);
   display:block; line-height:0;
@@ -84,6 +117,7 @@ a{color:inherit}
   filter:drop-shadow(0 1px 4px rgba(8,24,43,.85));
 }
 .hdr-right{display:flex; align-items:center; gap:10px}
+.hdr-left{display:flex; align-items:center; gap:10px}
 .book{
   font-family:var(--sans); font-weight:700; font-size:13.5px;
   background:transparent; color:var(--amber);
@@ -105,6 +139,14 @@ a{color:inherit}
 }
 .lang-toggle:hover{border-color:var(--pale); color:var(--pale); background:rgba(250,247,187,.06)}
 
+/* the bar itself stays pinned RTL (dir="rtl" in the markup) so the menu never
+   swaps sides with the language; only the label text reads LTR in English */
+html[lang="en"] .fan-btn,
+html[lang="en"] .fan-menu a,
+html[lang="en"] .drawer a,
+html[lang="en"] .drawer-section-lbl,
+html[lang="en"] .lang-toggle,
+html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .menu-btn{ display:none; }
 .drawer-backdrop{
   position:fixed; inset:0; z-index:199; background:rgba(8,24,43,.6);
@@ -130,6 +172,17 @@ a{color:inherit}
   color:var(--pale); text-decoration:none; border-bottom:1px solid rgba(250,247,187,.14);
 }
 .drawer .drawer-book{ color:var(--amber); font-weight:700; }
+.drawer-section-lbl{
+  font-family:var(--sans); font-weight:800; font-size:11px; letter-spacing:2px;
+  color:var(--dim); margin:16px 0 6px;
+}
+.drawer-section-lbl:first-of-type{ margin-top:4px; }
+.drawer .drawer-lang{
+  margin-top:16px; align-self:flex-start;
+  font-family:var(--sans); font-weight:700; font-size:13px; color:var(--pale);
+  background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
+  padding:9px 18px; cursor:pointer;
+}
 .drawer .lang-toggle{ align-self:flex-start; margin-top:14px; }
 @media (max-width:760px){
   .menu-btn{
@@ -138,6 +191,8 @@ a{color:inherit}
     background:transparent; color:var(--pale); cursor:pointer; font-size:16px;
   }
   .book{ display:none; }
+  .hdr-left{ display:none; }
+  .hdr-right > *:not(.menu-btn){ display:none; }
 }
 
 /* ---------- the scroll story: one track, both clips ----------
@@ -347,8 +402,9 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 
 /* ---------- mobile ---------- */
 @media (max-width:760px){
-  .hdr-nav{display:none}
   .hdr-logo img{height:22px}
+  .fan-menu{ min-width:0; width:max-content; max-width:calc(100vw - 28px); }
+  .fan-menu a{ font-size:13.5px; padding:10px 14px; }
   /* three squares stacked one under another read as slow, repetitive scroll -
      swipe sideways through them instead */
   .cards{
@@ -399,20 +455,39 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 <a class="skip" href="#booking" data-en="Skip to the booking form">דילוג לטופס ההזמנה</a>
 <div id="boot"><i></i></div>
 
-<header class="hdr" id="hdr">
-  <!-- CONFIRM the two outward links: they are best guesses, not supplied -->
-  <nav class="hdr-nav" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
-    <a href="overim.html" data-en="Relocating">התיישבות</a>
-    <a href="lomdim.html" data-en="Mitzpe Gvulot">מצפה גבולות</a>
-    <a href="../more.html#event" data-en="Ventures in the region">יוזמות במרחב</a>
-  </nav>
-  <a class="hdr-logo" href="index.html" aria-label="הננו — לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
+<header class="hdr" id="hdr" dir="rtl">
+  <div class="hdr-left">
+    <div class="navfan" id="fanHineni">
+      <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
+      <div class="fan-menu" hidden>
+        <a href="../index.html#track-a" data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</a>
+        <a href="../more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
+        <a href="lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+        <a href="overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+        <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
+        <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+      </div>
+    </div>
+    <div class="navfan" id="navFan">
+      <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
+      <div class="fan-menu" hidden>
+        <a href="../index.html" data-en="Hinenu">הננו</a>
+        <a href="lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
+        <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
+        <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
+        <a href="overim.html" data-en="Relocating">התיישבות</a>
+        <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
+      </div>
+    </div>
+    <a class="fan-btn" href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  </div>
+  <a class="hdr-logo" href="index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
     <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
   </a>
   <div class="hdr-right">
     <button class="audio-btn" id="audioBtn" type="button" aria-pressed="false" hidden data-en="Audio">אודיו</button>
+    <a class="fan-btn" href="accessibility.html" aria-label="נגישות" data-en="Accessibility" data-en-aria-label="Accessibility">נגישות</a>
     <button class="lang-toggle" id="langToggle" type="button">EN</button>
-    <a class="book" href="#booking" data-en="Book a day">להזמין יום</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="תפריט" data-en-aria-label="Menu" aria-expanded="false" aria-controls="drawer">☰</button>
   </div>
 </header>
@@ -420,17 +495,31 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <nav class="drawer" id="drawer" aria-label="תפריט נייד" data-en-aria-label="Mobile menu">
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
+  <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
+  <a href="../index.html#track-a" data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</a>
+  <a href="../more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
+  <a href="lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <a href="overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+  <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
+  <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+  <p class="drawer-section-lbl" data-en="Navigate">ניווט</p>
+  <a href="../index.html" data-en="Hinenu">הננו</a>
+  <a href="lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
+  <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
+  <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
   <a href="overim.html" data-en="Relocating">התיישבות</a>
-  <a href="lomdim.html" data-en="Mitzpe Gvulot">מצפה גבולות</a>
-  <a href="../more.html#event" data-en="Ventures in the region">יוזמות במרחב</a>
-  <a class="drawer-book" href="#booking" data-en="Book a day">להזמין יום</a>
+  <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
+  <p class="drawer-section-lbl" data-en="More">עוד</p>
+  <a href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  <a href="accessibility.html" data-en="Accessibility">נגישות</a>
+  <button class="drawer-lang" id="drawerLangToggle" type="button">EN</button>
 </nav>
 
 <main>
 
 <h1 class="sr-only" data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</h1>
 
-<!-- ══════ THE STORY — one track, both clips, no seam ══════ -->
+<!-- ══════ THE STORY - one track, both clips, no seam ══════ -->
 <section class="scroll-track" id="track">
   <div class="sticky-stage">
     <canvas></canvas>
@@ -442,9 +531,9 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
            The join sits at 0.542 and falls inside a gap between beats.
            A negative data-in means the beat is already up at the very top. -->
       <div class="beat" data-in="-0.08" data-out="0.20"><p data-en="Once, there was only sand here.">פעם היה פה רק חול.</p></div>
-      <div class="beat" data-in="0.25"  data-out="0.52"><p data-en-html="Then pioneers arrived - <span class='n'>12</span> young people, <span class='n'>19</span> years old, and founded Mitzpe Gvulot - which changed the Negev.">ואז הגיעו חלוצים, <span class="n">12</span> צעירים בני <span class="n">19</span>, והקימו את מצפה גבולות — ששינה את הנגב.</p></div>
-      <div class="beat" data-in="0.58"  data-out="0.80"><p data-en="And now, after October 7th, the Negev is full of challenges - and thirsty for pioneers again.">ועכשיו, אחרי ה־7/10, הנגב מלא באתגרים — ושוב צמא לחלוצים.</p></div>
-      <div class="beat" data-in="0.84"  data-out="1.08"><p data-en="So we say Hineni.">אז אומרים הננו.</p></div>
+      <div class="beat" data-in="0.25"  data-out="0.52"><p data-en-html="Then pioneers arrived - <span class='n'>12</span> young people, <span class='n'>19</span> years old, and founded Mitzpe Gvulot - which changed the Negev.">ואז הגיעו חלוצים, <span class="n">12</span> צעירים בני <span class="n">19</span>, והקימו את מצפה גבולות - ששינה את הנגב.</p></div>
+      <div class="beat" data-in="0.58"  data-out="0.80"><p data-en="And now, after October 7th, the Negev is full of challenges - and thirsty for pioneers again.">ועכשיו, אחרי ה-7/10, הנגב מלא באתגרים - ושוב צמא לחלוצים.</p></div>
+      <div class="beat" data-in="0.84"  data-out="1.08"><p data-en="And what's left for us to say is: Hineni.">ולנו נותר להגיד: הננו.</p></div>
     </div>
   </div>
 </section>
@@ -462,7 +551,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
           <h3 data-en="Relocating">עוברים</h3>
         </div>
         <div class="body">
-          <p class="who" data-en="Relocation groups · ages 21-35 · couples and families">חבורות התיישבות · גילאי 21–35 · זוגות ומשפחות</p>
+          <p class="who" data-en="Relocation groups · ages 21-35 · couples and families">חבורות התיישבות · גילאי 21-35 · זוגות ומשפחות</p>
           <ul>
             <li data-en="Pioneering seminars for groups">סמינרים לחלוציות לחבורות</li>
             <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
@@ -479,12 +568,10 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
           <h3 data-en="Doers">פועלים</h3>
         </div>
         <div class="body">
-          <p class="who" data-en="Young entrepreneurs and change-makers">יזמים ומובילי שינוי צעירים</p>
+          <p class="who" data-en="Young entrepreneurs and change agents">יזמים וסוכני שינוי צעירים</p>
           <ul>
-            <li data-en="The national entrepreneurship accelerator in the Negev">המאיץ ליזמות לאומית בנגב</li>
-            <li data-en="Supplementary education">חינוך משלים</li>
-            <li data-en="Sustainable agriculture">חקלאות מקיימת</li>
-            <li data-en="Welfare and resilience">רווחה וחוסן</li>
+            <li data-en="The national entrepreneurship accelerator in the Negev and the Galilee">המאיץ ליזמות לאומית בנגב ובגליל</li>
+            <li data-en="Support for regional ventures">ליווי יוזמות במרחב</li>
           </ul>
           <span class="go" data-en="To the full page">לעמוד המלא</span>
         </div>
@@ -497,7 +584,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
           <h3 data-en="Learning">לומדים</h3>
         </div>
         <div class="body">
-          <p class="who" data-en="People in the security establishment">אנשי מערכת הביטחון</p>
+          <p class="who" data-en="Groups, organizations and schools">קבוצות, ארגונים ובתי ספר</p>
           <ul>
             <li data-en="Reconnecting with the Israeli story">חיבור מחודש לסיפור הישראלי</li>
             <li data-en="Proactive and practical thinking">חשיבה יוזמת ומעשית</li>
@@ -552,7 +639,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
           <select id="f-type" name="type">
             <option data-en="Relocation group / core">חבורת התיישבות / גרעין</option>
             <option data-en="Combat-unit veterans' community">קהילת בוגרי יחידה קרבית</option>
-            <option data-en="Pre-military or pre-yeshiva academy">מכינה קדם־צבאית או תורנית</option>
+            <option data-en="Pre-military or pre-yeshiva academy">מכינה קדם-צבאית או תורנית</option>
             <option data-en="School / senior high">בית ספר / חטיבה עליונה</option>
             <option data-en="Security organisation">ארגון ביטחון</option>
             <option data-en="Entrepreneurs / a venture being built">יזמים / מיזם בהקמה</option>
@@ -896,6 +983,28 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   };
 })();
 
+/* ---------- nav fan: same dropdown mechanic as the main site's הנני+/תצוגה+ ---------- */
+(function(){
+  function setupFan(id){
+    var root = document.getElementById(id); if(!root) return null;
+    var btn = root.querySelector('.fan-btn'), menu = root.querySelector('.fan-menu');
+    function close(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+    function open(){
+      document.querySelectorAll('.fan-menu').forEach(function(m){ m.hidden = true; });
+      document.querySelectorAll('.fan-btn').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+      menu.hidden = false; btn.setAttribute('aria-expanded','true');
+    }
+    var toggleFan = function(e){ e.preventDefault(); e.stopPropagation(); menu.hidden ? open() : close(); };
+    btn.addEventListener('pointerup', toggleFan);
+    btn.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') toggleFan(e); });
+    document.addEventListener('pointerdown', function(e){ if(!root.contains(e.target)) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    menu.querySelectorAll('a,button').forEach(function(it){ it.addEventListener('click', function(){ close(); }); });
+  }
+  setupFan('fanHineni');
+  setupFan('navFan');
+})();
+
 /* ---------- mobile drawer: everything the desktop header nav shows ---------- */
 (function(){
   var btn = document.getElementById('menuBtn');
@@ -949,13 +1058,42 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   }, { passive:true });
 })();
 
-/* ---------- form: no endpoint wired yet - keep the data rather than drop it ---------- */
+/* ---------- form: saved locally, and mirrored to the "הזמנת יום" Google Form/Sheet ---------- */
 document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
-  var data = {};
+  var data = { page:'index', submittedAt: new Date().toISOString() };
   new FormData(e.target).forEach(function(v,k){ data[k] = v; });
+  try{
+    var all = JSON.parse(localStorage.getItem('hinenu-bookings') || '[]');
+    all.push(data);
+    localStorage.setItem('hinenu-bookings', JSON.stringify(all));
+  }catch(err){ console.error('could not save booking locally', err); }
   console.log('booking submitted', data);
-  alert(document.documentElement.lang === 'en' ? 'This form is not connected to a destination yet. The details were logged to the console.' : 'הטופס עדיין לא מחובר ליעד. הפרטים נרשמו לקונסולה.');
+
+  /* the "סוג הקבוצה" question only has a fixed set of choices in the Google Form -
+     anything outside that list rides in via its built-in "Other" mechanism */
+  var TYPE_CHOICES = ['חבורת התיישבות / גרעין','קהילת בוגרי יחידה קרבית','מכינה קדם-צבאית או תורנית','בית ספר','ארגון ביטחון','יזמים / מיזם בהקמה'];
+  var fd = new FormData();
+  fd.append('entry.1126002676', data.name || '');
+  fd.append('entry.77854263', data.org || '');
+  fd.append('entry.1911373868', data.role || '');
+  fd.append('entry.478134640', data.phone || '');
+  fd.append('entry.1544157263', data.email || '');
+  if(data.type && TYPE_CHOICES.indexOf(data.type) !== -1){
+    fd.append('entry.1779666808', data.type);
+  } else if(data.type){
+    fd.append('entry.1779666808', '__other_option__');
+    fd.append('entry.1779666808.other_option_response', data.type);
+  }
+  fd.append('entry.657552941', data.size || '');
+  fd.append('entry.1062750637', data.when || '');
+  fd.append('entry.498866476', data.note || '');
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLSemUCDsE0fSRosFapdiydJokWfatkgxPDYRS_T9i7u5_wL5Zg/formResponse', {
+    method:'POST', mode:'no-cors', body:fd
+  }).catch(function(err){ console.error('booking form submit failed', err); });
+
+  e.target.reset();
+  alert(document.documentElement.lang === 'en' ? 'Thanks! We’ll get back to you soon.' : 'תודה! נחזור אליכם בהקדם.');
 });
 
 </script>
@@ -995,13 +1133,15 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
         }
       });
     });
-    var btn = document.getElementById('langToggle');
-    if(btn) btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    document.querySelectorAll('#langToggle, #drawerLangToggle').forEach(function(btn){
+      btn.textContent = LANG === 'en' ? 'עב' : 'EN';
+    });
     try{ localStorage.setItem('mg-lang', LANG); }catch(e){}
   }
   window.__mgApplyLang = applyLang;
-  var toggleBtn = document.getElementById('langToggle');
-  if(toggleBtn) toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  document.querySelectorAll('#langToggle, #drawerLangToggle').forEach(function(toggleBtn){
+    toggleBtn.addEventListener('click', function(){ applyLang(LANG === 'en' ? 'he' : 'en'); });
+  });
   if(LANG === 'en') applyLang('en');
 })();
 </script>

@@ -10,6 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@300;800;900&family=Heebo:wght@200;400;500;700;800&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Suez+One&family=Karantina:wght@300;400;700&family=Secular+One&family=Miriam+Libre:wght@400;700&family=Amatic+SC:wght@700&family=Bellefair&family=Assistant:wght@200;800&family=Open+Sans:wght@300;800&family=Noto+Sans+Hebrew:wght@200;800&family=IBM+Plex+Sans+Hebrew:wght@200;700&family=Alef:wght@400;700&family=David+Libre:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
 <style>
   @font-face{
+    font-family:'Reisinger Yonatan';
+    src:url('fonts/Reisinger-Yonatan-Regular.woff2') format('woff2'),
+        url('fonts/Reisinger-Yonatan-Regular.woff') format('woff');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
     font-family:'Dana Yad';
     src:url('dana-yad-alefalefalef/DanaYadAlefAlefAlef-Normal.woff') format('woff'),
         url('dana-yad-alefalefalef/DanaYadAlefAlefAlef-Normal.otf') format('opentype');
@@ -82,7 +88,7 @@
     --coral:#D96A50;
     --bg:#070b16;
     --hl:#D96A50;
-    --font-display:'Alef';
+    --font-display:'Reisinger Yonatan';
     --font-mid:'Frank Ruhl Libre';
   }
   ::selection{ background:#fff; color:#000; }
@@ -152,6 +158,13 @@
   .top-side{ display:flex; align-items:center; gap:34px; }
   .top-side.start{ justify-content:flex-start; }
   .top-side.end{ justify-content:flex-end; }
+  /* the bar itself stays pinned RTL (dir="rtl" in the markup) so the menu never
+     swaps sides with the language; only the label text reads LTR in English */
+  html[lang="en"] .top-link,
+  html[lang="en"] .fan-btn,
+  html[lang="en"] .fan-menu a,
+  html[lang="en"] .fan-menu button{ direction:ltr; text-align:left; }
+  html[lang="en"] .fan-menu a, html[lang="en"] .fan-menu button{ transform-origin:top left; }
   .menu-btn{ display:none; }
   .drawer-backdrop{
     position:fixed; inset:0; z-index:399; background:rgba(0,0,0,.6);
@@ -159,14 +172,13 @@
   }
   .drawer-backdrop.open{ opacity:1; pointer-events:auto; }
   .drawer{
-    position:fixed; top:0; bottom:0; inset-inline-start:0; z-index:400;
+    position:fixed; top:0; bottom:0; right:0; z-index:400;
     width:min(80vw,320px); background:var(--bg); color:var(--ink);
-    border-inline-end:1px solid rgba(255,255,255,.12);
-    transform:translateX(-100%); transition:transform .3s ease;
+    border-inline-start:1px solid rgba(255,255,255,.12);
+    transform:translateX(100%); transition:transform .3s ease;
     padding:24px 24px 26px; display:flex; flex-direction:column; gap:2px;
-    box-shadow:24px 0 60px rgba(0,0,0,.55); overflow-y:auto;
+    box-shadow:-24px 0 60px rgba(0,0,0,.55); overflow-y:auto;
   }
-  html[dir="ltr"] .drawer{ inset-inline-start:auto; inset-inline-end:0; transform:translateX(100%); }
   .drawer.open{ transform:translateX(0); }
   .drawer-close{
     align-self:flex-start; width:36px; height:36px; margin-bottom:14px;
@@ -197,6 +209,11 @@
     }
     .top-side.start{ display:none; }
     .top-side.end > *:not(.menu-btn){ display:none; }
+    /* display:none pulls .top-side.start out of the grid, so without explicit
+       columns the logo and the burger both slide one track over. Pin them:
+       burger on the inline-start (right) edge, logo dead centre. */
+    .top-side.end{ grid-column:1; grid-row:1; justify-content:flex-start; }
+    .brand{ grid-column:2; grid-row:1; }
   }
   .brand{ display:flex; align-items:center; justify-content:center; text-decoration:none; justify-self:center; }
   .brand-logo{
@@ -253,6 +270,9 @@
   .fan-menu > :nth-child(2){ animation-delay:.09s; }
   .fan-menu > :nth-child(3){ animation-delay:.16s; }
   .fan-menu > :nth-child(4){ animation-delay:.23s; }
+  .fan-menu > :nth-child(5){ animation-delay:.3s; }
+  .fan-menu > :nth-child(6){ animation-delay:.37s; }
+  .fan-menu > :nth-child(7){ animation-delay:.44s; }
   @keyframes dockIn{ from{ opacity:0; transform:translateY(-28px) scale(.4); } }
 
   /* ---------- HERO v5: pitch black title (damngood) ---------- */
@@ -312,11 +332,12 @@
   .h5-scroll{
     z-index:2;
     position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
-    color:var(--dim); font-size:13px; letter-spacing:2px;
+    color:#fff; font-size:15px; font-weight:600; letter-spacing:3px;
+    text-shadow:0 2px 12px rgba(0,0,0,.55);
     opacity:0; transition:opacity .6s ease; pointer-events:none;
   }
   .h5-scroll.show{ opacity:1; }
-  .h5-scroll::after{ content:"↓"; display:block; font-size:18px; animation:hint 1.6s ease-in-out infinite; }
+  .h5-scroll::after{ content:"↓"; display:block; font-size:22px; animation:hint 1.6s ease-in-out infinite; }
   @keyframes hint{ 50%{ transform:translateY(6px); } }
 
   /* ---------- challenges: full-screen photo scenes ---------- */
@@ -597,7 +618,7 @@
     font-size:clamp(20px,2.6vw,28px); letter-spacing:.5px; font-weight:900;
   }
   .tracks-head h2{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; color:var(--ink);
     font-size:clamp(30px,5vw,54px); line-height:1.15; margin:0 0 14px;
   }
   .tracks-head h2 .acc{ color:var(--hl-blue); }
@@ -620,7 +641,7 @@
   }
   .track h3{
     color:var(--ink-dark);
-    font-family:'Rubik',sans-serif; font-weight:900;
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
     font-size:clamp(24px,3vw,34px); line-height:1.2; margin:0 0 14px;
   }
   .track .desc{ font-size:16px; line-height:1.65; margin:0 0 24px; }
@@ -724,8 +745,9 @@
 
   /* ---------- EVENT: the next evening ---------- */
   .event{
+    scroll-margin-top:90px;
     position:relative; overflow:hidden;
-    padding:76px 0 64px;
+    padding:44px 0 36px;
     background:radial-gradient(ellipse 70% 50% at 50% 100%, rgba(217,106,80,.07), transparent 70%), var(--bg);
   }
   .event::before{
@@ -742,7 +764,7 @@
     font-size:14px; letter-spacing:4px; margin:0 0 12px;
   }
   .event-body h2{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; color:var(--ink);
     font-size:clamp(28px,3.8vw,46px); line-height:1.18; margin:0 0 18px;
   }
   .event-body h2 .acc{ color:#fff; position:relative; z-index:1; white-space:nowrap; }
@@ -839,7 +861,7 @@
   }
   .event-wa-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 32px rgba(66,87,230,.5); }
   button.event-wa-cta{ border:none; cursor:pointer; }
-  .accel-bridge{ max-width:720px; margin:0 auto; padding:0 26px 100px; }
+  .accel-bridge{ max-width:720px; margin:0 auto; padding:0 26px 52px; }
   .accel-card{
     position:relative; text-align:center; padding:52px 40px;
     border-radius:26px; overflow:hidden;
@@ -852,7 +874,7 @@
     background:linear-gradient(90deg, transparent, var(--blue), transparent);
   }
   .accel-title{
-    font-family:'Rubik',sans-serif; font-weight:900; color:#fff;
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; color:#fff;
     font-size:clamp(24px,3.6vw,34px); margin:0 0 14px;
   }
   .accel-sub{
@@ -921,14 +943,14 @@
   /* ---------- VENTURES: already working ---------- */
   .ventures{
     background:radial-gradient(ellipse 75% 55% at 50% 50%, rgba(217,106,80,.06), transparent 70%), var(--bg);
-    color:#fff; padding:110px 0 100px; overflow:clip;
+    color:#fff; padding:60px 0 52px; overflow:clip;
   }
   .ventures .kicker{
     font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 14px; text-align:center;
   }
   .ventures h2{
-    font-family:'Rubik',sans-serif; font-weight:900;
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400;
     font-size:clamp(28px,4.6vw,50px); line-height:1.2; margin:0 0 52px; text-align:center;
   }
   .ventures h2 .hl{ color:var(--hl-blue); position:relative; z-index:1; }
@@ -958,7 +980,7 @@
     text-decoration:underline; text-underline-offset:4px;
   }
   .vcard.you .vbig{
-    font-family:'Rubik',sans-serif; font-weight:900; font-size:46px; line-height:1;
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; font-size:46px; line-height:1;
     padding:120px 22px 60px; color:#fff; text-align:center;
   }
   .vcard.you .apply-link{
@@ -1055,7 +1077,7 @@
     font-size:20px; cursor:pointer; line-height:1;
   }
   .modal-card h3{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink-dark);
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; color:var(--ink-dark);
     font-size:24px; margin:0 0 6px;
   }
   .modal-sub{ color:#63656E; font-size:15px; margin:0 0 22px; }
@@ -1142,11 +1164,11 @@
   /* ---------- FAQ: floats on the start of the footer gradient ---------- */
   .faq{
     background:linear-gradient(180deg, var(--bg) 0%, #05060D 45%, #0B0F26 78%, #10152F 100%);
-    padding:100px 0 90px;
+    padding:56px 0 48px;
   }
   .faq-inner{ max-width:680px; margin:0 auto; padding:0 26px; }
   .faq h2{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; color:var(--ink);
     font-size:clamp(26px,4vw,38px); margin:0 0 40px;
   }
   .faq h2 .acc{ color:var(--hl-blue); }
@@ -1156,7 +1178,7 @@
     list-style:none; cursor:pointer;
     display:flex; align-items:center; justify-content:space-between; gap:18px;
     padding:22px 2px;
-    font-weight:700; font-size:clamp(16.5px,2.2vw,19px);
+    font-family:var(--font-display),'Rubik',sans-serif; font-weight:400; font-size:clamp(16.5px,2.2vw,19px);
   }
   summary::-webkit-details-marker{ display:none; }
   summary .plus{
@@ -1232,7 +1254,7 @@
     .h5-jump-btn{ font-size:13px; padding:11px 20px; }
     .h5-jump-a{ background:rgba(66,87,230,.92); border-color:var(--blue); }
     .h5-jump-c{ background:rgba(139,94,52,.92); border-color:#8B5E34; }
-    .h5-scroll{ bottom:18px; font-size:11.5px; }
+    .h5-scroll{ bottom:18px; font-size:13.5px; }
 
     /* challenges */
     .chal{ scroll-snap-align:start; }
@@ -1414,7 +1436,7 @@
 
 <a class="skip-link" href="#event" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
 
-<header class="top" id="topbar">
+<header class="top" id="topbar" dir="rtl">
   <div class="top-inner">
     <nav class="top-side start" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
       <div class="navfan" id="fanHineni">
@@ -1425,6 +1447,17 @@
           <a href="mitzpe-gvolot/lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
           <a href="mitzpe-gvolot/overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+        </div>
+      </div>
+      <div class="navfan" id="navFan">
+        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
+        <div class="fan-menu" hidden>
+          <a href="index.html" data-en="Hinenu">הננו</a>
+          <a href="mitzpe-gvolot/lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
+          <a class="fan-special" href="more.html#event" aria-current="page" data-en="National Entrepreneurship Meetup →">מיטאפ יזמות לאומית ←</a>
+          <a href="index.html#track-a" data-en="Accelerator">אקסלרטור</a>
+          <a href="mitzpe-gvolot/overim.html" data-en="Relocating">התיישבות</a>
+          <a href="harzaot.html" data-en="Lectures">הרצאות</a>
         </div>
       </div>
       <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
@@ -1471,7 +1504,7 @@
     <div class="wrap">
       <div class="tracks-head">
         <h2 class="reveal" data-en-html="National <span class='acc'>entrepreneurship</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
-        <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-en="Join the WhatsApp group for updates on the next meet-up ←">הצטרפות לקבוצת הוואטסאפ - עדכונים על הערב הבא ←</a>
+        <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-en="Join the WhatsApp group for updates on the next meet-up →">הצטרפות לקבוצת הוואטסאפ - עדכונים על הערב הבא ←</a>
       </div>
       <div class="ev-featured">
         <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
@@ -1503,14 +1536,14 @@
     <div class="accel-card reveal">
       <p class="accel-title" data-en="Beginning entrepreneurs?">יזמים בתחילת הדרך?</p>
       <p class="accel-sub" data-en="We're building a national entrepreneurship accelerator for beginning entrepreneurs, where you'll get knowledge, mentorship, and tools on the journey to national impact.">אנחנו מקימים מאיץ ליזמים מתחילים שבו תקבלו ידע, ליווי וכלים במסע להשפעה לאומית.</p>
-      <button type="button" class="accel-cta" data-apply data-en="Apply to the accelerator ←">הגשת מועמדות למאיץ ←</button>
+      <button type="button" class="accel-cta" data-apply data-en="Apply to the accelerator →">הגשת מועמדות למאיץ ←</button>
     </div>
   </div>
 
   <!-- ======= 5. VENTURES: already working ======= -->
   <section class="ventures" id="ventures">
     <div class="wrap">
-      <h2 class="reveal" data-en-html="Our <span class='hl'>Entrepreneurs.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
+      <h2 class="reveal" data-en-html="People we walked with, who were exactly where you are, <span class='hl'>and today are solving national challenges.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
       <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו" data-en-aria-label="Ventures we've mentored">
         <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
           <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
@@ -1604,7 +1637,7 @@
 
       <details class="reveal" style="--d:.1s">
         <summary data-en-html="Is this defined by a timeline or a mission? <span class='plus' aria-hidden='true'></span>">האם זה מוגדר בזמן או במשימה? <span class="plus" aria-hidden="true"></span></summary>
-        <p class="a" data-en="The first step is to show up, get to know people, and start thinking big. The second step - start building; we'll meet and hear what you're working on. The third step - join the national entrepreneurship accelerator, where we'll help you go from an idea taking shape to a venture that changes reality.">הצעד הראשון הוא להגיע, להכיר, ולהתחיל לחשוב בגדול. הצעד השני - להתחיל להקים; ניפגש, ונשמע על מה אתם עובדים. הצעד השלישי - להצטרף למאיץ ליזמות לאומית, שבו נעזור לכם לעבור מרעיון בהתהוות למיזם שמשנה מציאות.</p>
+        <p class="a" data-en="Step one: show up and start thinking big. Step two: start building - we'll hear what you're working on. Step three: join the accelerator, and go from idea to venture.">שלב ראשון: להגיע ולהתחיל לחשוב בגדול. שלב שני: להתחיל להקים - נשמע על מה אתם עובדים. שלב שלישי: להצטרף למאיץ, ולעבור מרעיון למיזם.</p>
       </details>
 
       <details class="reveal" style="--d:.15s">
@@ -2104,7 +2137,7 @@
       qs:['התוכנית הלאומית ל-AI','מחשב קוונטי כחול-לבן','שדה ניסויים ל-Physical AI','איפה יזמים יכולים להיכנס לתמונה?'],
       wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t' },
     { title:'ערב יזמות לאומית', guest:'עם מייקל אייזנברג', status:'past',
-      chips:['יום שני · 3.8','19:30','בית בן־גוריון, תל אביב'],
+      chips:['יום שני · 3.8','19:30','בית בן-גוריון, תל אביב'],
       lede:'מילה אחת תקבע מי ישרוד את העשור הקרוב: Agency. אנחנו קוראים לזה חלוציות - היכולת לקחת יוזמה, ללמוד מהר ולזוז. אורח: מייקל אייזנברג, מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.',
       gallery:['assets/ev-michael-2-3.jpg','assets/ev-michael-2-4.jpg','assets/ev-michael-2-1.jpg','assets/ev-michael-2-2.jpg'] },
     { title:'ערב יזמות ציונית', guest:'עם יואל זילברמן', status:'past',
@@ -2498,6 +2531,7 @@
     return { close: close };
   }
   setupFan('fanHineni');
+  setupFan('navFan');
   setupFan('fanView');
 
   /* ---- mobile drawer: everything the desktop header nav shows ---- */

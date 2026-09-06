@@ -7,8 +7,14 @@
 <meta name="description" content="ישראל מלאה בבעיות. הגיע הזמן להתאהב בבעיה - ולפתור אותה. ערב יזמות לאומית עם מייקל אייזנברג · 3.8.2026 · 19:30 · בית בן-גוריון, תל אביב.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@300;800;900&family=Heebo:wght@200;400;500;700;800&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Suez+One&family=Karantina:wght@300;400;700&family=Secular+One&family=Miriam+Libre:wght@400;700&family=Amatic+SC:wght@700&family=Bellefair&family=Assistant:wght@200;800&family=Open+Sans:wght@300;800&family=Noto+Sans+Hebrew:wght@200;800&family=IBM+Plex+Sans+Hebrew:wght@200;700&family=Alef:wght@400;700&family=David+Libre:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Reisinger Yonatan';
+    src:url('fonts/Reisinger-Yonatan-Regular.woff2') format('woff2'),
+        url('fonts/Reisinger-Yonatan-Regular.woff') format('woff');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
   @font-face{
     font-family:'Dana Yad';
     src:url('dana-yad-alefalefalef/DanaYadAlefAlefAlef-Normal.woff') format('woff'),
@@ -82,8 +88,11 @@
     --coral:#D96A50;
     --bg:#070b16;
     --hl:#D96A50;
-    --font-display:'Alef';
+    --font-display:'Reisinger Yonatan';
+    --fd-weight:400;
     --font-mid:'Frank Ruhl Libre';
+    --sans:'Rubik',system-ui,sans-serif;
+    --display:var(--font-display),'Rubik',system-ui,sans-serif;
   }
   ::selection{ background:#fff; color:#000; }
   *{ box-sizing:border-box; }
@@ -98,7 +107,8 @@
     margin:0;
     background:var(--bg);
     color:var(--ink);
-    font-family:'Heebo',system-ui,sans-serif;
+    font-family:var(--sans);
+    font-weight:300;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     overflow-x:clip; /* clips the carousel fan without creating a scroll container (keeps position:sticky alive) */
@@ -152,6 +162,13 @@
   .top-side{ display:flex; align-items:center; gap:34px; }
   .top-side.start{ justify-content:flex-start; }
   .top-side.end{ justify-content:flex-end; }
+  /* the bar itself stays pinned RTL (dir="rtl" in the markup) so the menu never
+     swaps sides with the language; only the label text reads LTR in English */
+  html[lang="en"] .top-link,
+  html[lang="en"] .fan-btn,
+  html[lang="en"] .fan-menu a,
+  html[lang="en"] .fan-menu button{ direction:ltr; text-align:left; }
+  html[lang="en"] .fan-menu a, html[lang="en"] .fan-menu button{ transform-origin:top left; }
   .menu-btn{ display:none; }
   .drawer-backdrop{
     position:fixed; inset:0; z-index:399; background:rgba(0,0,0,.6);
@@ -162,11 +179,14 @@
     position:fixed; top:0; bottom:0; inset-inline-start:0; z-index:400;
     width:min(80vw,320px); background:var(--bg); color:var(--ink);
     border-inline-end:1px solid rgba(255,255,255,.12);
-    transform:translateX(-100%); transition:transform .3s ease;
+    /* RTL: the panel is anchored to the RIGHT (inset-inline-start:0), so it has to
+       hide to the RIGHT. translateX(-100%) parked it in the middle of the screen. */
+    transform:translateX(100%); transition:transform .3s ease;
     padding:24px 24px 26px; display:flex; flex-direction:column; gap:2px;
     box-shadow:24px 0 60px rgba(0,0,0,.55); overflow-y:auto;
   }
   html[dir="ltr"] .drawer{ inset-inline-start:auto; inset-inline-end:0; transform:translateX(100%); }
+  .drawer.open{ transform:translateX(0) !important; }
   .drawer.open{ transform:translateX(0); }
   .drawer-close{
     align-self:flex-start; width:36px; height:36px; margin-bottom:14px;
@@ -174,18 +194,18 @@
     color:var(--ink); font-size:16px; cursor:pointer;
   }
   .drawer-section-lbl{
-    font-family:'Rubik',sans-serif; font-weight:800; font-size:11px; letter-spacing:2px;
+    font-family:var(--sans); font-weight:800; font-size:11px; letter-spacing:2px;
     color:var(--dim); margin:16px 0 6px;
   }
   .drawer-section-lbl:first-of-type{ margin-top:4px; }
   .drawer a, .drawer button.drawer-item{
     display:block; width:100%; text-align:start; background:transparent; border:none; cursor:pointer;
-    padding:13px 4px; font-size:15.5px; font-family:'Rubik',sans-serif; font-weight:500;
+    padding:13px 4px; font-size:15.5px; font-family:var(--sans); font-weight:500;
     color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.1);
   }
   .drawer .drawer-lang{
     margin-top:16px; align-self:flex-start;
-    font-family:'Rubik',sans-serif; font-weight:700; font-size:13px; color:var(--ink);
+    font-family:var(--sans); font-weight:700; font-size:13px; color:var(--ink);
     background:transparent; border:1px solid rgba(255,255,255,.35); border-radius:100px;
     padding:9px 18px; cursor:pointer;
   }
@@ -197,6 +217,11 @@
     }
     .top-side.start{ display:none; }
     .top-side.end > *:not(.menu-btn){ display:none; }
+    /* display:none pulls .top-side.start out of the grid, so without explicit
+       columns the logo and the burger both slide one track over. Pin them:
+       burger on the inline-start (right) edge, logo dead centre. */
+    .top-side.end{ grid-column:1; grid-row:1; justify-content:flex-start; }
+    .brand{ grid-column:2; grid-row:1; }
   }
   .brand{ display:flex; align-items:center; justify-content:center; text-decoration:none; justify-self:center; }
   .brand-logo{
@@ -233,7 +258,7 @@
   .fan-menu[hidden]{ display:none; }
   .fan-menu a, .fan-menu button{
     touch-action:manipulation;
-    font-family:'Heebo',system-ui,sans-serif; letter-spacing:0;
+    font-family:var(--sans); letter-spacing:0;
     text-align:start; cursor:pointer;
     background:#0C0C0E; border:1px solid var(--line); border-radius:13px;
     box-shadow:0 18px 44px rgba(0,0,0,.6);
@@ -248,11 +273,20 @@
     background:#17181C;
     transform:translateX(var(--fx,0px)) scale(1.06);
   }
+  .fan-menu a.fan-special{
+    background:linear-gradient(135deg, #8E2230, #B5761F 55%, #D99B21);
+    border-color:#D99B21; font-family:var(--display); font-weight:400;
+    letter-spacing:.5px; font-size:16.5px;
+  }
+  .fan-menu a.fan-special:hover{ filter:brightness(1.1); }
   .fan-menu:not([hidden]) > *{ animation:dockIn .5s cubic-bezier(.34,1.56,.64,1) both; }
   .fan-menu > :nth-child(1){ animation-delay:.02s; }
   .fan-menu > :nth-child(2){ animation-delay:.09s; }
   .fan-menu > :nth-child(3){ animation-delay:.16s; }
   .fan-menu > :nth-child(4){ animation-delay:.23s; }
+  .fan-menu > :nth-child(5){ animation-delay:.3s; }
+  .fan-menu > :nth-child(6){ animation-delay:.37s; }
+  .fan-menu > :nth-child(7){ animation-delay:.44s; }
   @keyframes dockIn{ from{ opacity:0; transform:translateY(-28px) scale(.4); } }
 
   /* ---------- HERO v5: pitch black title (damngood) ---------- */
@@ -273,12 +307,12 @@
   }
   .h5-kick{
     position:relative; z-index:2;
-    font-family:'Karantina',sans-serif; font-weight:700; letter-spacing:5px;
+    font-family:var(--display); font-weight:400; letter-spacing:5px;
     font-size:clamp(15px,1.6vw,20px); color:#fff; margin:0 0 18px;
   }
   .h5-title{
     position:relative; z-index:2;
-    margin:0; font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,400);
+    margin:0; font-family:var(--display); font-weight:var(--fd-weight,400);
     color:#fff; line-height:.95; font-size:clamp(76px,15vw,230px);
     display:flex; flex-direction:column;
   }
@@ -299,7 +333,7 @@
   }
   .h5-jump-btn{
     display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,700); font-size:17px;
+    font-family:var(--display); font-weight:var(--fd-weight,700); font-size:17px;
     color:#fff; text-decoration:none; padding:12px 28px; border-radius:999px;
     border:1.5px solid rgba(255,255,255,.4); background:transparent;
     transition:transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
@@ -307,16 +341,19 @@
   .h5-jump-btn:hover, .h5-jump-btn:focus-visible{ transform:translateY(-3px); }
   .h5-jump-a{ border-color:rgba(66,87,230,.55); }
   .h5-jump-a:hover, .h5-jump-a:focus-visible{ background:var(--blue); border-color:var(--blue); box-shadow:0 14px 30px rgba(66,87,230,.45); }
+  .h5-jump-l{ border-color:rgba(130,156,232,.6); }
+  .h5-jump-l:hover, .h5-jump-l:focus-visible{ background:#829ce8; border-color:#829ce8; box-shadow:0 14px 30px rgba(130,156,232,.4); }
   .h5-jump-c{ border-color:rgba(139,94,52,.6); }
   .h5-jump-c:hover, .h5-jump-c:focus-visible{ background:#8B5E34; border-color:#8B5E34; box-shadow:0 14px 30px rgba(139,94,52,.4); }
   .h5-scroll{
     z-index:2;
     position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
-    color:var(--dim); font-size:13px; letter-spacing:2px;
+    color:#fff; font-size:15px; font-weight:600; letter-spacing:3px;
+    text-shadow:0 2px 12px rgba(0,0,0,.55);
     opacity:0; transition:opacity .6s ease; pointer-events:none;
   }
   .h5-scroll.show{ opacity:1; }
-  .h5-scroll::after{ content:"↓"; display:block; font-size:18px; animation:hint 1.6s ease-in-out infinite; }
+  .h5-scroll::after{ content:"↓"; display:block; font-size:22px; animation:hint 1.6s ease-in-out infinite; }
   @keyframes hint{ 50%{ transform:translateY(6px); } }
 
   /* ---------- challenges: full-screen photo scenes ---------- */
@@ -333,7 +370,7 @@
   }
   .chal-txt{ position:relative; z-index:2; padding:0 6vw 11svh; max-width:1200px; }
   .chal-txt h2{
-    margin:0 0 10px; font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,400);
+    margin:0 0 10px; font-family:var(--display); font-weight:var(--fd-weight,400);
     color:#fff; font-size:clamp(40px,7vw,104px); line-height:1.06;
     text-shadow:0 2px 26px rgba(0,0,0,.45);
   }
@@ -352,7 +389,7 @@
   .chal[data-theme="hasbara"] .k{ --kmask:url('assets/hlk-4.webp'); }
   .chal[data-theme="trauma"] .k{ --kmask:url('assets/hlk-5.webp'); }
   .chal-stat{
-    margin:0; font-family:'Karantina',sans-serif;
+    margin:0; font-family:var(--display); font-weight:400;
     font-size:clamp(17px,2vw,24px); letter-spacing:.05em;
     color:var(--chalk); opacity:.92;
   }
@@ -401,7 +438,7 @@
     background:url('assets/torn-2.webp') center/100% 100% no-repeat;
     color:var(--board);
     border:none;
-    font-family:'Rubik',sans-serif; font-weight:800; font-size:17px;
+    font-family:var(--sans); font-weight:800; font-size:17px;
     text-decoration:none; cursor:pointer;
     transform:rotate(-1deg);
     filter:drop-shadow(0 10px 16px rgba(35,36,31,.28));
@@ -433,7 +470,7 @@
   }
   .card-editor textarea{
     width:100%; border:none; background:transparent; resize:none;
-    font-family:'Dana Yad','Heebo',sans-serif;
+    font-family:'Dana Yad',var(--sans);
     font-size:20px; color:var(--ink-dark); line-height:1.5;
     min-height:70px; padding:0; outline:none;
   }
@@ -454,7 +491,7 @@
   }
   .mission-intro p{
     max-width:860px; margin:0 auto; color:var(--ink);
-    font-family:'Rubik',sans-serif; font-weight:800;
+    font-family:var(--font-display),var(--sans); font-weight:400;
     font-size:clamp(22px,3.4vw,36px); line-height:1.4;
   }
   .mission-intro p .acc{ color:var(--hl-blue); }
@@ -474,7 +511,7 @@
     max-width:1100px; margin:0 auto; padding:0 26px;
   }
   .letter .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
+    font-family:var(--sans); font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 26px; text-align:center;
   }
   .notebook{
@@ -538,7 +575,7 @@
   }
   html[lang="en"] .sign-name{ font-family:'OH Aner Shapiro','Frank Ruhl Libre',serif; }
   .letter .meta{
-    font-family:'Heebo',sans-serif;
+    font-family:var(--sans);
     font-size:14px; letter-spacing:.02em;
     color:var(--dim); margin:4px 0 0; font-weight:400;
   }
@@ -591,14 +628,14 @@
   .tracks .wrap{ position:relative; z-index:2; }
   .tracks-head{ text-align:center; margin-bottom:54px; }
   .tracks-head .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
+    font-family:var(--sans); font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 14px;
   }
   .tracks-head .tracks-kicker-lg{
     font-size:clamp(20px,2.6vw,28px); letter-spacing:.5px; font-weight:900;
   }
   .tracks-head h2{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
+    font-family:var(--font-display),var(--sans); font-weight:400; color:var(--ink);
     font-size:clamp(30px,5vw,54px); line-height:1.15; margin:0 0 14px;
   }
   .tracks-head h2 .acc, .tracks-head .sub .acc{ color:var(--hl-blue); }
@@ -606,6 +643,7 @@
   /* tracks: both shown side by side, hover to highlight */
   .tflow{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:stretch; }
   .track{
+    scroll-margin-top:90px;
     background:
       url('assets/torn-top-a.webp') top center/100% calc(100% - 62px) no-repeat,
       url('assets/torn-btm-a.webp') bottom center/100% 64px no-repeat;
@@ -621,7 +659,7 @@
   }
   .track h3{
     color:var(--ink-dark);
-    font-family:'Rubik',sans-serif; font-weight:900;
+    font-family:var(--font-display),var(--sans); font-weight:400;
     font-size:clamp(24px,3vw,34px); line-height:1.2; margin:0 0 14px;
   }
   .track .desc{ font-size:16px; line-height:1.65; margin:0 0 24px; }
@@ -703,7 +741,7 @@
     display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
     text-align:center; padding:10px 12px; font-size:13px; gap:6px;
   }
-  .track .desc b{ font-family:'Rubik',sans-serif; font-weight:800; color:var(--blue); }
+  .track .desc b{ font-family:var(--sans); font-weight:800; color:var(--blue); }
   .track-contact{
     display:flex; align-items:center; flex-wrap:wrap; gap:6px 10px;
     margin:0 0 16px; padding:10px 16px;
@@ -739,11 +777,11 @@
   }
   .event > .wrap{ position:relative; z-index:1; }
   .event .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
+    font-family:var(--sans); font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 12px;
   }
   .event-body h2{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
+    font-family:var(--sans); font-weight:900; color:var(--ink);
     font-size:clamp(28px,3.8vw,46px); line-height:1.18; margin:0 0 18px;
   }
   .event-body h2 .acc{ color:#fff; position:relative; z-index:1; white-space:nowrap; }
@@ -759,7 +797,7 @@
   }
   .event-meta span{
     font-weight:800; font-size:16px; color:var(--ink-dark);
-    font-family:'Rubik',sans-serif;
+    font-family:var(--sans);
   }
   .event-meta span + span{ color:var(--dim); font-weight:400; }
   .event-meta span + span::before{ content:'·'; margin-inline-end:8px; color:var(--dim); }
@@ -789,7 +827,7 @@
   .event-photo figcaption{ margin-top:18px; padding:0 12px; font-size:13.5px; line-height:1.55; color:var(--dim); text-align:center; position:relative; }
   .event-photo figcaption b{
     display:block; color:var(--ink); font-size:15.5px; margin-bottom:2px;
-    font-family:'Rubik',sans-serif; font-weight:800;
+    font-family:var(--sans); font-weight:800;
   }
   .event-body{ text-align:start; }
   .event-lede{
@@ -852,7 +890,7 @@
     position:absolute; inset-inline:10px; bottom:10px;
     padding:9px 14px; border-radius:10px;
     background:rgba(0,0,0,.55); backdrop-filter:blur(2px);
-    color:#fff; font-family:'Rubik',sans-serif; font-weight:700; font-size:12.5px;
+    color:#fff; font-family:var(--sans); font-weight:700; font-size:12.5px;
     text-align:center; letter-spacing:.02em;
     transition:background .25s ease, transform .25s ease;
   }
@@ -861,7 +899,7 @@
   .ev-tag{
     position:absolute; top:14px; inset-inline-start:14px;
     color:#fff; font-weight:800; font-size:13px;
-    font-family:'Rubik',sans-serif;
+    font-family:var(--sans);
     text-shadow:0 1px 3px rgba(0,0,0,.6), 0 2px 10px rgba(0,0,0,.5);
   }
   .ev-tag.ev-future{ color:var(--hl-blue); }
@@ -884,11 +922,11 @@
     color:#fff; padding:110px 0 100px; overflow:clip;
   }
   .ventures .kicker{
-    font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
+    font-family:var(--sans); font-weight:800; color:#fff;
     font-size:14px; letter-spacing:4px; margin:0 0 14px; text-align:center;
   }
   .ventures h2{
-    font-family:'Rubik',sans-serif; font-weight:900;
+    font-family:var(--sans); font-weight:900;
     font-size:clamp(28px,4.6vw,50px); line-height:1.2; margin:0 0 52px; text-align:center;
   }
   .ventures h2 .hl{ color:var(--hl-blue); position:relative; z-index:1; }
@@ -903,12 +941,12 @@
   .vcard img{ width:100%; height:300px; object-fit:cover; object-position:50% 12%; pointer-events:none; display:block; }
   .vbody{ padding:20px 22px 24px; }
   .vbody .role{ font-size:11.5px; font-weight:800; letter-spacing:.12em; color:rgba(255,255,255,.78); margin-bottom:6px; }
-  .vbody b{ display:block; font-size:20px; font-family:'Rubik',sans-serif; font-weight:800; margin-bottom:7px; color:#fff; }
+  .vbody b{ display:block; font-size:20px; font-family:var(--sans); font-weight:800; margin-bottom:7px; color:#fff; }
   .vbody p{ margin:0; font-size:13.5px; line-height:1.55; color:rgba(255,255,255,.72); }
   .vcard.you{ background:var(--blue); }
   .vcard.vtxt{ background:#16181F; }
   .vcard .vbig-sm{
-    font-family:var(--font-display),'Rubik',sans-serif; font-weight:var(--fd-weight,400);
+    font-family:var(--display); font-weight:var(--fd-weight,400);
     font-size:44px; line-height:1.1; padding:104px 22px 48px;
     color:#fff; text-align:center;
   }
@@ -918,7 +956,7 @@
     text-decoration:underline; text-underline-offset:4px;
   }
   .vcard.you .vbig{
-    font-family:'Rubik',sans-serif; font-weight:900; font-size:46px; line-height:1;
+    font-family:var(--sans); font-weight:900; font-size:46px; line-height:1;
     padding:120px 22px 60px; color:#fff; text-align:center;
   }
   .vcard.you .apply-link{
@@ -941,7 +979,7 @@
     padding:64px 0 58px; text-align:center; overflow:hidden;
   }
   .backers .overline{
-    display:block; font-family:'Rubik',sans-serif; font-weight:800; color:#fff;
+    display:block; font-family:var(--sans); font-weight:800; color:#fff;
     font-size:13px; letter-spacing:3px; margin:0 0 34px; padding:0 24px;
   }
   .marquee{ position:relative; overflow:hidden; direction:ltr; }
@@ -982,9 +1020,9 @@
     padding:0 24px;
   }
   .scroll-msg.show{ opacity:1; transform:translate(50%,0); pointer-events:auto; }
-  .scroll-msg p{ font-family:'Rubik',sans-serif; font-weight:800; color:#fff; font-size:22px; margin:0; }
+  .scroll-msg p{ font-family:var(--sans); font-weight:800; color:#fff; font-size:22px; margin:0; }
   .scroll-msg a{
-    font-family:'Rubik',sans-serif; font-weight:700; color:var(--hl-blue); font-size:15px;
+    font-family:var(--sans); font-weight:700; color:var(--hl-blue); font-size:15px;
     text-decoration:none; border-bottom:1.5px solid currentColor; padding-bottom:2px;
   }
 
@@ -1015,7 +1053,7 @@
     font-size:20px; cursor:pointer; line-height:1;
   }
   .modal-card h3{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink-dark);
+    font-family:var(--sans); font-weight:900; color:var(--ink-dark);
     font-size:24px; margin:0 0 6px;
   }
   .modal-sub{ color:#63656E; font-size:15px; margin:0 0 22px; }
@@ -1056,7 +1094,7 @@
   .cta-btn{
     width:100%; border:none; border-radius:14px;
     background:var(--blue); color:#fff;
-    font-family:'Rubik',sans-serif; font-weight:800; font-size:18px;
+    font-family:var(--sans); font-weight:800; font-size:18px;
     padding:17px 18px; cursor:pointer; margin-top:10px;
     transition:transform .15s ease, background .2s ease;
   }
@@ -1073,7 +1111,7 @@
   /* contact modal */
   .contact-card{ max-width:400px; text-align:center; }
   .contact-card h3{ margin:0 0 18px; }
-  .contact-name{ font-family:'Rubik',sans-serif; font-weight:800; font-size:22px; color:var(--ink-dark); margin:0; }
+  .contact-name{ font-family:var(--sans); font-weight:800; font-size:22px; color:var(--ink-dark); margin:0; }
   .contact-role{ color:#3E405A; font-size:14.5px; margin:4px 0 20px; }
   .contact-rows{ display:flex; flex-direction:column; gap:10px; }
   .contact-rows a{
@@ -1106,7 +1144,7 @@
   }
   .faq-inner{ max-width:680px; margin:0 auto; padding:0 26px; }
   .faq h2{
-    font-family:'Rubik',sans-serif; font-weight:900; color:var(--ink);
+    font-family:var(--sans); font-weight:900; color:var(--ink);
     font-size:clamp(26px,4vw,38px); margin:0 0 40px;
   }
   .faq h2 .acc{ color:var(--hl-blue); }
@@ -1148,7 +1186,7 @@
     padding:230px 0 52px; text-align:center;
   }
   footer .name{
-    font-family:'Fredoka',sans-serif; font-weight:700; font-size:34px; letter-spacing:-0.5px;
+    font-family:var(--display); font-weight:400; font-size:34px; letter-spacing:-0.5px;
   }
   footer .tag{ font-size:14px; opacity:.75; margin:6px 0 18px; }
   footer .meta{ font-size:13.5px; opacity:.6; }
@@ -1191,8 +1229,9 @@
     .h5-jump{ margin-top:22px; gap:10px; }
     .h5-jump-btn{ font-size:13px; padding:11px 20px; }
     .h5-jump-a{ background:rgba(66,87,230,.92); border-color:var(--blue); }
+    .h5-jump-l{ background:rgba(130,156,232,.92); border-color:#829ce8; }
     .h5-jump-c{ background:rgba(139,94,52,.92); border-color:#8B5E34; }
-    .h5-scroll{ bottom:18px; font-size:11.5px; }
+    .h5-scroll{ bottom:18px; font-size:13.5px; }
 
     /* challenges */
     .chal{ scroll-snap-align:start; }
@@ -1371,7 +1410,7 @@
 
 <a class="skip-link" href="#letter" data-en="Skip to main content">דילוג לתוכן המרכזי</a>
 
-<header class="top" id="topbar">
+<header class="top" id="topbar" dir="rtl">
   <div class="top-inner">
     <nav class="top-side start" aria-label="ניווט ראשי" data-en-aria-label="Main navigation">
       <div class="navfan" id="fanHineni">
@@ -1381,7 +1420,19 @@
           <a href="more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
           <a href="mitzpe-gvolot/lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
           <a href="mitzpe-gvolot/overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+          <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+        </div>
+      </div>
+      <div class="navfan" id="navFan">
+        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
+        <div class="fan-menu" hidden>
+          <a href="#" aria-current="page" data-en="Hinenu">הננו</a>
+          <a href="mitzpe-gvolot/lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
+          <a href="more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
+          <a href="#track-a" data-en="Accelerator">אקסלרטור</a>
+          <a href="mitzpe-gvolot/overim.html" data-en="Relocating">התיישבות</a>
+          <a class="fan-special" href="harzaot.html" data-en="Lectures →">הרצאות ←</a>
         </div>
       </div>
       <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
@@ -1412,6 +1463,7 @@
   <a href="more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
   <a href="mitzpe-gvolot/lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
   <a href="mitzpe-gvolot/overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+  <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
   <button type="button" class="drawer-item" id="drawerContactOpen" data-en="Contact us">צרו קשר</button>
@@ -1426,16 +1478,33 @@
   <!-- ======= 1. HERO v5: the title board ======= -->
   <div class="hero-letter-pin">
     <div class="pin-vid-wrap" aria-hidden="true">
-      <video class="h5-vid" src="assets/hero-bg.mp4" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"></video>
+      <video class="h5-vid" poster="assets/hero-poster.webp" muted loop playsinline autoplay aria-hidden="true"
+             data-vid-mobile="assets/hero-bg.mp4" data-poster-mobile="assets/hero-poster.webp"
+             data-vid-desktop="assets/hero-bg-desktop.mp4" data-poster-desktop="assets/hero-poster-desktop.jpg"></video>
+      <script>
+      /* desktop gets the wide 16:9 film, mobile keeps the vertical one. set inline, before the
+         browser starts fetching, so neither file is downloaded twice. */
+      (function(){
+        var v = document.currentScript.previousElementSibling;
+        var mq = window.matchMedia('(min-width:761px)');
+        function apply(){
+          var d = mq.matches;
+          var src = v.getAttribute(d ? 'data-vid-desktop' : 'data-vid-mobile');
+          if(v.getAttribute('src') === src) return;
+          v.poster = v.getAttribute(d ? 'data-poster-desktop' : 'data-poster-mobile');
+          v.setAttribute('src', src);
+          if(v.readyState) { v.load(); var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+        }
+        apply();
+        if(mq.addEventListener) mq.addEventListener('change', apply);
+        else if(mq.addListener) mq.addListener(apply);
+      })();
+      </script>
     </div>
   <section class="hero5" id="hero" aria-label="הננו - חלוציות כדרך חיים" data-en-aria-label="Hinenu - Pioneering as a way of life">
     <button type="button" class="vid-toggle" id="vidToggle" aria-pressed="false" aria-label="השהיית וידאו הרקע" title="השהיית וידאו הרקע" data-en-aria-label="Pause background video" data-en-title="Pause background video">❚❚</button>
     <div class="h5-shade" aria-hidden="true"></div>
     <h1 class="h5-title"><img class="h5-logo" id="heroLogo" src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"><span class="t2" data-en="Here We Are">חלוציות כדרך חיים</span></h1>
-    <div class="h5-jump" aria-label="קפיצה מהירה למסלולים" data-en-aria-label="Jump to a track">
-      <a class="h5-jump-btn h5-jump-c" href="mitzpe-gvolot/index.html" data-en="Pioneering">התיישבות</a>
-      <a class="h5-jump-btn h5-jump-a" href="more.html#event" data-en="Entrepreneurship">יזמות</a>
-    </div>
     <div class="h5-scroll" data-en="Scroll to the story of &quot;Hinenu&quot;">גללו לסיפור של "הננו"</div>
   </section>
 
@@ -1472,7 +1541,7 @@
     <img class="chal-bg" src="assets/ch-trauma.webp" alt="">
     <div class="chal-txt">
       <h2>דור שלם נושא טראומה. <span class="k">לבד</span>.</h2>
-      <p class="chal-stat">כ־3,000,000 ישראלים נושאים טראומה מאז ה־7.10 (מבקר המדינה)</p>
+      <p class="chal-stat">כ-3,000,000 ישראלים נושאים טראומה מאז ה-7.10 (מבקר המדינה)</p>
     </div>
   </section>
 
@@ -1495,7 +1564,7 @@
                 <p class="meta" data-en="Founder and Executive Director · Hinenu">מייסד ומנכ"ל · הננו</p>
               </div>
             </div>
-            <p class="meta font-credit" data-en-html="Handwriting: Aner Shapira · <a href=&quot;https://www.ot-hayim.co.il/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ot Chaim project</a>">כתב היד: יפתח יעבץ ז"ל · <a href="https://www.ot-hayim.co.il/fonts/iftah-yavetz/" target="_blank" rel="noopener">מיזם אות חיים</a></p>
+            <p class="meta font-credit" data-en-html="Handwriting: Iftah Yavetz z&quot;l · <a href=&quot;https://www.ot-hayim.co.il/fonts/iftah-yavetz/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ot Hayim project</a>">כתב היד: יפתח יעבץ ז"ל · <a href="https://www.ot-hayim.co.il/fonts/iftah-yavetz/" target="_blank" rel="noopener">מיזם אות חיים</a></p>
           </div>
         </div>
       </div>
@@ -1550,7 +1619,7 @@
                 <span class="tc-name" data-en="Shaked, Pioneering Center">שקד, מרכז לחלוציות</span>
                 <a class="tc-email" href="mailto:shaked@hinenu.org.il">shaked@hinenu.org.il</a>
               </div>
-              <a class="track-cta" href="mitzpe-gvolot/index.html" data-en-html="Negev &amp; Galilee page <span class='arr' aria-hidden='true'>→</span>">לדף הנגב והגליל <span class="arr" aria-hidden="true">←</span></a>
+              <a class="track-cta" href="mitzpe-gvolot/index.html" data-en-html="The Pioneering Center at Mitzpe Gvulot <span class='arr' aria-hidden='true'>→</span>">המרכז לחלוציות במצפה גבולות <span class="arr" aria-hidden="true">←</span></a>
             </div>
           </div>
         </article>
@@ -2109,7 +2178,7 @@
   /* ---- evenings: cards open a popup ---- */
   var EV = [
     { title:'ערב יזמות לאומית', guest:'עם מייקל אייזנברג', status:'past',
-      chips:['יום שני · 3.8','19:30','בית בן־גוריון, תל אביב'],
+      chips:['יום שני · 3.8','19:30','בית בן-גוריון, תל אביב'],
       lede:'מילה אחת תקבע מי ישרוד את העשור הקרוב: Agency. אנחנו קוראים לזה חלוציות - היכולת לקחת יוזמה, ללמוד מהר ולזוז. אורח: מייקל אייזנברג, מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.',
       gallery:['assets/ev-michael-2-3.jpg','assets/ev-michael-2-4.jpg','assets/ev-michael-2-1.jpg','assets/ev-michael-2-2.jpg'] },
     { title:'ערב יזמות ציונית', guest:'עם יואל זילברמן', status:'past',
@@ -2498,6 +2567,7 @@
     return { close: close };
   }
   setupFan('fanHineni');
+  setupFan('navFan');
   setupFan('fanView');
 
   /* ---- mobile drawer: everything the desktop header nav shows ---- */
