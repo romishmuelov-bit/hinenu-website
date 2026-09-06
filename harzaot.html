@@ -16,7 +16,7 @@
 }
 :root{
   --navy:#28346d; --navy-deep:#1e2a5e;
-  --peri:#829ce8; --sky:#cddcfb; --sky-light:#eef3fd;
+  --peri:#829ce8; --peri-text:#4a5fb0; --sky:#cddcfb; --sky-light:#eef3fd;
   --sand:#f7e7b3; --green:#8fa843; --paper:#f8fafe;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -94,10 +94,11 @@ img,video{display:block;max-width:100%}
 .byline strong{display:block;font-size:clamp(14px,1.25vw,15.5px);font-weight:800;
   color:var(--navy-deep);letter-spacing:-.01em;line-height:1.2}
 .byline em{display:block;font-style:normal;margin-top:2px;
-  font-size:clamp(11.5px,1vw,13px);font-weight:400;color:var(--peri)}
+  /* peri-text (darkened --peri): 5.3:1 on --sky-light, was 2.39:1 with --peri (axe-core WCAG AA fail) */
+  font-size:clamp(11.5px,1vw,13px);font-weight:400;color:var(--peri-text)}
 @media (max-width:620px){ .sec-head{gap:12px} .byline img{width:38px} }
 .sec-head h2{font-size:clamp(23px,2.9vw,34px);font-weight:900;letter-spacing:-.02em;color:var(--navy-deep)}
-.sec-head span{font-size:12px;font-weight:500;color:var(--peri);letter-spacing:.16em}
+.sec-head span{font-size:12px;font-weight:500;color:var(--peri-text);letter-spacing:.16em}
 
 /* a plain ruled list - no cards, no glass, no 3D */
 .deck{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);
