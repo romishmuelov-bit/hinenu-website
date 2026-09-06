@@ -995,29 +995,17 @@
   .blogo img.slim{ height:31px; }
   .blogo span{ font-weight:700; color:var(--dim); font-size:12px; white-space:nowrap; letter-spacing:.02em; }
 
-  /* ---------- scroll-end: partners bar rises from below, then pins; "pick a track" follows ---------- */
-  .scroll-end{ position:relative; height:85vh; }
+  /* ---------- scroll-end: static partners strip + "pick a track" line at the foot of the page ---------- */
+  .scroll-end{ position:relative; }
   .scroll-end .backers{
-    position:fixed; left:0; right:0; bottom:0; z-index:40;
-    background:#000;
-    border-top:1px solid transparent;
-    background-clip:padding-box;
-    padding:26px 0 22px; margin:0;
-    opacity:0; transform:translateY(100%); pointer-events:none;
-    will-change:transform, opacity;
+    position:relative; z-index:2;
+    background:#000; border-top:2px solid var(--blue);
+    padding:30px 0 26px; margin:0;
   }
-  .scroll-end .backers::before{
-    content:''; position:absolute; top:-1px; left:0; right:0; height:2px;
-    background:var(--blue);
-  }
-  .scroll-end .backers.active{ pointer-events:auto; }
   .scroll-msg{
-    position:fixed; left:0; right:50%; transform:translate(50%,16px); bottom:190px; z-index:41;
     display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center;
-    opacity:0; pointer-events:none; transition:opacity .5s ease, transform .5s ease;
-    padding:0 24px;
+    padding:34px 24px 40px;
   }
-  .scroll-msg.show{ opacity:1; transform:translate(50%,0); pointer-events:auto; }
   .scroll-msg p{ font-family:var(--sans); font-weight:800; color:#fff; font-size:22px; margin:0; }
   .scroll-msg a{
     font-family:var(--sans); font-weight:700; color:var(--hl-blue); font-size:15px;
@@ -1614,7 +1602,7 @@
     </div>
   </section>
 
-  <!-- ======= 4. SCROLL END: partners rise from below and pin, then "pick a track" ======= -->
+  <!-- ======= 4. PAGE FOOT: partners strip + "pick a track" line ======= -->
   <div class="scroll-end" id="scrollEnd">
     <section class="backers" id="backers" aria-label="השותפים שלנו" data-en-aria-label="Our partners">
       <span class="overline" data-en="Our partners">השותפים שלנו</span>
@@ -2040,42 +2028,7 @@
     window.addEventListener('resize', updateLetter);
   }
 
-  /* ---- scroll-end: partners bar rises from below and pins, then the "pick a track" message ---- */
-  var scrollEnd = document.getElementById('scrollEnd');
-  var scrollBar = document.getElementById('backers');
-  var scrollMsg = document.getElementById('scrollMsg');
-  if(scrollEnd && scrollBar){
-    var seTicking = false;
-    var updateScrollEnd = function(){
-      var rect = scrollEnd.getBoundingClientRect();
-      var revealRange = window.innerHeight * 0.2;
-      var started = Math.max(0, -rect.top);
-      var revealP = Math.max(0, Math.min(1, started / revealRange));
-      if(reducedMotion){
-        scrollBar.style.opacity = started > 0 ? 1 : 0;
-        scrollBar.style.transform = 'none';
-      } else {
-        scrollBar.style.opacity = revealP;
-        scrollBar.style.transform = 'translateY(' + (100 - revealP * 100) + '%)';
-      }
-      scrollBar.classList.toggle('active', revealP >= 1);
-      if(scrollMsg){
-        var msgStart = revealRange + window.innerHeight * 0.08;
-        var msgRange = window.innerHeight * 0.15;
-        var msgP = Math.max(0, Math.min(1, (started - msgStart) / msgRange));
-        scrollMsg.classList.toggle('show', msgP >= 0.5);
-      }
-    };
-    window.addEventListener('scroll', function(){
-      if(!seTicking){
-        requestAnimationFrame(function(){ updateScrollEnd(); seTicking = false; });
-        seTicking = true;
-      }
-    }, { passive:true });
-    window.addEventListener('resize', updateScrollEnd);
-    window.__updateScrollEnd = updateScrollEnd; /* qa hook */
-    updateScrollEnd();
-  }
+  /* ---- scroll-end: partners strip + "pick a track" line now render statically at the foot of the page ---- */
 
   /* ---- tracks: cursor grid, tilt, magnetic buttons ---- */
   var tracksSec = document.getElementById('tracks');
