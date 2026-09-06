@@ -174,8 +174,9 @@ h2{font-family:var(--display); font-weight:400; font-size:clamp(30px,4.6vw,46px)
 .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch}
 .plan{
   display:flex; flex-direction:column;
-  border:1px solid rgba(250,247,187,.20); border-radius:16px; overflow:hidden;
-  background:rgba(250,247,187,.04);
+  border:1px solid rgba(250,247,187,.32); border-radius:16px; overflow:hidden;
+  background:rgba(250,247,187,.08);
+  box-shadow:0 14px 34px rgba(6,18,33,.5);
   transition:border-color .2s ease, transform .2s ease;
 }
 .plan:hover{border-color:rgba(217,155,33,.5); transform:translateY(-3px)}
@@ -223,8 +224,10 @@ html[lang="en"] .plan.featured .len::after{content:' · Recommended'}
 /* ---------- audiences ---------- */
 .aud{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:0}
 .aud div{
-  border:1px solid rgba(250,247,187,.18); border-inline-start:3px solid var(--wine);
+  border:1px solid rgba(250,247,187,.28); border-inline-start:3px solid var(--wine);
   border-radius:12px; padding:24px 26px;
+  background:rgba(250,247,187,.07);
+  box-shadow:0 12px 28px rgba(6,18,33,.42);
 }
 .aud h3{
   font-family:var(--display); font-weight:400;
@@ -321,10 +324,8 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
       <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
       <div class="fan-menu" hidden>
         <a href="../index.html" data-en="Hinenu">הננו</a>
-        <a class="fan-special" href="lomdim.html" aria-current="page" data-en="The Pioneering Center at Mitzpe Gvulot →">מרכז לחלוציות במצפה גבולות ←</a>
-        <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
-        <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
-        <a href="overim.html" data-en="Relocating">התיישבות</a>
+        <a class="fan-special" href="lomdim.html" aria-current="page" data-en="The Pioneering Center →">מרכז לחלוציות ←</a>
+        <a href="../index.html#tracks" data-en="Entrepreneurship">יזמות</a>
         <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
       </div>
     </div>
@@ -352,10 +353,8 @@ footer{padding:40px 24px 60px; text-align:center; color:var(--dim); font-size:13
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
   <p class="drawer-section-lbl" data-en="Navigate">ניווט</p>
   <a href="../index.html" data-en="Hinenu">הננו</a>
-  <a class="drawer-book" href="lomdim.html" aria-current="page" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
-  <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
-  <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
-  <a href="overim.html" data-en="Relocating">התיישבות</a>
+  <a class="drawer-book" href="lomdim.html" aria-current="page" data-en="The Pioneering Center">מרכז לחלוציות</a>
+  <a href="../index.html#tracks" data-en="Entrepreneurship">יזמות</a>
   <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
   <a href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>

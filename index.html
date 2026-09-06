@@ -484,11 +484,15 @@
     padding:70px 24px;
   }
   .mission-intro p{
-    max-width:860px; margin:0 auto; color:var(--ink);
+    display:inline-block; max-width:820px; margin:0 auto; color:#fff;
     font-family:var(--font-display),var(--sans); font-weight:400;
-    font-size:clamp(22px,3.4vw,36px); line-height:1.4;
+    font-size:clamp(23px,3.6vw,38px); line-height:1.45;
+    background:rgba(7,11,22,.74);
+    -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px);
+    padding:.62em 1.05em; border-radius:20px;
+    border:1px solid rgba(255,255,255,.09);
   }
-  .mission-intro p .acc{ color:var(--hl-blue); }
+  .mission-intro p .acc{ color:#8ea6ff; }
   .letter-zone{ position:relative; }
   .letter-zone::before{
     content:''; position:absolute; inset:0; z-index:1;
@@ -992,7 +996,7 @@
   .blogo span{ font-weight:700; color:var(--dim); font-size:12px; white-space:nowrap; letter-spacing:.02em; }
 
   /* ---------- scroll-end: partners bar rises from below, then pins; "pick a track" follows ---------- */
-  .scroll-end{ position:relative; height:150vh; }
+  .scroll-end{ position:relative; height:85vh; }
   .scroll-end .backers{
     position:fixed; left:0; right:0; bottom:0; z-index:40;
     background:#000;
@@ -1418,17 +1422,6 @@
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
         </div>
       </div>
-      <div class="navfan" id="navFan">
-        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
-        <div class="fan-menu" hidden>
-          <a href="#" aria-current="page" data-en="Hinenu">הננו</a>
-          <a href="mitzpe-gvolot/lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
-          <a href="more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
-          <a href="#track-a" data-en="Accelerator">אקסלרטור</a>
-          <a href="mitzpe-gvolot/overim.html" data-en="Relocating">התיישבות</a>
-          <a href="harzaot.html" data-en="Lectures">הרצאות</a>
-        </div>
-      </div>
       <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
     </nav>
     <a class="brand" href="#">
@@ -1542,7 +1535,7 @@
   <!-- ======= 2. THE LETTER ======= -->
   <div class="letter-zone">
     <section class="mission-intro">
-      <p data-en-html="Hinenu is a social movement advancing <span class='acc'>pioneering</span> through community building on the frontier and national entrepreneurship.">הננו היא תנועה חברתית המקדמת <span class="acc">חלוציות</span> דרך התיישבות בגבולות ויזמות לאומית.</p>
+      <p class="reveal" style="--d:.1s" data-en-html="Hinenu is a social movement advancing <span class='acc'>pioneering</span> through community building on the frontier and national entrepreneurship.">הננו היא תנועה חברתית המקדמת <span class="acc">חלוציות</span> דרך התיישבות בגבולות ויזמות לאומית.</p>
     </section>
 
     <section class="letter" id="letter">
@@ -2561,7 +2554,6 @@
     return { close: close };
   }
   setupFan('fanHineni');
-  setupFan('navFan');
   setupFan('fanView');
 
   /* ---- mobile drawer: everything the desktop header nav shows ---- */
