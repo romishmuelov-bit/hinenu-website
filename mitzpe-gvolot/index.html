@@ -272,7 +272,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .flyers-in{max-width:1120px; margin:0 auto; position:relative}
 .flyers h2{margin:0 0 10px; font-family:var(--display); font-weight:400; font-size:clamp(34px,5.4vw,58px); line-height:1.1}
 .flyers .lede{margin:0 0 52px; font-size:17px; color:#3D5570; max-width:46ch}
-.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:26px; max-width:760px}
+.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; max-width:600px}
 .swipe-hint{ display:none; }
 .card{
   position:relative; display:flex; flex-direction:column;
@@ -281,7 +281,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   transition:transform .22s cubic-bezier(.22,.61,.36,1), box-shadow .22s ease;
 }
 .card:hover,.card:focus-visible{transform:translate(3px,3px); box-shadow:4px 4px 0 var(--navy)}
-.card .poster{position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--pale)}
+.card .poster{position:relative; aspect-ratio:1/1; overflow:hidden; background:var(--pale)}
 .card .poster img{
   width:100%; height:100%; object-fit:cover; display:block;
   transform:scale(1.08); transform-origin:50% 50%;
@@ -302,9 +302,9 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 }
 .card .poster h3{
   position:absolute; z-index:3; inset-inline:0; bottom:0;
-  margin:0; padding:0 16px 20px; text-align:center;
+  margin:0; padding:0 14px 16px; text-align:center;
   font-family:var(--display); font-weight:400; line-height:.92;
-  font-size:clamp(56px,9vw,104px); color:var(--pale);
+  font-size:clamp(34px,5.6vw,52px); color:var(--pale);
   text-shadow:0 1px 2px rgba(8,24,43,.8), 0 2px 18px rgba(8,24,43,.9);
 }
 .card .body{border-top:2px solid var(--navy); padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
@@ -346,17 +346,30 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 /* ---------- deep sections: overim + lomdim, merged in from their own pages ---------- */
 .deep{
   position:relative; z-index:3; background:var(--navy); color:var(--ink);
-  padding:84px 24px 68px; scroll-margin-top:64px;
+  padding:0 0 68px; scroll-margin-top:0;
 }
-.deep + .deep{ border-top:1px solid rgba(250,247,187,.14); }
-.deep-in{ max-width:1080px; margin:0 auto; }
+/* overim runs on a slightly deeper navy so the seam with the lomdim block reads as a soft divider */
+#overim{ background:#0E2A49; }
+.deep-in{ max-width:1080px; margin:0 auto; padding:0 24px; }
+/* heading band with a photo behind the title */
+.deep .d-hd{
+  position:relative; padding:104px 0 48px; margin-bottom:36px;
+  background:#0b2036 center/cover no-repeat;
+}
+.deep .d-hd::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,24,43,.42) 0%, rgba(8,24,43,.62) 55%, var(--navy) 100%);
+}
+#overim .d-hd::after{ background:linear-gradient(180deg, rgba(8,24,43,.42) 0%, rgba(8,24,43,.62) 55%, #0E2A49 100%); }
+.deep .d-hd .deep-in{ position:relative; z-index:1; }
 .deep .kicker{
   font-family:var(--sans); font-size:11px; letter-spacing:.24em;
   color:var(--amber); margin:0 0 12px;
 }
 .deep h2{
   font-family:var(--display); font-weight:400; line-height:1.03;
-  font-size:clamp(40px,7vw,78px); margin:0 0 16px;
+  font-size:clamp(40px,7vw,74px); margin:0;
+  text-shadow:0 2px 24px rgba(8,24,43,.7);
 }
 .deep .lead{ max-width:60ch; font-size:clamp(17px,2.1vw,19px); line-height:1.7; margin:0 0 12px; }
 .deep h3{
@@ -669,16 +682,19 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 
 <!-- ══════ OVERIM - relocation groups ══════ -->
 <section class="deep" id="overim">
+  <div class="d-hd" style="background-image:url('photos/pioneers-night.jpg')">
+    <div class="deep-in">
+      <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21-35</p>
+      <h2 data-en="Relocating">עוברים</h2>
+    </div>
+  </div>
   <div class="deep-in">
-    <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21-35</p>
-    <h2 data-en="Relocating">עוברים</h2>
     <p class="lead" data-en="Seminars training groups of young people - couples and families - as settlement cores who integrate into and live in Negev communities.">סמינרים להכשרת חבורות של צעירים - זוגות ומשפחות - כגרעיני התיישבות שמשתלבים וחיים ביישובי הנגב.</p>
 
-    <h3 data-en="What's here">מה יש כאן</h3>
+    <h3 data-en="From alumni communities to communities of life">מקהילות בוגרים לקהילות חיים</h3>
     <ul>
       <li data-en="Pioneering seminars for groups">סמינרים לחלוציות לחבורות</li>
       <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
-      <li data-en="From alumni communities to communities of life">מקהילות בוגרים לקהילות חיים</li>
     </ul>
 
     <h3 data-en="The groups model">מודל החבורות</h3>
@@ -700,17 +716,19 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
         <figcaption data-en="A relocation seminar for Shalem Academic Center alumni">סמינר מעבר לדרום של בוגרי המרכז האקדמי שלם</figcaption>
       </figure>
     </div>
-
-    <a class="d-cta" href="#booking" data-en="Leave your details">להשאיר פרטים</a>
   </div>
 </section>
 
 <!-- ══════ LOMDIM - the Pioneering Center ══════ -->
 <section class="deep" id="lomdim">
+  <div class="d-hd" style="background-image:url('photos/night-crowd.webp')">
+    <div class="deep-in">
+      <p class="kicker" data-en="Groups, organisations and schools">קבוצות, ארגונים ובתי ספר</p>
+      <h2 data-en="The Pioneering Center at Mitzpe Gvulot">המרכז לחלוציות במצפה גבולות</h2>
+    </div>
+  </div>
   <div class="deep-in">
-    <p class="kicker" data-en="Groups, organisations and schools">קבוצות, ארגונים ובתי ספר</p>
-    <h2 data-en="The Pioneering Center">המרכז לחלוציות</h2>
-    <p class="lead" data-en="The Center hosts groups from Israel and abroad for an experiential encounter with the idea of pioneering - tours, content, workshops and meetings at Mitzpe Gvulot, the pioneer of Negev settlement.">המרכז מארח קבוצות מישראל ומהעולם למפגש חווייתי עם רעיון החלוציות - סיורים, תוכן, סדנאות ומפגשים במצפה גבולות, חלוץ ההתיישבות בנגב.</p>
+    <p class="lead" data-en="The Center hosts groups from Israel and abroad for an experiential encounter with the idea of pioneering - tours, content, workshops and meetings at Mitzpe Gvulot, the pioneer of Negev settlement - connecting them to action facing national missions on the Israeli frontier.">המרכז מארח קבוצות מישראל ומהעולם למפגש חווייתי עם רעיון החלוציות - סיורים, תוכן, סדנאות ומפגשים במצפה גבולות, חלוץ ההתיישבות בנגב, ומחבר אותם למעשה מול משימות לאומיות בספר הישראלי.</p>
 
     <h3 data-en="The programmes">התכניות</h3>
     <div class="plans">
@@ -790,8 +808,6 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
         <p data-en="Founder and CEO of the Hinenu movement.">מייסד ומנכ״ל תנועת הננוּ.</p>
       </div>
     </div>
-
-    <a class="d-cta" href="#booking" data-en="Leave your details">להשאיר פרטים</a>
   </div>
 </section>
 
@@ -804,7 +820,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 <!-- ══════ BOOKING ══════ -->
 <section class="booking" id="booking">
   <div class="booking-in">
-    <p class="sub" data-en-html="Relocation group or a visit to the Center - tell us who you are, how many, and when.<br>We'll get back to you with a suggestion.">חבורת התיישבות או ביקור במרכז - כתבו לנו מי אתם, כמה, ומתי.<br>נחזור אליכם עם הצעה.</p>
+    <p class="sub" data-en="A relocation group or a visit to the Center - tell us who you are, how many, and when. We'll get back to you with a suggestion.">חבורת התיישבות או ביקור במרכז — כתבו לנו מי אתם, כמה, ומתי. נחזור אליכם עם הצעה.</p>
     <form id="bookForm" novalidate>
       <div class="grid2">
         <div class="field">
@@ -880,11 +896,6 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   <p class="support" data-en="With the support of the President of the State and his wife">בתמיכת כבוד נשיא המדינה ורעייתו</p>
 </section>
 
-<footer>
-  <p class="markline" data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</p>
-  <p data-en="The Hinenu movement">תנועת הננו</p>
-  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px" data-en="Accessibility statement">הצהרת נגישות</a>
-</footer>
 
 </main>
 
