@@ -49,17 +49,45 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
   text-decoration:none; margin-top:48px}
 .back:hover{color:var(--amber)}
 .lang-toggle{
-  position:absolute; top:20px; inset-inline-end:24px;
   font-family:var(--sans); font-weight:700; font-size:12.5px; color:var(--pale);
   background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
-  padding:8px 15px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
+  padding:7px 14px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
 }
 .lang-toggle:hover{border-color:var(--pale); background:rgba(250,247,187,.08)}
+.site-hdr{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:13px 24px; background:rgba(19,52,88,.92);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(250,247,187,.14);
+}
+.site-hdr .site-logo{display:flex; align-items:center}
+.site-hdr .site-logo img{height:21px; width:auto; display:block}
+.site-hdr nav{display:flex; align-items:center; gap:16px}
+.site-hdr nav a{
+  font-family:var(--sans); font-weight:700; font-size:13px; color:var(--pale);
+  text-decoration:none; letter-spacing:.02em;
+}
+.site-hdr nav a:hover{color:var(--amber)}
+@media (max-width:560px){
+  .site-hdr{padding:11px 16px; gap:10px}
+  .site-hdr nav{gap:11px}
+  .site-hdr nav a{font-size:12px}
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main" data-en="Skip to content">דילוג לתוכן</a>
-<button class="lang-toggle" id="langToggle" type="button">EN</button>
+<header class="site-hdr" dir="rtl">
+  <a class="site-logo" href="index.html" aria-label="הננו — למרכז לחלוציות" data-en-aria-label="Hinenu — to the Pioneering Center">
+    <img src="assets/logo-hinenu.webp" alt="הננו" width="1500" height="530">
+  </a>
+  <nav aria-label="ניווט" data-en-aria-label="Navigation">
+    <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
+    <a href="index.html#booking" data-en="Contact us">צרו קשר</a>
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+  </nav>
+</header>
 <div class="wrap">
 <main id="main">
   <h1 data-en="Accessibility Statement">הצהרת נגישות</h1>

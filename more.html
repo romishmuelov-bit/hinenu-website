@@ -1537,7 +1537,7 @@
         <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
           <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
           <div class="vbody">
-            <button type="button" class="apply-link" data-apply data-en="Leave your details">השאירו פרטים</button>
+            <button type="button" class="apply-link" data-contact data-en="Contact us →">צרו קשר ←</button>
           </div>
         </article>
         <article class="vcard" tabindex="0" role="group" aria-label="דנאל בן-נמר" data-en-aria-label="Danel Ben-Namer">
@@ -1597,7 +1597,7 @@
         <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
           <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
           <div class="vbody">
-            <button type="button" class="apply-link" data-apply data-en="Leave your details">השאירו פרטים</button>
+            <button type="button" class="apply-link" data-contact data-en="Contact us →">צרו קשר ←</button>
           </div>
         </article>
       </div>
@@ -1717,6 +1717,7 @@
     <p class="contact-role" data-en="National entrepreneurship · the Hinenu movement">יזמות לאומית · תנועת הננו</p>
     <div class="contact-rows">
       <a href="mailto:roee@hinenu.org.il">roee@hinenu.org.il</a>
+      <a href="https://www.instagram.com/hinenu_israel?igsh=YmF4dm9iM2FmODR0&amp;utm_source=qr" target="_blank" rel="noopener" data-en="Instagram">אינסטגרם</a>
     </div>
   </div>
 </div>
@@ -1735,13 +1736,6 @@
   <div class="wrap">
     <div class="name"><img src="assets/logo-white.webp" alt="הננו" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu"></div>
     <p class="tag" data-en="Here We Are">חלוצים של תקווה</p>
-    <div class="socials">
-      <a href="https://www.instagram.com/hinenu_israel?igsh=YmF4dm9iM2FmODR0&amp;utm_source=qr" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor" stroke="none"/></svg>
-        <span data-en="Instagram">אינסטגרם</span>
-      </a>
-      <a href="mitzpe-gvolot/index.html" data-en="Hinenu · to the Negev and the Galilee ↖">הננו · לנגב ולגליל ↖</a>
-    </div>
   </div>
 </footer>
 
@@ -2257,6 +2251,13 @@
   }
   document.querySelectorAll('[data-apply]').forEach(function(btn){
     btn.addEventListener('click', openApply);
+  });
+  /* [data-contact] buttons reuse the header's wired "צרו קשר" opener */
+  document.querySelectorAll('[data-contact]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var opener = document.getElementById('contactOpen');
+      if(opener) opener.click();
+    });
   });
 
   /* contact + accessibility modals (shared pattern: open/close, focus restore) */
