@@ -73,6 +73,8 @@ img,video{display:block;max-width:100%}
   background:rgba(251,252,255,.86);box-shadow:0 6px 18px rgba(30,42,94,.07);
   font-size:clamp(12px,1.15vw,14.5px);font-weight:600;color:var(--navy-deep);
   letter-spacing:-.01em;white-space:nowrap}
+/* "Pre-military academies" is a Hebrew-only audience - drop the chip in the English view */
+html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
 @media (max-width:560px){
   .hero-who{gap:7px}
   .who-row{gap:6px}
@@ -451,7 +453,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
     <article class="lec"><div class="num">03</div>
       <h3 data-en="So many communities - no society">מרוב קהילות - אין חברה</h3><p data-en="Social polarization, and the answer that will come from the younger generation.">הקיטוב החברתי, והפתרון שיגיע מהדור הצעיר.</p></article>
     <article class="lec"><div class="num">04</div>
-      <h3 data-en="So what came of it?">מה התוצאה?</h3><p data-en="A first lesson in strategy for young people in the social sector.">שיעור ראשון באסטרטגיה לצעירים בעולם החברתי.</p></article>
+      <h3 data-en="What's the outcome?">מה התוצאה?</h3><p data-en="A first lesson in strategy for young people in the social sector.">שיעור ראשון באסטרטגיה לצעירים בעולם החברתי.</p></article>
     <article class="lec"><div class="num">05</div>
       <h3 data-en="Hinenu - pioneers of hope">הננו - חלוצים של תקווה</h3><p data-en="Pioneering as a solution to Israel's identity crisis.">חלוציות כפתרון למשבר הזהותי בישראל.</p></article>
     <p class="deck-note" data-en-html="Students leave with <b>a sense of capability</b> and a first tool for national entrepreneurship.">התלמידים יוצאים עם <b>תחושת מסוגלות</b> וכלי ראשון ליזמות לאומית.</p>
@@ -471,7 +473,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   <div class="gallery-in">
     <div class="gtitle">
       <h2 data-en-html="Thousands of participants.<br>Dozens of lectures.">אלפי משתתפים.<br>עשרות הרצאות.</h2>
-      <span data-en="High schools · pre-military academies · gap-year service programs · leadership programs">תיכונים · מכינות · שנות שירות · תוכניות מנהיגות</span>
+      <span data-en="High schools · gap-year service programs · leadership programs">תיכונים · מכינות · שנות שירות · תוכניות מנהיגות</span>
     </div>
   </div>
 </section>
