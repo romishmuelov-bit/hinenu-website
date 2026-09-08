@@ -556,9 +556,13 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   opacity:.78; transition:opacity .2s ease;
 }
 .partners .row img:hover{opacity:1}
-.partners .support{border-top:2px solid rgba(142,34,48,.35); padding-top:26px; max-width:420px; margin-inline:auto;
-  margin:34px 0 0; font-size:13.5px; color:#485C70; letter-spacing:.02em;
+.partners .support{
+  border-top:2px solid rgba(142,34,48,.35); padding-top:24px;
+  max-width:420px; margin:34px auto 0;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
 }
+.partners .support img{ height:66px; width:auto; opacity:.92; }
+.partners .support p{ margin:0; font-size:13.5px; color:#485C70; letter-spacing:.02em; }
 @media (max-width:760px){ .partners .row img{height:26px} .partners .row{gap:18px 22px} }
 footer{position:relative; z-index:3; background:var(--bg); border-top:1px solid rgba(250,247,187,.14); padding:30px 24px 44px; text-align:center}
 footer p{margin:0 0 7px; font-size:13px; color:var(--dim)}
@@ -985,7 +989,10 @@ html[lang="en"] .cmodal-card{ text-align:left; }
       <img src="partners/partner-10.webp" alt="" loading="lazy" height="120">
       <img src="partners/partner-11.webp" alt="" loading="lazy" height="120">
   </div>
-  <p class="support" data-en="With the support of the President of the State and his wife">בתמיכת כבוד נשיא המדינה ורעייתו</p>
+  <div class="support">
+    <img src="partners/p-president.png" alt="בית הנשיא" data-en-alt="The President's Residence" width="457" height="437" loading="lazy">
+    <p data-en="With the support of the President and his wife">בתמיכת כבוד הנשיא ורעייתו</p>
+  </div>
 </section>
 
 
