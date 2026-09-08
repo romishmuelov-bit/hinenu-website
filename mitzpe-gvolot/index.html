@@ -350,6 +350,8 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 }
 /* overim runs on a slightly deeper navy so the seam with the lomdim block reads as a soft divider */
 #overim{ background:#0E2A49; }
+/* the shared "מי אנחנו" block has no photo heading band, so it needs its own top padding */
+.deep.team-block{ padding-top:76px; border-top:1px solid rgba(250,247,187,.14); }
 .deep-in{ max-width:1080px; margin:0 auto; padding:0 24px; }
 /* heading band with a photo behind the title */
 .deep .d-hd{
@@ -430,7 +432,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .deep .aud p{ font-size:15px; line-height:1.65; margin:0; color:rgba(250,247,187,.86); }
 
 /* photo strips + gallery */
-.deep .strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:24px; }
+.deep .strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px; }
 .deep .strip img{ width:100%; height:190px; object-fit:cover; display:block; border-radius:10px; }
 .deep .gal{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
 .deep .gal figure{ margin:0; position:relative; border-radius:12px; overflow:hidden; }
@@ -561,6 +563,39 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   #boot{display:none}
   body.locked{overflow:auto}
 }
+
+/* ---------- contact modal (matches the main site's "צרו קשר") ---------- */
+.drawer button.drawer-navbtn{
+  display:block; width:100%; text-align:start; padding:14px 4px; font-size:16px; font-weight:500;
+  color:var(--pale); background:none; border:none; border-bottom:1px solid rgba(250,247,187,.14);
+  cursor:pointer; font-family:inherit;
+}
+html[lang="en"] .drawer button.drawer-navbtn{ direction:ltr; text-align:left; }
+.cmodal{
+  position:fixed; inset:0; z-index:120; display:flex; align-items:flex-start; justify-content:center;
+  padding:9vh 20px 40px; background:rgba(8,24,43,.66);
+  -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); overflow-y:auto;
+}
+.cmodal[hidden]{ display:none; }
+.cmodal-card{
+  position:relative; width:100%; max-width:400px; background:var(--sand); color:var(--navy);
+  border:2px solid var(--navy); box-shadow:10px 10px 0 rgba(8,24,43,.4);
+  padding:30px 24px 24px; text-align:center;
+}
+.cmodal-close{
+  position:absolute; top:10px; inset-inline-start:10px; width:34px; height:34px;
+  border:1px solid var(--navy); background:transparent; color:var(--navy); font-size:15px; cursor:pointer;
+}
+.cmodal-card h3{ font-family:var(--display); font-weight:400; font-size:30px; line-height:1; margin:0 0 6px; }
+.cmodal-role{ font-family:var(--sans); font-size:13px; color:#4A5C70; margin:0 0 18px; }
+.cmodal-rows{ display:flex; flex-direction:column; gap:9px; }
+.cmodal-rows a{
+  display:block; padding:12px 14px; border:1px solid rgba(19,52,88,.3);
+  color:var(--navy); font-family:var(--sans); font-weight:600; font-size:14px; text-decoration:none;
+  transition:background .15s ease;
+}
+.cmodal-rows a:hover{ background:rgba(19,52,88,.07); }
+html[lang="en"] .cmodal-card{ text-align:left; }
 </style>
 </head>
 <body class="locked">
@@ -590,7 +625,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
         <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
       </div>
     </div>
-    <a class="fan-btn" href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+    <button class="fan-btn" type="button" data-contact data-en="Contact us">צרו קשר</button>
   </div>
   <a class="hdr-logo" href="index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
     <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
@@ -619,10 +654,22 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   <a href="../index.html#tracks" data-en="Entrepreneurship">יזמות</a>
   <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
-  <a href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  <button type="button" class="drawer-navbtn" data-contact data-en="Contact us">צרו קשר</button>
   <a href="accessibility.html" data-en="Accessibility">נגישות</a>
   <button class="drawer-lang" id="drawerLangToggle" type="button">EN</button>
 </nav>
+
+<div class="cmodal" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="cmodalTitle">
+  <div class="cmodal-card">
+    <button type="button" class="cmodal-close" id="contactClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
+    <h3 id="cmodalTitle" data-en="Contact us">צרו קשר</h3>
+    <p class="cmodal-role" data-en="The Hinenu movement">תנועת הננו</p>
+    <div class="cmodal-rows">
+      <a href="mailto:shaked@hinenu.org.il" data-en="Shaked · Director, the Pioneering Center · shaked@hinenu.org.il">שקד · מנהלת המרכז לחלוציות · shaked@hinenu.org.il</a>
+      <a href="mailto:roee@hinenu.org.il" data-en="Roee · National entrepreneurship · roee@hinenu.org.il">רועי · יזמות לאומית · roee@hinenu.org.il</a>
+    </div>
+  </div>
+</div>
 
 <main>
 
@@ -749,25 +796,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
       <img src="photos/seminar-mats.webp" alt="קבוצה במצפה גבולות" data-en-alt="A group at Mitzpe Gvulot" width="1400" height="931" loading="lazy">
       <img src="photos/tower-night.webp" alt="מגדל המצפה בלילה" data-en-alt="The lookout tower at night" width="1400" height="931" loading="lazy">
       <img src="photos/mitzpe-day.webp" alt="מצפה גבולות ביום" data-en-alt="Mitzpe Gvulot by day" width="1400" height="1050" loading="lazy">
-    </div>
-
-    <h3 data-en="Who we are">מי אנחנו</h3>
-    <div class="team">
-      <div class="who">
-        <img src="photos/team-shaked.webp" alt="שקד וולק" data-en-alt="Shaked Wolk" width="420" height="420" loading="lazy">
-        <h4 data-en="Shaked Wolk">שקד וולק</h4>
-        <p data-en="Director of the Pioneering Center, a Gaza-border resident.">מנהלת המרכז לחלוציות, תושבת העוטף.</p>
-      </div>
-      <div class="who">
-        <img src="photos/team-roee.webp" alt="רועי עזיזי" data-en-alt="Roee Azizi" width="420" height="420" loading="lazy">
-        <h4 data-en="Roee Azizi">רועי עזיזי</h4>
-        <p data-en="Founder and CEO of the Hinenu movement.">מייסד ומנכ״ל תנועת הננוּ.</p>
-      </div>
-      <div class="who">
-        <img src="photos/team-jo.webp" alt="ג׳ו קולבה" data-en-alt="Jo Kolber" width="420" height="420" loading="lazy">
-        <h4 data-en="Jo Kolber">ג׳ו קולבה</h4>
-        <p data-en="The beating heart and working hands at Mitzpe Gvulot for 14 years.">הלב הפועם והידיים העובדות במצפה גבולות כבר 14 שנה.</p>
-      </div>
+      <img src="photos/group-outdoors.webp" alt="קבוצה בפעילות חוץ במצפה גבולות" data-en-alt="A group in an outdoor activity at Mitzpe Gvulot" width="1400" height="931" loading="lazy">
     </div>
   </div>
 </section>
@@ -808,6 +837,30 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
     </div>
 
     <a class="d-cta" href="#booking" data-en="Ready to relocate? Talk to us">מוכנים לעבור? דברו איתנו</a>
+  </div>
+</section>
+
+<!-- ══════ TEAM ══════ -->
+<section class="deep team-block">
+  <div class="deep-in">
+    <h3 data-en="Who we are">מי אנחנו</h3>
+    <div class="team">
+      <div class="who">
+        <img src="photos/team-shaked.webp" alt="שקד וולק" data-en-alt="Shaked Wolk" width="420" height="420" loading="lazy">
+        <h4 data-en="Shaked Wolk">שקד וולק</h4>
+        <p data-en="Director of the Pioneering Center, a Gaza-border resident.">מנהלת המרכז לחלוציות, תושבת העוטף.</p>
+      </div>
+      <div class="who">
+        <img src="photos/team-roee.webp" alt="רועי עזיזי" data-en-alt="Roee Azizi" width="420" height="420" loading="lazy">
+        <h4 data-en="Roee Azizi">רועי עזיזי</h4>
+        <p data-en="Founder and CEO of the Hinenu movement.">מייסד ומנכ״ל תנועת הננוּ.</p>
+      </div>
+      <div class="who">
+        <img src="photos/team-jo.webp" alt="ג׳ו קולבה" data-en-alt="Jo Kolber" width="420" height="420" loading="lazy">
+        <h4 data-en="Jo Kolber">ג׳ו קולבה</h4>
+        <p data-en="The beating heart and working hands at Mitzpe Gvulot for 14 years.">הלב הפועם והידיים העובדות במצפה גבולות כבר 14 שנה.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1245,6 +1298,31 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   if(backdrop) backdrop.addEventListener('click', close);
   drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  window.__closeDrawer = close;
+})();
+
+/* ---------- contact modal: same content as the main site's "צרו קשר" ---------- */
+(function(){
+  var modal = document.getElementById('contactModal');
+  if(!modal) return;
+  var closeBtn = document.getElementById('contactClose');
+  var last = null;
+  function open(){
+    if(window.__closeDrawer) window.__closeDrawer();
+    last = document.activeElement;
+    modal.hidden = false; document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close(){
+    modal.hidden = true; document.body.style.overflow = '';
+    if(last && last.focus) last.focus();
+  }
+  document.querySelectorAll('[data-contact]').forEach(function(b){
+    b.addEventListener('click', function(e){ e.preventDefault(); open(); });
+  });
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
 })();
 
 /* ---------- audio: hidden until a source exists, never on by default ---------- */
