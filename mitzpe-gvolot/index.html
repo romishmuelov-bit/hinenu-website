@@ -473,16 +473,13 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 /* photo strips + gallery */
 .deep .strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px; }
 .deep .strip img{ width:100%; height:190px; object-fit:cover; display:block; border-radius:10px; }
-.deep .gal{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
-.deep .gal figure{ margin:0; position:relative; border-radius:12px; overflow:hidden; }
-.deep .gal img{ width:100%; height:100%; object-fit:cover; display:block; }
-.deep .gal .tall{ grid-row:span 2; }
-.deep .gal figure:not(.tall) img{ height:230px; }
-.deep .gal .tall img{ height:474px; }
+.deep .gal{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:22px; }
+.deep .gal figure{ margin:0; position:relative; border-radius:10px; overflow:hidden; }
+.deep .gal img{ width:100%; height:172px; object-fit:cover; display:block; }
 .deep .gal figcaption{
-  position:absolute; inset-inline:0; bottom:0; padding:22px 16px 12px;
-  font-size:13px; color:var(--pale);
-  background:linear-gradient(180deg, transparent, rgba(8,24,43,.82));
+  position:absolute; inset-inline:0; bottom:0; padding:26px 12px 9px;
+  font-size:11.5px; line-height:1.35; color:var(--pale);
+  background:linear-gradient(180deg, transparent, rgba(8,24,43,.85));
 }
 
 /* team (from lomdim) */
@@ -496,14 +493,15 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   .deep .plans{ grid-template-columns:1fr; }
   .deep .aud{ grid-template-columns:1fr; }
   .deep .team{ grid-template-columns:1fr 1fr; }
+  .deep .gal{ grid-template-columns:1fr 1fr; }
+  .deep .gal img{ height:180px; }
 }
 @media (max-width:600px){
   .deep{ padding:64px 20px 52px; }
   .deep .team{ grid-template-columns:1fr; }
   .deep .strip{ grid-template-columns:1fr 1fr; }
-  .deep .gal{ grid-template-columns:1fr; }
-  .deep .gal .tall{ grid-row:auto; }
-  .deep .gal .tall img,.deep .gal figure:not(.tall) img{ height:220px; }
+  .deep .gal{ grid-template-columns:1fr 1fr; gap:8px; }
+  .deep .gal img{ height:150px; }
   .deep .d-cta{ display:block; text-align:center; }
 }
 
@@ -865,17 +863,21 @@ html[lang="en"] .cmodal-card{ text-align:left; }
 
     <h3 data-en="What we do">הפעילות שלנו</h3>
     <div class="gal">
-      <figure class="tall">
-        <img src="photos/community-group.webp" alt="קהילת הננו מתכנסת מול מגדל המצפה" data-en-alt="The Hinenu community gathers before the lookout tower" width="1600" height="784" loading="lazy">
+      <figure>
+        <img src="photos/community-group.webp" alt="קהילת הננו מתכנסת מול מגדל המצפה" data-en-alt="The Hinenu community gathers before the lookout tower" width="1400" height="933" loading="lazy">
         <figcaption data-en="The Hinenu community at Mitzpe Gvulot">קהילת הננו במצפה גבולות</figcaption>
       </figure>
       <figure>
-        <img src="photos/community-fire.webp" alt="מעגל סביב המדורה בערב" data-en-alt="A circle around the campfire at night" width="1600" height="1200" loading="lazy">
+        <img src="photos/community-evening.webp" alt="ערב במצפה גבולות סביב הבמה" data-en-alt="An evening gathering at Mitzpe Gvulot" width="1400" height="933" loading="lazy">
+        <figcaption data-en="An evening at the lookout">ערב במצפה</figcaption>
+      </figure>
+      <figure>
+        <img src="photos/community-fire.webp" alt="מעגל סביב המדורה בערב" data-en-alt="A circle around the campfire at night" width="1400" height="933" loading="lazy">
         <figcaption data-en="A Poika evening">ערב פויקה</figcaption>
       </figure>
       <figure>
-        <img src="photos/community-hall.webp" alt="מפגש קהילה באולם האבן" data-en-alt="A community gathering in the stone hall" width="1204" height="1600" loading="lazy">
-        <figcaption data-en="A relocation seminar for Shalem Academic Center alumni">סמינר מעבר לדרום של בוגרי המרכז האקדמי שלם</figcaption>
+        <img src="photos/community-hall.webp" alt="מפגש קהילה באולם האבן" data-en-alt="A community gathering in the stone hall" width="1400" height="933" loading="lazy">
+        <figcaption data-en="A seminar for Shalem Academic Center alumni">סמינר בוגרי המרכז האקדמי שלם</figcaption>
       </figure>
     </div>
 
