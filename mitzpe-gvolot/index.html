@@ -348,11 +348,34 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   position:relative; z-index:3; background:var(--navy); color:var(--ink);
   padding:0 0 68px; scroll-margin-top:0;
 }
-/* overim runs on a slightly deeper navy so the seam with the lomdim block reads as a soft divider */
-#overim{ background:#0E2A49; }
 /* the shared "מי אנחנו" block has no photo heading band, so it needs its own top padding */
 .deep.team-block{ padding-top:76px; border-top:1px solid rgba(250,247,187,.14); }
 .deep-in{ max-width:1080px; margin:0 auto; padding:0 24px; }
+
+/* "ללמוד" runs on sand like the flyers above it - a clean, hard break from the navy "עוברים" track */
+#lomdim{ background:var(--sand); color:var(--navy); }
+#lomdim::before{
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:.3; z-index:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4'/></filter><rect width='160' height='160' filter='url(%23p)' opacity='.32'/></svg>");
+  mix-blend-mode:multiply;
+}
+#lomdim > .deep-in{ position:relative; z-index:1; }
+/* the heading band keeps its dark photo (light title), then a 36px sand gap before the body */
+#lomdim .d-hd::after{ background:linear-gradient(180deg, rgba(8,24,43,.35) 0%, rgba(8,24,43,.55) 60%, rgba(8,24,43,.78) 100%); }
+#lomdim .d-hd h2{ color:var(--pale); }
+#lomdim .lead{ color:#2E465F; }
+#lomdim li::before{ background:var(--wine); }
+#lomdim .quote{ color:var(--navy); border-inline-start-color:var(--wine); }
+#lomdim .plan{ border-color:rgba(19,52,88,.18); background:rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(60,44,20,.14); }
+#lomdim .plan:hover{ border-color:rgba(142,34,48,.4); }
+#lomdim .plan.featured{ border-color:rgba(217,155,33,.7); background:rgba(217,155,33,.12); }
+#lomdim .plan .desc{ color:#3E4B5C; }
+#lomdim .plan .tag{ color:#8A6208; }
+#lomdim .plan .pick{ border-color:rgba(19,52,88,.3); color:var(--navy); }
+#lomdim .plan .pick:hover{ background:rgba(19,52,88,.08); }
+#lomdim .aud div{ border-color:rgba(19,52,88,.18); background:rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(60,44,20,.12); }
+#lomdim .aud h4{ color:var(--navy); }
+#lomdim .aud p{ color:#3E4B5C; }
 /* heading band with a photo behind the title */
 .deep .d-hd{
   position:relative; padding:104px 0 48px; margin-bottom:36px;
@@ -362,7 +385,6 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   content:''; position:absolute; inset:0; pointer-events:none;
   background:linear-gradient(180deg, rgba(8,24,43,.42) 0%, rgba(8,24,43,.62) 55%, var(--navy) 100%);
 }
-#overim .d-hd::after{ background:linear-gradient(180deg, rgba(8,24,43,.42) 0%, rgba(8,24,43,.62) 55%, #0E2A49 100%); }
 .deep .d-hd .deep-in{ position:relative; z-index:1; }
 .deep .kicker{
   font-family:var(--sans); font-size:11px; letter-spacing:.24em;
