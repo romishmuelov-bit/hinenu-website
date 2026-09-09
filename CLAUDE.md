@@ -10,12 +10,15 @@ One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כ
 ## Architecture — deliberately simple
 **Shared across every page:** `assets/hinenu-common.js` — a plain (non-defer) script included
 right before each page's own inline script. It injects the site footer (back to top → partners
-marquee with hover names → "תזמינו הרצאה" → contact rows with mail/Instagram/WhatsApp icons →
-accessibility line), the accessibility toolbar (font size, contrast, link highlight, readable
-font, stop-motion; saved in localStorage `hinenu-a11y`), and the idle scroll cue. Everything it
+marquee with hover names → two buttons, צרו קשר and הרצאות → accessibility line), the
+accessibility toolbar (font size, contrast, link highlight, readable font, stop-motion; saved in
+localStorage `hinenu-a11y`), and the idle scroll cue. The footer's צרו קשר opens the page's own
+`#contactModal` where there is one, and a dialog the script builds itself where there isn't
+(harzaot) — so the mail / Instagram / WhatsApp / leave-details rows exist in exactly one place. Everything it
 writes carries `data-en`, so each page's own `applyLang()` translates it — which is why the tag
 must load *before* that inline script, not with `defer`. Opt-outs live on the tag:
-`data-lecture="no"` (harzaot) and `data-apply="…"` (pages with no apply modal of their own).
+`data-lecture="no"` (harzaot — hides the הרצאות button on the lectures page itself) and
+`data-apply="…"` (pages with no apply modal of their own).
 The partner list lives there once; no page should hardcode logos again.
 
 Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-JS IIFE. No frameworks, no build step. Optimized assets in `assets/` (webp/jpg ≤1920px, hero video mp4). Local fonts in `fonts/` (Aduma, Asakim, MigdalHaemek, Heebo variable) + `dana-yad-alefalefalef/` for the manifesto handwriting.

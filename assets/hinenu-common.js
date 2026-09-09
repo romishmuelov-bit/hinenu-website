@@ -109,25 +109,31 @@
 '.hn-logo-name{position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(5px);white-space:nowrap;font-style:normal;font-weight:700;font-size:11.5px;letter-spacing:.02em;color:#fff;background:#4257E6;padding:3px 9px;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:3}',
 '.hn-logo:hover .hn-logo-name{opacity:1;transform:translateX(-50%) translateY(0)}',
 
-/* book a lecture */
-'.hn-lecture{border-top:1px solid rgba(242,240,233,.14);border-bottom:1px solid rgba(242,240,233,.14)}',
-'.hn-lecture .hn-in{display:flex;align-items:center;justify-content:space-between;gap:22px;padding-top:26px;padding-bottom:26px;flex-wrap:wrap}',
-'.hn-lecture p{margin:0;font-weight:800;font-size:21px;color:#fff}',
-'.hn-lecture span.sub{display:block;font-weight:400;font-size:14.5px;color:#9A9C93;margin-top:4px}',
-'.hn-book{display:inline-flex;align-items:center;gap:10px;background:#4257E6;color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:14px 26px;transition:transform .2s ease,background .2s ease}',
-'.hn-book svg{width:20px;height:20px}',
-'.hn-book:hover{background:#5468f0;transform:translateY(-2px)}',
+/* the two actions that close every page */
+'.hn-actions{border-top:1px solid rgba(242,240,233,.14)}',
+'.hn-actions .hn-in{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;padding-top:30px;padding-bottom:30px}',
+'.hn-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:800;font-size:16px;padding:15px 30px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease}',
+'.hn-btn svg{width:20px;height:20px}',
+'.hn-btn-solid{background:#4257E6;color:#fff}',
+'.hn-btn-solid:hover{background:#5468f0;transform:translateY(-2px)}',
+'.hn-btn-ghost{background:none;color:#F2F0E9;border-color:rgba(242,240,233,.35)}',
+'.hn-btn-ghost:hover{background:#F2F0E9;border-color:#F2F0E9;color:#000;transform:translateY(-2px)}',
 
-/* contact */
-'.hn-contact .hn-in{padding-top:34px;padding-bottom:30px}',
-'.hn-ct-lbl{margin:0 0 18px;font-weight:800;font-size:12.5px;letter-spacing:3px;color:#fff}',
-'.hn-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}',
-'.hn-row{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid rgba(242,240,233,.18);text-decoration:none;transition:border-color .2s ease,background .2s ease}',
-'.hn-row:hover{border-color:#4257E6;background:rgba(66,87,230,.12)}',
+/* the fallback contact dialog, for a page with none of its own */
+'.hn-dlg{position:fixed;inset:0;z-index:120;display:flex;align-items:flex-start;justify-content:center;padding:8vh 20px 40px;background:rgba(10,12,24,.66);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);overflow-y:auto}',
+'.hn-dlg[hidden]{display:none}',
+'.hn-dlg-card{position:relative;width:100%;max-width:440px;background:#fff;color:#1A1C2E;padding:30px 26px 26px;font-family:"Heebo","Rubik",system-ui,sans-serif;text-align:start}',
+'.hn-dlg-card h3{margin:0 0 18px;font-size:24px;font-weight:800}',
+'.hn-dlg-close{position:absolute;top:10px;inset-inline-start:12px;background:none;border:none;font-size:18px;line-height:1;color:#565870;cursor:pointer}',
+'.hn-rows{display:flex;flex-direction:column;gap:10px}',
+'.hn-row{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid #EAE8E2;text-decoration:none;color:inherit;transition:border-color .2s ease,background .2s ease}',
+'.hn-row:hover{border-color:#4257E6;background:#F3F2FC}',
 '.hn-row svg{width:22px;height:22px;flex:0 0 22px;color:#4257E6}',
-'.hn-row b{display:block;font-weight:800;font-size:15px;color:#fff}',
-'.hn-row i{display:block;font-style:normal;font-size:13px;color:#9A9C93;margin-top:2px;unicode-bidi:plaintext}',
+'.hn-row b{display:block;font-weight:800;font-size:15px}',
+'.hn-row i{display:block;font-style:normal;font-size:13px;color:#565870;margin-top:2px;unicode-bidi:plaintext}',
 '.hn-row-txt{min-width:0}',
+/* these rows draw their own icon — keep the page-wide channel mask off them */
+'.hn-dlg a::before,.hn-foot a::before,.hn-foot button::before{content:none !important}',
 
 /* legal strip */
 '.hn-legal{border-top:1px solid rgba(242,240,233,.14)}',
@@ -174,8 +180,8 @@
 'html.hn-still video{visibility:hidden}',
 
 '@media (max-width:760px){',
-'  .hn-lecture .hn-in{flex-direction:column;align-items:flex-start}',
-'  .hn-book{width:100%;justify-content:center}',
+'  .hn-actions .hn-in{flex-direction:column}',
+'  .hn-btn{width:100%}',
 '  .hn-logo{height:56px}.hn-logo img{height:38px}.hn-logo img.slim{height:24px}',
 '  .hn-group{gap:34px;padding-left:34px}',
 '  .hn-a11y-btn{inset-inline-end:14px;bottom:22px;width:42px;height:42px}',
@@ -209,28 +215,12 @@
       '<div class="hn-group" aria-hidden="true">' + partnerGroup(true) + '</div>' +
     '</div></div>' +
   '</section>' +
-  (wantLecture ?
-  '<section class="hn-lecture"><div class="hn-in">' +
-    '<p><span data-en="Want the lecture at your programme?">רוצים את ההרצאה אצלכם במסגרת?</span>' +
-      '<span class="sub" data-en="High schools · pre-military academies · gap-year programmes · leadership programmes">תיכונים · מכינות · שנות שירות · תוכניות מנהיגות</span></p>' +
-    '<a class="hn-book" href="' + base + 'harzaot.html">' + ICON.mic +
-      '<span data-en="Book a lecture">תזמינו הרצאה</span></a>' +
-  '</div></section>' : '') +
-  '<section class="hn-contact" id="site-contact"><div class="hn-in">' +
-    '<p class="hn-ct-lbl" data-en="Contact us">צרו קשר</p>' +
-    '<div class="hn-rows">' +
-      '<a class="hn-row" href="mailto:' + MAIL + '">' + ICON.mail +
-        '<span class="hn-row-txt"><b data-en="Roee Azizi">רועי עזיזי</b>' +
-        '<i data-en="Founder &amp; CEO · ' + MAIL + '">מייסד ומנכ״ל · ' + MAIL + '</i></span></a>' +
-      '<a class="hn-row" href="' + IG + '" target="_blank" rel="noopener">' + ICON.ig +
-        '<span class="hn-row-txt"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>' +
-      '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
-        '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
-        '<i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>' +
-      '<a class="hn-row" ' + applyAttr + '>' + ICON.form +
-        '<span class="hn-row-txt"><b data-en="Leave your details">השארת פרטים</b>' +
-        '<i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>' +
-    '</div>' +
+  '<section class="hn-actions" id="site-contact"><div class="hn-in">' +
+    '<button type="button" class="hn-btn hn-btn-solid" id="hnContact">' + ICON.mail +
+      '<span data-en="Contact us">צרו קשר</span></button>' +
+    (wantLecture ?
+    '<a class="hn-btn hn-btn-ghost" href="' + base + 'harzaot.html">' + ICON.mic +
+      '<span data-en="Lectures">הרצאות</span></a>' : '') +
   '</div></section>' +
   '<div class="hn-legal"><div class="hn-in">' +
     '<span data-en="Hinenu — pioneering as a way of life">הננו — חלוציות כדרך חיים</span>' +
@@ -244,6 +234,64 @@
   foot.setAttribute('dir', 'rtl');
   foot.innerHTML = html;
   document.body.appendChild(foot);
+
+  /* ---------- "צרו קשר": the page's own dialog where there is one, ours where there isn't ---------- */
+  (function(){
+    var own = document.getElementById('contactModal');
+    var fallback = null;
+
+    function buildFallback(){
+      var d = document.createElement('div');
+      d.className = 'hn-dlg';
+      d.hidden = true;
+      d.setAttribute('role', 'dialog');
+      d.setAttribute('aria-modal', 'true');
+      d.setAttribute('aria-label', 'צרו קשר');
+      d.setAttribute('data-en-aria-label', 'Contact us');
+      d.setAttribute('dir', 'rtl');
+      d.innerHTML =
+        '<div class="hn-dlg-card">' +
+          '<button type="button" class="hn-dlg-close" aria-label="סגירה" data-en-aria-label="Close">✕</button>' +
+          '<h3 data-en="Contact us">צרו קשר</h3>' +
+          '<div class="hn-rows">' +
+            '<a class="hn-row" href="mailto:' + MAIL + '">' + ICON.mail +
+              '<span class="hn-row-txt"><b data-en="Roee Azizi">רועי עזיזי</b>' +
+              '<i data-en="Founder &amp; CEO · ' + MAIL + '">מייסד ומנכ״ל · ' + MAIL + '</i></span></a>' +
+            '<a class="hn-row" href="' + IG + '" target="_blank" rel="noopener">' + ICON.ig +
+              '<span class="hn-row-txt"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>' +
+            '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
+              '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
+              '<i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>' +
+            '<a class="hn-row" ' + applyAttr + '>' + ICON.form +
+              '<span class="hn-row-txt"><b data-en="Leave your details">השארת פרטים</b>' +
+              '<i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(d);
+      function close(){ d.hidden = true; document.body.style.overflow = ''; }
+      d.querySelector('.hn-dlg-close').addEventListener('click', close);
+      d.addEventListener('click', function(e){ if(e.target === d) close(); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !d.hidden) close(); });
+      return d;
+    }
+
+    /* built now, not on first click, so the page's applyLang() sees its strings */
+    if(!own) fallback = buildFallback();
+
+    function open(e){
+      if(e) e.preventDefault();
+      var d = own || fallback;
+      d.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var c = d.querySelector('.modal-close, .cmodal-close, .hn-dlg-close');
+      if(c) c.focus();
+    }
+    document.getElementById('hnContact').addEventListener('click', open);
+    /* the lectures page points its header "צרו קשר" here */
+    document.querySelectorAll('a[href="#site-contact"]').forEach(function(a){
+      a.addEventListener('click', open);
+    });
+  })();
 
   /* the page's own floating CTA steps aside once the footer is on screen */
   if('IntersectionObserver' in window){

@@ -926,10 +926,9 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     transition:transform .25s ease, box-shadow .25s ease, background .2s ease;
   }
   .accel-cta:hover{ transform:translateY(-3px); background:#5468EE; box-shadow:0 22px 46px rgba(66,87,230,.55); }
-  .ev-featured{ max-width:400px; margin:46px auto 0; }
   .events-grid{
-    display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:28px; max-width:880px; margin:28px auto 0;
+    display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:24px; max-width:1080px; margin:46px auto 0;
   }
   .ev-card{
     position:relative; border:none; background:none; padding:0; cursor:pointer;
@@ -944,7 +943,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     filter:grayscale(1); transition:filter .4s ease;
   }
   .ev-card:hover img, .ev-card:focus-visible img{ filter:grayscale(0); }
-  .ev-featured .ev-card img{ filter:grayscale(0); }
   .ev-card::after{
     content:'לפרטים נוספים ←';
     position:absolute; inset-inline:10px; bottom:10px;
@@ -972,6 +970,9 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   .ev-modal .event-qs li{ color:var(--ink-dark); }
   .ev-modal .ev-cal{ display:block; text-align:center; text-decoration:none; }
   .ev-modal .gal-grid{ grid-auto-rows:130px; margin-top:8px; }
+  @media (max-width:1000px){
+    .events-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  }
   @media (max-width:760px){
     .events-grid{ grid-template-columns:1fr; }
   }
@@ -990,16 +991,27 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     font-size:clamp(28px,4.6vw,50px); line-height:1.2; margin:0 0 52px; text-align:center;
   }
   .ventures h2 .hl{ color:var(--hl-blue); position:relative; z-index:1; }
-  .vflow{ position:relative; height:530px; perspective:1400px; touch-action:pan-y; }
-  .vcard{
-    position:absolute; top:0; left:50%; width:320px; margin-left:-160px;
-    background:#1E2028; border-radius:0; overflow:hidden; cursor:grab;
-    transition:transform .7s cubic-bezier(.22,.61,.36,1), filter .7s ease, opacity .7s ease;
-    will-change:transform; text-align:start;
-    box-shadow:0 30px 70px rgba(0,0,0,.5);
+  /* a rail that drifts on its own and can be swiped or arrow-keyed at any time */
+  .vflow{
+    display:flex; gap:22px; align-items:stretch;
+    overflow-x:auto; overflow-y:hidden;
+    /* no scroll-snap here: snapping keeps yanking the slow drift back to a card */
+    padding:6px 2px 20px; margin:0 -2px;
+    scrollbar-width:none; -ms-overflow-style:none;
   }
-  .vcard img{ width:100%; height:300px; object-fit:cover; object-position:50% 12%; pointer-events:none; display:block; }
-  .vbody{ padding:20px 22px 24px; }
+  .vflow::-webkit-scrollbar{ display:none; }
+  .vflow:focus-visible{ outline:2px solid var(--hl-blue); outline-offset:6px; }
+  .vcard{
+    flex:0 0 320px;
+    display:flex; flex-direction:column;
+    background:#1E2028; border-radius:0; overflow:hidden;
+    text-align:start;
+    box-shadow:0 30px 70px rgba(0,0,0,.5);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .vcard:hover{ transform:translateY(-6px); box-shadow:0 40px 80px rgba(0,0,0,.6); }
+  .vcard img{ width:100%; height:280px; object-fit:cover; object-position:50% 12%; display:block; }
+  .vbody{ padding:20px 22px 24px; flex:1; }
   .vbody .role{ font-size:11.5px; font-weight:800; letter-spacing:.12em; color:rgba(255,255,255,.78); margin-bottom:6px; }
   .vbody b{ display:block; font-size:20px; font-family:'Rubik',sans-serif; font-weight:800; margin-bottom:7px; color:#fff; }
   .vbody p{ margin:0; font-size:13.5px; line-height:1.55; color:rgba(255,255,255,.72); }
@@ -1024,14 +1036,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     color:#fff; font-weight:800; font-size:15px; padding:0; margin-top:12px;
     text-decoration:underline; text-underline-offset:4px;
   }
-  .vflow-nav{ display:flex; gap:12px; justify-content:flex-start; margin:2px 0 18px; position:relative; z-index:5; }
-  .vflow-nav button{
-    width:52px; height:52px; border-radius:50%;
-    border:1.5px solid rgba(255,255,255,.7); background:transparent; color:#fff;
-    font-size:18px; cursor:pointer;
-    transition:background .3s ease, border-color .3s ease;
-  }
-  .vflow-nav button:hover{ background:var(--blue); border-color:var(--blue); }
 
   /* ---------- BACKERS: featured callout + running marquee ---------- */
   .backers{
@@ -1269,8 +1273,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   a.cta-btn{ display:block; text-align:center; text-decoration:none; box-sizing:border-box; }
   /* ev popup: registration (outline) above, WhatsApp (big solid blue) below */
   /* past evening fades to b&w; color returns on hover/focus */
-  .ev-card[data-ev="1"] img{ filter:grayscale(1); transition:filter .45s ease; }
-  .ev-card[data-ev="1"]:hover img, .ev-card[data-ev="1"]:focus-visible img{ filter:grayscale(0); }
   .ev-reg{ background:#fff; color:var(--ink-dark); border:2px solid var(--ink-dark); padding:14px 18px; font-size:16.5px; }
   .ev-reg:hover{ background:#F3F2FC; }
   .ev-wa{ font-size:20px; padding:20px 18px; }
@@ -1502,9 +1504,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     .ventures{ padding:76px 0 64px; }
     .ventures .wrap{ position:relative; }
     /* phones swipe - arrows are desktop-only (itamar 13.7) */
-    .vflow-nav{ display:none; }
-    .vflow{ height:520px; }
-    .vcard{ width:272px; margin-left:-136px; }
+    .vcard{ flex-basis:272px; }
     .vcard img{ height:240px; }
     .vcard.you .vbig{ padding:90px 22px 40px; }
     .vbody{ padding:16px 16px 18px; }
@@ -1676,19 +1676,12 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       <div class="tracks-head">
         <h2 class="reveal" data-en-html="National <span class='acc'>entrepreneurship</span> meetup.">ערבי <span class="acc">יזמות לאומית</span>.</h2>
         <a class="event-wa-cta reveal" style="--d:.08s" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-track="JoinChannel" data-en="Join the WhatsApp channel - updates on the next meet-up →">להצטרפות לערוץ הוואטסאפ - עדכונים על הערב הבא ←</a>
-        <div class="ev-contact reveal" style="--d:.12s">
-          <span data-en="Questions about the meet-ups?">שאלות על הערבים?</span>
-          <a href="mailto:roee@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%A2%D7%A8%D7%91%D7%99%20%D7%99%D7%96%D7%9E%D7%95%D7%AA" data-track="EmailRoee" data-en="Email Roee">מייל לרועי</a>
-          <a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener" data-track="InstagramEvents" data-en="Instagram">אינסטגרם</a>
-        </div>
       </div>
-      <div class="ev-featured">
+      <div class="events-grid">
         <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
           <img src="assets/ev-orit.jpg" alt="ערב יזמות לאומית עם אורית קורמן נגרי - 7.9, תל אביב" data-en-alt="National entrepreneurship meet-up with Orit Korman Nagari - 7.9, Tel Aviv" loading="lazy">
           <span class="ev-tag ev-past" data-en="7.9 · Already happened">7.9 · כבר קרה</span>
         </button>
-      </div>
-      <div class="events-grid">
         <button type="button" class="ev-card reveal" data-ev="1" aria-haspopup="dialog">
           <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג - 3.8, בית בן-גוריון תל אביב" data-en-alt="National entrepreneurship meet-up with Michael Eisenberg - 3.8, Beit Ben-Gurion Tel Aviv" loading="lazy">
           <span class="ev-tag ev-past" data-en="3.8 · Already happened">3.8 · כבר קרה</span>
@@ -1741,13 +1734,9 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   <section class="ventures" id="ventures">
     <div class="wrap">
       <h2 class="reveal" data-en-html="People we walked with, who were exactly where you are, <span class='hl'>and today are solving national challenges.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
-      <div class="vflow-nav">
-        <button id="vflowPrev" aria-label="הכרטיס הקודם" type="button" data-en-aria-label="Previous card">→</button>
-        <button id="vflowNext" aria-label="הכרטיס הבא" type="button" data-en-aria-label="Next card">←</button>
-      </div>
-      <div class="vflow" id="vflow" role="group" aria-roledescription="קרוסלה" aria-label="מיזמים שכבר ליווינו" data-en-aria-label="Ventures we've mentored">
-        <article class="vcard you" tabindex="0" role="group" aria-label="אתם" data-en-aria-label="You">
-          <div class="vbig" aria-hidden="true" data-en="You?">אתם?</div>
+      <div class="vflow" id="vflow" tabindex="0" role="group" aria-label="מיזמים שכבר ליווינו - אפשר לגלול לצדדים" data-en-aria-label="Ventures we've mentored - scroll sideways">
+        <article class="vcard you" tabindex="0" role="group" aria-label="את/אתה" data-en-aria-label="You">
+          <div class="vbig" aria-hidden="true" data-en="You?">את/אתה?</div>
           <div class="vbody">
             <button type="button" class="apply-link" data-contact data-en="Contact us →">צרו קשר ←</button>
           </div>
@@ -1806,14 +1795,13 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
             <a class="vlink" href="https://www.instagram.com/asaf.pinchassi/" target="_blank" rel="noopener" data-en="Instagram →">אינסטגרם ←</a>
           </div>
         </article>
-        <article class="vcard you" tabindex="0" role="group" aria-label="אתן" data-en-aria-label="You">
-          <div class="vbig" aria-hidden="true" data-en="You?">אתן?</div>
+        <article class="vcard you" tabindex="0" role="group" aria-label="את/אתה" data-en-aria-label="You">
+          <div class="vbig" aria-hidden="true" data-en="You?">את/אתה?</div>
           <div class="vbody">
             <button type="button" class="apply-link" data-contact data-en="Contact us →">צרו קשר ←</button>
           </div>
         </article>
       </div>
-      <p class="sr-only" aria-live="polite" id="vflowStatus"></p>
     </div>
   </section>
 
@@ -2427,54 +2415,66 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeEv(); });
   }
 
-    /* ---- ventures cover-flow: click / swipe / arrows bring a card to the front ---- */
+    /* ---- ventures rail: drifts by itself, yields the moment anyone touches it ---- */
   var vflow = document.getElementById('vflow');
   if(vflow){
-    var vcards = Array.prototype.slice.call(vflow.querySelectorAll('.vcard'));
-    var vnames = ['אתם','דנאל בן-נמר','דור המייסדות','נעם מאירוב','כיף בעוטף','יובל פיטלוק','שמונה','אתן'];
-    var vnamesEn = ['You','Danel Ben-Namer','Dor HaMeyasdot','Noam Meirov','Kef BaOtef','Yuval Pitluk','Shmona','You'];
-    var vstatus = document.getElementById('vflowStatus');
-    var vcur = 4; /* start centered on Maayan Gal / Kef BaOtef, with the rest fanned on both sides */
-    function renderVFlow(){
-      vcards.forEach(function(c, i){
-        var d = i - vcur, ad = Math.abs(d);
-        c.style.zIndex = 100 - ad;
-        c.style.opacity = ad > 2 ? 0 : 1;
-        c.style.pointerEvents = ad > 2 ? 'none' : 'auto';
-        c.style.transform = 'translateX(' + (d * -240) + 'px) rotateY(' + (d * 16) + 'deg) scale(' + (1 - ad * 0.12) + ')';
-        c.style.filter = ad ? 'brightness(.55)' : 'none';
-      });
-      var names = LANG === 'en' ? vnamesEn : vnames;
-      var cardWord = LANG === 'en' ? ('Card ' + (vcur + 1) + ' of ' + vcards.length + ': ') : ('כרטיס ' + (vcur + 1) + ' מתוך ' + vcards.length + ': ');
-      if(vstatus) vstatus.textContent = cardWord + (names[vcur] || '');
+    var vheld = false, vseen = true, vresume = null;
+    var vsign = 0;     /* -1 when the engine reports RTL scroll as negative */
+    var vdir  = 1;     /* which way the drift is currently travelling */
+    var vpos  = 0;     /* our own position: scrollLeft reads back rounded to a device
+                          pixel, and re-deriving from it strands the drift at an end */
+
+    function vMeasure(){
+      var span = vflow.scrollWidth - vflow.clientWidth;
+      if(span <= 1) return null;
+      if(!vsign){
+        var keep = vflow.scrollLeft;
+        vflow.scrollLeft = -1e6;
+        vsign = vflow.scrollLeft < -1 ? -1 : 1;
+        vflow.scrollLeft = keep;
+        vdir = vsign;
+      }
+      return vsign < 0 ? { lo:-span, hi:0 } : { lo:0, hi:span };
     }
-    function goVFlow(n){ vcur = (n + vcards.length) % vcards.length; renderVFlow(); }
-    window.__renderVFlow = renderVFlow; /* re-run on language toggle */
-    renderVFlow();
-    document.getElementById('vflowNext').addEventListener('click', function(){ goVFlow(vcur + 1); });
-    document.getElementById('vflowPrev').addEventListener('click', function(){ goVFlow(vcur - 1); });
-    var vfx = null;
-    vflow.addEventListener('pointerdown', function(e){ vfx = e.clientX; });
-    vflow.addEventListener('pointerup', function(e){
-      if(vfx === null) return;
-      var dx = e.clientX - vfx;
-      if(Math.abs(dx) > 40) goVFlow(vcur + (dx > 0 ? 1 : -1));
-      vfx = null;
+    function vSync(){
+      var r = vMeasure(); if(!r) return;
+      vpos = Math.max(r.lo, Math.min(r.hi, vflow.scrollLeft));
+    }
+    function vStill(){
+      return reducedMotion || document.documentElement.classList.contains('hn-still');
+    }
+    function vStep(){
+      requestAnimationFrame(vStep);
+      if(vheld || !vseen || vStill()) return;
+      var r = vMeasure(); if(!r) return;
+      vpos += vdir * 0.4;
+      if(vpos >= r.hi){ vpos = r.hi; vdir = -1; }
+      else if(vpos <= r.lo){ vpos = r.lo; vdir = 1; }
+      vflow.scrollLeft = vpos;
+    }
+
+    function vHold(ms){
+      vheld = true;
+      clearTimeout(vresume);
+      vresume = setTimeout(function(){ vSync(); vheld = false; }, ms || 2600);
+    }
+    ['pointerdown','wheel','touchstart','keydown'].forEach(function(ev){
+      vflow.addEventListener(ev, function(){ vHold(); }, { passive:true });
     });
-    /* clicking a back card only brings it forward - its buttons stay inert until it's front */
-    vflow.addEventListener('click', function(e){
-      var card = e.target.closest('.vcard');
-      if(!card) return;
-      var i = vcards.indexOf(card);
-      if(i !== vcur){ e.preventDefault(); e.stopPropagation(); goVFlow(i); }
-    }, true);
-    vcards.forEach(function(c, i){
-      c.addEventListener('keydown', function(e){
-        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); if(i !== vcur) goVFlow(i); }
-        else if(e.key === 'ArrowLeft'){ e.preventDefault(); goVFlow(vcur + 1); }  /* RTL: left = forward */
-        else if(e.key === 'ArrowRight'){ e.preventDefault(); goVFlow(vcur - 1); }
-      });
-    });
+    vflow.addEventListener('mouseenter', function(){ vheld = true; clearTimeout(vresume); });
+    vflow.addEventListener('mouseleave', function(){ vHold(500); });
+    vflow.addEventListener('focusin', function(){ vheld = true; clearTimeout(vresume); });
+    vflow.addEventListener('focusout', function(){ vHold(500); });
+
+    /* no point drifting a rail nobody is looking at */
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        vseen = entries[0].isIntersecting;
+      }, { threshold:0 }).observe(vflow);
+    }
+    window.addEventListener('resize', function(){ vsign = 0; vSync(); }, { passive:true });
+    vSync();
+    vStep();
   }
 
   /* ---- apply modal: leave-your-details form (Google Form → Sheet) ---- */

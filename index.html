@@ -1080,6 +1080,18 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     .qcta.mini .qcta-txt{ max-width:220px; opacity:1; }
   }
 
+  /* ---- "enough scrolling, pick a track" — the last word before the footer ---- */
+  .scroll-msg{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    text-align:center; padding:0 24px 84px;
+  }
+  .scroll-msg p{ font-family:var(--sans); font-weight:800; color:#fff; font-size:clamp(20px,3vw,26px); margin:0; }
+  .scroll-msg a{
+    font-family:var(--sans); font-weight:700; color:var(--hl-blue); font-size:15px;
+    text-decoration:none; border-bottom:1.5px solid currentColor; padding-bottom:2px;
+  }
+  .scroll-msg a:hover{ color:#fff; }
+
   /* ---------- APPLY MODAL ---------- */
   .modal-overlay{
     position:fixed; inset:0; z-index:100;
@@ -1664,7 +1676,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <article class="track track-a" id="track-a">
           <div class="track-a-panel">
             <h3 data-en-html="National entrepreneurship<br>as a way of life">יזמות לאומית<br>כדרך חיים</h3>
-            <p class="desc" data-en="For young people who want to solve national problems. One meet-up a month, one guest, and a room full of people looking for partners.">לצעירים ולצעירות שרוצים לפתור בעיות לאומיות. ערב בחודש, אורח, וחדר מלא אנשים שמחפשים שותפים.</p>
+            <p class="desc" data-en="For young people who want to solve national problems. One meet-up a month, one guest, and a room full of people looking for partners.">לצעירים שרוצים לפתור בעיות לאומיות. ערב בחודש, אורח, וחדר מלא אנשים שמחפשים שותפים.</p>
             <div class="track-contact">
               <span class="tc-name" data-en="Roee">רועי</span>
               <a class="tc-email" href="mailto:roee@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%99%D7%96%D7%9E%D7%95%D7%AA%20%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA" data-track="EmailRoee" data-en="Email Roee">מייל לרועי</a>
@@ -1679,7 +1691,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <article class="track track-c" id="track-c">
           <div class="track-c-panel">
             <h3 data-en-html="Pioneering<br>as a way of life">חלוציות בַּסְפָר<br>כדרך חיים</h3>
-            <p class="desc" data-en="Hundreds of young people have already moved and built communities in the Negev and the Galilee. Come to the Pioneering Center at Mitzpe Gvulot.">מאות צעירים וצעירות כבר עברו והקימו קהילות בנגב ובגליל. בואו למרכז לחלוציות במצפה גבולות.</p>
+            <p class="desc" data-en="Hundreds of young people have already moved and built communities in the Negev and the Galilee. Come to the Pioneering Center at Mitzpe Gvulot.">מאות צעירים כבר עברו והקימו קהילות בנגב ובגליל. בואו למרכז לחלוציות במצפה גבולות.</p>
             <div class="track-contact">
               <span class="tc-name" data-en="Shaked">שקד</span>
               <a class="tc-email" href="mailto:shaked@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%97%D7%9C%D7%95%D7%A6%D7%99%D7%95%D7%AA%20%D7%91%D7%A1%D7%A4%D7%A8" data-track="EmailShaked" data-en="Email Shaked">מייל לשקד</a>
@@ -1706,6 +1718,11 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     </div>
   </section>
 
+  <!-- ======= "enough scrolling" — the nudge back up to the two tracks ======= -->
+  <div class="scroll-msg">
+    <p data-en="Enough scrolling - choose a track.">די לגלול, תבחרו מסלול.</p>
+    <a href="#tracks" data-en="Back to the tracks ↑">חזרה למסלולים ↑</a>
+  </div>
 
 </main>
 
