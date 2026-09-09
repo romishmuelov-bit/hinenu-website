@@ -127,6 +127,9 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
     <li data-en="The site can be zoomed up to 200% without loss of content or function.">האתר ניתן להגדלה עד 200% בלי אובדן תוכן או תפקוד.</li>
   </ul>
 
+  <h2 data-en="The accessibility toolbar">סרגל הנגישות</h2>
+  <p data-en="Every page carries an accessibility toolbar, opened from the icon at the bottom of the screen: larger or smaller text, high contrast, highlighted links, a readable font and stopping animations. Your choices are kept on your device.">בכל עמוד באתר קיים סרגל נגישות, שנפתח מהסמל בתחתית המסך: הגדלה והקטנה של הטקסט, ניגודיות גבוהה, הדגשת קישורים, גופן קריא ועצירת אנימציות. הבחירות נשמרות במכשיר שלכם.</p>
+
   <h2 data-en="Known limitations">מגבלות ידועות</h2>
   <p data-en="The main page includes a scroll-driven image sequence. Users who have set reduced motion in their operating system will instead get a static page with the full content. Some parts of the site may not yet be fully accessible, and we continue to improve them on an ongoing basis.">העמוד הראשי כולל רצף תמונות המונע בגלילה. משתמשים שהגדירו במערכת ההפעלה שלהם צמצום תנועה יקבלו במקומו עמוד סטטי הכולל את מלוא התוכן. ייתכנו חלקים באתר שטרם הונגשו במלואם, ואנו ממשיכים לשפר אותם באופן שוטף.</p>
 
@@ -134,6 +137,7 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
   <div class="box">
     <p data-en="Found an inaccessible component, or have a suggestion for improvement? We'd love to hear from you and will handle it promptly.">נתקלתם ברכיב שאינו נגיש, או שיש לכם הצעה לשיפור? נשמח לשמוע ונטפל בפנייה בהקדם.</p>
     <p>
+      <span data-en="Accessibility officer:">רכזת נגישות:</span> <span data-en="Romi Shmuelov">רומי שמואלוב</span><br>
       <span data-en="Email:">דוא״ל:</span> <a href="mailto:romishmuelov@gmail.com">romishmuelov@gmail.com</a>
     </p>
   </div>
@@ -141,6 +145,8 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
   <a class="back" href="index.html" data-en="→ Back to the site">← חזרה לאתר</a>
 </main>
 </div>
+<!-- shared footer + accessibility toolbar + idle scroll cue (one file for every page) -->
+<script src="../assets/hinenu-common.js" data-apply="../index.html#apply"></script>
 <script>
 (function(){
   "use strict";

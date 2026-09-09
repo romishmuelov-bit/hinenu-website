@@ -3,7 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-en="Lectures | Hinenu">הרצאות | הננו</title>
+<title data-en="Lectures | Hinenu">הרצאות · הננו</title>
+<meta name="description" content="הרצאות לבני נוער וצעירים על חלוציות ויזמות.">
+<link rel="canonical" href="https://hinenu-site.vercel.app/harzaot.html">
+<link rel="icon" href="/assets/favicon.png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/favicon.png">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="הננו">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://hinenu-site.vercel.app/harzaot.html">
+<meta property="og:title" content="הרצאות · הננו">
+<meta property="og:description" content="הרצאות לבני נוער וצעירים על חלוציות ויזמות.">
+<meta property="og:image" content="https://hinenu-site.vercel.app/assets/og-harzaot.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="סדנה של הננו עם צעירים">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="הרצאות · הננו">
+<meta name="twitter:description" content="הרצאות לבני נוער וצעירים על חלוציות ויזמות.">
+<meta name="twitter:image" content="https://hinenu-site.vercel.app/assets/og-harzaot.jpg">
+
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -98,12 +118,19 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
   .who-row > div{font-size:11.5px;padding:5px 11px}
 }
 .scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:7;
-  font-size:11px;letter-spacing:.3em;color:var(--peri);animation:bob 2.4s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--peri)}
+.scrollcue::after{content:'';display:block;width:1px;height:34px;
+  background:linear-gradient(to bottom,rgba(130,156,232,0),var(--peri));
+  animation:bob 2.4s ease-in-out infinite}
+.scrollcue::before{content:'';position:absolute;left:50%;bottom:0;width:9px;height:9px;
+  border-left:1.4px solid var(--peri);border-bottom:1.4px solid var(--peri);
+  transform:translate(-50%,4px) rotate(-45deg);animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{opacity:.5}50%{opacity:1}}
 
 /* ============ LECTURES ============ */
 .lectures{padding:clamp(38px,4.6vw,64px) 6vw clamp(26px,3.2vw,42px);background:var(--sky-light);
-  margin-top:-24px;border-radius:28px 28px 0 0;position:relative;z-index:2}
+  margin-top:-24px;border-radius:0;position:relative;z-index:2}
 .sec-head{max-width:1080px;margin:0 auto clamp(18px,2.2vw,26px);display:flex;align-items:center;
   justify-content:space-between;gap:20px;flex-wrap:wrap}
 .sec-title{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
@@ -169,7 +196,7 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
 /* ============ HISTORY ============ */
 .history{position:relative;margin-top:-6vh;min-height:min(52vh,440px);overflow:hidden;
   display:grid;place-items:center;padding:clamp(70px,10vw,130px) 6vw;
-  border-radius:28px 28px 0 0;z-index:2}
+  border-radius:0;z-index:2}
 .history-bg{position:absolute;inset:0;overflow:hidden}
 .history-bg img{width:100%;height:120%;object-fit:cover;object-position:50% 40%;
   border-radius:0;box-shadow:none;will-change:transform}
@@ -279,7 +306,7 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
 .fan-menu[hidden]{ display:none; }
 .fan-menu a{
   display:block; font-family:Heebo,sans-serif; font-weight:500; font-size:14px; text-align:start;
-  background:var(--navy); border:1px solid rgba(255,255,255,.16); border-radius:12px;
+  background:var(--navy); border:1px solid rgba(255,255,255,.16); border-radius:0;
   box-shadow:0 16px 36px rgba(0,0,0,.4);
   color:#fff; padding:11px 16px; text-decoration:none;
   transform-origin:top right;
@@ -321,7 +348,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
 .drawer.open{ transform:translateX(0); }
 .drawer-close{
   align-self:flex-end; width:36px; height:36px; margin-bottom:18px;
-  background:transparent; border:1px solid rgba(255,255,255,.3); border-radius:8px;
+  background:transparent; border:1px solid rgba(255,255,255,.3); border-radius:0;
   color:#fff; font-size:16px; cursor:pointer;
 }
 .drawer a{
@@ -353,7 +380,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   .fan-menu a{ font-size:13.5px; padding:10px 14px; }
   .menu-btn{
     display:flex; align-items:center; justify-content:center;
-    width:38px; height:38px; border:1px solid rgba(255,255,255,.4); border-radius:8px;
+    width:38px; height:38px; border:1px solid rgba(255,255,255,.4); border-radius:0;
     background:transparent; color:#fff; cursor:pointer; font-size:16px;
   }
   .hdr-left{ display:none; }
@@ -362,6 +389,23 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
      edge next to where the drawer flies in from, logo centred */
   .brand{ position:absolute; inset-inline-start:50%; transform:translateX(50%); }
 }
+
+  /* ---------- channel marks: a mail / Instagram / WhatsApp link always shows which it is ---------- */
+  a[href^="mailto:"]::before,
+  a[href*="instagram.com"]::before,
+  a[href*="whatsapp.com"]::before{
+    content:''; display:inline-block; vertical-align:-.16em;
+    width:1.05em; height:1.05em; margin-inline-end:.42em;
+    background:currentColor;
+    -webkit-mask-size:contain; mask-size:contain;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-position:center; mask-position:center;
+  }
+  a[href^="mailto:"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M2.5%205.5h19v13h-19z'%2F%3E%3Cpath%20d%3D'M2.5%206l9.5%207%209.5-7'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M2.5%205.5h19v13h-19z'%2F%3E%3Cpath%20d%3D'M2.5%206l9.5%207%209.5-7'%2F%3E%3C%2Fsvg%3E"); }
+  a[href*="instagram.com"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'18'%20height%3D'18'%20rx%3D'4.6'%2F%3E%3Ccircle%20cx%3D'12'%20cy%3D'12'%20r%3D'4.1'%2F%3E%3Ccircle%20cx%3D'17.4'%20cy%3D'6.6'%20r%3D'1.2'%20fill%3D'black'%20stroke%3D'none'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'18'%20height%3D'18'%20rx%3D'4.6'%2F%3E%3Ccircle%20cx%3D'12'%20cy%3D'12'%20r%3D'4.1'%2F%3E%3Ccircle%20cx%3D'17.4'%20cy%3D'6.6'%20r%3D'1.2'%20fill%3D'black'%20stroke%3D'none'%2F%3E%3C%2Fsvg%3E"); }
+  a[href*="whatsapp.com"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M20.5%2011.7a8.5%208.5%200%200%201-12.7%207.4L3.5%2020.5l1.4-4.2a8.5%208.5%200%201%201%2015.6-4.6z'%2F%3E%3Cpath%20d%3D'M9.2%209.1c.6%201.6%202.1%203.4%204%204.3'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M20.5%2011.7a8.5%208.5%200%200%201-12.7%207.4L3.5%2020.5l1.4-4.2a8.5%208.5%200%201%201%2015.6-4.6z'%2F%3E%3Cpath%20d%3D'M9.2%209.1c.6%201.6%202.1%203.4%204%204.3'%2F%3E%3C%2Fsvg%3E"); }
+  /* the places that already carry a drawn icon of their own */
+  .hn-foot a::before, .contact-rows a::before, .cmodal-rows a::before, .btn::before, .vlink::before{ content:none !important; }
 </style>
 </head>
 <body>
@@ -387,7 +431,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
         <a class="fan-special" href="harzaot.html" aria-current="page" data-en="Lectures →">הרצאות ←</a>
       </div>
     </div>
-    <a class="fan-btn" href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+    <a class="fan-btn" href="#site-contact" data-en="Contact us">צרו קשר</a>
   </div>
   <a class="brand" href="index.html">
     <img class="brand-logo" src="assets/logo-white.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
@@ -415,7 +459,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   <a href="index.html#tracks" data-en="Entrepreneurship">יזמות</a>
   <a class="fan-special" href="harzaot.html" aria-current="page" data-en="Lectures">הרצאות</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
-  <a href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  <a href="#site-contact" data-en="Contact us">צרו קשר</a>
   <a href="mitzpe-gvolot/accessibility.html" data-en="Accessibility">נגישות</a>
   <button class="drawer-lang" id="drawerLangToggle" type="button">EN</button>
 </nav>
@@ -433,7 +477,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
     </div>
     <div class="hero-copy" id="heroCopy">
       <h1 data-en="A Visionary Generation">נוֹעַר חֲלוצִי חוֹלֵם</h1>
-      <p data-en="Young people need a reason to believe big things can be built - and live proof that people their age are already doing it.">בני הנוער צריכים סיבה להאמין שאפשר לבנות דברים גדולים - והוכחה חיה שצעירים כמוהם כבר עושים את זה</p>
+      <p data-en="Young people need a reason to believe big things can be built - and live proof that people their age are already doing it.">בני ובנות הנוער צריכים סיבה להאמין שאפשר לבנות דברים גדולים - והוכחה חיה שצעירים כמוהם כבר עושים את זה</p>
       <div class="hero-who">
         <span class="who-label" data-en="Who this is for">למי זה מיועד</span>
         <div class="who-row">
@@ -473,7 +517,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
       <h3 data-en="What's the outcome?">מה התוצאה?</h3><p data-en="A first lesson in strategy for young people in the social sector.">שיעור ראשון באסטרטגיה לצעירים בעולם החברתי.</p></article>
     <article class="lec"><div class="num">05</div>
       <h3 data-en="Hinenu - pioneers of hope">הננו - חלוצים של תקווה</h3><p data-en="Pioneering as a solution to Israel's identity crisis.">חלוציות כפתרון למשבר הזהותי בישראל.</p></article>
-    <p class="deck-note" data-en-html="Students leave with <b>a sense of capability</b> and a first tool for national entrepreneurship.">התלמידים יוצאים עם <b>תחושת מסוגלות</b> וכלי ראשון ליזמות לאומית.</p>
+    <p class="deck-note" data-en-html="Students leave with <b>a sense of capability</b> and a first tool for national entrepreneurship.">התלמידים והתלמידות יוצאים עם <b>תחושת מסוגלות</b> וכלי ראשון ליזמות לאומית.</p>
   </div>
 </section>
 
@@ -489,7 +533,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   </div>
   <div class="gallery-in">
     <div class="gtitle">
-      <h2 data-en-html="Thousands of participants.<br>Dozens of lectures.">אלפי משתתפים.<br>עשרות הרצאות.</h2>
+      <h2 data-en-html="Thousands of participants.<br>Dozens of lectures.">אלפי משתתפים ומשתתפות.<br>עשרות הרצאות.</h2>
       <span data-en="High schools · gap-year service programs · leadership programs">תיכונים · מכינות · שנות שירות · תוכניות מנהיגות</span>
     </div>
   </div>
@@ -510,13 +554,11 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   <div class="cta-in">
     <img class="logo" src="data:image/webp;base64,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" alt="הננו - חלוצים של תקווה">
     <h2 data-en="When would you like us to come?">מתי תרצו שנגיע?</h2>
-    <p class="cta-lead" data-en="Tell us which program and which date - we'll come back to you on availability.">כתבו איזו מסגרת ואיזה תאריך. נחזור עם תשובה על זמינות.</p>
-    <a class="btn" href="mailto:roee@hinenu.org.il?subject=%D7%94%D7%96%D7%9E%D7%A0%D7%AA%20%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%E2%80%94%20%D7%A0%D7%95%D7%A2%D7%A8%20%D7%97%D7%9C%D7%95%D7%A6%D7%99%20%D7%97%D7%95%D7%9C%D7%9D&body=%D7%94%D7%99%D7%99%20%D7%A8%D7%95%D7%A2%D7%99%2C%0A%0A%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D6%BE____%20%28%D7%A9%D7%9D%20%D7%94%D7%9E%D7%A1%D7%92%D7%A8%D7%AA%29.%0A%D7%92%D7%95%D7%93%D7%9C%20%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20____%0A%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20____%0A%0A%D7%90%D7%A4%D7%A9%D7%A8%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%3F%0A">
-      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
-      <span data-en="Check if your date is available">לבדוק אם התאריך שלכם פנוי</span>
+    <p class="cta-lead" data-en="Write which programme and which date - we'll come back with an answer on availability, within one business day.">כתבו איזו מסגרת ואיזה תאריך — נחזור עם תשובה על זמינות, תוך יום עבודה.</p>
+    <a class="btn" href="mailto:roee@hinenu.org.il?subject=%D7%94%D7%96%D7%9E%D7%A0%D7%AA%20%D7%94%D7%A8%D7%A6%D7%90%D7%94">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg>
+      <span data-en="Book a lecture">לתיאום הרצאה</span>
     </a>
-    <div class="btn-note" data-en="No commitment · answer within one business day">בלי התחייבות · תשובה תוך יום עבודה</div>
-    <div class="alt"><a href="mailto:roee@hinenu.org.il?subject=%D7%94%D7%96%D7%9E%D7%A0%D7%AA%20%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%E2%80%94%20%D7%A0%D7%95%D7%A2%D7%A8%20%D7%97%D7%9C%D7%95%D7%A6%D7%99%20%D7%97%D7%95%D7%9C%D7%9D&body=%D7%94%D7%99%D7%99%20%D7%A8%D7%95%D7%A2%D7%99%2C%0A%0A%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D6%BE____%20%28%D7%A9%D7%9D%20%D7%94%D7%9E%D7%A1%D7%92%D7%A8%D7%AA%29.%0A%D7%92%D7%95%D7%93%D7%9C%20%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20____%0A%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20____%0A%0A%D7%90%D7%A4%D7%A9%D7%A8%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%3F%0A">roee@hinenu.org.il</a></div>
   </div>
 </section>
 
@@ -525,6 +567,8 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   <a class="btn" href="mailto:roee@hinenu.org.il?subject=%D7%94%D7%96%D7%9E%D7%A0%D7%AA%20%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%E2%80%94%20%D7%A0%D7%95%D7%A2%D7%A8%20%D7%97%D7%9C%D7%95%D7%A6%D7%99%20%D7%97%D7%95%D7%9C%D7%9D&body=%D7%94%D7%99%D7%99%20%D7%A8%D7%95%D7%A2%D7%99%2C%0A%0A%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D6%BE____%20%28%D7%A9%D7%9D%20%D7%94%D7%9E%D7%A1%D7%92%D7%A8%D7%AA%29.%0A%D7%92%D7%95%D7%93%D7%9C%20%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20____%0A%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20____%0A%0A%D7%90%D7%A4%D7%A9%D7%A8%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%3F%0A"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/></svg> <span data-en="Check a date">בדקו תאריך</span></a>
 </div>
 
+<!-- shared footer + accessibility toolbar + idle scroll cue (one file for every page) -->
+<script src="assets/hinenu-common.js" data-lecture="no" data-apply="index.html#apply"></script>
 <script>
 /* ---------- nav fan: same dropdown mechanic as the main site's הנני+/תצוגה+ ---------- */
 (function(){
