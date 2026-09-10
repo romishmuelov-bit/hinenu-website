@@ -9,9 +9,9 @@ One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כ
 
 ## Architecture — deliberately simple
 **Shared across every page:** `assets/hinenu-common.js` — a plain (non-defer) script included
-right before each page's own inline script. It injects the site footer (back to top → partners
-marquee with hover names → two buttons, צרו קשר and הרצאות → accessibility line), the
-accessibility toolbar (font size, contrast, link highlight, readable font, stop-motion; saved in
+right before each page's own inline script. It injects the site footer (partners marquee with
+hover names, then one closing row: צרו קשר · הרצאות · חזרה למעלה · הצהרת נגישות, with nothing
+below it), the accessibility toolbar (font size, contrast, link highlight, readable font, stop-motion; saved in
 localStorage `hinenu-a11y`), and the idle scroll cue. The footer's צרו קשר opens the page's own
 `#contactModal` where there is one, and a dialog the script builds itself where there isn't
 (harzaot) — so the mail / Instagram / WhatsApp / leave-details rows exist in exactly one place. Everything it
@@ -52,6 +52,11 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - `applyLang()` overwrites `textContent` on every `[data-en]` element, so an icon must never be an element child of one. The channel marks (mail / Instagram / WhatsApp) are `::before` masks keyed off the href, exactly for that reason.
 - The apply form posts through a hidden iframe, not `fetch`: `fetch(..., {mode:'no-cors'})` returns an opaque response that "succeeds" even when Google refused it, so it used to show "קיבלנו את המועמדות" over a failed send. The iframe's `load` event, guarded by an `about:blank` check, is the only completion signal the browser gives.
 - The Google Form still holds the long questions that were dropped from the page (`entry.823481406/1746048607/720430898`). While they are marked required over there, an empty answer is refused — `FILL_IF_EMPTY` sends a dash for each. Once Romi clears the "required" flags, delete that list.
+- `assets/hora.mov` is the 138MB archive master for the lectures page's "פעם ידענו לעשות את זה"
+  band; `*.mov` is gitignored. What ships is `assets/hora-bg.mp4` (30s, 1080x828, ~3.4MB) plus
+  `hora-poster.jpg`. Re-encode with the CapCut ffmpeg and *plain* AMF flags —
+  `-c:v h264_amf -b:v 900k`; adding `-quality`/`-rc vbr_peak` or `+faststart` in the same pass
+  hangs the encoder at close. Do faststart as a separate `-c copy` remux.
 - `og:image` URLs are absolute and hardcoded to `hinenu-site.vercel.app`. A custom domain means updating them in all four pages.
 
 ## Open items
@@ -62,5 +67,7 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
 - Photos/videos wanted for כיף בעוטף + שמונה venture cards; videos from the 16.6 evening can be added to the past-event popup (`EV[2].gallery`).
 - Custom domain not configured.
+- The header bars carry only הנני + / צרו קשר / נגישות / EN — the ניווט + fan was removed from
+  every page; navigation lives in the ☰ drawer.
 - Accessibility officer of record: רומי שמואלוב (romishmuelov@gmail.com) — named in the toolbar,
   in the statement modal and on `mitzpe-gvolot/accessibility.html`.

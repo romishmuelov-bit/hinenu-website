@@ -1514,22 +1514,11 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       <div class="navfan" id="fanHineni">
         <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
         <div class="fan-menu" hidden>
-          <button type="button" data-apply data-en="I want to start in entrepreneurship">אני רוצה להתחיל ביזמות</button>
-          <a href="more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
-          <a href="mitzpe-gvolot/index.html#lomdim" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+          <button type="button" data-apply data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</button>
+          <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
           <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
           <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
-        </div>
-      </div>
-      <div class="navfan" id="fanNav">
-        <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
-        <div class="fan-menu" hidden>
-          <a href="index.html" data-en="Hinenu">הננו</a>
-          <a href="mitzpe-gvolot/index.html#overim" data-en="Settlement">התיישבות</a>
-          <a href="index.html#tracks" data-en="Entrepreneurship">יזמות</a>
-          <a href="more.html#event" data-en="Meet-ups">ערבי יזמות</a>
-          <a href="harzaot.html" data-en="Lectures">הרצאות</a>
         </div>
       </div>
       <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
@@ -1556,9 +1545,8 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 <nav class="drawer" id="drawer" aria-label="תפריט נייד" data-en-aria-label="Mobile menu">
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
-  <button type="button" class="drawer-item" data-apply data-en="I want to start in entrepreneurship">אני רוצה להתחיל ביזמות</button>
-  <a href="more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
-  <a href="mitzpe-gvolot/index.html#lomdim" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <button type="button" class="drawer-item" data-apply data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</button>
+  <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
   <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -1731,8 +1719,8 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 
   <!-- ======= "enough scrolling" — the nudge back up to the two tracks ======= -->
   <div class="scroll-msg">
-    <p data-en="Enough scrolling - choose a track.">די לגלול, תבחרו מסלול.</p>
-    <a href="#tracks" data-en="Back to the tracks ↑">חזרה למסלולים ↑</a>
+    <p class="reveal" data-en="Enough scrolling - choose a track.">די לגלול, תבחרו מסלול.</p>
+    <a class="reveal" style="--d:.12s" href="#tracks" data-en="Back to the tracks ↑">חזרה למסלולים ↑</a>
   </div>
 
 </main>
@@ -2629,7 +2617,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     return { close: close };
   }
   setupFan('fanHineni');
-  setupFan('fanNav');
   setupFan('fanView');
 
   /* ---- mobile drawer: everything the desktop header nav shows ---- */

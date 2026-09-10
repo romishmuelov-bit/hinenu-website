@@ -84,15 +84,8 @@
 '.hn-foot a{color:inherit}',
 '.hn-in{max-width:1180px;margin:0 auto;padding:0 24px}',
 
-/* back to top */
-'.hn-top-row{display:flex;justify-content:center;padding:26px 24px 0}',
-'.hn-top{display:inline-flex;align-items:center;gap:9px;background:none;border:1px solid rgba(242,240,233,.3);color:#F2F0E9;font:inherit;font-weight:700;font-size:14px;letter-spacing:.02em;padding:11px 20px;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease}',
-'.hn-top:hover{background:#F2F0E9;border-color:#F2F0E9;color:#000}',
-'.hn-top svg{width:17px;height:17px;transition:transform .25s ease}',
-'.hn-top:hover svg{transform:translateY(-3px)}',
-
 /* partners */
-'.hn-partners{padding:38px 0 34px;text-align:center}',
+'.hn-partners{padding:44px 0 34px;text-align:center}',
 '.hn-lbl{margin:0 0 30px;font-weight:800;font-size:12.5px;letter-spacing:3px;color:#fff}',
 '.hn-marquee{position:relative;overflow:hidden;direction:ltr}',
 '.hn-marquee::before,.hn-marquee::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}',
@@ -109,15 +102,19 @@
 '.hn-logo-name{position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(5px);white-space:nowrap;font-style:normal;font-weight:700;font-size:11.5px;letter-spacing:.02em;color:#fff;background:#4257E6;padding:3px 9px;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:3}',
 '.hn-logo:hover .hn-logo-name{opacity:1;transform:translateX(-50%) translateY(0)}',
 
-/* the two actions that close every page */
+/* the last row of the page — nothing lives below it */
 '.hn-actions{border-top:1px solid rgba(242,240,233,.14)}',
-'.hn-actions .hn-in{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;padding-top:30px;padding-bottom:30px}',
+'.hn-actions .hn-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;padding-top:30px;padding-bottom:34px}',
 '.hn-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:800;font-size:16px;padding:15px 30px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease}',
 '.hn-btn svg{width:20px;height:20px}',
 '.hn-btn-solid{background:#4257E6;color:#fff}',
 '.hn-btn-solid:hover{background:#5468f0;transform:translateY(-2px)}',
 '.hn-btn-ghost{background:none;color:#F2F0E9;border-color:rgba(242,240,233,.35)}',
 '.hn-btn-ghost:hover{background:#F2F0E9;border-color:#F2F0E9;color:#000;transform:translateY(-2px)}',
+'.hn-btn-ghost svg{transition:transform .25s ease}',
+'#hnTop:hover svg{transform:translateY(-3px)}',
+'.hn-a11y-link{font-size:13px;color:#9A9C93;text-decoration:none;border-bottom:1px solid rgba(242,240,233,.3);padding-bottom:2px}',
+'.hn-a11y-link:hover{color:#fff;border-color:#fff}',
 
 /* the fallback contact dialog, for a page with none of its own */
 '.hn-dlg{position:fixed;inset:0;z-index:120;display:flex;align-items:flex-start;justify-content:center;padding:8vh 20px 40px;background:rgba(10,12,24,.66);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);overflow-y:auto}',
@@ -134,12 +131,6 @@
 '.hn-row-txt{min-width:0}',
 /* these rows draw their own icon — keep the page-wide channel mask off them */
 '.hn-dlg a::before,.hn-foot a::before,.hn-foot button::before{content:none !important}',
-
-/* legal strip */
-'.hn-legal{border-top:1px solid rgba(242,240,233,.14)}',
-'.hn-legal .hn-in{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:22px;font-size:12.5px;color:#9A9C93}',
-'.hn-legal a{text-decoration:none;border-bottom:1px solid rgba(242,240,233,.3)}',
-'.hn-legal a:hover{color:#fff;border-color:#fff}',
 
 /* idle scroll cue */
 '.hn-cue{position:fixed;left:50%;bottom:26px;z-index:55;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;opacity:0;transform:translateX(-50%) translateY(14px);transition:opacity .5s ease,transform .5s ease}',
@@ -204,10 +195,6 @@
   var applyAttr = applyHref ? 'href="' + applyHref + '"' : 'href="#" data-apply';
 
   var html =
-  '<div class="hn-top-row">' +
-    '<button type="button" class="hn-top" id="hnTop">' + ICON.up +
-      '<span data-en="Back to top">חזרה למעלה</span></button>' +
-  '</div>' +
   '<section class="hn-partners" aria-label="השותפים שלנו" data-en-aria-label="Our partners">' +
     '<p class="hn-lbl" data-en="Our partners">השותפים שלנו</p>' +
     '<div class="hn-marquee"><div class="hn-track">' +
@@ -221,13 +208,10 @@
     (wantLecture ?
     '<a class="hn-btn hn-btn-ghost" href="' + base + 'harzaot.html">' + ICON.mic +
       '<span data-en="Lectures">הרצאות</span></a>' : '') +
-  '</div></section>' +
-  '<div class="hn-legal"><div class="hn-in">' +
-    '<span data-en="Hinenu — pioneering as a way of life">הננו — חלוציות כדרך חיים</span>' +
-    '<span><a href="' + a11yHref + '" data-en="Accessibility statement">הצהרת נגישות</a>' +
-      ' · <span data-en="Accessibility officer: Romi Shmuelov">רכזת נגישות: רומי שמואלוב</span>' +
-      ' · <a href="mailto:' + A11Y_MAIL + '">' + A11Y_MAIL + '</a></span>' +
-  '</div></div>';
+    '<button type="button" class="hn-btn hn-btn-ghost" id="hnTop">' + ICON.up +
+      '<span data-en="Back to top">חזרה למעלה</span></button>' +
+    '<a class="hn-a11y-link" href="' + a11yHref + '" data-en="Accessibility statement">הצהרת נגישות</a>' +
+  '</div></section>';
 
   var foot = document.createElement('footer');
   foot.className = 'hn-foot';
@@ -393,6 +377,10 @@
       root.classList.toggle('hn-readable', state.readable);
       root.classList.toggle('hn-still', state.still);
       root.style.fontSize = state.font ? (100 + state.font * 10) + '%' : '';
+      /* "stop motion" has to actually stop the background films, not just hide them */
+      document.querySelectorAll('video').forEach(function(v){
+        try{ state.still ? v.pause() : (v.autoplay && v.play().catch(function(){})); }catch(e){}
+      });
       panel.querySelectorAll('[data-act]').forEach(function(b){
         var a = b.getAttribute('data-act');
         if(typeof state[a] === 'boolean') b.setAttribute('aria-pressed', String(state[a]));
