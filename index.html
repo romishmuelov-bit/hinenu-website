@@ -1735,27 +1735,27 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     <form class="signup-form" id="applyForm" novalidate>
       <div class="field">
         <label for="fullname" data-en="Full name">שם מלא</label>
-        <input type="text" id="fullname" name="entry.1024546999" required autocomplete="name">
+        <input type="text" id="fullname" name="entry.834284576" required autocomplete="name">
       </div>
       <div class="field">
         <label for="phone" data-en="Phone">טלפון</label>
-        <input type="tel" id="phone" name="entry.368855929" required autocomplete="tel" inputmode="tel">
+        <input type="tel" id="phone" name="entry.947166453" required autocomplete="tel" inputmode="tel">
       </div>
       <div class="field">
         <label for="email" data-en="Email">אימייל</label>
-        <input type="email" id="email" name="entry.594139932" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com" data-en-title="A valid email address, e.g. name@example.com">
+        <input type="email" id="email" name="entry.247289337" required autocomplete="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="כתובת אימייל חוקית, לדוגמה name@example.com" data-en-title="A valid email address, e.g. name@example.com">
       </div>
       <fieldset class="field field-choice">
         <legend data-en="What are you interested in?">מה מעניין אותך?</legend>
         <div class="choices">
-          <label class="choice"><input type="radio" name="entry.473349595" value="יזמות לאומית" data-en-value="National entrepreneurship" required><span data-en="National entrepreneurship">יזמות לאומית</span></label>
-          <label class="choice"><input type="radio" name="entry.473349595" value="חלוציות בספר" data-en-value="Pioneering on the frontier"><span data-en="Pioneering on the frontier">חלוציות בַּסְפָר</span></label>
-          <label class="choice"><input type="radio" name="entry.473349595" value="עוד לא יודע/ת" data-en-value="Not sure yet"><span data-en="Not sure yet">עוד לא יודע/ת</span></label>
+          <label class="choice"><input type="radio" name="entry.2138204294" value="יזמות לאומית" data-en-value="National entrepreneurship" required><span data-en="National entrepreneurship">יזמות לאומית</span></label>
+          <label class="choice"><input type="radio" name="entry.2138204294" value="חלוציות בספר" data-en-value="Pioneering on the frontier"><span data-en="Pioneering on the frontier">חלוציות בַּסְפָר</span></label>
+          <label class="choice"><input type="radio" name="entry.2138204294" value="עוד לא יודע/ת" data-en-value="Not sure yet"><span data-en="Not sure yet">עוד לא יודע/ת</span></label>
         </div>
       </fieldset>
       <div class="field">
         <label for="note" data-en-html="Anything we should know? <span class='opt'>(optional)</span>">משהו שכדאי שנדע? <span class="opt">(לא חובה)</span></label>
-        <input type="text" id="note" name="entry.823481406" autocomplete="off">
+        <input type="text" id="note" name="note" autocomplete="off">
       </div>
       <button type="submit" class="cta-btn" data-en="Send">שליחה</button>
       <p class="form-error" id="applyError" data-en-html="We couldn't send this. Try again, or reach us by <a href=&quot;mailto:roee@hinenu.org.il&quot;>email</a> or on <a href=&quot;https://www.instagram.com/hinenu_israel&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Instagram</a>.">לא הצלחנו לשלוח. נסו שוב, או פנו אלינו ב<a href="mailto:roee@hinenu.org.il">מייל</a> או ב<a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener">אינסטגרם</a>.</p>
@@ -1857,15 +1857,11 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
      1. השליחה נעשית דרך iframe נסתר ולא דרך fetch, כי fetch עם no-cors
         מחזיר תשובה אטומה - הוא "מצליח" גם כשהבקשה נכשלה. אירוע ה-load
         של ה-iframe הוא הסימן היחיד מהדפדפן שהבקשה באמת הושלמה.
-     2. הטופס בגוגל עדיין מכיל את השאלות הארוכות שהוסרו מהעמוד. כל עוד הן
-        מסומנות שם כחובה, בקשה בלי תשובה עליהן תידחה - ולכן נשלח סימון.
-        אחרי שמסירים את החובה בטופס בגוגל אפשר למחוק את FILL_IF_EMPTY.
+     2. הטופס מכיל ארבע שאלות: שם, טלפון, מייל, ומה מעניין אותך. לשדה
+        "משהו שכדאי שנדע" אין מקבילה שם, ולכן הוא נשלח ל-Formspree בלבד.
+        אם מוסיפים לטופס שאלה כזאת - צריך את ה-entry שלה כאן.
      ================================================================ */
-  var GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdi8Fi0_RebqmG3M_QelGnQk8nFSvAykHecbIRbriKBlXcWxw/formResponse';
-  /* questions that are still in the Google Form but no longer asked here (plus the
-     optional note): an empty answer is refused while they are marked required there,
-     so an unanswered one travels as a dash. */
-  var FILL_IF_EMPTY = ['entry.823481406', 'entry.1746048607', 'entry.720430898'];
+  var GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA/formResponse';
 
   /* every submission is kept in the browser too, so a failed send is recoverable */
   function backupSubmission(fd){
@@ -2502,17 +2498,20 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     submitBtn.disabled = true;
     applyError.classList.remove('show');
     var fd = new FormData(applyForm);
-    FILL_IF_EMPTY.forEach(function(id){ if(!fd.get(id)) fd.set(id, '—'); });
+    /* the new form has no "anything we should know" question - that one rides
+       to Formspree only, so Google does not reject an unknown field */
+    var note = fd.get('note') || '';
+    fd.delete('note');
     backupSubmission(fd);
     /* Formspree answers for real and mails it on; the Google Form keeps the sheet fed */
     var readable = {
-      _subject: 'השארת פרטים מהאתר - ' + (fd.get('entry.1024546999') || ''),
+      _subject: 'השארת פרטים מהאתר - ' + (fd.get('entry.834284576') || ''),
       form: 'השארת פרטים',
-      name: fd.get('entry.1024546999') || '',
-      phone: fd.get('entry.368855929') || '',
-      email: fd.get('entry.594139932') || '',
-      interest: fd.get('entry.473349595') || '',
-      note: fd.get('entry.823481406') || ''
+      name: fd.get('entry.834284576') || '',
+      phone: fd.get('entry.947166453') || '',
+      email: fd.get('entry.247289337') || '',
+      interest: fd.get('entry.2138204294') || '',
+      note: note
     };
     var send = window.hinenuSend ? window.hinenuSend(readable, GFORM_URL, fd) : postToGoogleForm(fd);
     send.then(function(ok){
@@ -2522,7 +2521,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         track('ApplyFailed');
         return;
       }
-      trackStandard('Lead', { content_name: fd.get('entry.473349595') || '' });
+      trackStandard('Lead', { content_name: fd.get('entry.2138204294') || '' });
       applyForm.style.display = 'none';
       applySuccess.classList.add('show');
       applySuccess.setAttribute('tabindex','-1');

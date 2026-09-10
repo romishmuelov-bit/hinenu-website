@@ -62,7 +62,13 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   tab and shows Google's own confirmation.
 - Neither endpoint can be exercised from a sandbox without internet — after any change to the
   form plumbing, do one real submission per form and confirm it lands.
-- The Google Form still holds the long questions that were dropped from the page (`entry.823481406/1746048607/720430898`). While they are marked required over there, an empty answer is refused — `FILL_IF_EMPTY` sends a dash for each. Once Romi clears the "required" flags, delete that list.
+- The apply modal posts into the **contact Google Form**
+  (`1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA`), four questions:
+  `entry.834284576` name · `entry.947166453` phone · `entry.247289337` email ·
+  `entry.2138204294` what interests you. There is no question for "משהו שכדאי שנדע", so that field
+  is stripped out of the Google payload and rides to Formspree only — add a question there and its
+  entry id here if it should reach the sheet. Google rejects a choice value that is not one of the
+  question's options, so the three radios must stay in step with the form.
 - `assets/hora.mov` is the 138MB archive master for the lectures page's "פעם ידענו לעשות את זה"
   band; `*.mov` is gitignored. What ships is `assets/hora-bg.mp4` (30s, 1080x828, ~3.4MB) plus
   `hora-poster.jpg`. Re-encode with the CapCut ffmpeg and *plain* AMF flags —
@@ -71,7 +77,7 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - `og:image` URLs are absolute and hardcoded to `hinenu-site.vercel.app`. A custom domain means updating them in all four pages.
 
 ## Open items
-- Google Form: mark the retired questions optional, turn on email notification per response, then drop `FILL_IF_EMPTY`.
+- Google Form: turn on email notification per response (Formspree already mails each one, so this is belt-and-braces).
 - No analytics beyond the Meta pixel (`901591649440894`), which now fires `Lead` on submit plus `trackCustom` events via `data-track="Name"` on any element. GA4 still missing.
 - Phone-only "keep me posted" capture has nowhere to go — the quiet-channel strip links to the WhatsApp group instead. Needs its own Google Form if Romi wants the field.
 - Letter text may still be revised by Roee Azizi.
