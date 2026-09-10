@@ -4,7 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>המרכז לחלוציות · מצפה גבולות</title>
-<meta name="description" content="פעם היה פה רק חול. המרכז לחלוציות במצפה גבולות - הנגב המערבי.">
+<meta name="description" content="חלוציות אז והיום - וחיבור למעשה. המרכז לחלוציות במצפה גבולות, בנגב המערבי.">
+<link rel="canonical" href="https://hinenu-site.vercel.app/mitzpe-gvolot/">
+<link rel="icon" href="/assets/favicon.png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/favicon.png">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="הננו">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://hinenu-site.vercel.app/mitzpe-gvolot/">
+<meta property="og:title" content="המרכז לחלוציות · מצפה גבולות">
+<meta property="og:description" content="חלוציות אז והיום - וחיבור למעשה. המרכז לחלוציות במצפה גבולות, בנגב המערבי.">
+<meta property="og:image" content="https://hinenu-site.vercel.app/assets/og-mitzpe.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ערב קהילתי במצפה גבולות">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="המרכז לחלוציות · מצפה גבולות">
+<meta name="twitter:description" content="חלוציות אז והיום - וחיבור למעשה. המרכז לחלוציות במצפה גבולות, בנגב המערבי.">
+<meta name="twitter:image" content="https://hinenu-site.vercel.app/assets/og-mitzpe.jpg">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '901591649440894');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -20,14 +56,15 @@
 :root{
   /* the palette, exactly as supplied */
   --navy:#133458; --olive:#838921; --amber:#D99B21; --pale:#FAF7BB; --red:#C1272D;
-  --wine:#8E2230;
+  --wine:#8E2230; --sand:#E9DFC7;
   --bg:var(--navy); --ink:var(--pale); --dim:#A8BACB;
   --display:'Reisinger Yonatan','Rubik',system-ui,sans-serif;
   --sans:'Rubik',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-html{background:var(--bg)}
+html{background:var(--bg); scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
 body{
   background:var(--bg); color:var(--ink);
   font-family:var(--sans); font-weight:300;
@@ -40,7 +77,7 @@ a{color:inherit}
 
 .skip{
   position:absolute; top:-100px; inset-inline-start:12px; z-index:200;
-  background:var(--amber); color:var(--navy); padding:10px 16px; border-radius:6px;
+  background:var(--amber); color:var(--navy); padding:10px 16px; border-radius:0;
   font-weight:700; text-decoration:none;
 }
 .skip:focus{top:12px}
@@ -50,6 +87,18 @@ a{color:inherit}
 #boot i{display:block; height:100%; width:0%; background:var(--amber); transition:width .18s linear}
 #boot.done{opacity:0; transition:opacity .4s ease .1s; pointer-events:none}
 
+/* ---------- quick pills: you should not have to sit through the whole film ---------- */
+.card.arrive{ animation:cardArrive .55s cubic-bezier(.2,.7,.3,1) both; }
+@keyframes cardArrive{
+  from{ opacity:0; transform:scale(.94) translateY(14px); }
+  to{ opacity:1; transform:none; }
+}
+@media (max-width:640px){
+}
+@media (prefers-reduced-motion:reduce){
+  .card.arrive{ animation:none; }
+}
+
 /* ---------- header ---------- */
 .hdr{
   position:fixed; top:0; inset-inline:0; z-index:90;
@@ -57,9 +106,11 @@ a{color:inherit}
   padding:18px 24px; pointer-events:none; transition:opacity .4s ease;
 }
 .hdr::before{
-  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
-  background:linear-gradient(180deg, rgba(8,24,43,.55), transparent);
+  content:''; position:absolute; inset:0 0 -22px 0; z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,24,43,.94) 0%, rgba(8,24,43,.76) 46%, rgba(8,24,43,0) 100%);
 }
+/* the bar keeps its own dir="rtl" so the order of הנני / ניווט / צרו קשר and the
+   centred logo stay put when the page flips to English */
 .hdr.gone{opacity:0}
 .hdr.gone > *{pointer-events:none}
 .hdr > *{pointer-events:auto}
@@ -90,7 +141,7 @@ a{color:inherit}
 .fan-menu[hidden]{ display:none; }
 .fan-menu a{
   display:block; font-family:var(--sans); font-weight:500; font-size:14px; text-align:start;
-  background:var(--navy); border:1px solid rgba(250,247,187,.22); border-radius:12px;
+  background:var(--navy); border:1px solid rgba(250,247,187,.22); border-radius:0;
   box-shadow:0 16px 36px rgba(8,24,43,.6);
   color:var(--pale); padding:11px 16px; text-decoration:none;
   transform-origin:top right;
@@ -164,7 +215,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .drawer.open{ transform:translateX(0); }
 .drawer-close{
   align-self:flex-end; width:36px; height:36px; margin-bottom:18px;
-  background:transparent; border:1px solid rgba(250,247,187,.3); border-radius:8px;
+  background:transparent; border:1px solid rgba(250,247,187,.3); border-radius:0;
   color:var(--pale); font-size:16px; cursor:pointer;
 }
 .drawer a, .drawer .drawer-book{
@@ -187,7 +238,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 @media (max-width:760px){
   .menu-btn{
     display:flex; align-items:center; justify-content:center;
-    width:38px; height:38px; border:1px solid rgba(250,247,187,.35); border-radius:8px;
+    width:38px; height:38px; border:1px solid rgba(250,247,187,.35); border-radius:0;
     background:transparent; color:var(--pale); cursor:pointer; font-size:16px;
   }
   .book{ display:none; }
@@ -198,7 +249,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 /* ---------- the scroll story: one track, both clips ----------
    Two separate tracks would unpin one stage and pin the next at the join,
    and that hand-off is exactly the seam this avoids. */
-.scroll-track{height:600svh; position:relative}
+.scroll-track{height:420svh; position:relative}
 .sticky-stage{position:sticky; top:0; height:100svh; overflow:hidden; background:var(--navy)}
 .sticky-stage canvas{
   display:block; width:100%; height:100%;
@@ -262,16 +313,16 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .beat .n{color:var(--amber); font-family:var(--sans); font-weight:700}
 
 /* ---------- flyers: the hard cut from the story into 1950s poster ---------- */
-.flyers{position:relative; z-index:3; background:var(--pale); color:var(--navy); padding:110px 24px 90px}
+.flyers{position:relative; z-index:3; background:var(--sand); color:var(--navy); padding:84px 24px 70px}
 .flyers::before{
   content:''; position:absolute; inset:0; pointer-events:none; opacity:.3;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4'/></filter><rect width='160' height='160' filter='url(%23p)' opacity='.32'/></svg>");
   mix-blend-mode:multiply;
 }
 .flyers-in{max-width:1120px; margin:0 auto; position:relative}
-.flyers h2{margin:0 0 10px; font-family:var(--display); font-weight:400; font-size:clamp(34px,5.4vw,58px); line-height:1.1}
+.flyers h2{margin:0 0 10px; font-family:var(--display); font-weight:400; font-size:clamp(38px,6.2vw,68px); line-height:1.05}
 .flyers .lede{margin:0 0 52px; font-size:17px; color:#3D5570; max-width:46ch}
-.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:26px}
+.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:30px; max-width:960px}
 .swipe-hint{ display:none; }
 .card{
   position:relative; display:flex; flex-direction:column;
@@ -280,7 +331,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   transition:transform .22s cubic-bezier(.22,.61,.36,1), box-shadow .22s ease;
 }
 .card:hover,.card:focus-visible{transform:translate(3px,3px); box-shadow:4px 4px 0 var(--navy)}
-.card .poster{position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--pale)}
+.card .poster{position:relative; aspect-ratio:1/1; overflow:hidden; background:var(--pale)}
 .card .poster img{
   width:100%; height:100%; object-fit:cover; display:block;
   transform:scale(1.08); transform-origin:50% 50%;
@@ -301,9 +352,9 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 }
 .card .poster h3{
   position:absolute; z-index:3; inset-inline:0; bottom:0;
-  margin:0; padding:0 16px 20px; text-align:center;
+  margin:0; padding:0 14px 16px; text-align:center;
   font-family:var(--display); font-weight:400; line-height:.92;
-  font-size:clamp(56px,9vw,104px); color:var(--pale);
+  font-size:clamp(34px,5.6vw,52px); color:var(--pale);
   text-shadow:0 1px 2px rgba(8,24,43,.8), 0 2px 18px rgba(8,24,43,.9);
 }
 .card .body{border-top:2px solid var(--navy); padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
@@ -312,8 +363,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 .card li{font-size:15px; line-height:1.5; color:#22405E; padding-inline-start:15px; position:relative}
 .card li::before{content:''; position:absolute; inset-inline-start:0; top:.6em; width:6px; height:6px; background:var(--wine)}
 .card .go{margin-top:auto; font-family:var(--sans); font-weight:700; font-size:14.5px; color:var(--wine)}
-.card .go::after{content:' \2190'}
-html[lang="en"] .card .go::after{content:' \2192'}
+.card .go::after{content:' \2193'}
 .card.blue .go{color:var(--navy)}
 .card.gold .go{color:#8A6208}
 
@@ -343,17 +393,162 @@ html[lang="en"] .card .go::after{content:' \2192'}
 }
 .quote cite{display:block; margin-top:14px; font-family:var(--sans); font-style:normal; font-size:13.5px; color:#485C70; font-weight:500}
 
+/* ---------- deep sections: overim + lomdim, merged in from their own pages ---------- */
+.deep{
+  position:relative; z-index:3; background:var(--navy); color:var(--ink);
+  padding:0 0 52px; scroll-margin-top:0;
+}
+/* the shared "מי אנחנו" block has no photo heading band, so it needs its own top padding */
+.deep.team-block{ padding-top:58px; border-top:1px solid rgba(250,247,187,.14); }
+.deep-in{ max-width:1080px; margin:0 auto; padding:0 24px; }
+
+/* "ללמוד" runs on sand like the flyers above it - a clean, hard break from the navy "עוברים" track */
+#lomdim{ background:var(--sand); color:var(--navy); }
+#lomdim::before{
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:.3; z-index:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4'/></filter><rect width='160' height='160' filter='url(%23p)' opacity='.32'/></svg>");
+  mix-blend-mode:multiply;
+}
+#lomdim > .deep-in{ position:relative; z-index:1; }
+/* the heading band keeps its dark photo (light title), then a 36px sand gap before the body */
+#lomdim .d-hd::after{ background:linear-gradient(180deg, rgba(8,24,43,.35) 0%, rgba(8,24,43,.55) 60%, rgba(8,24,43,.78) 100%); }
+#lomdim .d-hd h2{ color:var(--pale); }
+#lomdim .lead{ color:#2E465F; }
+#lomdim li::before{ background:var(--wine); }
+#lomdim .quote{ color:var(--navy); border-inline-start-color:var(--wine); }
+#lomdim .plan{ border-color:rgba(19,52,88,.18); background:rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(60,44,20,.14); }
+#lomdim .plan:hover{ border-color:rgba(142,34,48,.4); }
+#lomdim .plan.featured{ border-color:var(--amber); border-width:2px; }
+#lomdim .plan .desc{ color:#3E4B5C; }
+#lomdim .plan .tag{ color:#8A6208; }
+#lomdim .plan .pick{ border-color:rgba(19,52,88,.3); color:var(--navy); }
+#lomdim .plan .pick:hover{ background:rgba(19,52,88,.08); }
+#lomdim .aud div{ border-color:rgba(19,52,88,.18); background:rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(60,44,20,.12); }
+#lomdim .aud h4{ color:var(--navy); }
+#lomdim .aud p{ color:#3E4B5C; }
+/* heading band with a photo behind the title */
+.deep .d-hd{
+  position:relative; padding:88px 0 40px; margin-bottom:28px;
+  background:#0b2036 center/cover no-repeat;
+}
+.deep .d-hd::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,24,43,.42) 0%, rgba(8,24,43,.62) 55%, var(--navy) 100%);
+}
+.deep .d-hd .deep-in{ position:relative; z-index:1; }
+.deep .kicker{
+  font-family:var(--sans); font-size:clamp(15px,2vw,19px); font-weight:500;
+  letter-spacing:.02em; color:var(--amber); margin:0 0 14px;
+}
+.deep h2{
+  font-family:var(--display); font-weight:400; line-height:1.03;
+  font-size:clamp(38px,6.2vw,68px); margin:0;
+  text-shadow:0 2px 24px rgba(8,24,43,.7);
+}
+.deep .lead{ max-width:60ch; font-size:clamp(17px,2.1vw,19px); line-height:1.7; margin:0 0 12px; }
+.deep h3{
+  font-family:var(--display); font-weight:400; font-size:clamp(26px,3.2vw,36px);
+  line-height:1.1; margin:40px 0 16px;
+  padding-inline-start:14px; border-inline-start:3px solid var(--wine);
+}
+.deep ul{ margin:0 0 8px; padding:0; list-style:none; display:grid; gap:10px; max-width:60ch; }
+.deep li{ position:relative; padding-inline-start:18px; font-size:16.5px; line-height:1.65; }
+.deep li::before{ content:''; position:absolute; inset-inline-start:0; top:.62em; width:7px; height:7px; background:var(--amber); }
+.deep .quote{
+  font-family:var(--display); font-weight:400; font-size:clamp(21px,2.7vw,30px);
+  line-height:1.35; margin:26px 0 0; max-width:34ch;
+  border-inline-start:3px solid var(--amber); padding-inline-start:20px; color:var(--ink);
+}
+.deep .d-cta{
+  display:inline-block; margin:34px 0 0; text-decoration:none;
+  background:var(--amber); color:var(--navy); font-weight:700; font-size:16px;
+  padding:15px 32px; border-radius:0; transition:filter .15s ease, transform .15s ease;
+}
+.deep .d-cta:hover{ filter:brightness(1.07); transform:translateY(-1px); }
+
+/* programme cards (from lomdim) */
+.deep .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch; margin-top:8px; }
+.deep .plan{
+  display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid rgba(250,247,187,.30); border-radius:0;
+  background:rgba(250,247,187,.08); box-shadow:0 14px 34px rgba(6,18,33,.5);
+  transition:border-color .2s ease, transform .2s ease;
+}
+.deep .plan:hover{ border-color:rgba(217,155,33,.5); transform:translateY(-3px); }
+.deep .plan.featured{ border-color:var(--amber); border-width:2px; }
+.deep .plan img{ width:100%; height:150px; object-fit:cover; display:block; }
+.deep .plan .p-in{ padding:22px 22px 24px; display:flex; flex-direction:column; flex:1; }
+.deep .plan .len{
+  align-self:flex-start; font-size:11.5px; font-weight:500; letter-spacing:.1em;
+  color:var(--navy); background:var(--amber); border-radius:100px; padding:5px 13px; margin:0 0 14px;
+}
+.deep .plan .plan-h{ font-family:var(--display); font-weight:400; font-size:clamp(22px,2.6vw,28px); line-height:1.05; margin:0 0 6px; padding:0; border:0; }
+.deep .plan .tag{ color:var(--amber); font-size:14.5px; font-weight:500; margin:0 0 12px; }
+.deep .plan .desc{ font-size:15px; line-height:1.7; margin:0 0 18px; color:rgba(250,247,187,.88); }
+.deep .plan .pick{
+  margin:auto 0 0; display:block; text-align:center; text-decoration:none;
+  font-weight:700; font-size:14.5px; padding:12px; border-radius:0;
+  border:1px solid rgba(217,155,33,.5); color:var(--amber); transition:background .2s ease;
+}
+.deep .plan .pick:hover{ background:rgba(217,155,33,.14); }
+.deep .plan.featured .pick{ background:var(--amber); color:var(--navy); border-color:var(--amber); }
+
+/* audiences (from lomdim) */
+.deep .aud{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:8px; }
+.deep .aud div{
+  border:1px solid rgba(250,247,187,.28); border-inline-start:3px solid var(--wine);
+  border-radius:0; padding:22px 24px;
+  background:rgba(250,247,187,.07); box-shadow:0 12px 28px rgba(6,18,33,.42);
+}
+.deep .aud h4{ font-family:var(--display); font-weight:400; font-size:clamp(22px,2.6vw,28px); line-height:1.1; color:var(--pale); margin:0 0 8px; }
+.deep .aud p{ font-size:15px; line-height:1.65; margin:0; color:rgba(250,247,187,.86); }
+
+/* photo strips + gallery */
+.deep .strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px; }
+.deep .strip img{ width:100%; height:190px; object-fit:cover; display:block; border-radius:0; }
+.deep .gal{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:22px; }
+.deep .gal figure{ margin:0; position:relative; border-radius:0; overflow:hidden; }
+.deep .gal img{ width:100%; height:172px; object-fit:cover; display:block; }
+.deep .gal figcaption{
+  position:absolute; inset-inline:0; bottom:0; padding:26px 12px 9px;
+  font-size:11.5px; line-height:1.35; color:var(--pale);
+  background:linear-gradient(180deg, transparent, rgba(8,24,43,.85));
+}
+
+/* team (from lomdim) */
+.deep .team{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:8px; }
+.deep .team .who{ border-top:2px solid var(--wine); padding-top:18px; }
+.deep .team .who img{ width:100%; max-width:210px; aspect-ratio:1/1; height:auto; border-radius:50%; object-fit:cover; display:block; margin:0 0 14px; border:2px solid rgba(250,247,187,.25); }
+.deep .team .who h4{ font-family:var(--sans); font-size:18px; font-weight:700; margin:0 0 6px; color:var(--amber); }
+.deep .team .who p{ font-size:15px; line-height:1.6; margin:0; color:rgba(250,247,187,.85); }
+
+@media (max-width:900px){
+  .deep .plans{ grid-template-columns:1fr; }
+  .deep .aud{ grid-template-columns:1fr; }
+  .deep .team{ grid-template-columns:1fr 1fr; }
+  .deep .gal{ grid-template-columns:1fr 1fr; }
+  .deep .gal img{ height:180px; }
+}
+@media (max-width:600px){
+  .deep{ padding:64px 20px 52px; }
+  .deep .team{ grid-template-columns:1fr; }
+  .deep .strip{ grid-template-columns:1fr 1fr; }
+  .deep .gal{ grid-template-columns:1fr 1fr; gap:8px; }
+  .deep .gal img{ height:150px; }
+  .deep .d-cta{ display:block; text-align:center; }
+}
+
 /* ---------- closing ---------- */
 .closing{
-  position:relative; z-index:3; background:var(--bg);
-  min-height:80svh; display:grid; place-items:center;
-  padding:100px 24px 60px; text-align:center; overflow:hidden;
+  position:relative; z-index:3; background:var(--navy);
+  min-height:52svh; display:grid; place-items:center;
+  padding:74px 24px 52px; text-align:center; overflow:hidden;
 }
-.closing .sand{position:absolute; inset:0; pointer-events:none; background:radial-gradient(120% 70% at 50% 108%, rgba(217,155,33,.16), transparent 60%)}
-.closing h2{position:relative; margin:0; max-width:17ch; font-family:var(--display); font-weight:400; font-size:clamp(34px,6.6vw,78px); line-height:1.16}
+.closing .sand{display:none}
+.closing h2{position:relative; margin:0; max-width:17ch; font-family:var(--display); font-weight:400; font-size:clamp(38px,6.2vw,68px); line-height:1.1}
 
 /* ---------- form ---------- */
-.booking{position:relative; z-index:3; background:var(--bg); padding:20px 24px 110px}
+.booking{position:relative; z-index:3; background:var(--bg); padding:20px 24px 76px}
 .booking-in{max-width:600px; margin:0 auto}
 .booking p.sub{margin:0 0 30px; color:var(--dim); font-size:16px; line-height:1.65; text-align:center}
 .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
@@ -362,7 +557,7 @@ html[lang="en"] .card .go::after{content:' \2192'}
 .field input,.field select,.field textarea{
   width:100%; font-family:var(--sans); font-size:15.5px; color:var(--ink);
   background:rgba(250,247,187,.06); border:1px solid rgba(250,247,187,.18);
-  border-radius:8px; padding:12px 14px; transition:border-color .2s ease, background .2s ease;
+  border-radius:0; padding:12px 14px; transition:border-color .2s ease, background .2s ease;
 }
 .field textarea{min-height:88px; resize:vertical}
 .field input:focus,.field select:focus,.field textarea:focus{background:rgba(250,247,187,.1); border-color:var(--amber); outline:none}
@@ -370,7 +565,7 @@ html[lang="en"] .card .go::after{content:' \2192'}
 .submit{
   width:100%; margin-top:8px; cursor:pointer;
   font-family:var(--sans); font-weight:700; font-size:16px;
-  background:var(--amber); color:var(--navy); border:none; border-radius:8px; padding:15px;
+  background:var(--amber); color:var(--navy); border:none; border-radius:0; padding:15px;
   transition:transform .15s ease, box-shadow .2s ease;
 }
 .submit:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(217,155,33,.28)}
@@ -392,9 +587,13 @@ html[lang="en"] .card .go::after{content:' \2192'}
   opacity:.78; transition:opacity .2s ease;
 }
 .partners .row img:hover{opacity:1}
-.partners .support{border-top:2px solid rgba(142,34,48,.35); padding-top:26px; max-width:420px; margin-inline:auto;
-  margin:34px 0 0; font-size:13.5px; color:#485C70; letter-spacing:.02em;
+.partners .support{
+  border-top:2px solid rgba(142,34,48,.35); padding-top:24px;
+  max-width:420px; margin:34px auto 0;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
 }
+.partners .support img{ height:66px; width:auto; opacity:.92; }
+.partners .support p{ margin:0; font-size:13.5px; color:#485C70; letter-spacing:.02em; }
 @media (max-width:760px){ .partners .row img{height:26px} .partners .row{gap:18px 22px} }
 footer{position:relative; z-index:3; background:var(--bg); border-top:1px solid rgba(250,247,187,.14); padding:30px 24px 44px; text-align:center}
 footer p{margin:0 0 7px; font-size:13px; color:var(--dim)}
@@ -405,29 +604,19 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   .hdr-logo img{height:22px}
   .fan-menu{ min-width:0; width:max-content; max-width:calc(100vw - 28px); }
   .fan-menu a{ font-size:13.5px; padding:10px 14px; }
-  /* three squares stacked one under another read as slow, repetitive scroll -
-     swipe sideways through them instead */
-  .cards{
-    display:flex; grid-template-columns:none; gap:16px;
-    overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    margin:0 -20px; padding:4px 20px 14px;
-  }
-  .card{ flex:0 0 76vw; scroll-snap-align:center; box-shadow:5px 5px 0 var(--navy)}
-  /* drop the poster photo on mobile, keep just the title on a flat colour block */
-  .card .poster{ aspect-ratio:auto; height:120px; background:var(--navy); }
+  /* two cards side by side, flat colour block with the title (no poster photo) */
+  .cards{ grid-template-columns:1fr 1fr; gap:12px; }
+  .card{ box-shadow:5px 5px 0 var(--navy); }
+  .card .poster{ aspect-ratio:auto; height:130px; background:var(--navy); }
   .card .poster img, .card .poster::before, .card .poster::after{ display:none; }
   .card.red .poster{ background:var(--wine); }
-  .card.blue .poster{ background:var(--navy); }
   .card.gold .poster{ background:#8A6208; }
   .card .poster h3{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    padding:0 14px; text-align:center; font-size:clamp(32px,9vw,44px);
+    padding:0 10px; text-align:center; font-size:clamp(28px,8vw,40px);
     text-shadow:none;
   }
-  .swipe-hint{
-    display:block; text-align:center; font-size:11.5px; letter-spacing:.14em;
-    color:var(--dim); margin:-6px 0 0;
-  }
+  .card .body{ padding:14px 14px 16px; }
   .shared-in{grid-template-columns:1fr; gap:32px}
   .grid2{grid-template-columns:1fr}
   .flyers{padding:80px 20px 60px}
@@ -448,6 +637,63 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   #boot{display:none}
   body.locked{overflow:auto}
 }
+
+/* ---------- contact modal (matches the main site's "צרו קשר") ---------- */
+.drawer button.drawer-navbtn{
+  display:block; width:100%; text-align:start; padding:14px 4px; font-size:16px; font-weight:500;
+  color:var(--pale); background:none; border:none; border-bottom:1px solid rgba(250,247,187,.14);
+  cursor:pointer; font-family:inherit;
+}
+html[lang="en"] .drawer button.drawer-navbtn{ direction:ltr; text-align:left; }
+.cmodal{
+  position:fixed; inset:0; z-index:120; display:flex; align-items:flex-start; justify-content:center;
+  padding:9vh 20px 40px; background:rgba(8,24,43,.66);
+  -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); overflow-y:auto;
+}
+.cmodal[hidden]{ display:none; }
+.cmodal-card{
+  position:relative; width:100%; max-width:400px; background:var(--sand); color:var(--navy);
+  border:2px solid var(--navy); box-shadow:10px 10px 0 rgba(8,24,43,.4);
+  padding:30px 24px 24px; text-align:center;
+}
+.cmodal-close{
+  position:absolute; top:10px; inset-inline-start:10px; width:34px; height:34px;
+  border:1px solid var(--navy); background:transparent; color:var(--navy); font-size:15px; cursor:pointer;
+}
+.cmodal-card h3{ font-family:var(--display); font-weight:400; font-size:30px; line-height:1; margin:0 0 6px; }
+.cmodal-role{ font-family:var(--sans); font-size:13px; color:#4A5C70; margin:0 0 18px; }
+.cmodal-rows{ display:flex; flex-direction:column; gap:9px; }
+.cmodal-rows a svg{ width:20px; height:20px; flex:0 0 20px; color:var(--wine); }
+.cmodal-rows .cr-t{ min-width:0; }
+.cmodal-rows .cr-t b{ display:block; font-weight:800; font-size:14.5px; }
+.cmodal-rows .cr-t i{ display:block; font-style:normal; font-weight:400; font-size:12.5px; color:#4A5C70; margin-top:2px; unicode-bidi:plaintext; }
+.cmodal-rows a{
+  display:flex; align-items:center; gap:11px; text-align:start;
+  padding:12px 14px; border:1px solid rgba(19,52,88,.3);
+  color:var(--navy); font-family:var(--sans); font-weight:600; font-size:14px; text-decoration:none;
+  transition:background .15s ease;
+}
+.cmodal-rows a:hover{ background:rgba(19,52,88,.07); }
+html[lang="en"] .cmodal-card{ text-align:left; }
+
+  /* ---------- channel marks: a mail / Instagram / WhatsApp link always shows which it is ---------- */
+  a[href^="mailto:"]::before,
+  a[href*="instagram.com"]::before,
+  a[href*="facebook.com"]::before,
+  a[href*="whatsapp.com"]::before{
+    content:''; display:inline-block; vertical-align:-.16em;
+    width:1.05em; height:1.05em; margin-inline-end:.42em;
+    background:currentColor;
+    -webkit-mask-size:contain; mask-size:contain;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-position:center; mask-position:center;
+  }
+  a[href^="mailto:"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M2.5%205.5h19v13h-19z'%2F%3E%3Cpath%20d%3D'M2.5%206l9.5%207%209.5-7'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M2.5%205.5h19v13h-19z'%2F%3E%3Cpath%20d%3D'M2.5%206l9.5%207%209.5-7'%2F%3E%3C%2Fsvg%3E"); }
+  a[href*="instagram.com"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'18'%20height%3D'18'%20rx%3D'4.6'%2F%3E%3Ccircle%20cx%3D'12'%20cy%3D'12'%20r%3D'4.1'%2F%3E%3Ccircle%20cx%3D'17.4'%20cy%3D'6.6'%20r%3D'1.2'%20fill%3D'black'%20stroke%3D'none'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'18'%20height%3D'18'%20rx%3D'4.6'%2F%3E%3Ccircle%20cx%3D'12'%20cy%3D'12'%20r%3D'4.1'%2F%3E%3Ccircle%20cx%3D'17.4'%20cy%3D'6.6'%20r%3D'1.2'%20fill%3D'black'%20stroke%3D'none'%2F%3E%3C%2Fsvg%3E"); }
+  a[href*="facebook.com"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'18'%20height%3D'18'%20rx%3D'4.6'%2F%3E%3Cpath%20d%3D'M15.4%208.2h-1.6c-.9%200-1.5.6-1.5%201.5V21'%2F%3E%3Cpath%20d%3D'M10%2013.6h4.3'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'18'%20height%3D'18'%20rx%3D'4.6'%2F%3E%3Cpath%20d%3D'M15.4%208.2h-1.6c-.9%200-1.5.6-1.5%201.5V21'%2F%3E%3Cpath%20d%3D'M10%2013.6h4.3'%2F%3E%3C%2Fsvg%3E"); }
+  a[href*="whatsapp.com"]::before{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M20.5%2011.7a8.5%208.5%200%200%201-12.7%207.4L3.5%2020.5l1.4-4.2a8.5%208.5%200%201%201%2015.6-4.6z'%2F%3E%3Cpath%20d%3D'M9.2%209.1c.6%201.6%202.1%203.4%204%204.3'%2F%3E%3C%2Fsvg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.7'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M20.5%2011.7a8.5%208.5%200%200%201-12.7%207.4L3.5%2020.5l1.4-4.2a8.5%208.5%200%201%201%2015.6-4.6z'%2F%3E%3Cpath%20d%3D'M9.2%209.1c.6%201.6%202.1%203.4%204%204.3'%2F%3E%3C%2Fsvg%3E"); }
+  /* the places that already carry a drawn icon of their own */
+  .hn-foot a::before, .contact-rows a::before, .cmodal-rows a::before, .btn::before, .vlink::before{ content:none !important; }
 </style>
 </head>
 <body class="locked">
@@ -460,28 +706,16 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
     <div class="navfan" id="fanHineni">
       <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
       <div class="fan-menu" hidden>
-        <a href="../index.html#track-a" data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</a>
-        <a href="../more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
-        <a href="lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
-        <a href="overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+        <a href="../more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
+        <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
+        <a href="#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
         <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
         <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
       </div>
     </div>
-    <div class="navfan" id="navFan">
-      <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Menu +">ניווט +</button>
-      <div class="fan-menu" hidden>
-        <a href="../index.html" data-en="Hinenu">הננו</a>
-        <a href="lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
-        <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
-        <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
-        <a href="overim.html" data-en="Relocating">התיישבות</a>
-        <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
-      </div>
-    </div>
-    <a class="fan-btn" href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+    <button class="fan-btn" type="button" data-contact data-en="Contact us">צרו קשר</button>
   </div>
-  <a class="hdr-logo" href="index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
+  <a class="hdr-logo" href="../index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
     <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
   </a>
   <div class="hdr-right">
@@ -496,30 +730,44 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 <nav class="drawer" id="drawer" aria-label="תפריט נייד" data-en-aria-label="Mobile menu">
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
-  <a href="../index.html#track-a" data-en="I want to apply to the accelerator">אני רוצה להתמודד על מקום במאיץ</a>
-  <a href="../more.html#event" data-en="I want to come to the meetup">אני רוצה להגיע למיטאפ</a>
-  <a href="lomdim.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
-  <a href="overim.html" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
+  <a href="../more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
+  <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
+  <a href="#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
   <p class="drawer-section-lbl" data-en="Navigate">ניווט</p>
   <a href="../index.html" data-en="Hinenu">הננו</a>
-  <a href="lomdim.html" data-en="The Pioneering Center at Mitzpe Gvulot">מרכז לחלוציות במצפה גבולות</a>
-  <a href="../more.html#event" data-en="National Entrepreneurship Meetup">מיטאפ יזמות לאומית</a>
-  <a href="../index.html#track-a" data-en="Accelerator">אקסלרטור</a>
-  <a href="overim.html" data-en="Relocating">התיישבות</a>
+  <a href="#overim" data-en="Settlement">התיישבות</a>
+  <a href="../index.html#tracks" data-en="Entrepreneurship">יזמות</a>
   <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
-  <a href="mailto:roee@hinenu.org.il" data-en="Contact us">צרו קשר</a>
+  <button type="button" class="drawer-navbtn" data-contact data-en="Contact us">צרו קשר</button>
   <a href="accessibility.html" data-en="Accessibility">נגישות</a>
   <button class="drawer-lang" id="drawerLangToggle" type="button">EN</button>
 </nav>
+
+<div class="cmodal" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="cmodalTitle">
+  <div class="cmodal-card">
+    <button type="button" class="cmodal-close" id="contactClose" aria-label="סגירת החלון" data-en-aria-label="Close">✕</button>
+    <h3 id="cmodalTitle" data-en="Contact us">צרו קשר</h3>
+    <p class="cmodal-role" data-en="The Hinenu movement">תנועת הננו</p>
+    <div class="cmodal-rows">
+      <a href="mailto:roee@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Roee Azizi">רועי עזיזי</b><i data-en="Founder &amp; CEO · roee@hinenu.org.il">מייסד ומנכ״ל · roee@hinenu.org.il</i></span></a>
+      <a href="mailto:shaked@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Shaked Wolk">שקד וולק</b><i data-en="Director, the Pioneering Center · shaked@hinenu.org.il">מנהלת המרכז לחלוציות · shaked@hinenu.org.il</i></span></a>
+      <a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>
+      <a href="https://www.facebook.com/p/%D7%94%D7%A0%D7%A0%D7%95%D6%BC-61565788381476/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><path d="M15.4 8.2h-1.6c-.9 0-1.5.6-1.5 1.5V11h3l-.4 2.6h-2.6V21"/><path d="M10 13.6h2.3"/></svg><span class="cr-t"><b data-en="Facebook">פייסבוק</b><i>הננוּ</i></span></a>
+      <a href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b><i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA/viewform" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b><i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>
+    </div>
+  </div>
+</div>
 
 <main>
 
 <h1 class="sr-only" data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</h1>
 
 <!-- ══════ THE STORY - one track, both clips, no seam ══════ -->
+
 <section class="scroll-track" id="track">
   <div class="sticky-stage">
     <canvas></canvas>
@@ -531,7 +779,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
            The join sits at 0.542 and falls inside a gap between beats.
            A negative data-in means the beat is already up at the very top. -->
       <div class="beat" data-in="-0.08" data-out="0.20"><p data-en="Once, there was only sand here.">פעם היה פה רק חול.</p></div>
-      <div class="beat" data-in="0.25"  data-out="0.52"><p data-en-html="Then pioneers arrived - <span class='n'>12</span> young people, <span class='n'>19</span> years old, and founded Mitzpe Gvulot - which changed the Negev.">ואז הגיעו חלוצים, <span class="n">12</span> צעירים בני <span class="n">19</span>, והקימו את מצפה גבולות - ששינה את הנגב.</p></div>
+      <div class="beat" data-in="0.25"  data-out="0.52"><p data-en-html="In <span class='n'>1943</span> pioneers arrived - <span class='n'>12</span> young people, <span class='n'>19</span> years old - and founded Mitzpe Gvulot, which changed the Negev.">ב־<span class="n">1943</span> הגיעו חלוצים וחלוצות, <span class="n">12</span> צעירים וצעירות בני <span class="n">19</span>, והקימו את מצפה גבולות - ששינה את הנגב.</p></div>
       <div class="beat" data-in="0.58"  data-out="0.80"><p data-en="And now, after October 7th, the Negev is full of challenges - and thirsty for pioneers again.">ועכשיו, אחרי ה-7/10, הנגב מלא באתגרים - ושוב צמא לחלוצים.</p></div>
       <div class="beat" data-in="0.84"  data-out="1.08"><p data-en="And what's left for us to say is: Hineni.">ולנו נותר להגיד: הננו.</p></div>
     </div>
@@ -541,73 +789,187 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 <!-- ══════ THE THREE FLYERS ══════ -->
 <section class="flyers" id="tracks">
   <div class="flyers-in">
-    <h2 data-en="Three ways to say Hineni">שלוש דרכים להגיד הננו</h2>
+    <h2 data-en="Two ways to say Hineni">שתי דרכים להגיד הננו</h2>
 
     <div class="cards">
-      <a class="card red" href="overim.html">
-        <div class="poster">
-          <img src="posters/overim.webp" width="900" height="900"
-               alt="כרזה: זוג חלוצים עם מזוודה ותוכנית בית" data-en-alt="Poster: a pair of pioneers with a suitcase and a house plan" loading="lazy" decoding="async">
-          <h3 data-en="Relocating">עוברים</h3>
-        </div>
-        <div class="body">
-          <p class="who" data-en="Relocation groups · ages 21-35 · couples and families">חבורות התיישבות · גילאי 21-35 · זוגות ומשפחות</p>
-          <ul>
-            <li data-en="Pioneering seminars for groups">סמינרים לחלוציות לחבורות</li>
-            <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
-            <li data-en="From alumni communities to communities of life">מקהילות בוגרים לקהילות חיים</li>
-          </ul>
-          <span class="go" data-en="To the full page">לעמוד המלא</span>
-        </div>
-      </a>
-
-      <a class="card blue" href="poalim.html">
-        <div class="poster">
-          <img src="posters/poalim.webp" width="900" height="1273"
-               alt="כרזה: זוג צעירים מביטים אל לוויין ושבב" data-en-alt="Poster: two young people looking at a satellite and a chip" loading="lazy" decoding="async">
-          <h3 data-en="Doers">פועלים</h3>
-        </div>
-        <div class="body">
-          <p class="who" data-en="Young entrepreneurs and change agents">יזמים וסוכני שינוי צעירים</p>
-          <ul>
-            <li data-en="The national entrepreneurship accelerator in the Negev and the Galilee">המאיץ ליזמות לאומית בנגב ובגליל</li>
-            <li data-en="Support for regional ventures">ליווי יוזמות במרחב</li>
-          </ul>
-          <span class="go" data-en="To the full page">לעמוד המלא</span>
-        </div>
-      </a>
-
-      <a class="card gold" href="lomdim.html">
+      <a class="card gold" href="#lomdim">
         <div class="poster">
           <img src="posters/lomdim.webp" width="900" height="900"
                alt="כרזה: זוג חלוצים עם שיבולים וספרים מול מגדל המצפה" data-en-alt="Poster: a pair of pioneers with wheat sheaves and books before the lookout tower" loading="lazy" decoding="async">
-          <h3 data-en="Learning">לומדים</h3>
+          <h3 data-en="Dreaming">חולמים</h3>
         </div>
         <div class="body">
-          <p class="who" data-en="Groups, organizations and schools">קבוצות, ארגונים ובתי ספר</p>
-          <ul>
-            <li data-en="Reconnecting with the Israeli story">חיבור מחודש לסיפור הישראלי</li>
-            <li data-en="Proactive and practical thinking">חשיבה יוזמת ומעשית</li>
-            <li data-en="Leadership rooted in responsibility">מנהיגות מתוך אחריות</li>
-          </ul>
-          <span class="go" data-en="To the full page">לעמוד המלא</span>
+          <p class="who" data-en="Groups, organisations and schools">קבוצות, ארגונים ובתי ספר</p>
+          <span class="go" data-en="Details">לפרטים</span>
+        </div>
+      </a>
+
+      <a class="card red" href="#overim">
+        <div class="poster">
+          <img src="posters/overim.webp" width="900" height="900"
+               alt="כרזה: זוג חלוצים עם מזוודה ותוכנית בית" data-en-alt="Poster: a pair of pioneers with a suitcase and a house plan" loading="lazy" decoding="async">
+          <h3 data-en="Making it real">מגשימים</h3>
+        </div>
+        <div class="body">
+          <p class="who" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21-35</p>
+          <span class="go" data-en="Details">לפרטים</span>
         </div>
       </a>
     </div>
-    <span class="swipe-hint" data-en="swipe for more ←→">להחלקה לעוד ←→</span>
+  </div>
+</section>
+
+<!-- ══════ LOMDIM - the Pioneering Center ══════ -->
+<section class="deep" id="lomdim">
+  <div class="d-hd" style="background-image:url('photos/night-crowd.webp')">
+    <div class="deep-in">
+      <p class="kicker" data-en="Groups, organisations and schools">קבוצות, ארגונים ובתי ספר</p>
+      <h2 data-en="Dream - The Pioneering Center at Mitzpe Gvulot">לחלום - המרכז לחלוציות במצפה גבולות</h2>
+    </div>
+  </div>
+  <div class="deep-in">
+    <p class="lead" data-en="The Center hosts groups from Israel and abroad for an experiential encounter with the idea of pioneering - tours, content, workshops and meetings at Mitzpe Gvulot, the pioneer of Negev settlement - connecting them to action facing national missions on the Israeli frontier.">המרכז מארח קבוצות מישראל ומהעולם למפגש חווייתי עם רעיון החלוציות - סיורים, תוכן, סדנאות ומפגשים במצפה גבולות, חלוץ ההתיישבות בנגב, ומחבר אותם למעשה מול משימות לאומיות בספר הישראלי.</p>
+
+    <h3 data-en="The programmes">התכניות</h3>
+    <div class="plans">
+      <article class="plan">
+        <img src="photos/indoor-session.webp" alt="הרצאה במצפה גבולות" data-en-alt="A talk at Mitzpe Gvulot" width="684" height="912" loading="lazy">
+        <div class="p-in">
+          <p class="len" data-en="60-90 minutes">60-90 דקות</p>
+          <p class="plan-h" data-en="Inspiration talks">הרצאות השראה</p>
+          <p class="tag" data-en="What does pioneering mean today?">מהי חלוציות כיום?</p>
+          <p class="desc" data-en="Talks by leaders from the Negev and across the country who live a pioneering way of life of taking responsibility in times of crisis.">הרצאות של מנהיגות ומנהיגים מהנגב ומכל הארץ שחיים דרך חיים חלוצית של לקיחת אחריות בזמן משבר.</p>
+          <a class="pick" href="#booking" data-en="Book a talk">להזמין הרצאה</a>
+        </div>
+      </article>
+      <article class="plan featured">
+        <img src="photos/group-trees.webp" alt="פעילות קבוצתית במצפה גבולות" data-en-alt="Group activity at Mitzpe Gvulot" width="730" height="548" loading="lazy">
+        <div class="p-in">
+          <p class="len" data-en="Half day / full day">חצי יום / יום מלא</p>
+          <p class="plan-h" data-en="The pioneering enterprise, then and now">המפעל החלוצי אז והיום</p>
+          <p class="tag" data-en="A mission that builds society">משימה בונה חברה</p>
+          <p class="desc" data-en="A day that turns a historical story into a discussion of our responsibility today - through the story of the pioneers who founded Mitzpe Gvulot.">יום שהופך סיפור היסטורי לדיון על האחריות שלנו היום - דרך סיפורם של החלוצים והחלוצות שהקימו את מצפה גבולות.</p>
+          <a class="pick" href="#booking" data-en="Book a day">להזמין יום</a>
+        </div>
+      </article>
+      <article class="plan">
+        <img src="photos/campfire.webp" alt="מפגש לילה סביב המדורה" data-en-alt="A night gathering around the campfire" width="816" height="615" loading="lazy">
+        <div class="p-in">
+          <p class="len" data-en="2-4 days">2-4 ימים</p>
+          <p class="plan-h" data-en="Pioneering seminar">סמינר חלוציות</p>
+          <p class="tag" data-en="What role will we choose to take">איזה תפקיד נבחר לקחת</p>
+          <p class="desc" data-en="A deep journey from the story that shaped the Negev to the responsibility of shaping what comes after us - tours, a night journey, meetings with local leaders and group work.">מסע עומק מהסיפור שעיצב את הנגב אל האחריות לעצב את מה שיבוא אחרינו - סיורים, מסע לילי, מפגשים עם מנהיגים מקומיים ועבודה קבוצתית.</p>
+          <a class="pick" href="#booking" data-en="Book a seminar">להזמין סמינר</a>
+        </div>
+      </article>
+    </div>
+
+    <h3 data-en="Who this is for">למי זה מתאים</h3>
+    <div class="aud">
+      <div>
+        <h4 data-en="Security organisations">ארגוני ביטחון</h4>
+        <p data-en="For people in the security establishment whose sense of 'why' can get lost in operational routine.">לאנשי מערכת הביטחון שה״למה״ שלהם עלול ללכת לאיבוד בשגרה המבצעית.</p>
+      </div>
+      <div>
+        <h4 data-en="Groups and communities">קבוצות וקהילות</h4>
+        <p data-en="For those who want to step out of routine, feel the western Negev and meet the pioneering story.">למי שרוצה לצאת מהשגרה, להרגיש את הנגב המערבי ולפגוש את סיפור החלוציות.</p>
+      </div>
+      <div>
+        <h4 data-en="Teams and organisations">צוותים וארגונים</h4>
+        <p data-en="A gathering that connects ideas and values to action, and brings back tools for turning vision into reality.">מפגש שמחבר רעיונות וערכים לעשייה, ומחזיר כלים להפוך חזון למציאות.</p>
+      </div>
+      <div>
+        <h4 data-en="Academies and schools">מכינות ובתי ספר</h4>
+        <p data-en="Cohorts already grappling with questions of identity and responsibility - here they get space and time.">שכבות שעסוקות ממילא בשאלות של זהות ואחריות - כאן הן מקבלות מקום וזמן.</p>
+      </div>
+    </div>
+
+    <div class="strip">
+      <img src="photos/seminar-mats.webp" alt="קבוצה במצפה גבולות" data-en-alt="A group at Mitzpe Gvulot" width="1400" height="931" loading="lazy">
+      <img src="photos/tower-night.webp" alt="מגדל המצפה בלילה" data-en-alt="The lookout tower at night" width="1400" height="931" loading="lazy">
+      <img src="photos/mitzpe-day.webp" alt="מצפה גבולות ביום" data-en-alt="Mitzpe Gvulot by day" width="1400" height="1050" loading="lazy">
+      <img src="photos/group-outdoors.webp" alt="קבוצה בפעילות חוץ במצפה גבולות" data-en-alt="A group in an outdoor activity at Mitzpe Gvulot" width="1400" height="931" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ══════ OVERIM - relocation groups ══════ -->
+<section class="deep" id="overim">
+  <div class="d-hd" style="background-image:url('photos/pioneers-night.jpg')">
+    <div class="deep-in">
+      <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21-35</p>
+      <h2 data-en="Making it real - from groups to settlement cores">מגשימים - מֵחֲבוּרוֹת לגרעינים</h2>
+    </div>
+  </div>
+  <div class="deep-in">
+    <p class="lead" data-en="Seminars training groups of young people - couples and families - as settlement cores who integrate into and live in Negev communities.">סמינרים להכשרת חבורות של צעירים וצעירות - זוגות ומשפחות - כגרעיני התיישבות שמשתלבים וחיים ביישובי הנגב.</p>
+
+    <h3 data-en="How it works">איך זה עובד</h3>
+    <p class="lead" data-en="A group of friends from the same framework who move to live together in the Gaza-border region or the Galilee. We support you in building the core group and finding the place that fits.">קבוצה של חברים וחברות מאותה מסגרת שעוברים לגור ביחד בעוטף או בגליל. אנחנו מלווים בבניית הגרעין ובמציאת המקום המתאים.</p>
+    <ul>
+      <li data-en="Pioneering seminars for groups">סמינרים לחלוציות לחבורות</li>
+      <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
+    </ul>
+    <p class="quote" data-en="You bring the group, we help kick-start the beginning.">את/אתה מביא/ה את החבורה, אנחנו עוזרים להתניע את ההתחלה.</p>
+
+    <h3 data-en="What we do">הפעילות שלנו</h3>
+    <div class="gal">
+      <figure>
+        <img src="photos/community-group.webp" alt="קהילת הננו מתכנסת מול מגדל המצפה" data-en-alt="The Hinenu community gathers before the lookout tower" width="1400" height="933" loading="lazy">
+        <figcaption data-en="The Hinenu community at Mitzpe Gvulot">קהילת הננו במצפה גבולות</figcaption>
+      </figure>
+      <figure>
+        <img src="photos/community-evening.webp" alt="ערב במצפה גבולות סביב הבמה" data-en-alt="An evening gathering at Mitzpe Gvulot" width="1400" height="933" loading="lazy">
+        <figcaption data-en="An evening at the lookout">ערב במצפה</figcaption>
+      </figure>
+      <figure>
+        <img src="photos/community-fire.webp" alt="מעגל סביב המדורה בערב" data-en-alt="A circle around the campfire at night" width="1400" height="933" loading="lazy">
+        <figcaption data-en="A Poika evening">ערב פויקה</figcaption>
+      </figure>
+      <figure>
+        <img src="photos/community-hall.webp" alt="מפגש קהילה באולם האבן" data-en-alt="A community gathering in the stone hall" width="1400" height="933" loading="lazy">
+        <figcaption data-en="A seminar for Shalem Academic Center alumni">סמינר בוגרי המרכז האקדמי שלם</figcaption>
+      </figure>
+    </div>
+
+    <a class="d-cta" href="#booking" data-en="Ready to relocate? Talk to us">מוכנים לעבור? דברו איתנו</a>
+  </div>
+</section>
+
+<!-- ══════ TEAM ══════ -->
+<section class="deep team-block">
+  <div class="deep-in">
+    <h3 data-en="Who we are">מי אנחנו</h3>
+    <div class="team">
+      <div class="who">
+        <img src="photos/team-shaked.webp" alt="שקד וולק" data-en-alt="Shaked Wolk" width="420" height="420" loading="lazy">
+        <h4 data-en="Shaked Wolk">שקד וולק</h4>
+        <p data-en="Director of the Pioneering Center, a Gaza-border resident.">מנהלת המרכז לחלוציות, תושבת העוטף.</p>
+      </div>
+      <div class="who">
+        <img src="../assets/roee-portrait.webp" alt="רועי עזיזי" data-en-alt="Roee Azizi" width="420" height="420" loading="lazy">
+        <h4 data-en="Roee Azizi">רועי עזיזי</h4>
+        <p data-en="Founder and CEO of the Hinenu movement.">מייסד ומנכ״ל תנועת הננוּ.</p>
+      </div>
+      <div class="who">
+        <img src="photos/team-jo.webp" alt="ג׳ו קולבה" data-en-alt="Jo Kolber" width="420" height="420" loading="lazy">
+        <h4 data-en="Jo Kolber">ג׳ו קולבה</h4>
+        <p data-en="The beating heart and working hands at Mitzpe Gvulot for 14 years.">הלב הפועם והידיים העובדות במצפה גבולות כבר 14 שנה.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ══════ CLOSING ══════ -->
 <section class="closing">
   <div class="sand" aria-hidden="true"></div>
-  <h2 data-en="We're ready when you are.">אנחנו מוכנים כשאתם מוכנים.</h2>
+  <h2 data-en="We're ready. And you?">אנחנו מוכנים. ואת/אתה?</h2>
 </section>
 
 <!-- ══════ BOOKING ══════ -->
 <section class="booking" id="booking">
   <div class="booking-in">
-    <p class="sub" data-en-html="Tell us about your group, how many of you there are, and when you'd like to come.<br>We'll get back to you with a suggestion for a day.">כתבו לנו מי הקבוצה, כמה הם ומתי אתם רוצים להגיע.<br>נחזור אליכם עם הצעה ליום.</p>
+    <p class="sub" data-en="A relocation group or a visit to the Center - tell us who you are, how many, and when. We'll get back to you with a suggestion.">חבורת התיישבות או ביקור במרכז — כתבו לנו מי אתם, כמה, ומתי. נחזור אליכם עם הצעה.</p>
     <form id="bookForm" novalidate>
       <div class="grid2">
         <div class="field">
@@ -638,6 +1000,7 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
           <label for="f-type" data-en="Group type">סוג הקבוצה</label>
           <select id="f-type" name="type">
             <option data-en="Relocation group / core">חבורת התיישבות / גרעין</option>
+            <option data-en="A group visiting the Pioneering Center">קבוצה לביקור במרכז לחלוציות</option>
             <option data-en="Combat-unit veterans' community">קהילת בוגרי יחידה קרבית</option>
             <option data-en="Pre-military or pre-yeshiva academy">מכינה קדם-צבאית או תורנית</option>
             <option data-en="School / senior high">בית ספר / חטיבה עליונה</option>
@@ -660,38 +1023,19 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
         <textarea id="f-note" name="note"></textarea>
       </div>
       <button class="submit" type="submit" data-en="Send">שליחה</button>
-      <p class="micro" data-en="We'll get back to you within one business day">נחזור אליכם תוך יום עבודה</p>
     </form>
   </div>
 </section>
 
-<section class="partners">
-  <p class="lbl" data-en="Our partners">השותפים שלנו</p>
-  <div class="row">
-      <img src="partners/partner-02.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-03.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-04.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-05.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-06.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-07.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-08.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-09.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-10.webp" alt="" loading="lazy" height="120">
-      <img src="partners/partner-11.webp" alt="" loading="lazy" height="120">
-  </div>
-  <p class="support" data-en="With the support of the President of the State and his wife">בתמיכת כבוד נשיא המדינה ורעייתו</p>
-</section>
 
-<footer>
-  <p class="markline" data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</p>
-  <p data-en="The Hinenu movement">תנועת הננו</p>
-  <br><a href="accessibility.html" style="color:inherit;display:inline-block;padding:8px 4px" data-en="Accessibility statement">הצהרת נגישות</a>
-</footer>
+
 
 </main>
 
 <audio id="wind" loop preload="none"></audio>
 
+<!-- shared footer + accessibility toolbar + idle scroll cue (one file for every page) -->
+<script src="../assets/hinenu-common.js" data-apply="#booking"></script>
 <script>
 (function(){
   "use strict";
@@ -895,6 +1239,17 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
     unlocked = true;
     document.body.classList.remove('locked');
     if(boot){ boot.classList.add('done'); }
+    /* deep-linked into a merged section (#overim / #lomdim) - the scroll the
+       browser tried on load was swallowed while the page was locked, and the
+       story track's height is set by JS afterwards, so re-run it a few times */
+    if(location.hash && location.hash.length > 1){
+      var t = document.getElementById(location.hash.slice(1));
+      if(t){
+        var jump = function(){ t.scrollIntoView({ behavior:'auto' }); };
+        [0, 120, 400, 900, 1600, 2600].forEach(function(d){ setTimeout(jump, d); });
+        window.addEventListener('load', jump, { once:true });
+      }
+    }
   }
 
   function onProgress(){
@@ -1002,7 +1357,6 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
     menu.querySelectorAll('a,button').forEach(function(it){ it.addEventListener('click', function(){ close(); }); });
   }
   setupFan('fanHineni');
-  setupFan('navFan');
 })();
 
 /* ---------- mobile drawer: everything the desktop header nav shows ---------- */
@@ -1025,6 +1379,35 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
   if(backdrop) backdrop.addEventListener('click', close);
   drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  window.__closeDrawer = close;
+})();
+
+/* ---------- contact modal: same content as the main site's "צרו קשר" ---------- */
+(function(){
+  var modal = document.getElementById('contactModal');
+  if(!modal) return;
+  var closeBtn = document.getElementById('contactClose');
+  var last = null;
+  function open(){
+    if(window.__closeDrawer) window.__closeDrawer();
+    last = document.activeElement;
+    modal.hidden = false; document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close(){
+    modal.hidden = true; document.body.style.overflow = '';
+    if(last && last.focus) last.focus();
+  }
+  document.querySelectorAll('[data-contact]').forEach(function(b){
+    b.addEventListener('click', function(e){ e.preventDefault(); open(); });
+  });
+  closeBtn.addEventListener('click', close);
+  /* the "leave your details" row jumps to the form, so the dialog gets out of the way */
+  modal.querySelectorAll('[data-close-contact]').forEach(function(el){
+    el.addEventListener('click', close);
+  });
+  modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
 })();
 
 /* ---------- audio: hidden until a source exists, never on by default ---------- */
@@ -1061,14 +1444,22 @@ footer .markline{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em
 /* ---------- form: saved locally, and mirrored to the "הזמנת יום" Google Form/Sheet ---------- */
 document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
+  var form = e.target;
+  /* novalidate keeps the browser's own bubbles off the page, but the required
+     fields still have to hold before anything is sent */
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+
+  var btn = form.querySelector('.submit');
+  var isEn = document.documentElement.getAttribute('lang') === 'en';
+  btn.disabled = true;
+
   var data = { page:'index', submittedAt: new Date().toISOString() };
-  new FormData(e.target).forEach(function(v,k){ data[k] = v; });
+  new FormData(form).forEach(function(v,k){ data[k] = v; });
   try{
     var all = JSON.parse(localStorage.getItem('hinenu-bookings') || '[]');
     all.push(data);
     localStorage.setItem('hinenu-bookings', JSON.stringify(all));
   }catch(err){ console.error('could not save booking locally', err); }
-  console.log('booking submitted', data);
 
   /* the "סוג הקבוצה" question only has a fixed set of choices in the Google Form -
      anything outside that list rides in via its built-in "Other" mechanism */
@@ -1088,12 +1479,33 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   fd.append('entry.657552941', data.size || '');
   fd.append('entry.1062750637', data.when || '');
   fd.append('entry.498866476', data.note || '');
-  fetch('https://docs.google.com/forms/d/e/1FAIpQLSemUCDsE0fSRosFapdiydJokWfatkgxPDYRS_T9i7u5_wL5Zg/formResponse', {
-    method:'POST', mode:'no-cors', body:fd
-  }).catch(function(err){ console.error('booking form submit failed', err); });
 
-  e.target.reset();
-  alert(document.documentElement.lang === 'en' ? 'Thanks! We’ll get back to you soon.' : 'תודה! נחזור אליכם בהקדם.');
+  var URL_ = 'https://docs.google.com/forms/d/e/1FAIpQLSemUCDsE0fSRosFapdiydJokWfatkgxPDYRS_T9i7u5_wL5Zg/formResponse';
+  var readable = {
+    _subject: 'הזמנה מהמרכז לחלוציות - ' + (data.name || ''),
+    form: 'מצפה גבולות - הזמנת ביקור',
+    name: data.name || '', org: data.org || '', role: data.role || '',
+    phone: data.phone || '', email: data.email || '', type: data.type || '',
+    size: data.size || '', when: data.when || '', note: data.note || ''
+  };
+  var post = window.hinenuSend ? window.hinenuSend(readable, URL_, fd) : Promise.resolve(false);
+  post.then(function(ok){
+    btn.disabled = false;
+    if(ok){
+      form.reset();
+      window.hinenuReceived({
+        title: isEn ? 'We got your request' : 'קיבלנו את הבקשה',
+        body:  isEn ? "Thanks - we'll be in touch soon." : 'תודה, נחזור אליכם בקרוב.'
+      });
+    } else {
+      window.hinenuReceived({
+        failed: true,
+        title: isEn ? "That didn't send" : 'השליחה לא עברה',
+        body:  isEn ? 'Please try again, or write to shaked@hinenu.org.il.'
+                    : 'נסו שוב, או כתבו לנו ל-shaked@hinenu.org.il.'
+      });
+    }
+  });
 });
 
 </script>
@@ -1145,5 +1557,7 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   if(LANG === 'en') applyLang('en');
 })();
 </script>
+
+
 </body>
 </html>

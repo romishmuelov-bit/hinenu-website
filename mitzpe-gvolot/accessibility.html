@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>הצהרת נגישות · המרכז לחלוציות במצפה גבולות</title>
 <meta name="description" content="הצהרת הנגישות של אתר המרכז לחלוציות במצפה גבולות.">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '901591649440894');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -49,17 +66,45 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
   text-decoration:none; margin-top:48px}
 .back:hover{color:var(--amber)}
 .lang-toggle{
-  position:absolute; top:20px; inset-inline-end:24px;
   font-family:var(--sans); font-weight:700; font-size:12.5px; color:var(--pale);
   background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
-  padding:8px 15px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
+  padding:7px 14px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
 }
 .lang-toggle:hover{border-color:var(--pale); background:rgba(250,247,187,.08)}
+.site-hdr{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:13px 24px; background:rgba(19,52,88,.92);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(250,247,187,.14);
+}
+.site-hdr .site-logo{display:flex; align-items:center}
+.site-hdr .site-logo img{height:21px; width:auto; display:block}
+.site-hdr nav{display:flex; align-items:center; gap:16px}
+.site-hdr nav a{
+  font-family:var(--sans); font-weight:700; font-size:13px; color:var(--pale);
+  text-decoration:none; letter-spacing:.02em;
+}
+.site-hdr nav a:hover{color:var(--amber)}
+@media (max-width:560px){
+  .site-hdr{padding:11px 16px; gap:10px}
+  .site-hdr nav{gap:11px}
+  .site-hdr nav a{font-size:12px}
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main" data-en="Skip to content">דילוג לתוכן</a>
-<button class="lang-toggle" id="langToggle" type="button">EN</button>
+<header class="site-hdr" dir="rtl">
+  <a class="site-logo" href="index.html" aria-label="הננו — למרכז לחלוציות" data-en-aria-label="Hinenu — to the Pioneering Center">
+    <img src="assets/logo-hinenu.webp" alt="הננו" width="1500" height="530">
+  </a>
+  <nav aria-label="ניווט" data-en-aria-label="Navigation">
+    <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
+    <a href="index.html#booking" data-en="Contact us">צרו קשר</a>
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+  </nav>
+</header>
 <div class="wrap">
 <main id="main">
   <h1 data-en="Accessibility Statement">הצהרת נגישות</h1>
@@ -82,6 +127,9 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
     <li data-en="The site can be zoomed up to 200% without loss of content or function.">האתר ניתן להגדלה עד 200% בלי אובדן תוכן או תפקוד.</li>
   </ul>
 
+  <h2 data-en="The accessibility toolbar">סרגל הנגישות</h2>
+  <p data-en="Every page carries an accessibility toolbar, opened from the icon at the bottom of the screen: larger or smaller text, high contrast, highlighted links, a readable font and stopping animations. Your choices are kept on your device.">בכל עמוד באתר קיים סרגל נגישות, שנפתח מהסמל בתחתית המסך: הגדלה והקטנה של הטקסט, ניגודיות גבוהה, הדגשת קישורים, גופן קריא ועצירת אנימציות. הבחירות נשמרות במכשיר שלכם.</p>
+
   <h2 data-en="Known limitations">מגבלות ידועות</h2>
   <p data-en="The main page includes a scroll-driven image sequence. Users who have set reduced motion in their operating system will instead get a static page with the full content. Some parts of the site may not yet be fully accessible, and we continue to improve them on an ongoing basis.">העמוד הראשי כולל רצף תמונות המונע בגלילה. משתמשים שהגדירו במערכת ההפעלה שלהם צמצום תנועה יקבלו במקומו עמוד סטטי הכולל את מלוא התוכן. ייתכנו חלקים באתר שטרם הונגשו במלואם, ואנו ממשיכים לשפר אותם באופן שוטף.</p>
 
@@ -89,6 +137,7 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
   <div class="box">
     <p data-en="Found an inaccessible component, or have a suggestion for improvement? We'd love to hear from you and will handle it promptly.">נתקלתם ברכיב שאינו נגיש, או שיש לכם הצעה לשיפור? נשמח לשמוע ונטפל בפנייה בהקדם.</p>
     <p>
+      <span data-en="Accessibility officer:">רכזת נגישות:</span> <span data-en="Romi Shmuelov">רומי שמואלוב</span><br>
       <span data-en="Email:">דוא״ל:</span> <a href="mailto:romishmuelov@gmail.com">romishmuelov@gmail.com</a>
     </p>
   </div>
@@ -96,6 +145,8 @@ li::before{content:''; position:absolute; inset-inline-start:0; top:.68em;
   <a class="back" href="index.html" data-en="→ Back to the site">← חזרה לאתר</a>
 </main>
 </div>
+<!-- shared footer + accessibility toolbar + idle scroll cue (one file for every page) -->
+<script src="../assets/hinenu-common.js" data-apply="../index.html#apply"></script>
 <script>
 (function(){
   "use strict";
