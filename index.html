@@ -717,7 +717,9 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   .tracks-head h2 .acc, .tracks-head .sub .acc{ color:var(--hl-blue); }
   .tracks-head .sub{ color:var(--dim); font-size:17px; margin:0; }
   /* tracks: both shown side by side, hover to highlight */
-  .tflow{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
+  /* stretch, not start: the two sheets stay the same height whatever the copy does,
+     and .track-actions{margin-top:auto} lines their buttons up along the bottom */
+  .tflow{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:stretch; }
   .track{
     scroll-margin-top:90px;
     background:
@@ -1415,6 +1417,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     .track-contact .tc-name{ display:none; }  /* the buttons already name the person */
     .track-contact .tc-email{ flex:1; text-align:center; padding:9px 10px; font-size:13.5px; }
     .track-actions{ margin-top:6px; }
+    .tflow{ align-items:start; }
 
     /* evenings */
     .event{ padding:76px 0 64px; }
