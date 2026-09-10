@@ -685,8 +685,10 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   .track-summary-text{ display:block; }
   .track-chevron{ display:none; }
   .track-body{ display:block; }
+  /* the two sheets tilt by the same amount in opposite directions, so the pair
+     stays symmetric about the gutter instead of drifting one way */
   .track-a{
-    transform:rotate(.6deg);
+    transform:rotate(.5deg);
     border-radius:0;
     background:
       linear-gradient(rgba(20,24,58,.22), rgba(20,24,58,.22)),
@@ -703,16 +705,16 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   .track-a-panel{
     position:relative; overflow:hidden;
     display:flex; flex-direction:column; flex:1;
-    background:rgba(255,255,255,.32);
+    background:rgba(255,255,255,.42);
     -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
     border-radius:0;
     padding:22px 24px;
-    box-shadow:0 8px 22px rgba(20,24,58,.22);
+    box-shadow:0 8px 22px rgba(20,24,58,.2);
     transition:background .35s ease;
   }
-  .track-a:hover .track-a-panel{ background:rgba(255,255,255,.68); }
+  .track-a:hover .track-a-panel{ background:rgba(255,255,255,.86); }
   .track-c{
-    transform:rotate(.4deg);
+    transform:rotate(-.5deg);
     border-radius:0;
     background:
       linear-gradient(rgba(216,195,160,.38), rgba(216,195,160,.38)),
@@ -737,7 +739,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
     border-radius:0;
     padding:22px 24px;
-    box-shadow:0 8px 22px rgba(60,40,10,.18);
+    box-shadow:0 8px 22px rgba(60,40,10,.2);
     transition:background .35s ease;
   }
   .track-c:hover .track-c-panel{ background:rgba(255,251,244,.86); }
@@ -1677,12 +1679,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
-  <p class="drawer-section-lbl" data-en="Navigate">ניווט</p>
-  <a href="index.html" data-en="Hinenu">הננו</a>
-  <a href="mitzpe-gvolot/index.html#overim" data-en="Settlement">התיישבות</a>
-  <a href="index.html#tracks" data-en="Entrepreneurship">יזמות</a>
-  <a href="more.html#event" data-en="Meet-ups">ערבי יזמות</a>
-  <a href="harzaot.html" data-en="Lectures">הרצאות</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
   <button type="button" class="drawer-item" id="drawerContactOpen" data-en="Contact us">צרו קשר</button>
   <button type="button" class="drawer-item" id="drawerA11yOpen" data-en="Accessibility">נגישות</button>
@@ -1907,7 +1903,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       <button type="submit" class="cta-btn" data-en="Send">שליחה</button>
       <p class="form-error" id="applyError" data-en-html="We couldn't send this. Try again, or reach us by <a href=&quot;mailto:roee@hinenu.org.il&quot;>email</a> or on <a href=&quot;https://www.instagram.com/hinenu_israel&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Instagram</a>.">לא הצלחנו לשלוח. נסו שוב, או פנו אלינו ב<a href="mailto:roee@hinenu.org.il">מייל</a> או ב<a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener">אינסטגרם</a>.</p>
     </form>
-    <p class="success-msg" id="applySuccess" data-en="We got your application. We'll be in touch soon.">קיבלנו את המועמדות. נחזור אליכם בקרוב.</p>
+    <p class="success-msg" id="applySuccess" data-en="We got your details. We'll be in touch soon.">קיבלנו את הפרטים שלך. נחזור אליכם בקרוב.</p>
   </div>
 </div>
 

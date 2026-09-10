@@ -28,7 +28,7 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 2. **Hero (`.hero5`)** — pitch black, fullscreen muted looping bg video (`assets/hero-bg.mp4`, from the "מעבר לצפון" campaign) under a dark shade; huge title "הננו / חלוציות כדרך חיים" in MigdalHaemek with a blue Highlights-mask on "כדרך חיים".
 3. **Challenges (`.chal` ×5)** — full-screen photo scenes (negev/housing/food/hasbara/trauma; Magnific-generated, unified warm grade). Big white statements with black hand-drawn highlight masks (`assets/hlk-1..5.webp`, one per scene) behind the keyword. Ken Burns zoom; text reveals via CSS scroll-driven animations (IO fallback). Fixed torn CTA appears through this range.
 4. **Manifesto (#letter)** — white torn sheet on black; scroll-inks the handwriting. Text = the "צעירים בישראל מסיימים את הצבא..." version (updated 12.7). Roee Azizi signature in white.
-5. **Tracks (#tracks)** — cover-flow of 2 cards skinned with ripped-paper strips (`torn-white.webp` / `torn-white-b.webp`, white paper with torn bottom on black). Cards min-height 915px so content stays inside the white zone; `.tflow` height is set inline by JS.
+5. **Tracks (#tracks)** — two side-by-side sheets in a `1fr 1fr` grid, each a photo card (`track-a-bg.avif` / `negev-track-bg.avif`) with a translucent panel on top. The pair is kept symmetric on purpose: `align-items:stretch` gives both the same height, `.track-actions{margin-top:auto}` lines the two buttons up along the bottom, the two panels share one alpha, and the sheets tilt by the same ±.5deg in opposite directions. Change one of those and the pair starts to drift.
 6. **Events (#event)** — grid of 2 flyer cards (`ev-michael.webp` future 28.7 / `ev-yoel.webp` past 16.6). Click opens `#evOverlay` popup: future = chips+lede+questions+calendar CTA; past = photo gallery. Data lives in the `EV` array in JS.
 7. **Ventures (#ventures)** — cover-flow: Ben Namer / Meirov / Pitluk / dor-hameyasdot (B&W photo) / kef-baotef / shmona (typographic cards) / "אתם?".
 8. **Footer** — from `hinenu-common.js` (see Architecture). The old 150vh `.scroll-end` with the
@@ -77,6 +77,12 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   `hora-poster.jpg`. Re-encode with the CapCut ffmpeg and *plain* AMF flags —
   `-c:v h264_amf -b:v 900k`; adding `-quality`/`-rc vbr_peak` or `+faststart` in the same pass
   hangs the encoder at close. Do faststart as a separate `-c copy` remux.
+- One Roee headshot for the whole site: `assets/roee-azizi.webp`, a 600×600 square crop used by
+  the lectures byline and the מי אנחנו block on the Mitzpe page. Both round it with CSS
+  `border-radius:50%`, so the file itself has to stay square — the retired `roee-portrait.webp` had a
+  circle and a pale-blue ground baked in, which read as a ring inside the CSS circle. It is cropped
+  from a 1206×1292 PNG that sits in `assets/` untracked; `roee-azizi.jpg` is still the signature photo
+  on the manifesto.
 - `og:image` URLs are absolute and hardcoded to `hinenu-site.vercel.app`. A custom domain means updating them in all four pages.
 
 ## Open items
@@ -101,6 +107,7 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   from its scrollable range, so the handwriting finishes just before the sheet arrives. Change one
   of the three and the other two have to follow.
 - The header bars carry only הנני + / צרו קשר / נגישות / EN — the ניווט + fan was removed from
-  every page; navigation lives in the ☰ drawer.
+  every page, and so was the matching ניווט section inside the ☰ drawer. What is left on all four
+  pages is הנני (the five actions) and עוד (צרו קשר / נגישות / view switch / EN).
 - Accessibility officer of record: רומי שמואלוב (romishmuelov@gmail.com) — named in the toolbar,
   in the statement modal and on `mitzpe-gvolot/accessibility.html`.
