@@ -991,16 +991,47 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     font-size:clamp(28px,4.6vw,50px); line-height:1.2; margin:0 0 52px; text-align:center;
   }
   .ventures h2 .hl{ color:var(--hl-blue); position:relative; z-index:1; }
-  /* a rail that drifts on its own and can be swiped or arrow-keyed at any time */
+  /* a rail that drifts on its own and can be dragged, swiped or arrow-keyed */
+  .vrail{ position:relative; }
+  /* the cards visibly run past both edges, so it reads as a rail and not a row */
+  .vrail::before, .vrail::after{
+    content:''; position:absolute; top:0; bottom:26px; width:70px; z-index:3; pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .vrail::before{ inset-inline-start:0; background:linear-gradient(to right, var(--bg), transparent); }
+  .vrail::after{ inset-inline-end:0; background:linear-gradient(to left, var(--bg), transparent); }
+  html[dir="rtl"] .vrail::before{ background:linear-gradient(to left, var(--bg), transparent); }
+  html[dir="rtl"] .vrail::after{ background:linear-gradient(to right, var(--bg), transparent); }
+  .vrail.at-start::before, .vrail.at-end::after{ opacity:0; }
   .vflow{
     display:flex; gap:22px; align-items:stretch;
     overflow-x:auto; overflow-y:hidden;
     /* no scroll-snap here: snapping keeps yanking the slow drift back to a card */
     padding:6px 2px 20px; margin:0 -2px;
     scrollbar-width:none; -ms-overflow-style:none;
+    cursor:grab;
   }
+  .vflow.dragging{ cursor:grabbing; }
+  .vflow.dragging .vcard{ transition:none; }
   .vflow::-webkit-scrollbar{ display:none; }
   .vflow:focus-visible{ outline:2px solid var(--hl-blue); outline-offset:6px; }
+  /* a real, draggable position bar - the clearest "there is more here" there is */
+  .vbar{
+    position:relative; height:4px; margin:10px auto 0; max-width:420px;
+    background:rgba(255,255,255,.13); cursor:pointer;
+  }
+  .vbar i{
+    position:absolute; top:0; bottom:0; inset-inline-start:0; width:32%;
+    background:var(--hl-blue); transition:transform .12s linear;
+  }
+  .vhint{
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    margin:0 0 20px; font-family:'Rubik',sans-serif; font-weight:600;
+    font-size:13.5px; letter-spacing:.02em; color:rgba(255,255,255,.62);
+  }
+  .vhint svg{ width:17px; height:17px; flex:none; animation:vNudge 2.4s ease-in-out infinite; }
+  @keyframes vNudge{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(-5px); } }
+  @media (prefers-reduced-motion:reduce){ .vhint svg{ animation:none; } }
   .vcard{
     flex:0 0 320px;
     display:flex; flex-direction:column;
@@ -1609,7 +1640,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
         <div class="fan-menu" hidden>
           <button type="button" data-apply data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</button>
-          <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+          <a href="mitzpe-gvolot/index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
           <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
           <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -1640,7 +1671,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
   <button type="button" class="drawer-item" data-apply data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</button>
-  <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <a href="mitzpe-gvolot/index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
   <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -1686,7 +1717,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <div class="ev-strip-row">
           <button type="button" class="ev-shot" data-openev="0" data-track="GalleryOrit" aria-label="תמונות מהערב עם אורית קורמן נגרי" data-en-aria-label="Photos from the evening with Orit Korman Nagari"><img src="assets/ev-orit-2.jpg" alt="הקהל בערב היזמות עם אורית קורמן נגרי" data-en-alt="The audience at the meet-up with Orit Korman Nagari" loading="lazy"></button>
           <button type="button" class="ev-shot" data-openev="0" data-track="GalleryOrit" aria-label="תמונות מהערב עם אורית קורמן נגרי" data-en-aria-label="Photos from the evening with Orit Korman Nagari"><img src="assets/ev-orit-3.jpg" alt="צעירים וצעירות מקשיבים בערב היזמות" data-en-alt="Young people listening at the meet-up" loading="lazy"></button>
-          <button type="button" class="ev-shot" data-openev="1" data-track="GalleryMichael" aria-label="תמונות מהערב עם מייקל אייזנברג" data-en-aria-label="Photos from the evening with Michael Eisenberg"><img src="assets/ev-michael-2-3.jpg" alt="הערב עם מייקל אייזנברג" data-en-alt="The evening with Michael Eisenberg" loading="lazy"></button>
+          <button type="button" class="ev-shot" data-openev="1" data-track="GalleryMichael" aria-label="תמונות מהערב עם מייקל אייזנברג" data-en-aria-label="Photos from the evening with Michael Eisenberg"><img src="assets/ev-michael-2-4.jpg" alt="הערב עם מייקל אייזנברג" data-en-alt="The evening with Michael Eisenberg" loading="lazy"></button>
           <button type="button" class="ev-shot" data-openev="2" data-track="GalleryYoel" aria-label="תמונות מהערב עם יואל זילברמן" data-en-aria-label="Photos from the evening with Yoel Zilberman"><img src="assets/event-1.jpg" alt="הערב עם יואל זילברמן" data-en-alt="The evening with Yoel Zilberman" loading="lazy"></button>
         </div>
       </div>
@@ -1700,16 +1731,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   </div>
 
 
-  <!-- ======= the quiet channel, for whoever isn't ready to apply today ======= -->
-  <section class="channel" id="channel" aria-labelledby="channelTitle">
-    <div class="wrap channel-in">
-      <div class="channel-txt">
-        <h2 id="channelTitle" data-en="Not ready yet? That's fine.">עוד לא בשלים? זה בסדר.</h2>
-        <p data-en="Join our quiet WhatsApp channel - we'll let you know when the next meet-up is set.">הצטרפו לערוץ הוואטסאפ השקט שלנו, ונעדכן ברגע שייסגר הערב הבא.</p>
-      </div>
-      <a class="channel-cta" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-track="JoinChannel" data-en-html="Join the channel <span class='arr' aria-hidden='true'>→</span>">להצטרפות לערוץ <span class="arr" aria-hidden="true">←</span></a>
-    </div>
-  </section>
 
   <!-- ======= entrepreneurs bridge: events -> ventures ======= -->
   <div class="accel-bridge">
@@ -1724,6 +1745,11 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   <section class="ventures" id="ventures">
     <div class="wrap">
       <h2 class="reveal" data-en-html="People we walked with, who were exactly where you are, <span class='hl'>and today are solving national challenges.</span>">אנשים שליווינו, שהיו בדיוק במקום שלכם, <span class="hl">וכיום הם פותרים אתגרים לאומיים.</span></h2>
+      <p class="vhint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="m9 6-6 6 6 6"/><path d="m15 6 6 6-6 6"/></svg>
+        <span data-en="Drag or scroll sideways to browse them all">גררו או גללו לצדדים כדי לעבור על כולם</span>
+      </p>
+      <div class="vrail" id="vrail">
       <div class="vflow" id="vflow" tabindex="0" role="group" aria-label="מיזמים שכבר ליווינו - אפשר לגלול לצדדים" data-en-aria-label="Ventures we've mentored - scroll sideways">
         <article class="vcard you" tabindex="0" role="group" aria-label="את/אתה" data-en-aria-label="You">
           <div class="vbig" aria-hidden="true" data-en="You?">את/אתה?</div>
@@ -1791,6 +1817,8 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
             <button type="button" class="apply-link" data-contact data-en="Contact us →">צרו קשר ←</button>
           </div>
         </article>
+      </div>
+        <div class="vbar" id="vbar"><i></i></div>
       </div>
     </div>
   </section>
@@ -1875,7 +1903,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <input type="text" id="note" name="entry.823481406" autocomplete="off">
       </div>
       <button type="submit" class="cta-btn" data-en="Send">שליחה</button>
-      <p class="form-note" data-en="We'll get back to you within one business day.">נחזור אליכם תוך יום עבודה.</p>
       <p class="form-error" id="applyError" data-en-html="We couldn't send this. Try again, or reach us by <a href=&quot;mailto:roee@hinenu.org.il&quot;>email</a> or on <a href=&quot;https://www.instagram.com/hinenu_israel&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Instagram</a>.">לא הצלחנו לשלוח. נסו שוב, או פנו אלינו ב<a href="mailto:roee@hinenu.org.il">מייל</a> או ב<a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener">אינסטגרם</a>.</p>
     </form>
     <p class="success-msg" id="applySuccess" data-en="We got your application. We'll be in touch soon.">קיבלנו את המועמדות. נחזור אליכם בקרוב.</p>
@@ -1905,9 +1932,10 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     <h3 id="contactTitle" data-en="Contact us">צרו קשר</h3>
     <div class="contact-rows">
       <a href="mailto:roee@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Roee Azizi">רועי עזיזי</b><i data-en="Founder &amp; CEO · roee@hinenu.org.il">מייסד ומנכ״ל · roee@hinenu.org.il</i></span></a>
+      <a href="mailto:shaked@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Shaked Wolk">שקד וולק</b><i data-en="Director, the Pioneering Center · shaked@hinenu.org.il">מנהלת המרכז לחלוציות · shaked@hinenu.org.il</i></span></a>
       <a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>
-      <a href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b><i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>
-      <a href="#" data-apply><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b><i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>
+      <a href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b><i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>
+      <a href="#" data-apply><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b></span></a>
     </div>
 
   </div>
@@ -2028,16 +2056,22 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         }, 0);
         resolve(ok);
       }
-      /* an empty iframe fires its own load event; only a frame that has left
-         about:blank is Google answering. Once it navigates to docs.google.com
-         reading its location throws - and that throw is the success signal. */
-      function stillBlank(){
-        try{ return iframe.contentWindow.location.href === 'about:blank'; }
-        catch(err){ return false; }
+      /* An empty iframe fires its own load event, so about:blank means "not yet".
+         After that there are two ways to land: a cross-origin document we are not
+         allowed to read - that throw is Google answering - or a document we CAN
+         read, which means we never left our own origin (a network error page, a
+         block). Only the throw counts as sent. */
+      function outcome(){
+        try{
+          return iframe.contentWindow.location.href === 'about:blank' ? 'blank' : 'readable';
+        }catch(err){
+          return 'cross-origin';
+        }
       }
       iframe.addEventListener('load', function(){
-        if(stillBlank()) return;
-        finish(true);
+        var o = outcome();
+        if(o === 'blank') return;
+        finish(o === 'cross-origin');
       });
       iframe.src = 'about:blank';
       document.body.appendChild(iframe);
@@ -2347,7 +2381,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     { title:'ערב יזמות לאומית', guest:'עם מייקל אייזנברג', status:'past',
       chips:['יום שני · 3.8','19:30','בית בן-גוריון, תל אביב'],
       lede:'מילה אחת תקבע מי ישרוד את העשור הקרוב: Agency. אנחנו קוראים לזה חלוציות - היכולת לקחת יוזמה, ללמוד מהר ולזוז. אורח: מייקל אייזנברג, מהדמויות המובילות ביזמות ובהון הסיכון בישראל, שותף-מנהל ומייסד בקרן Aleph.',
-      gallery:['assets/ev-michael-2-3.jpg','assets/ev-michael-2-4.jpg','assets/ev-michael-2-1.jpg','assets/ev-michael-2-2.jpg'] },
+      gallery:['assets/ev-michael-2-4.jpg','assets/ev-michael-2-1.jpg','assets/ev-michael-2-2.jpg'] },
     { title:'ערב יזמות ציונית', guest:'עם יואל זילברמן', status:'past',
       chips:['16.6','19:00','הרצליה'],
       lede:'שיח עם יזמים מובילים - יואל זילברמן, מייסד ומנכ״ל "השומר החדש", על איך מקימים תנועה מאפס.',
@@ -2361,7 +2395,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     { title:'Meet-Up', guest:'with Michael Eisenberg', status:'past',
       chips:['Monday · 3.8','19:30','Beit Ben-Gurion, Tel Aviv'],
       lede:'One word will decide who survives the next decade: Agency. We call it pioneering - the ability to take initiative, learn fast, and move. Guest: Michael Eisenberg, one of Israel’s leading entrepreneurship and venture-capital figures, managing partner and founder at Aleph.',
-      gallery:['assets/ev-michael-2-3.jpg','assets/ev-michael-2-4.jpg','assets/ev-michael-2-1.jpg','assets/ev-michael-2-2.jpg'] },
+      gallery:['assets/ev-michael-2-4.jpg','assets/ev-michael-2-1.jpg','assets/ev-michael-2-2.jpg'] },
     { title:'Meet-Up', guest:'with Yoel Zilberman', status:'past',
       chips:['16.6','19:00','Herzliya'],
       lede:'A conversation with leading entrepreneurs - Yoel Zilberman, founder and CEO of "HaShomer HaChadash," on building a movement from scratch.',
@@ -2405,9 +2439,12 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeEv(); });
   }
 
-    /* ---- ventures rail: drifts by itself, yields the moment anyone touches it ---- */
+    /* ---- ventures rail: drifts by itself, and hands over the moment anyone touches it ---- */
   var vflow = document.getElementById('vflow');
   if(vflow){
+    var vrail = document.getElementById('vrail');
+    var vbar  = document.getElementById('vbar');
+    var vknob = vbar && vbar.querySelector('i');
     var vheld = false, vseen = true, vresume = null;
     var vsign = 0;     /* -1 when the engine reports RTL scroll as negative */
     var vdir  = 1;     /* which way the drift is currently travelling */
@@ -2424,7 +2461,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         vflow.scrollLeft = keep;
         vdir = vsign;
       }
-      return vsign < 0 ? { lo:-span, hi:0 } : { lo:0, hi:span };
+      return vsign < 0 ? { lo:-span, hi:0, span:span } : { lo:0, hi:span, span:span };
     }
     function vSync(){
       var r = vMeasure(); if(!r) return;
@@ -2433,6 +2470,27 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     function vStill(){
       return reducedMotion || document.documentElement.classList.contains('hn-still');
     }
+
+    /* the position bar and the edge fades both read off the same number */
+    function vPaint(){
+      var r = vMeasure();
+      if(!r){
+        if(vrail){ vrail.classList.add('at-start'); vrail.classList.add('at-end'); }
+        return;
+      }
+      var t = (vflow.scrollLeft - r.lo) / r.span;      /* 0 at the rail's start side */
+      if(vsign < 0) t = 1 - t;                          /* RTL: lo is the far end */
+      t = Math.max(0, Math.min(1, t));
+      if(vknob){
+        var free = 100 - 32;                            /* knob is 32% wide */
+        vknob.style.transform = 'translateX(' + (vsign < 0 ? -1 : 1) * (t * free) + '%)';
+      }
+      if(vrail){
+        vrail.classList.toggle('at-start', t < 0.02);
+        vrail.classList.toggle('at-end', t > 0.98);
+      }
+    }
+
     function vStep(){
       requestAnimationFrame(vStep);
       if(vheld || !vseen || vStill()) return;
@@ -2441,6 +2499,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       if(vpos >= r.hi){ vpos = r.hi; vdir = -1; }
       else if(vpos <= r.lo){ vpos = r.lo; vdir = 1; }
       vflow.scrollLeft = vpos;
+      vPaint();
     }
 
     function vHold(ms){
@@ -2448,13 +2507,58 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       clearTimeout(vresume);
       vresume = setTimeout(function(){ vSync(); vheld = false; }, ms || 2600);
     }
-    ['pointerdown','wheel','touchstart','keydown'].forEach(function(ev){
+    ['wheel','touchstart','keydown'].forEach(function(ev){
       vflow.addEventListener(ev, function(){ vHold(); }, { passive:true });
     });
+    vflow.addEventListener('scroll', vPaint, { passive:true });
     vflow.addEventListener('mouseenter', function(){ vheld = true; clearTimeout(vresume); });
     vflow.addEventListener('mouseleave', function(){ vHold(500); });
     vflow.addEventListener('focusin', function(){ vheld = true; clearTimeout(vresume); });
     vflow.addEventListener('focusout', function(){ vHold(500); });
+
+    /* drag to browse: a trackpad-less mouse has no sideways scroll of its own */
+    (function(){
+      var down = false, startX = 0, startScroll = 0, moved = 0;
+      vflow.addEventListener('pointerdown', function(e){
+        if(e.button !== 0) return;
+        down = true; moved = 0;
+        startX = e.clientX; startScroll = vflow.scrollLeft;
+        vHold(4000);
+      });
+      window.addEventListener('pointermove', function(e){
+        if(!down) return;
+        var dx = e.clientX - startX;
+        if(Math.abs(dx) > 4){ moved = Math.abs(dx); vflow.classList.add('dragging'); }
+        vflow.scrollLeft = startScroll - dx;
+        vPaint();
+      });
+      window.addEventListener('pointerup', function(e){
+        if(!down) return;
+        down = false;
+        vflow.classList.remove('dragging');
+        /* a drag must not fire the link the pointer happened to finish on */
+        if(moved > 6){
+          var swallow = function(ev){ ev.preventDefault(); ev.stopPropagation(); };
+          window.addEventListener('click', swallow, { capture:true, once:true });
+          setTimeout(function(){ window.removeEventListener('click', swallow, true); }, 0);
+        }
+        vSync(); vHold(2600);
+      });
+    })();
+
+    /* the bar is a control, not just a readout */
+    if(vbar){
+      var vSeek = function(e){
+        var r = vMeasure(); if(!r) return;
+        var box = vbar.getBoundingClientRect();
+        var t = (e.clientX - box.left) / box.width;
+        if(vsign < 0) t = 1 - t;
+        vflow.scrollLeft = r.lo + Math.max(0, Math.min(1, t)) * r.span;
+        vSync(); vPaint(); vHold(3200);
+      };
+      vbar.addEventListener('pointerdown', vSeek);
+      vbar.addEventListener('pointermove', function(e){ if(e.buttons === 1) vSeek(e); });
+    }
 
     /* no point drifting a rail nobody is looking at */
     if('IntersectionObserver' in window){
@@ -2462,8 +2566,9 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         vseen = entries[0].isIntersecting;
       }, { threshold:0 }).observe(vflow);
     }
-    window.addEventListener('resize', function(){ vsign = 0; vSync(); }, { passive:true });
+    window.addEventListener('resize', function(){ vsign = 0; vSync(); vPaint(); }, { passive:true });
     vSync();
+    vPaint();
     vStep();
   }
 
@@ -2647,7 +2752,18 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     var fd = new FormData(applyForm);
     FILL_IF_EMPTY.forEach(function(id){ if(!fd.get(id)) fd.set(id, '—'); });
     backupSubmission(fd);
-    postToGoogleForm(fd).then(function(ok){
+    /* Formspree answers for real and mails it on; the Google Form keeps the sheet fed */
+    var readable = {
+      _subject: 'השארת פרטים מהאתר - ' + (fd.get('entry.1024546999') || ''),
+      form: 'השארת פרטים',
+      name: fd.get('entry.1024546999') || '',
+      phone: fd.get('entry.368855929') || '',
+      email: fd.get('entry.594139932') || '',
+      interest: fd.get('entry.473349595') || '',
+      note: fd.get('entry.823481406') || ''
+    };
+    var send = window.hinenuSend ? window.hinenuSend(readable, GFORM_URL, fd) : postToGoogleForm(fd);
+    send.then(function(ok){
       if(!ok){
         applyError.classList.add('show');
         submitBtn.disabled = false;

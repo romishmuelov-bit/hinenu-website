@@ -155,12 +155,13 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
   font-weight:400;letter-spacing:-.015em;line-height:1.15;margin-bottom:5px;color:var(--navy-deep)}
 .lec p{font-size:clamp(13.5px,1.15vw,15px);font-weight:300;line-height:1.5;opacity:.8;max-width:38ch}
 /* the closing line sits in the slot the fifth lecture leaves empty */
-.deck-note{align-self:center;padding-top:13px;will-change:opacity;
-  font-size:clamp(15px,1.4vw,18px);font-weight:300;line-height:1.45;
-  color:var(--navy-deep);letter-spacing:-.01em;max-width:30ch}
-.deck-note b{font-weight:700}
-@media (max-width:820px){ .deck-note{grid-column:1/-1;max-width:none;
-  border-top:1px solid rgba(130,156,232,.55);align-self:start} }
+.deck-note{align-self:center;will-change:opacity;
+  background:var(--navy-deep);color:#fff;padding:20px 22px;
+  box-shadow:0 18px 40px rgba(20,28,64,.22);
+  font-size:clamp(15px,1.4vw,18px);font-weight:400;line-height:1.5;
+  letter-spacing:-.01em;max-width:30ch}
+.deck-note b{font-weight:800;color:var(--sand)}
+@media (max-width:820px){ .deck-note{grid-column:1/-1;max-width:none;padding:18px;align-self:start} }
 @media (max-width:820px){ .deck{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:520px){ .deck{grid-template-columns:1fr;gap:18px} }
 /* ============ 2. אלפי משתתפים - התמונות פשוט ברקע ============ */
@@ -216,7 +217,10 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
 .cta-hill{position:absolute;bottom:-4%;inset-inline-end:-6%;width:min(760px,78vw);opacity:.95;
   will-change:transform;pointer-events:none}
 .cta-in{max-width:1080px;margin:0 auto;position:relative;z-index:2}
-.cta h2{font-size:clamp(27px,3.9vw,50px);font-weight:900;letter-spacing:-.025em;line-height:1;color:var(--navy-deep)}
+/* English runs longer than Hebrew - keep the copy clear of the illustration */
+@media (min-width:900px){ .cta-in{max-width:min(1080px,58vw);margin-inline:0 auto} }
+@media (min-width:900px) and (max-width:1200px){ .cta-hill{width:min(560px,52vw)} }
+.cta h2{max-width:13ch;font-size:clamp(27px,3.9vw,50px);font-weight:900;letter-spacing:-.025em;line-height:1;color:var(--navy-deep)}
 .cta .links{margin-top:clamp(20px,2.6vw,30px);display:flex;flex-direction:column;gap:9px;align-items:flex-start}
 .cta a:not(.btn){font-size:clamp(16px,1.8vw,22px);font-weight:400;color:var(--navy);text-decoration:none;
   direction:ltr;position:relative;padding-bottom:3px}
@@ -417,7 +421,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
       <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
       <div class="fan-menu" hidden>
         <a href="more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
-        <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+        <a href="mitzpe-gvolot/index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
         <a href="mitzpe-gvolot/index.html#overim" data-en="I want to move to the south or the north">אני רוצה לעבור לדרום/הצפון</a>
         <a href="harzaot.html" aria-current="page" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
         <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -440,7 +444,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה">✕</button>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
   <a href="more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
-  <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <a href="mitzpe-gvolot/index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
   <a href="mitzpe-gvolot/index.html#overim" data-en="I want to move to the south or the north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="harzaot.html" aria-current="page" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -548,8 +552,7 @@ html[lang="en"] .fan-menu a{ transform-origin:top left; }
   <div class="cta-in">
     <img class="logo" src="data:image/webp;base64,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" alt="הננו - חלוצים של תקווה">
     <h2 data-en="When would you like us to come?">מתי תרצו שנגיע?</h2>
-    <p class="cta-lead" data-en="Write which programme and which date - we'll come back with an answer on availability, within one business day.">כתבו איזו מסגרת ואיזה תאריך — נחזור עם תשובה על זמינות, תוך יום עבודה.</p>
-    <a class="btn" href="mailto:roee@hinenu.org.il?subject=%D7%94%D7%96%D7%9E%D7%A0%D7%AA%20%D7%94%D7%A8%D7%A6%D7%90%D7%94">
+    <a class="btn" href="mailto:roee@hinenu.org.il">
       <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg>
       <span data-en="Book a lecture">לתיאום הרצאה</span>
     </a>

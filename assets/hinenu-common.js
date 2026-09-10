@@ -28,6 +28,7 @@
   var WA   = 'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t';
   var IG   = 'https://www.instagram.com/hinenu_israel';
   var MAIL = 'roee@hinenu.org.il';
+  var MAIL_SHAKED = 'shaked@hinenu.org.il';
   var A11Y_MAIL = 'romishmuelov@gmail.com';
   var a11yHref  = base + 'mitzpe-gvolot/accessibility.html';
 
@@ -85,8 +86,8 @@
 '.hn-in{max-width:1180px;margin:0 auto;padding:0 24px}',
 
 /* partners */
-'.hn-partners{padding:44px 0 34px;text-align:center}',
-'.hn-lbl{margin:0 0 30px;font-weight:800;font-size:12.5px;letter-spacing:3px;color:#fff}',
+'.hn-partners{padding:26px 0 30px;text-align:center}',
+'.hn-lbl{margin:0 0 22px;font-weight:800;font-size:12.5px;letter-spacing:3px;color:#fff}',
 '.hn-marquee{position:relative;overflow:hidden;direction:ltr}',
 '.hn-marquee::before,.hn-marquee::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}',
 '.hn-marquee::before{left:0;background:linear-gradient(to right,#000,transparent)}',
@@ -129,6 +130,15 @@
 '.hn-row b{display:block;font-weight:800;font-size:15px}',
 '.hn-row i{display:block;font-style:normal;font-size:13px;color:#565870;margin-top:2px;unicode-bidi:plaintext}',
 '.hn-row-txt{min-width:0}',
+
+/* the "we got it" dialog */
+'.hn-ok-card{text-align:center;max-width:400px;padding:34px 26px 28px}',
+'.hn-ok-mark{width:56px;height:56px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:#4257E6;color:#fff}',
+'.hn-ok-mark svg{width:30px;height:30px}',
+'.hn-ok-bad .hn-ok-mark{background:#C1272D}',
+'.hn-ok-title{margin:0 0 8px;font-size:23px;font-weight:800}',
+'.hn-ok-body{margin:0 0 22px;font-size:15px;line-height:1.6;color:#3E405A}',
+'.hn-ok .hn-btn{width:100%}',
 /* these rows draw their own icon — keep the page-wide channel mask off them */
 '.hn-dlg a::before,.hn-foot a::before,.hn-foot button::before{content:none !important}',
 
@@ -241,14 +251,16 @@
             '<a class="hn-row" href="mailto:' + MAIL + '">' + ICON.mail +
               '<span class="hn-row-txt"><b data-en="Roee Azizi">רועי עזיזי</b>' +
               '<i data-en="Founder &amp; CEO · ' + MAIL + '">מייסד ומנכ״ל · ' + MAIL + '</i></span></a>' +
+            '<a class="hn-row" href="mailto:' + MAIL_SHAKED + '">' + ICON.mail +
+              '<span class="hn-row-txt"><b data-en="Shaked Wolk">שקד וולק</b>' +
+              '<i data-en="Director, the Pioneering Center · ' + MAIL_SHAKED + '">מנהלת המרכז לחלוציות · ' + MAIL_SHAKED + '</i></span></a>' +
             '<a class="hn-row" href="' + IG + '" target="_blank" rel="noopener">' + ICON.ig +
               '<span class="hn-row-txt"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>' +
             '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
               '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
-              '<i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>' +
+              '<i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>' +
             '<a class="hn-row" ' + applyAttr + '>' + ICON.form +
-              '<span class="hn-row-txt"><b data-en="Leave your details">השארת פרטים</b>' +
-              '<i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>' +
+              '<span class="hn-row-txt"><b data-en="Leave your details">השארת פרטים</b></span></a>' +
           '</div>' +
         '</div>';
       document.body.appendChild(d);
@@ -289,6 +301,125 @@
                  document.documentElement.classList.contains('hn-still');
     window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
   });
+
+  /* ---------- form plumbing every page can share ----------
+     window.hinenuPost(url, formData) -> Promise<boolean>
+       Posts through a hidden iframe. fetch(..., {mode:'no-cors'}) can't be used
+       here: it hands back an opaque response that resolves even when Google
+       refused the answer, so a page using it says "received" over a failed send.
+       The iframe leaving about:blank is the only completion signal the browser
+       gives us — reading its location then throws, and that throw is success.
+
+     window.hinenuReceived(opts) — the styled "we got it" dialog.
+  ------------------------------------------------------------------------- */
+  window.hinenuPost = function(url, fd){
+    return new Promise(function(resolve){
+      var frameName = 'hn-post-' + Date.now();
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('name', frameName);
+      iframe.setAttribute('aria-hidden', 'true');
+      iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;left:-9999px';
+      var form = document.createElement('form');
+      form.action = url; form.method = 'POST'; form.target = frameName;
+      form.style.display = 'none';
+      fd.forEach(function(v, k){
+        var i = document.createElement('input');
+        i.type = 'hidden'; i.name = k; i.value = v;
+        form.appendChild(i);
+      });
+      var settled = false;
+      var timer = setTimeout(function(){ finish(false); }, 12000);
+      function finish(ok){
+        if(settled) return;
+        settled = true;
+        clearTimeout(timer);
+        setTimeout(function(){ try{ form.remove(); iframe.remove(); }catch(e){} }, 0);
+        resolve(ok);
+      }
+      /* about:blank = not yet. A document we can still read means we never left
+         our own origin (network error page, block) - only a cross-origin read
+         that throws is Google actually answering. */
+      function outcome(){
+        try{
+          return iframe.contentWindow.location.href === 'about:blank' ? 'blank' : 'readable';
+        }catch(e){
+          return 'cross-origin';
+        }
+      }
+      iframe.addEventListener('load', function(){
+        var o = outcome();
+        if(o !== 'blank') finish(o === 'cross-origin');
+      });
+      iframe.src = 'about:blank';
+      document.body.appendChild(iframe);
+      document.body.appendChild(form);
+      form.submit();
+    });
+  };
+
+  /* window.hinenuSend(readable, googleUrl, googleFd) -> Promise<boolean>
+     Sends every submission twice:
+       · Formspree, which answers with a readable JSON response (so success and
+         failure are actually knowable) and mails the submission on,
+       · the Google Form, which keeps filling the sheet the team already uses.
+     A cross-origin form POST into a hidden iframe can never be read, so the
+     Google leg alone can only ever say "the browser finished something". When
+     Formspree gives a real answer, that answer wins. */
+  var FORMSPREE = 'https://formspree.io/f/xnjygrae';
+  window.hinenuSend = function(readable, googleUrl, googleFd){
+    var toFormspree = fetch(FORMSPREE, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(readable || {})
+    }).then(function(r){ return r.ok; }).catch(function(){ return null; });
+
+    var toGoogle = (googleUrl && googleFd) ? window.hinenuPost(googleUrl, googleFd)
+                                           : Promise.resolve(null);
+
+    return Promise.all([toFormspree, toGoogle]).then(function(r){
+      var fs = r[0], g = r[1];
+      if(fs === true) return true;          /* Formspree confirmed it */
+      if(fs === false) return g === true;   /* Formspree refused - fall back to the mirror */
+      return g !== false;                   /* Formspree unreachable - the mirror is all we have */
+    });
+  };
+
+  var okDlg = null;
+  window.hinenuReceived = function(opts){
+    opts = opts || {};
+    if(!okDlg){
+      okDlg = document.createElement('div');
+      okDlg.className = 'hn-dlg hn-ok';
+      okDlg.hidden = true;
+      okDlg.setAttribute('role', 'dialog');
+      okDlg.setAttribute('aria-modal', 'true');
+      okDlg.setAttribute('dir', 'rtl');
+      okDlg.innerHTML =
+        '<div class="hn-dlg-card hn-ok-card">' +
+          '<div class="hn-ok-mark" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5 10-11"/></svg>' +
+          '</div>' +
+          '<h3 class="hn-ok-title"></h3>' +
+          '<p class="hn-ok-body"></p>' +
+          '<button type="button" class="hn-btn hn-btn-solid hn-ok-close"><span></span></button>' +
+        '</div>';
+      document.body.appendChild(okDlg);
+      var close = function(){ okDlg.hidden = true; document.body.style.overflow = ''; };
+      okDlg.querySelector('.hn-ok-close').addEventListener('click', close);
+      okDlg.addEventListener('click', function(e){ if(e.target === okDlg) close(); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !okDlg.hidden) close(); });
+    }
+    var en = document.documentElement.getAttribute('lang') === 'en';
+    okDlg.querySelector('.hn-ok-title').textContent = opts.title ||
+      (en ? 'We got it' : 'קיבלנו');
+    okDlg.querySelector('.hn-ok-body').textContent = opts.body ||
+      (en ? "Thanks — we'll be in touch soon." : 'תודה, נחזור אליכם בקרוב.');
+    okDlg.querySelector('.hn-ok-close span').textContent = en ? 'Close' : 'סגירה';
+    okDlg.classList.toggle('hn-ok-bad', !!opts.failed);
+    okDlg.hidden = false;
+    document.body.style.overflow = 'hidden';
+    okDlg.querySelector('.hn-ok-close').focus();
+  };
 
   /* ---------- idle scroll cue: shows itself once the reader has gone still ---------- */
   (function(){

@@ -88,40 +88,12 @@ a{color:inherit}
 #boot.done{opacity:0; transition:opacity .4s ease .1s; pointer-events:none}
 
 /* ---------- quick pills: you should not have to sit through the whole film ---------- */
-.mg-quick{
-  position:fixed; top:74px; inset-inline:0; z-index:88;
-  display:flex; justify-content:center; gap:10px;
-  pointer-events:none; opacity:0; transform:translateY(-10px);
-  transition:opacity .45s ease, transform .45s ease;
-}
-.mg-quick.show{ opacity:1; transform:translateY(0); }
-.mg-quick.show .mgq{ pointer-events:auto; }
-.mgq{
-  display:flex; flex-direction:column; align-items:center; gap:1px;
-  padding:9px 20px 10px; border-radius:999px; text-decoration:none;
-  border:2px solid var(--navy); background:var(--pale); color:var(--navy);
-  box-shadow:3px 3px 0 var(--navy);
-  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-  will-change:transform, opacity;
-}
-.mgq b{ font-family:var(--display); font-weight:400; font-size:19px; line-height:1; }
-.mgq span{ font-size:10.5px; letter-spacing:.02em; color:#4A5F76; }
-.mgq:hover{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--navy); }
-.mgq-gold{ background:var(--amber); }
-.mgq-red{ background:var(--red); color:var(--pale); border-color:var(--wine); box-shadow:3px 3px 0 var(--wine); }
-.mgq-red span{ color:rgba(250,247,187,.82); }
-/* the pills leave by growing into the two posters below them */
-.mg-quick.handoff{ opacity:0; transition:opacity .5s ease; }
 .card.arrive{ animation:cardArrive .55s cubic-bezier(.2,.7,.3,1) both; }
 @keyframes cardArrive{
   from{ opacity:0; transform:scale(.94) translateY(14px); }
   to{ opacity:1; transform:none; }
 }
 @media (max-width:640px){
-  .mg-quick{ top:66px; gap:8px; }
-  .mgq{ padding:8px 15px 9px; }
-  .mgq b{ font-size:16px; }
-  .mgq span{ font-size:9.5px; }
 }
 @media (prefers-reduced-motion:reduce){
   .card.arrive{ animation:none; }
@@ -733,7 +705,7 @@ html[lang="en"] .cmodal-card{ text-align:left; }
       <button class="fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
       <div class="fan-menu" hidden>
         <a href="../more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
-        <a href="index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+        <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
         <a href="#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
         <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
         <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -741,7 +713,7 @@ html[lang="en"] .cmodal-card{ text-align:left; }
     </div>
     <button class="fan-btn" type="button" data-contact data-en="Contact us">צרו קשר</button>
   </div>
-  <a class="hdr-logo" href="index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
+  <a class="hdr-logo" href="../index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
     <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
   </a>
   <div class="hdr-right">
@@ -757,7 +729,7 @@ html[lang="en"] .cmodal-card{ text-align:left; }
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
   <a href="../more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
-  <a href="index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
   <a href="#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -792,11 +764,6 @@ html[lang="en"] .cmodal-card{ text-align:left; }
 <h1 class="sr-only" data-en="The Pioneering Center · Mitzpe Gvulot · the western Negev">המרכז לחלוציות · מצפה גבולות · הנגב המערבי</h1>
 
 <!-- ══════ THE STORY - one track, both clips, no seam ══════ -->
-<!-- shortcut through the long opening scroll: two pills that hand off to the posters -->
-<nav class="mg-quick" id="mgQuick" aria-label="מעבר מהיר למסלולים">
-  <a class="mgq mgq-gold" href="#lomdim" data-quick="0" data-en-html="<b>Dream</b><span>groups &amp; schools</span>"><b>לחלום</b><span>קבוצות ובתי ספר</span></a>
-  <a class="mgq mgq-red" href="#overim" data-quick="1" data-en-html="<b>Make it real</b><span>living in the Negev</span>"><b>להגשים</b><span>לגור בנגב</span></a>
-</nav>
 
 <section class="scroll-track" id="track">
   <div class="sticky-stage">
@@ -1053,7 +1020,6 @@ html[lang="en"] .cmodal-card{ text-align:left; }
         <textarea id="f-note" name="note"></textarea>
       </div>
       <button class="submit" type="submit" data-en="Send">שליחה</button>
-      <p class="micro" data-en="We'll get back to you within one business day">נחזור אליכם תוך יום עבודה</p>
     </form>
   </div>
 </section>
@@ -1475,14 +1441,22 @@ html[lang="en"] .cmodal-card{ text-align:left; }
 /* ---------- form: saved locally, and mirrored to the "הזמנת יום" Google Form/Sheet ---------- */
 document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
+  var form = e.target;
+  /* novalidate keeps the browser's own bubbles off the page, but the required
+     fields still have to hold before anything is sent */
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+
+  var btn = form.querySelector('.submit');
+  var isEn = document.documentElement.getAttribute('lang') === 'en';
+  btn.disabled = true;
+
   var data = { page:'index', submittedAt: new Date().toISOString() };
-  new FormData(e.target).forEach(function(v,k){ data[k] = v; });
+  new FormData(form).forEach(function(v,k){ data[k] = v; });
   try{
     var all = JSON.parse(localStorage.getItem('hinenu-bookings') || '[]');
     all.push(data);
     localStorage.setItem('hinenu-bookings', JSON.stringify(all));
   }catch(err){ console.error('could not save booking locally', err); }
-  console.log('booking submitted', data);
 
   /* the "סוג הקבוצה" question only has a fixed set of choices in the Google Form -
      anything outside that list rides in via its built-in "Other" mechanism */
@@ -1502,12 +1476,33 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   fd.append('entry.657552941', data.size || '');
   fd.append('entry.1062750637', data.when || '');
   fd.append('entry.498866476', data.note || '');
-  fetch('https://docs.google.com/forms/d/e/1FAIpQLSemUCDsE0fSRosFapdiydJokWfatkgxPDYRS_T9i7u5_wL5Zg/formResponse', {
-    method:'POST', mode:'no-cors', body:fd
-  }).catch(function(err){ console.error('booking form submit failed', err); });
 
-  e.target.reset();
-  alert(document.documentElement.lang === 'en' ? 'Thanks! We’ll get back to you soon.' : 'תודה! נחזור אליכם בהקדם.');
+  var URL_ = 'https://docs.google.com/forms/d/e/1FAIpQLSemUCDsE0fSRosFapdiydJokWfatkgxPDYRS_T9i7u5_wL5Zg/formResponse';
+  var readable = {
+    _subject: 'הזמנה מהמרכז לחלוציות - ' + (data.name || ''),
+    form: 'מצפה גבולות - הזמנת ביקור',
+    name: data.name || '', org: data.org || '', role: data.role || '',
+    phone: data.phone || '', email: data.email || '', type: data.type || '',
+    size: data.size || '', when: data.when || '', note: data.note || ''
+  };
+  var post = window.hinenuSend ? window.hinenuSend(readable, URL_, fd) : Promise.resolve(false);
+  post.then(function(ok){
+    btn.disabled = false;
+    if(ok){
+      form.reset();
+      window.hinenuReceived({
+        title: isEn ? 'We got your request' : 'קיבלנו את הבקשה',
+        body:  isEn ? "Thanks - we'll be in touch soon." : 'תודה, נחזור אליכם בקרוב.'
+      });
+    } else {
+      window.hinenuReceived({
+        failed: true,
+        title: isEn ? "That didn't send" : 'השליחה לא עברה',
+        body:  isEn ? 'Please try again, or write to shaked@hinenu.org.il.'
+                    : 'נסו שוב, או כתבו לנו ל-shaked@hinenu.org.il.'
+      });
+    }
+  });
 });
 
 </script>
@@ -1560,62 +1555,6 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
 })();
 </script>
 
-<script>
-/* The opening scroll is 600svh of film. These two pills ride along it so a visitor who
-   already knows what they want can leave early - and when the posters finally arrive,
-   each pill flies into its own poster instead of just disappearing. */
-(function(){
-  "use strict";
-  var quick = document.getElementById('mgQuick');
-  var flyers = document.getElementById('tracks');
-  var track = document.getElementById('track');
-  if(!quick || !flyers || !track) return;
-  var pills = Array.prototype.slice.call(quick.querySelectorAll('.mgq'));
-  var cards = Array.prototype.slice.call(flyers.querySelectorAll('.card'));
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var handedOff = false;
-
-  function handoff(){
-    if(handedOff) return;
-    handedOff = true;
-    if(reduced){ quick.classList.remove('show'); return; }
-    pills.forEach(function(pill, i){
-      var card = cards[i];
-      if(!card) return;
-      var a = pill.getBoundingClientRect(), b = card.getBoundingClientRect();
-      pill.animate([
-        { transform:'none', opacity:1 },
-        { transform:'translate(' + ((b.left + b.width/2) - (a.left + a.width/2)) + 'px,' +
-                                   ((b.top + b.height/2) - (a.top + a.height/2)) + 'px) ' +
-                     'scale(' + Math.min(6, b.width / a.width) + ')',
-          opacity:0 }
-      ], { duration:620, easing:'cubic-bezier(.3,.7,.3,1)', fill:'forwards' });
-      card.classList.add('arrive');
-    });
-    quick.classList.add('handoff');
-    setTimeout(function(){ quick.classList.remove('show'); }, 640);
-  }
-
-  /* visible along the film, gone once the posters take over */
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting) handoff();
-      });
-    }, { threshold:0.28 }).observe(flyers);
-  }
-  var onScroll = function(){
-    if(handedOff) return;
-    var r = track.getBoundingClientRect();
-    var started = -r.top > window.innerHeight * 0.25;
-    var stillOnFilm = r.bottom > window.innerHeight * 0.6;
-    quick.classList.toggle('show', started && stillOnFilm);
-  };
-  window.addEventListener('scroll', onScroll, { passive:true });
-  window.addEventListener('resize', onScroll);
-  onScroll();
-})();
-</script>
 
 </body>
 </html>

@@ -50,7 +50,18 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - Downloading from Freepik CDNs via automation gets blocked by Chrome — give Itamar direct links to click.
 - `index.html` and `more.html` are near-identical 2.6k-line files (shared header, modals, apply form, machine mode). Every fix here has to be made twice — unless it belongs in `assets/hinenu-common.js`, which is the place for anything that has to be identical on all four pages.
 - `applyLang()` overwrites `textContent` on every `[data-en]` element, so an icon must never be an element child of one. The channel marks (mail / Instagram / WhatsApp) are `::before` masks keyed off the href, exactly for that reason.
-- The apply form posts through a hidden iframe, not `fetch`: `fetch(..., {mode:'no-cors'})` returns an opaque response that "succeeds" even when Google refused it, so it used to show "קיבלנו את המועמדות" over a failed send. The iframe's `load` event, guarded by an `about:blank` check, is the only completion signal the browser gives.
+- **Forms.** Every submission now goes out twice, through `window.hinenuSend()` in
+  `assets/hinenu-common.js`: to **Formspree** (`xnjygrae`) as JSON — the only leg that answers
+  with a readable response, so success/failure is actually knowable and the team gets an email —
+  and to the **Google Form** as a mirror, so the existing sheet keeps filling. A cross-origin
+  form POST into a hidden iframe can never be read: `fetch(..., {mode:'no-cors'})` resolves
+  opaque even when Google refused, and even the iframe's `load` event fires for a network-error
+  page. So the Google leg alone can only ever say "the browser finished something" — when
+  Formspree answers, that answer wins. Two forms use it: the apply modal (index/more) and the
+  booking form (mitzpe). Event registration is an external Google Form link that opens in a new
+  tab and shows Google's own confirmation.
+- Neither endpoint can be exercised from a sandbox without internet — after any change to the
+  form plumbing, do one real submission per form and confirm it lands.
 - The Google Form still holds the long questions that were dropped from the page (`entry.823481406/1746048607/720430898`). While they are marked required over there, an empty answer is refused — `FILL_IF_EMPTY` sends a dash for each. Once Romi clears the "required" flags, delete that list.
 - `assets/hora.mov` is the 138MB archive master for the lectures page's "פעם ידענו לעשות את זה"
   band; `*.mov` is gitignored. What ships is `assets/hora-bg.mp4` (30s, 1080x828, ~3.4MB) plus
@@ -67,6 +78,9 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
 - Photos/videos wanted for כיף בעוטף + שמונה venture cards; videos from the 16.6 evening can be added to the past-event popup (`EV[2].gallery`).
 - Custom domain not configured.
+- The letter zone ends where the pinned film is clipped; `.letter-zone::after` is an 86vh fade to
+  `--bg` anchored to that boundary, and it has to reach full opacity *before* the cut or the clip
+  reads as a ruled line across the page.
 - The header bars carry only הנני + / צרו קשר / נגישות / EN — the ניווט + fan was removed from
   every page; navigation lives in the ☰ drawer.
 - Accessibility officer of record: רומי שמואלוב (romishmuelov@gmail.com) — named in the toolbar,

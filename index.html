@@ -551,11 +551,13 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
      reads as a ruled line across the page. dissolve it into the tracks colour. */
   .letter-zone::after{
     content:''; position:absolute; left:0; right:0; bottom:0; z-index:1;
-    height:min(48vh, 460px); pointer-events:none;
+    height:min(86vh, 800px); pointer-events:none;
     background:linear-gradient(180deg,
       rgba(7,11,22,0) 0%,
-      rgba(7,11,22,.45) 38%,
-      rgba(7,11,22,.82) 72%,
+      rgba(7,11,22,.30) 26%,
+      rgba(7,11,22,.68) 52%,
+      rgba(7,11,22,.93) 74%,
+      var(--bg) 86%,
       var(--bg) 100%);
   }
   .letter-zone::before{
@@ -659,7 +661,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 
   /* ---------- TRACKS: how to continue ---------- */
   .tracks{
-    position:relative; overflow:clip;
+    position:relative; overflow:clip; margin-top:-1px;
     padding:82px 0 72px;
     background:radial-gradient(ellipse 80% 60% at 50% 14%, rgba(66,87,230,.09), transparent 70%), var(--bg);
     --mx:50%; --my:50%;
@@ -1093,13 +1095,14 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 
   /* ---- "enough scrolling, pick a track" — the last word before the footer ---- */
   .scroll-msg{
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    text-align:center; padding:0 24px 84px;
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+    text-align:center; padding:86px 24px 26px;
   }
-  .scroll-msg p{ font-family:var(--sans); font-weight:800; color:#fff; font-size:clamp(20px,3vw,26px); margin:0; }
+  .scroll-msg p{ font-family:var(--sans); font-weight:800; color:#fff; font-size:clamp(26px,4vw,38px); margin:0; }
   .scroll-msg a{
     font-family:var(--sans); font-weight:700; color:var(--hl-blue); font-size:15px;
     text-decoration:none; border-bottom:1.5px solid currentColor; padding-bottom:2px;
+    font-size:16.5px;
   }
   .scroll-msg a:hover{ color:#fff; }
 
@@ -1515,7 +1518,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <button class="top-link fan-btn" type="button" aria-expanded="false" aria-haspopup="true" data-en="Hineni +">הנני +</button>
         <div class="fan-menu" hidden>
           <button type="button" data-apply data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</button>
-          <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+          <a href="mitzpe-gvolot/index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
           <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
           <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
           <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -1523,7 +1526,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       </div>
       <button class="top-link fan-btn" type="button" id="contactOpen" data-en="Contact us">צרו קשר</button>
     </nav>
-    <a class="brand" href="#">
+    <a class="brand" href="index.html">
       <img class="brand-logo" src="assets/logo-white.webp" alt="הננו - חלוציות כדרך חיים" data-en-src="assets/logo-white-en.png" data-en-alt="Hinenu - Pioneers of Hope">
     </a>
     <div class="top-side end">
@@ -1546,7 +1549,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
   <button type="button" class="drawer-item" data-apply data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</button>
-  <a href="mitzpe-gvolot/index.html" data-en="I want to visit the Pioneering Center">אני רוצה להגיע למרכז לחלוציות</a>
+  <a href="mitzpe-gvolot/index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
   <a href="mitzpe-gvolot/index.html#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
   <a href="harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
   <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
@@ -1676,11 +1679,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
           <div class="track-a-panel">
             <h3 data-en-html="National entrepreneurship<br>as a way of life">יזמות לאומית<br>כדרך חיים</h3>
             <p class="desc" data-en="Come to the entrepreneurship evenings we run - get inspired, and find partners for the road.">בואו לערבי היזמות שאנחנו מרימים, תתמלאו השראה ותמצאו שותפים לדרך.</p>
-            <div class="track-contact">
-              <span class="tc-name" data-en="Roee">רועי</span>
-              <a class="tc-email" href="mailto:roee@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%99%D7%96%D7%9E%D7%95%D7%AA%20%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA" data-track="EmailRoee" data-en="Email Roee">מייל לרועי</a>
-              <a class="tc-email" href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener" data-track="InstagramTrackA" data-en="Instagram">אינסטגרם</a>
-            </div>
             <div class="track-actions">
               <a class="track-cta" href="more.html#event" data-track="TrackA_Events" data-en-html="To the meet-ups <span class='arr' aria-hidden='true'>→</span>">לערבי היזמות <span class="arr" aria-hidden="true">←</span></a>
             </div>
@@ -1691,11 +1689,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
           <div class="track-c-panel">
             <h3 data-en-html="Pioneering<br>as a way of life">חלוציות בַּסְפָר<br>כדרך חיים</h3>
             <p class="desc" data-en="We invite you to the Pioneering Center we built at Mitzpe Gvulot. There we study pioneering then and now, and we train and accompany you to move to the frontier communities, live in them and work there.">מזמינים אתכם למרכז לחלוציות שהקמנו במצפה גבולות. שם נלמד על חלוציות אז והיום, ונכשיר ונלווה אתכם לעבור, לחיות ולפעול בישובי הַסְּפָר.</p>
-            <div class="track-contact">
-              <span class="tc-name" data-en="Shaked">שקד</span>
-              <a class="tc-email" href="mailto:shaked@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%97%D7%9C%D7%95%D7%A6%D7%99%D7%95%D7%AA%20%D7%91%D7%A1%D7%A4%D7%A8" data-track="EmailShaked" data-en="Email Shaked">מייל לשקד</a>
-              <a class="tc-email" href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener" data-track="InstagramTrackC" data-en="Instagram">אינסטגרם</a>
-            </div>
             <div class="track-actions">
               <a class="track-cta" href="mitzpe-gvolot/index.html" data-track="TrackC_Mitzpe" data-en-html="To the Pioneering Center <span class='arr' aria-hidden='true'>→</span>">למרכז לחלוציות <span class="arr" aria-hidden="true">←</span></a>
             </div>
@@ -1706,16 +1699,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   </section>
 
 
-  <!-- ======= 3b. the quiet channel, for whoever isn't ready to apply today ======= -->
-  <section class="channel" id="channel" aria-labelledby="channelTitle">
-    <div class="wrap channel-in">
-      <div class="channel-txt">
-        <h2 id="channelTitle" data-en="Not ready yet? That's fine.">עוד לא בשלים? זה בסדר.</h2>
-        <p data-en="Join our quiet WhatsApp channel - we'll let you know when there's a meet-up, a group or a track that fits you.">הצטרפו לערוץ הוואטסאפ השקט שלנו, ונעדכן כשיהיה ערב, קבוצה או מסלול שמתאים לכם.</p>
-      </div>
-      <a class="channel-cta" href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener" data-track="JoinChannel" data-en-html="Join the channel <span class='arr' aria-hidden='true'>→</span>">להצטרפות לערוץ <span class="arr" aria-hidden="true">←</span></a>
-    </div>
-  </section>
 
   <!-- ======= "enough scrolling" — the nudge back up to the two tracks ======= -->
   <div class="scroll-msg">
@@ -1762,7 +1745,6 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <input type="text" id="note" name="entry.823481406" autocomplete="off">
       </div>
       <button type="submit" class="cta-btn" data-en="Send">שליחה</button>
-      <p class="form-note" data-en="We'll get back to you within one business day.">נחזור אליכם תוך יום עבודה.</p>
       <p class="form-error" id="applyError" data-en-html="We couldn't send this. Try again, or reach us by <a href=&quot;mailto:roee@hinenu.org.il&quot;>email</a> or on <a href=&quot;https://www.instagram.com/hinenu_israel&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Instagram</a>.">לא הצלחנו לשלוח. נסו שוב, או פנו אלינו ב<a href="mailto:roee@hinenu.org.il">מייל</a> או ב<a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener">אינסטגרם</a>.</p>
     </form>
     <p class="success-msg" id="applySuccess" data-en="We got your application. We'll be in touch soon.">קיבלנו את המועמדות. נחזור אליכם בקרוב.</p>
@@ -1792,9 +1774,10 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     <h3 id="contactTitle" data-en="Contact us">צרו קשר</h3>
     <div class="contact-rows">
       <a href="mailto:roee@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Roee Azizi">רועי עזיזי</b><i data-en="Founder &amp; CEO · roee@hinenu.org.il">מייסד ומנכ״ל · roee@hinenu.org.il</i></span></a>
+      <a href="mailto:shaked@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Shaked Wolk">שקד וולק</b><i data-en="Director, the Pioneering Center · shaked@hinenu.org.il">מנהלת המרכז לחלוציות · shaked@hinenu.org.il</i></span></a>
       <a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>
-      <a href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b><i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>
-      <a href="#" data-apply><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b><i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>
+      <a href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b><i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>
+      <a href="#" data-apply><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b></span></a>
     </div>
 
   </div>
@@ -1908,16 +1891,22 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         }, 0);
         resolve(ok);
       }
-      /* an empty iframe fires its own load event; only a frame that has left
-         about:blank is Google answering. Once it navigates to docs.google.com
-         reading its location throws - and that throw is the success signal. */
-      function stillBlank(){
-        try{ return iframe.contentWindow.location.href === 'about:blank'; }
-        catch(err){ return false; }
+      /* An empty iframe fires its own load event, so about:blank means "not yet".
+         After that there are two ways to land: a cross-origin document we are not
+         allowed to read - that throw is Google answering - or a document we CAN
+         read, which means we never left our own origin (a network error page, a
+         block). Only the throw counts as sent. */
+      function outcome(){
+        try{
+          return iframe.contentWindow.location.href === 'about:blank' ? 'blank' : 'readable';
+        }catch(err){
+          return 'cross-origin';
+        }
       }
       iframe.addEventListener('load', function(){
-        if(stillBlank()) return;
-        finish(true);
+        var o = outcome();
+        if(o === 'blank') return;
+        finish(o === 'cross-origin');
       });
       iframe.src = 'about:blank';
       document.body.appendChild(iframe);
@@ -2499,7 +2488,18 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     var fd = new FormData(applyForm);
     FILL_IF_EMPTY.forEach(function(id){ if(!fd.get(id)) fd.set(id, '—'); });
     backupSubmission(fd);
-    postToGoogleForm(fd).then(function(ok){
+    /* Formspree answers for real and mails it on; the Google Form keeps the sheet fed */
+    var readable = {
+      _subject: 'השארת פרטים מהאתר - ' + (fd.get('entry.1024546999') || ''),
+      form: 'השארת פרטים',
+      name: fd.get('entry.1024546999') || '',
+      phone: fd.get('entry.368855929') || '',
+      email: fd.get('entry.594139932') || '',
+      interest: fd.get('entry.473349595') || '',
+      note: fd.get('entry.823481406') || ''
+    };
+    var send = window.hinenuSend ? window.hinenuSend(readable, GFORM_URL, fd) : postToGoogleForm(fd);
+    send.then(function(ok){
       if(!ok){
         applyError.classList.add('show');
         submitBtn.disabled = false;
