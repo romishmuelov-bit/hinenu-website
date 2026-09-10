@@ -53,7 +53,9 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 }
 :root{
   --navy:#28346d; --navy-deep:#1e2a5e;
-  --peri:#829ce8; --sky:#cddcfb; --sky-light:#eef3fd;
+  /* peri-text (darkened --peri): 5.3:1 on --sky-light, was 2.39:1 (axe-core WCAG AA fail).
+     --peri itself stays for decorative use - rules, arrows, the progress bar. */
+  --peri:#829ce8; --peri-text:#4a5fb0; --sky:#cddcfb; --sky-light:#eef3fd;
   --sand:#f7e7b3; --green:#8fa843; --paper:#f8fafe;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -119,7 +121,7 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
 }
 .scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:7;
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--peri)}
+  font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--peri-text)}
 .scrollcue::after{content:'';display:block;width:1px;height:34px;
   background:linear-gradient(to bottom,rgba(130,156,232,0),var(--peri));
   animation:bob 2.4s ease-in-out infinite}
@@ -140,16 +142,16 @@ html[lang="en"] .who-row > div[data-en="Pre-military academies"]{display:none}
 .byline strong{display:block;font-size:clamp(14px,1.25vw,15.5px);font-weight:800;
   color:var(--navy-deep);letter-spacing:-.01em;line-height:1.2}
 .byline em{display:block;font-style:normal;margin-top:2px;
-  font-size:clamp(11.5px,1vw,13px);font-weight:400;color:var(--peri)}
+  font-size:clamp(11.5px,1vw,13px);font-weight:400;color:var(--peri-text)}
 @media (max-width:620px){ .sec-head{gap:12px} .byline img{width:38px} }
 .sec-head h2{font-size:clamp(23px,2.9vw,34px);font-weight:900;letter-spacing:-.02em;color:var(--navy-deep)}
-.sec-head span{font-size:12px;font-weight:500;color:var(--peri);letter-spacing:.16em}
+.sec-head span{font-size:12px;font-weight:500;color:var(--peri-text);letter-spacing:.16em}
 
 /* a plain ruled list - no cards, no glass, no 3D */
 .deck{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);
   gap:clamp(20px,2.4vw,30px) clamp(22px,3vw,40px)}
 .lec{border-top:1px solid rgba(130,156,232,.55);padding-top:13px;will-change:opacity}
-.lec .num{font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--peri);
+.lec .num{font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--peri-text);
   line-height:1;margin-bottom:9px}
 .lec h3{font-family:'Reisinger Yonatan',Heebo,sans-serif;font-size:clamp(17px,1.65vw,21px);
   font-weight:400;letter-spacing:-.015em;line-height:1.15;margin-bottom:5px;color:var(--navy-deep)}
