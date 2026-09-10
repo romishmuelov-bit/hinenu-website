@@ -78,9 +78,12 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
 - Photos/videos wanted for כיף בעוטף + שמונה venture cards; videos from the 16.6 evening can be added to the past-event popup (`EV[2].gallery`).
 - Custom domain not configured.
-- The letter zone ends where the pinned film is clipped; `.letter-zone::after` is an 86vh fade to
-  `--bg` anchored to that boundary, and it has to reach full opacity *before* the cut or the clip
-  reads as a ruled line across the page.
+- The tracks section is laid **over** the end of the manifesto like a fresh sheet: `--cover`
+  (82vh, 58vh on phones) is added as `padding-bottom` on `.letter-track` — which keeps the sticky
+  letter pinned through it — and pulled straight back off with `margin-top:calc(-1 * var(--cover))`
+  on `.tracks`, so the page is no taller than before. `updateLetter()` subtracts that same padding
+  from its scrollable range, so the handwriting finishes just before the sheet arrives. Change one
+  of the three and the other two have to follow.
 - The header bars carry only הנני + / צרו קשר / נגישות / EN — the ניווט + fan was removed from
   every page; navigation lives in the ☰ drawer.
 - Accessibility officer of record: רומי שמואלוב (romishmuelov@gmail.com) — named in the toolbar,

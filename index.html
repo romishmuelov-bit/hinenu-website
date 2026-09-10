@@ -116,6 +116,8 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     --prob:#A6A8B6;
     --prob-hover:#434662;
     --radius:16px;
+    /* how far "הנני. אבל לאן?" rides up over the tail of the manifesto */
+    --cover:82vh;
     --board:#23241F;
     --flood-dark:#1B1C17;
     --flood-olive:#5E684F;
@@ -551,7 +553,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
      reads as a ruled line across the page. dissolve it into the tracks colour. */
   .letter-zone::after{
     content:''; position:absolute; left:0; right:0; bottom:0; z-index:1;
-    height:min(86vh, 800px); pointer-events:none;
+    height:min(60vh, 560px); pointer-events:none;
     background:linear-gradient(180deg,
       rgba(7,11,22,0) 0%,
       rgba(7,11,22,.30) 26%,
@@ -569,7 +571,14 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     background:transparent;
     padding:84px 0 52px;
   }
-  .letter-track{ position:relative; }
+  .letter-track{
+    position:relative;
+    /* dead scroll at the end of the letter: the sticky sheet stays put here while
+       the tracks slide over it. .tracks pulls the same amount back, so the page
+       is no taller than before - and updateLetter() subtracts it so the ink
+       still finishes exactly when the covering starts. */
+    padding-bottom:var(--cover);
+  }
   .letter-sticky{
     position:sticky; top:96px;
     max-width:1100px; margin:0 auto; padding:0 26px;
@@ -661,8 +670,11 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 
   /* ---------- TRACKS: how to continue ---------- */
   .tracks{
-    position:relative; overflow:clip; margin-top:-1px;
+    position:relative; overflow:clip; z-index:6;
+    margin-top:calc(-1 * var(--cover));
     padding:82px 0 72px;
+    box-shadow:0 -34px 70px rgba(0,0,0,.72);
+    border-top:1px solid rgba(242,240,233,.10);
     background:radial-gradient(ellipse 80% 60% at 50% 14%, rgba(66,87,230,.09), transparent 70%), var(--bg);
     --mx:50%; --my:50%;
   }
@@ -1351,6 +1363,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
 
     /* letter */
     .mission-intro{ min-height:32svh; }
+    :root{ --cover:58vh; }
     .letter{ padding:90px 0 56px; }
     .notebook{
       padding:1.6em 1em 2.2em; font-size:24px; line-height:1.85;
@@ -2036,7 +2049,10 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   function updateLetter(){
     if(!letterTrack) return;
     var rect = letterTrack.getBoundingClientRect();
-    var scrollable = letterTrack.offsetHeight - window.innerHeight;
+    /* the track's padding-bottom is the stretch the tracks section slides over -
+       the letter is pinned and finished by then, so it is not ink time */
+    var tail = parseFloat(getComputedStyle(letterTrack).paddingBottom) || 0;
+    var scrollable = letterTrack.offsetHeight - window.innerHeight - tail;
     if(scrollable < 1) scrollable = 1;
     var p = Math.max(0, Math.min(1, -rect.top / scrollable));
     var lit = p * inks.length;
