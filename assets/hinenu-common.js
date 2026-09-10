@@ -29,6 +29,7 @@
 
   var WA   = 'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t';
   var IG   = 'https://www.instagram.com/hinenu_israel';
+  var FB   = 'https://www.facebook.com/p/%D7%94%D7%A0%D7%A0%D7%95%D6%BC-61565788381476/';
   var MAIL = 'roee@hinenu.org.il';
   var MAIL_SHAKED = 'shaked@hinenu.org.il';
   var A11Y_MAIL = 'romishmuelov@gmail.com';
@@ -42,6 +43,7 @@
     form: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg>',
     up:   '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20V5"/><path d="M5.4 11.4 12 4.7l6.6 6.7"/></svg>',
     mic:  '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.8a2.9 2.9 0 0 1 2.9 2.9v6a2.9 2.9 0 0 1-5.8 0v-6A2.9 2.9 0 0 1 12 2.8z"/><path d="M5.6 11.3a6.4 6.4 0 0 0 12.8 0"/><path d="M12 17.7V21M8.6 21h6.8"/></svg>',
+    fb:   '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><path d="M15.4 8.2h-1.6c-.9 0-1.5.6-1.5 1.5V11h3l-.4 2.6h-2.6V21"/><path d="M10 13.6h2.3"/></svg>',
     a11y: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="4.3" r="1.9" fill="currentColor" stroke="none"/><path d="M4.4 8.2h15.2"/><path d="M12 8.6v5.2"/><path d="m12 13.8-3 7.1M12 13.8l3 7.1"/></svg>'
   };
 
@@ -258,6 +260,8 @@
               '<i data-en="Director, the Pioneering Center · ' + MAIL_SHAKED + '">מנהלת המרכז לחלוציות · ' + MAIL_SHAKED + '</i></span></a>' +
             '<a class="hn-row" href="' + IG + '" target="_blank" rel="noopener">' + ICON.ig +
               '<span class="hn-row-txt"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>' +
+            '<a class="hn-row" href="' + FB + '" target="_blank" rel="noopener">' + ICON.fb +
+              '<span class="hn-row-txt"><b data-en="Facebook">פייסבוק</b><i>הננוּ</i></span></a>' +
             '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
               '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
               '<i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>' +

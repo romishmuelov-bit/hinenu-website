@@ -62,13 +62,16 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   tab and shows Google's own confirmation.
 - Neither endpoint can be exercised from a sandbox without internet — after any change to the
   form plumbing, do one real submission per form and confirm it lands.
-- The apply modal posts into the **contact Google Form**
-  (`1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA`), four questions:
-  `entry.834284576` name · `entry.947166453` phone · `entry.247289337` email ·
-  `entry.2138204294` what interests you. There is no question for "משהו שכדאי שנדע", so that field
-  is stripped out of the Google payload and rides to Formspree only — add a question there and its
-  entry id here if it should reach the sheet. Google rejects a choice value that is not one of the
-  question's options, so the three radios must stay in step with the form.
+- The apply modal posts into the contact Google Form **"טופס התעניינות דף נחיתה"**
+  (`1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA`), five questions, all optional:
+  `entry.834284576` שם מלא · `entry.947166453` טלפון · `entry.247289337` מייל ·
+  `entry.2138204294` במה מעוניין? · `entry.1594498855` משהו נוסף?.
+  Google refuses the **whole** response when a multiple-choice value is not one of the question's
+  options, so the three radio `value=` strings have to match the form exactly — and the form's
+  wording does get edited. To check them, fetch the form and read the options out of
+  `FB_PUBLIC_LOAD_DATA_`; posting from a shell mangles Hebrew, so build the request in Python with
+  an explicit UTF-8 body. Verified end to end on 10.9.2026: all three options accepted (HTTP 200)
+  with the full five-field payload.
 - `assets/hora.mov` is the 138MB archive master for the lectures page's "פעם ידענו לעשות את זה"
   band; `*.mov` is gitignored. What ships is `assets/hora-bg.mp4` (30s, 1080x828, ~3.4MB) plus
   `hora-poster.jpg`. Re-encode with the CapCut ffmpeg and *plain* AMF flags —
