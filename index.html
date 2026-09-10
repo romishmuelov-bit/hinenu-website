@@ -547,6 +547,17 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   }
   .mission-intro p .acc{ color:#8ea6ff; }
   .letter-zone{ position:relative; }
+  /* the pinned film is clipped where this zone ends - without a fade that clip
+     reads as a ruled line across the page. dissolve it into the tracks colour. */
+  .letter-zone::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; z-index:1;
+    height:min(48vh, 460px); pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(7,11,22,0) 0%,
+      rgba(7,11,22,.45) 38%,
+      rgba(7,11,22,.82) 72%,
+      var(--bg) 100%);
+  }
   .letter-zone::before{
     content:''; position:absolute; inset:0; z-index:1;
     background:linear-gradient(180deg, rgba(7,11,22,.22) 0%, rgba(7,11,22,.42) 20%, rgba(7,11,22,.6) 45%, rgba(7,11,22,.68) 100%);
@@ -650,7 +661,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   .tracks{
     position:relative; overflow:clip;
     padding:82px 0 72px;
-    background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(66,87,230,.09), transparent 70%), var(--bg);
+    background:radial-gradient(ellipse 80% 60% at 50% 14%, rgba(66,87,230,.09), transparent 70%), var(--bg);
     --mx:50%; --my:50%;
   }
   /* faint continuation of the hero grid + cursor-revealed layer */
@@ -1676,7 +1687,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <article class="track track-a" id="track-a">
           <div class="track-a-panel">
             <h3 data-en-html="National entrepreneurship<br>as a way of life">יזמות לאומית<br>כדרך חיים</h3>
-            <p class="desc" data-en="For young people who want to solve national problems. One meet-up a month, one guest, and a room full of people looking for partners.">לצעירים שרוצים לפתור בעיות לאומיות. ערב בחודש, אורח, וחדר מלא אנשים שמחפשים שותפים.</p>
+            <p class="desc" data-en="Come to the entrepreneurship evenings we run - get inspired, and find partners for the road.">בואו לערבי היזמות שאנחנו מרימים, תתמלאו השראה ותמצאו שותפים לדרך.</p>
             <div class="track-contact">
               <span class="tc-name" data-en="Roee">רועי</span>
               <a class="tc-email" href="mailto:roee@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%99%D7%96%D7%9E%D7%95%D7%AA%20%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA" data-track="EmailRoee" data-en="Email Roee">מייל לרועי</a>
@@ -1691,7 +1702,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <article class="track track-c" id="track-c">
           <div class="track-c-panel">
             <h3 data-en-html="Pioneering<br>as a way of life">חלוציות בַּסְפָר<br>כדרך חיים</h3>
-            <p class="desc" data-en="Hundreds of young people have already moved and built communities in the Negev and the Galilee. Come to the Pioneering Center at Mitzpe Gvulot.">מאות צעירים כבר עברו והקימו קהילות בנגב ובגליל. בואו למרכז לחלוציות במצפה גבולות.</p>
+            <p class="desc" data-en="We invite you to the Pioneering Center we built at Mitzpe Gvulot. There we study pioneering then and now, and we train and accompany you to move to the frontier communities, live in them and work there.">מזמינים אתכם למרכז לחלוציות שהקמנו במצפה גבולות. שם נלמד על חלוציות אז והיום, ונכשיר ונלווה אתכם לעבור, לחיות ולפעול בישובי הַסְּפָר.</p>
             <div class="track-contact">
               <span class="tc-name" data-en="Shaked">שקד</span>
               <a class="tc-email" href="mailto:shaked@hinenu.org.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20-%20%D7%97%D7%9C%D7%95%D7%A6%D7%99%D7%95%D7%AA%20%D7%91%D7%A1%D7%A4%D7%A8" data-track="EmailShaked" data-en="Email Shaked">מייל לשקד</a>
