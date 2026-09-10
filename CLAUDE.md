@@ -3,8 +3,12 @@
 ## What this is
 One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כדרך חיים**: national-entrepreneurship evenings + an incubator (חממה) for young Israelis. Built July 2026 by Itamar + Claude. Fully redesigned 12.7 to a pitch-black cinematic one-pager.
 
-- **Live:** https://hinenu-site.vercel.app (currently serving `main`; the dark redesign lives on branch `redesign-hero` — merge when Itamar approves)
-- **Repo:** github.com/Itamargend/hinenu-site — push to `main` auto-deploys (Vercel Git integration).
+- **Live:** https://hinenu-website.vercel.app — this is the deployment that is actually current.
+  `hinenu-site.vercel.app` still resolves but is a build from before the shared footer landed
+  (`assets/hinenu-common.js` 404s there); it does not rebuild on push. The hardcoded `og:image`
+  URLs still point at that stale host, so share cards pull months-old images — worth fixing.
+- **Repos:** `romi` → github.com/romishmuelov-bit/hinenu-website is what `main` tracks and what
+  Vercel builds; `origin` → github.com/Itamargend/hinenu-site is kept in sync by hand. Push both.
 - Local preview: Itamar runs a static server on `localhost:8934` from this folder.
 
 ## Architecture — deliberately simple
