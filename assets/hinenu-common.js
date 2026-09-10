@@ -24,6 +24,8 @@
   };
   var wantLecture = opt('lecture', 'yes') !== 'no';
   var applyHref   = opt('apply', '');           /* '' = use the page's own apply modal */
+  /* the contact form itself - Google shows its own confirmation on submit */
+  var CONTACT_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA/viewform';
 
   var WA   = 'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t';
   var IG   = 'https://www.instagram.com/hinenu_israel';
@@ -80,9 +82,9 @@
 
   /* ---------- styles ---------- */
   var css = [
-'.hn-foot{background:#000;color:#F2F0E9;font-family:"Heebo","Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:400;border-top:1px solid rgba(242,240,233,.14);position:relative;z-index:5}',
+'.hn-foot{background:#000;padding:0;color:#F2F0E9;font-family:"Heebo","Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:400;border-top:1px solid rgba(242,240,233,.14);position:relative;z-index:5}',
 '.hn-foot *{box-sizing:border-box}',
-'.hn-foot a{color:inherit}',
+'.hn-foot a{color:inherit;font-weight:inherit}',
 '.hn-in{max-width:1180px;margin:0 auto;padding:0 24px}',
 
 /* partners */
@@ -259,7 +261,7 @@
             '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
               '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
               '<i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>' +
-            '<a class="hn-row" ' + applyAttr + '>' + ICON.form +
+            '<a class="hn-row" href="' + CONTACT_FORM + '" target="_blank" rel="noopener">' + ICON.form +
               '<span class="hn-row-txt"><b data-en="Leave your details">השארת פרטים</b></span></a>' +
           '</div>' +
         '</div>';

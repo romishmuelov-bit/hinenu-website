@@ -78,6 +78,13 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
 - Photos/videos wanted for כיף בעוטף + שמונה venture cards; videos from the 16.6 evening can be added to the past-event popup (`EV[2].gallery`).
 - Custom domain not configured.
+- `.hn-foot` is a `<footer>`, and index/more still carry the old site's `footer{ padding:230px 0 52px }`
+  rule. The shared footer resets `padding:0` and `font-weight:inherit` on its links to shake that
+  off — an element selector from the page will keep reaching it, so watch for it.
+- "השארת פרטים" everywhere opens the contact Google Form
+  (`1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA`) in a new tab; Google shows its own
+  confirmation. The on-site apply modal still posts to its own form + Formspree. If that modal should
+  feed the contact form instead, its entry IDs are needed.
 - The tracks section is laid **over** the end of the manifesto like a fresh sheet: `--cover`
   (82vh, 58vh on phones) is added as `padding-bottom` on `.letter-track` — which keeps the sticky
   letter pinned through it — and pulled straight back off with `margin-top:calc(-1 * var(--cover))`
