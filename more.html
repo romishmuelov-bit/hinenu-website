@@ -1005,18 +1005,16 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   /* a rail that drifts on its own and can be dragged, swiped or arrow-keyed */
   .vrail{ position:relative; }
   /* the cards run past both edges into the dark, so it reads as a rail and not a row.
-     the rail is a ring with no ends, so the fades are always on - and wide enough
-     that a card cut by the rim dissolves instead of showing as a bright sliver */
-  .vrail::before, .vrail::after{
-    content:''; position:absolute; top:0; bottom:26px; width:120px; z-index:3; pointer-events:none;
-  }
-  .vrail::before{ inset-inline-start:0; background:linear-gradient(to right, var(--bg) 18%, transparent); }
-  .vrail::after{ inset-inline-end:0; background:linear-gradient(to left, var(--bg) 18%, transparent); }
-  html[dir="rtl"] .vrail::before{ background:linear-gradient(to left, var(--bg) 18%, transparent); }
-  html[dir="rtl"] .vrail::after{ background:linear-gradient(to right, var(--bg) 18%, transparent); }
+     the rail is a ring with no ends, so the edges always dissolve: the scroller is
+     masked, so a card reaching the rim fades to nothing - a photo with a white
+     ground or the blue "you" card cannot leave a bright slab at the edge the way
+     a painted-over gradient let them */
+  .vrail{ --vfade:190px; }
   .vflow{
     display:flex; gap:22px; align-items:stretch;
     overflow-x:auto; overflow-y:hidden;
+    -webkit-mask-image:linear-gradient(to right, transparent, #000 var(--vfade), #000 calc(100% - var(--vfade)), transparent);
+            mask-image:linear-gradient(to right, transparent, #000 var(--vfade), #000 calc(100% - var(--vfade)), transparent);
     /* no scroll-snap here: snapping keeps yanking the slow drift back to a card */
     padding:6px 2px 20px; margin:0 -2px;
     scrollbar-width:none; -ms-overflow-style:none;
@@ -1026,14 +1024,16 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   .vflow.dragging .vcard{ transition:none; }
   .vflow::-webkit-scrollbar{ display:none; }
   .vflow:focus-visible{ outline:2px solid var(--hl-blue); outline-offset:6px; }
-  /* a real, draggable position bar - the clearest "there is more here" there is */
+  /* a real, draggable position bar - the clearest "there is more here" there is.
+     it is a ring like the rail: the knob runs off one end and comes back in at the
+     other, so there are two of them, one lap apart, and the bar clips them */
   .vbar{
     position:relative; height:4px; margin:10px auto 0; max-width:420px;
-    background:rgba(255,255,255,.13); cursor:pointer;
+    background:rgba(255,255,255,.13); cursor:pointer; overflow:hidden;
   }
   .vbar i{
     position:absolute; top:0; bottom:0; inset-inline-start:0; width:32%;
-    background:var(--hl-blue); transition:transform .12s linear;
+    background:var(--hl-blue);
   }
   .vhint{
     display:flex; align-items:center; justify-content:center; gap:9px;
@@ -1552,6 +1552,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     .ventures{ padding:76px 0 64px; }
     .ventures .wrap{ position:relative; }
     /* phones swipe - arrows are desktop-only (itamar 13.7) */
+    .vrail{ --vfade:48px; }   /* the whole rail is barely a card wide here */
     .vcard{ flex-basis:272px; }
     .vcard img{ height:240px; }
     .vcard.you .vbig{ padding:90px 22px 40px; }
@@ -1826,7 +1827,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
         <!-- the rail is a ring: the script clones this set once after itself, so
              the first "you" card comes back around and no second copy is needed -->
       </div>
-        <div class="vbar" id="vbar"><i></i></div>
+        <div class="vbar" id="vbar"><i></i><i></i></div>
       </div>
     </div>
   </section>
@@ -2441,7 +2442,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
   var vflow = document.getElementById('vflow');
   if(vflow){
     var vbar  = document.getElementById('vbar');
-    var vknob = vbar && vbar.querySelector('i');
+    var vknobs = vbar ? Array.prototype.slice.call(vbar.querySelectorAll('i')) : [];
     var vheld = false, vseen = true, vresume = null;
     var vsign = 0;     /* -1 when the engine reports RTL scroll as negative */
     var vlap  = 0;     /* width of one set of cards: the distance after which the rail repeats */
@@ -2488,12 +2489,16 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
       return reducedMotion || document.documentElement.classList.contains('hn-still');
     }
 
-    /* the bar reads one lap of the ring: it runs to the end and starts over */
+    /* the bar reads one lap of the ring. translateX percentages are of the knob's
+       own width (32% of the bar), so a full bar is 100/32 knob-widths; the second
+       knob trails one lap behind and slides in as the first runs off the end */
     function vPaint(){
-      if(!vknob || !vlap) return;
-      var t = (vFold(vRaw()) - vlap) / vlap;
-      var free = 100 - 32;                              /* knob is 32% wide */
-      vknob.style.transform = 'translateX(' + (vsign < 0 ? -1 : 1) * (t * free) + '%)';
+      if(!vknobs.length || !vlap) return;
+      var t = (vFold(vRaw()) - vlap) / vlap;            /* 0..1 through the lap */
+      var dir = vsign < 0 ? -1 : 1, bar = 100 / 32;
+      vknobs.forEach(function(k, i){
+        k.style.transform = 'translateX(' + dir * (t - i) * bar * 100 + '%)';
+      });
     }
 
     function vStep(){

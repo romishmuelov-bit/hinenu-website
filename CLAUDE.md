@@ -137,5 +137,8 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   `scrollLeft` folded into the middle lap (`vlap` = first clone's `offsetLeft` minus the first
   original's). Drift, drag, wheel and the position bar all go through `vWrite()`/the `scroll`
   handler, so nothing ever reaches the scroller's real ends and the seam is pixel-identical.
-  The edge fades (`.vrail::before/::after`, 120px) are always on — there is no start or end to
-  reveal. Don't add a second "you" card to the markup; the ring brings the first one back around.
+  The edges are a `mask-image` on `.vflow` itself (`--vfade`: 190px, 48px on phones), so a card
+  reaching the rim fades to nothing — painted-over gradients let white photos and the blue card
+  show through as a bright slab. The position bar is a ring too: two knobs one lap apart inside
+  an `overflow:hidden` bar (translateX % is of the knob's own width, hence the `100/32` factor).
+  Don't add a second "you" card to the markup; the ring brings the first one back around.
