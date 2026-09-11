@@ -1797,7 +1797,7 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
             <a class="vlink" href="https://www.linkedin.com/company/abraham-executive-academy-aea/" target="_blank" rel="noopener" data-en="LinkedIn →">לינקדאין ←</a>
           </div>
         </article>
-        <article class="vcard" tabindex="0" role="group" aria-label="כיף בעוטף" data-en-aria-label="Kef BaOtef">
+        <article class="vcard" tabindex="0" role="group" aria-label="כיף בעוטף" data-en-aria-label="Kef BaOtef" data-first>
           <img src="assets/v-otef.webp" alt="" loading="lazy">
           <div class="vbody">
             <div class="role" data-en="Founder · Kef BaOtef">מייסדת · כיף בעוטף</div>
@@ -2586,6 +2586,10 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     }
     window.addEventListener('resize', function(){ vsign = 0; vSync(); vPaint(); }, { passive:true });
     vSync();
+    /* the rail opens on the card marked data-first (Maayan - romi 11.9), flush with
+       the start edge the way the "you" card used to be */
+    var vfirst = vflow.querySelector('.vcard[data-first]');
+    if(vfirst && vlap) vWrite(Math.abs(vfirst.offsetLeft - vset[0].offsetLeft));
     vPaint();
     vStep();
   }

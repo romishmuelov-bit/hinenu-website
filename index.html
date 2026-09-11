@@ -362,8 +362,13 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     color:#fff; line-height:.95; font-size:clamp(76px,15vw,230px);
     display:flex; flex-direction:column;
   }
+  .h5-title{ --logo-w:clamp(300px,40vw,600px); }
   .h5-title .t2{ font-size:clamp(38px,6.9vw,104px); }
-  .h5-logo{ display:block; width:clamp(300px,40vw,600px); height:auto; margin:0 auto 18px; }
+  .h5-logo{ display:block; width:var(--logo-w); height:auto; margin:0 auto 18px; }
+  /* the Hebrew logo file carries its dot at the left edge, so the word הננו itself sits
+     3% of the image's width right of the image's middle. the line under it is centred
+     on the word, not the file. the English logo has no dot and needs no shift */
+  html:not([lang="en"]) .h5-title .t2{ transform:translateX(calc(var(--logo-w) * .03)); }
   .h5-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .pin-vid-wrap::after{
     content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
@@ -1360,7 +1365,8 @@ src="https://www.facebook.com/tr?id=901591649440894&ev=PageView&noscript=1"
     .hero5{ padding:96px 16px 54px; }
     .h5-title{ font-size:clamp(58px,20vw,96px); }
     .h5-title .t2{ font-size:clamp(23px,7.7vw,38px); }
-    .h5-logo{ width:min(72vw,340px); margin-bottom:12px; }
+    .h5-title{ --logo-w:min(72vw,340px); }
+    .h5-logo{ margin-bottom:12px; }
     .h5-jump{ margin-top:22px; gap:10px; }
     .h5-jump-btn{ font-size:13px; padding:11px 20px; }
     .h5-jump-a{ background:rgba(66,87,230,.92); border-color:var(--blue); }
