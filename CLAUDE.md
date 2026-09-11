@@ -123,6 +123,12 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - The header bars carry only הנני + / צרו קשר / נגישות / EN — the ניווט + fan was removed from
   every page, and so was the matching ניווט section inside the ☰ drawer. What is left on all four
   pages is הנני (the five actions) and עוד (צרו קשר / נגישות / view switch / EN).
+- Mitzpe page: the scroll film's last frame (the lookout with the flag) is held under a closing
+  beat carrying "המרכז לחלוציות במצפה גבולות" + its lede — Romi asked for that sentence over that
+  picture (11.9.2026). `HOLD_TAIL` (0.31) in the JS says how far the track runs past the film;
+  `.scroll-track{height:550svh}` = 420 of film + 130 of hold, and beat `data-in/out` stay in film
+  terms (>1.0 = on the held frame). Change one, change the others. `.flyers` no longer repeats
+  the title; its kicker "מסע החלוציות" is the section's `h2`.
 - Accessibility officer of record: רומי שמואלוב (romishmuelov@gmail.com) — named in the toolbar,
   in the statement modal and on `mitzpe-gvolot/accessibility.html`.
 - The lectures page ends on the hora: the light "מתי תרצו שנגיע?" band (with the hill illustration
