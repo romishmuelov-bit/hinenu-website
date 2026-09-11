@@ -213,8 +213,14 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   box-shadow:-24px 0 60px rgba(8,24,43,.55); overflow-y:auto;
 }
 .drawer.open{ transform:translateX(0); }
+/* close on one side, language on the other - the language switch is the one
+   control people hunt for, so it sits at the top rather than under the list */
+.drawer-top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin-bottom:18px;
+}
 .drawer-close{
-  align-self:flex-end; width:36px; height:36px; margin-bottom:18px;
+  align-self:center; width:36px; height:36px; flex:none;
   background:transparent; border:1px solid rgba(250,247,187,.3); border-radius:0;
   color:var(--pale); font-size:16px; cursor:pointer;
 }
@@ -229,7 +235,7 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 }
 .drawer-section-lbl:first-of-type{ margin-top:4px; }
 .drawer .drawer-lang{
-  margin-top:16px; align-self:flex-start;
+  margin:0; align-self:center; flex:none;
   font-family:var(--sans); font-weight:700; font-size:13px; color:var(--pale);
   background:transparent; border:1px solid rgba(250,247,187,.35); border-radius:100px;
   padding:9px 18px; cursor:pointer;
@@ -321,7 +327,9 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 }
 .flyers-in{max-width:1120px; margin:0 auto; position:relative}
 .flyers h2{margin:0 0 10px; font-family:var(--display); font-weight:400; font-size:clamp(38px,6.2vw,68px); line-height:1.05}
-.flyers .lede{margin:0 0 52px; font-size:17px; color:#3D5570; max-width:46ch}
+.flyers .lede{margin:0 0 40px; font-size:17px; color:#3D5570; max-width:46ch}
+.flyers-kicker{margin:0 0 18px; font-family:var(--sans); font-size:12px; font-weight:800;
+  letter-spacing:.18em; text-transform:uppercase; color:#3D5570}
 .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:30px; max-width:960px}
 .swipe-hint{ display:none; }
 .card{
@@ -420,7 +428,6 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
 #lomdim .plan:hover{ border-color:rgba(142,34,48,.4); }
 #lomdim .plan.featured{ border-color:var(--amber); border-width:2px; }
 #lomdim .plan .desc{ color:#3E4B5C; }
-#lomdim .plan .tag{ color:#8A6208; }
 #lomdim .plan .pick{ border-color:rgba(19,52,88,.3); color:var(--navy); }
 #lomdim .plan .pick:hover{ background:rgba(19,52,88,.08); }
 #lomdim .aud div{ border-color:rgba(19,52,88,.18); background:rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(60,44,20,.12); }
@@ -483,7 +490,6 @@ html[lang="en"] .drawer-lang{ direction:ltr; text-align:left; }
   color:var(--navy); background:var(--amber); border-radius:100px; padding:5px 13px; margin:0 0 14px;
 }
 .deep .plan .plan-h{ font-family:var(--display); font-weight:400; font-size:clamp(22px,2.6vw,28px); line-height:1.05; margin:0 0 6px; padding:0; border:0; }
-.deep .plan .tag{ color:var(--amber); font-size:14.5px; font-weight:500; margin:0 0 12px; }
 .deep .plan .desc{ font-size:15px; line-height:1.7; margin:0 0 18px; color:rgba(250,247,187,.88); }
 .deep .plan .pick{
   margin:auto 0 0; display:block; text-align:center; text-decoration:none;
@@ -708,15 +714,15 @@ html[lang="en"] .cmodal-card{ text-align:left; }
       <div class="fan-menu" hidden>
         <a href="../more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
         <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
-        <a href="#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
-        <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
-        <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+        <a href="#overim" data-en="Pioneer communities">מחבורות לגרעינים</a>
+        <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
+        <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="Donations">תרומות</a>
       </div>
     </div>
     <button class="fan-btn" type="button" data-contact data-en="Contact us">צרו קשר</button>
   </div>
   <a class="hdr-logo" href="../index.html" aria-label="הננו - לעמוד הראשי" data-en-aria-label="Hinenu - to the main page">
-    <img src="assets/logo-hinenu.webp" alt="הננו" data-en-alt="Hinenu" width="1500" height="530">
+    <img src="assets/logo-hinenu.webp" alt="הננו" data-en-src="../assets/logo-white-en.png" data-en-alt="Hinenu" width="1500" height="530">
   </a>
   <div class="hdr-right">
     <button class="audio-btn" id="audioBtn" type="button" aria-pressed="false" hidden data-en="Audio">אודיו</button>
@@ -728,17 +734,19 @@ html[lang="en"] .cmodal-card{ text-align:left; }
 
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <nav class="drawer" id="drawer" aria-label="תפריט נייד" data-en-aria-label="Mobile menu">
-  <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
+  <div class="drawer-top">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="סגירה" data-en-aria-label="Close">✕</button>
+    <button class="drawer-lang" id="drawerLangToggle" type="button" aria-label="Switch to English">EN</button>
+  </div>
   <p class="drawer-section-lbl" data-en="Hineni">הנני</p>
   <a href="../more.html#event" data-en="Entrepreneurship as a way of life">יזמות כדרך חיים</a>
   <a href="index.html" data-en="The Pioneering Center">המרכז לחלוציות</a>
-  <a href="#overim" data-en="I want to relocate south or north">אני רוצה לעבור לדרום/הצפון</a>
-  <a href="../harzaot.html" data-en="I want a lecture at my program">אני רוצה הרצאה אצלי במסגרת</a>
-  <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="I want to donate">אני רוצה לתרום לעשייה</a>
+  <a href="#overim" data-en="Pioneer communities">מחבורות לגרעינים</a>
+  <a href="../harzaot.html" data-en="Lectures">הרצאות</a>
+  <a href="https://pages.greeninvoice.co.il/payments/links/8f715aed-312f-4970-b994-53e3fd091a04" target="_blank" rel="noopener" data-en="Donations">תרומות</a>
   <p class="drawer-section-lbl" data-en="More">עוד</p>
   <button type="button" class="drawer-navbtn" data-contact data-en="Contact us">צרו קשר</button>
   <a href="accessibility.html" data-en="Accessibility">נגישות</a>
-  <button class="drawer-lang" id="drawerLangToggle" type="button">EN</button>
 </nav>
 
 <div class="cmodal" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="cmodalTitle">
@@ -750,9 +758,9 @@ html[lang="en"] .cmodal-card{ text-align:left; }
       <a href="mailto:roee@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Roee Azizi">רועי עזיזי</b><i data-en="Founder &amp; CEO · roee@hinenu.org.il">מייסד ומנכ״ל · roee@hinenu.org.il</i></span></a>
       <a href="mailto:shaked@hinenu.org.il"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5h19v13h-19z"/><path d="M2.5 6l9.5 7 9.5-7"/></svg><span class="cr-t"><b data-en="Shaked Wolk">שקד וולק</b><i data-en="Director, the Pioneering Center · shaked@hinenu.org.il">מנהלת המרכז לחלוציות · shaked@hinenu.org.il</i></span></a>
       <a href="https://www.instagram.com/hinenu_israel" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>
-      <a href="https://www.facebook.com/p/%D7%94%D7%A0%D7%A0%D7%95%D6%BC-61565788381476/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><path d="M15.4 8.2h-1.6c-.9 0-1.5.6-1.5 1.5V11h3l-.4 2.6h-2.6V21"/><path d="M10 13.6h2.3"/></svg><span class="cr-t"><b data-en="Facebook">פייסבוק</b><i>הננוּ</i></span></a>
+      <a href="https://www.facebook.com/p/%D7%94%D7%A0%D7%A0%D7%95%D6%BC-61565788381476/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.9h2.78l-.44 2.91h-2.34v7.03C18.34 21.24 22 17.08 22 12.06z"/></svg><span class="cr-t"><b data-en="Facebook">פייסבוק</b><i>הננוּ</i></span></a>
       <a href="https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg><span class="cr-t"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b><i data-en="Updates on evenings and groups">עדכונים על ערבים וקבוצות</i></span></a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA/viewform" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b><i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>
+      <a href="../index.html#apply"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg><span class="cr-t"><b data-en="Leave your details">השארת פרטים</b><i data-en="We get back within one business day">נחזור אליכם תוך יום עבודה</i></span></a>
     </div>
   </div>
 </div>
@@ -773,10 +781,10 @@ html[lang="en"] .cmodal-card{ text-align:left; }
       <!-- data-in / data-out are progress across BOTH clips, 0..1.
            The join sits at 0.542 and falls inside a gap between beats.
            A negative data-in means the beat is already up at the very top. -->
-      <div class="beat" data-in="-0.08" data-out="0.20"><p data-en="Once, there was only sand here.">פעם היה פה רק חול.</p></div>
-      <div class="beat" data-in="0.25"  data-out="0.52"><p data-en-html="In <span class='n'>1943</span> pioneers arrived - <span class='n'>12</span> young people, <span class='n'>19</span> years old - and founded Mitzpe Gvulot, which changed the Negev.">ב־<span class="n">1943</span> הגיעו חלוצים וחלוצות, <span class="n">12</span> צעירים וצעירות בני <span class="n">19</span>, והקימו את מצפה גבולות - ששינה את הנגב.</p></div>
-      <div class="beat" data-in="0.58"  data-out="0.80"><p data-en="And now, after October 7th, the Negev is full of challenges - and thirsty for pioneers again.">ועכשיו, אחרי ה-7/10, הנגב מלא באתגרים - ושוב צמא לחלוצים.</p></div>
-      <div class="beat" data-in="0.84"  data-out="1.08"><p data-en="And what's left for us to say is: Hineni.">ולנו נותר להגיד: הננו.</p></div>
+      <div class="beat" data-in="-0.08" data-out="0.20"><p data-en="Once, there was almost nothing here.">פעם היה פה רק חול.</p></div>
+      <div class="beat" data-in="0.25"  data-out="0.52"><p data-en-html="In <span class='n'>1943</span>, twelve young pioneers came to this desert. They were barely <span class='n'>19</span>. They built Mitzpe Gvulot - and helped open the Negev to a new future.">ב־<span class="n">1943</span> הגיעו לכאן <span class="n">12</span> צעירות וצעירים בני <span class="n">19</span>, והקימו את מצפה גבולות - ששינה את הנגב.</p></div>
+      <div class="beat" data-in="0.58"  data-out="0.80"><p data-en="Today, the Negev needs pioneers again. After October 7, the challenges are bigger. The opportunity is bigger, too.">ועכשיו, אחרי ה-7/10, הנגב מלא באתגרים - ושוב צמא לחלוצים.</p></div>
+      <div class="beat" data-in="0.84"  data-out="1.08"><p data-en="And all that's left for us to say is: HINENU.">ולנו נותר להגיד: הננו.</p></div>
     </div>
   </div>
 </section>
@@ -784,8 +792,10 @@ html[lang="en"] .cmodal-card{ text-align:left; }
 <!-- ══════ THE THREE FLYERS ══════ -->
 <section class="flyers" id="tracks">
   <div class="flyers-in">
-    <h2 data-en="Two ways to say Hineni">שתי דרכים להגיד הננו</h2>
+    <h2 data-en="The Pioneering Center at Mitzpe Gvulot">המרכז לחלוציות במצפה גבולות</h2>
+    <p class="lede" data-en="The Pioneering Center at Mitzpe Gvulot connects young Israelis with the Negev - introducing them to pioneering, local communities, and opportunities to live and lead in the region.">המרכז לחלוציות במצפה גבולות מחבר צעירות וצעירים מישראל אל הנגב - ומכיר להם את החלוציות, את הקהילות המקומיות ואת ההזדמנויות לחיות ולהוביל באזור.</p>
 
+    <p class="flyers-kicker" data-en="The Pioneering Journey">מסע החלוציות</p>
     <div class="cards">
       <a class="card gold" href="#lomdim">
         <div class="poster">
@@ -819,11 +829,11 @@ html[lang="en"] .cmodal-card{ text-align:left; }
   <div class="d-hd" style="background-image:url('photos/night-crowd.webp')">
     <div class="deep-in">
       <p class="kicker" data-en="Groups, organisations and schools">קבוצות, ארגונים ובתי ספר</p>
-      <h2 data-en="Dream - The Pioneering Center at Mitzpe Gvulot">לחלום - המרכז לחלוציות במצפה גבולות</h2>
+      <h2 data-en="Dreaming">לחלום</h2>
     </div>
   </div>
   <div class="deep-in">
-    <p class="lead" data-en="The Center hosts groups from Israel and abroad for an experiential encounter with the idea of pioneering - tours, content, workshops and meetings at Mitzpe Gvulot, the pioneer of Negev settlement - connecting them to action facing national missions on the Israeli frontier.">המרכז מארח קבוצות מישראל ומהעולם למפגש חווייתי עם רעיון החלוציות - סיורים, תוכן, סדנאות ומפגשים במצפה גבולות, חלוץ ההתיישבות בנגב, ומחבר אותם למעשה מול משימות לאומיות בספר הישראלי.</p>
+    <p class="lead" data-en="The Center hosts groups from Israel and abroad for an immersive experience of pioneering - combining tours, talks, workshops, and encounters at historic Mitzpe Gvulot. Participants explore what pioneering means today and connect it to action on Israel's frontier, taking part in the national missions shaping its future.">המרכז מארח קבוצות מישראל ומהעולם למפגש חווייתי עם רעיון החלוציות - סיורים, תוכן וסדנאות במצפה גבולות, חלוץ ההתיישבות בנגב.</p>
 
     <h3 data-en="The programmes">התכניות</h3>
     <div class="plans">
@@ -832,7 +842,6 @@ html[lang="en"] .cmodal-card{ text-align:left; }
         <div class="p-in">
           <p class="len" data-en="60-90 minutes">60-90 דקות</p>
           <p class="plan-h" data-en="Inspiration talks">הרצאות השראה</p>
-          <p class="tag" data-en="What does pioneering mean today?">מהי חלוציות כיום?</p>
           <p class="desc" data-en="Talks by leaders from the Negev and across the country who live a pioneering way of life of taking responsibility in times of crisis.">הרצאות של מנהיגות ומנהיגים מהנגב ומכל הארץ שחיים דרך חיים חלוצית של לקיחת אחריות בזמן משבר.</p>
           <a class="pick" href="#booking" data-en="Book a talk">להזמין הרצאה</a>
         </div>
@@ -842,7 +851,6 @@ html[lang="en"] .cmodal-card{ text-align:left; }
         <div class="p-in">
           <p class="len" data-en="Half day / full day">חצי יום / יום מלא</p>
           <p class="plan-h" data-en="The pioneering enterprise, then and now">המפעל החלוצי אז והיום</p>
-          <p class="tag" data-en="A mission that builds society">משימה בונה חברה</p>
           <p class="desc" data-en="A day that turns a historical story into a discussion of our responsibility today - through the story of the pioneers who founded Mitzpe Gvulot.">יום שהופך סיפור היסטורי לדיון על האחריות שלנו היום - דרך סיפורם של החלוצים והחלוצות שהקימו את מצפה גבולות.</p>
           <a class="pick" href="#booking" data-en="Book a day">להזמין יום</a>
         </div>
@@ -851,31 +859,30 @@ html[lang="en"] .cmodal-card{ text-align:left; }
         <img src="photos/campfire.webp" alt="מפגש לילה סביב המדורה" data-en-alt="A night gathering around the campfire" width="816" height="615" loading="lazy">
         <div class="p-in">
           <p class="len" data-en="2-4 days">2-4 ימים</p>
-          <p class="plan-h" data-en="Pioneering seminar">סמינר חלוציות</p>
-          <p class="tag" data-en="What role will we choose to take">איזה תפקיד נבחר לקחת</p>
+          <p class="plan-h" data-en="Pioneering seminars">סמינרי חלוציות</p>
           <p class="desc" data-en="A deep journey from the story that shaped the Negev to the responsibility of shaping what comes after us - tours, a night journey, meetings with local leaders and group work.">מסע עומק מהסיפור שעיצב את הנגב אל האחריות לעצב את מה שיבוא אחרינו - סיורים, מסע לילי, מפגשים עם מנהיגים מקומיים ועבודה קבוצתית.</p>
           <a class="pick" href="#booking" data-en="Book a seminar">להזמין סמינר</a>
         </div>
       </article>
     </div>
 
-    <h3 data-en="Who this is for">למי זה מתאים</h3>
+    <h3 data-en="Who is it for?">למי זה מתאים?</h3>
     <div class="aud">
       <div>
-        <h4 data-en="Security organisations">ארגוני ביטחון</h4>
-        <p data-en="For people in the security establishment whose sense of 'why' can get lost in operational routine.">לאנשי מערכת הביטחון שה״למה״ שלהם עלול ללכת לאיבוד בשגרה המבצעית.</p>
+        <h4 data-en="Security Organizations">ארגוני ביטחון</h4>
+        <p data-en="For people in Israel's security establishment whose sense of purpose can get lost in the demands of operational routine.">לאנשי מערכת הביטחון שה״למה״ שלהם עלול ללכת לאיבוד בשגרה המבצעית.</p>
       </div>
       <div>
-        <h4 data-en="Groups and communities">קבוצות וקהילות</h4>
-        <p data-en="For those who want to step out of routine, feel the western Negev and meet the pioneering story.">למי שרוצה לצאת מהשגרה, להרגיש את הנגב המערבי ולפגוש את סיפור החלוציות.</p>
+        <h4 data-en="Groups &amp; Communities">קבוצות וקהילות</h4>
+        <p data-en="For groups looking to step out of routine, experience the Western Negev, and encounter the story and spirit of pioneering.">למי שרוצה לצאת מהשגרה, להרגיש את הנגב המערבי ולפגוש את סיפור החלוציות.</p>
       </div>
       <div>
-        <h4 data-en="Teams and organisations">צוותים וארגונים</h4>
-        <p data-en="A gathering that connects ideas and values to action, and brings back tools for turning vision into reality.">מפגש שמחבר רעיונות וערכים לעשייה, ומחזיר כלים להפוך חזון למציאות.</p>
+        <h4 data-en="Teams &amp; Organizations">צוותים וארגונים</h4>
+        <p data-en="For teams looking to connect values and ideas to action - and return with practical tools for turning vision into reality.">מפגש שמחבר רעיונות וערכים לעשייה, ומחזיר כלים להפוך חזון למציאות.</p>
       </div>
       <div>
-        <h4 data-en="Academies and schools">מכינות ובתי ספר</h4>
-        <p data-en="Cohorts already grappling with questions of identity and responsibility - here they get space and time.">שכבות שעסוקות ממילא בשאלות של זהות ואחריות - כאן הן מקבלות מקום וזמן.</p>
+        <h4 data-en="Academies &amp; Schools">מכינות ובתי ספר</h4>
+        <p data-en="For cohorts already grappling with questions of identity, responsibility, and their role in Israel's future - giving them the space and time to explore them together.">שכבות שעסוקות ממילא בשאלות של זהות ואחריות - כאן הן מקבלות מקום וזמן.</p>
       </div>
     </div>
 
@@ -893,21 +900,25 @@ html[lang="en"] .cmodal-card{ text-align:left; }
   <div class="d-hd" style="background-image:url('photos/pioneers-night.jpg')">
     <div class="deep-in">
       <p class="kicker" data-en="Relocation groups · ages 21-35">חבורות התיישבות · גילאי 21-35</p>
-      <h2 data-en="Making it real - from groups to settlement cores">מגשימים - מֵחֲבוּרוֹת לגרעינים</h2>
+      <h2 data-en="Making it real">מגשימים - מֵחֲבוּרוֹת לגרעינים</h2>
     </div>
   </div>
   <div class="deep-in">
-    <p class="lead" data-en="Seminars training groups of young people - couples and families - as settlement cores who integrate into and live in Negev communities.">סמינרים להכשרת חבורות של צעירים וצעירות - זוגות ומשפחות - כגרעיני התיישבות שמשתלבים וחיים ביישובי הנגב.</p>
+    <p class="lead" data-en-html="<b>For groups ready to move south.</b> We help groups of young people - couples, families, and friends - move to Negev communities, build a life together, and take on meaningful roles in the region.">סמינרים להכשרת חבורות של צעירים וצעירות - זוגות ומשפחות - כגרעיני התיישבות שמשתלבים וחיים ביישובי הנגב.</p>
 
     <h3 data-en="How it works">איך זה עובד</h3>
-    <p class="lead" data-en="A group of friends from the same framework who move to live together in the Gaza-border region or the Galilee. We support you in building the core group and finding the place that fits.">קבוצה של חברים וחברות מאותה מסגרת שעוברים לגור ביחד בעוטף או בגליל. אנחנו מלווים בבניית הגרעין ובמציאת המקום המתאים.</p>
+    <p class="lead" data-en="Bring a group of friends from your existing community, program, or network. We help you build the group, find the community that fits, prepare for the move, and connect members to jobs and opportunities.">קבוצה של חברים וחברות מאותה מסגרת שעוברים לגור ביחד בעוטף או בגליל. אנחנו מלווים בבניית הגרעין ובמציאת המקום המתאים.</p>
+
+    <h3 data-en="What we offer">מה אנחנו מציעים</h3>
     <ul>
       <li data-en="Pioneering seminars for groups">סמינרים לחלוציות לחבורות</li>
       <li data-en="Employment seminars and placement in critical jobs">סמינרי תעסוקה וחיבור למשרות קריטיות</li>
+      <li data-en="Support in finding the right community">ליווי במציאת הקהילה המתאימה</li>
+      <li data-en="Guidance through the relocation process">ליווי לאורך תהליך המעבר</li>
     </ul>
-    <p class="quote" data-en="You bring the group, we help kick-start the beginning.">את/אתה מביא/ה את החבורה, אנחנו עוזרים להתניע את ההתחלה.</p>
+    <p class="quote" data-en="You bring the group. We help kick-start the journey.">את/אתה מביא/ה את החבורה, אנחנו עוזרים להתניע את ההתחלה.</p>
 
-    <h3 data-en="What we do">הפעילות שלנו</h3>
+    <h3 data-en="HINENU in Action">הפעילות שלנו</h3>
     <div class="gal">
       <figure>
         <img src="photos/community-group.webp" alt="קהילת הננו מתכנסת מול מגדל המצפה" data-en-alt="The Hinenu community gathers before the lookout tower" width="1400" height="933" loading="lazy">
@@ -939,17 +950,17 @@ html[lang="en"] .cmodal-card{ text-align:left; }
       <div class="who">
         <img src="photos/team-shaked.webp" alt="שקד וולק" data-en-alt="Shaked Wolk" width="420" height="420" loading="lazy">
         <h4 data-en="Shaked Wolk">שקד וולק</h4>
-        <p data-en="Director of the Pioneering Center, a Gaza-border resident.">מנהלת המרכז לחלוציות, תושבת העוטף.</p>
+        <p data-en="Director of the Pioneering Center, born and raised in Netiv Ha'asara">מנהלת המרכז לחלוציות, ילידת נתיב העשרה.</p>
       </div>
       <div class="who">
         <img src="../assets/roee-azizi.webp" alt="רועי עזיזי" data-en-alt="Roee Azizi" width="600" height="600" loading="lazy">
         <h4 data-en="Roee Azizi">רועי עזיזי</h4>
-        <p data-en="Founder and CEO of the Hinenu movement.">מייסד ומנכ״ל תנועת הננוּ.</p>
+        <p data-en="National Entrepreneur, Founder and CEO, HINENU">מייסד ומנכ״ל תנועת הננוּ.</p>
       </div>
       <div class="who">
-        <img src="photos/team-jo.webp" alt="ג׳ו קולבה" data-en-alt="Jo Kolber" width="420" height="420" loading="lazy">
-        <h4 data-en="Jo Kolber">ג׳ו קולבה</h4>
-        <p data-en="The beating heart and working hands at Mitzpe Gvulot for 14 years.">הלב הפועם והידיים העובדות במצפה גבולות כבר 14 שנה.</p>
+        <img src="photos/team-jo.webp" alt="ג׳ו קולבה" data-en-alt="Joe Kolbe" width="420" height="420" loading="lazy">
+        <h4 data-en="Joe Kolbe">ג׳ו קולבה</h4>
+        <p data-en="The beating heart and working hands at Mitzpe Gvulot since 2012">הלב הפועם והידיים העובדות במצפה גבולות מאז 2012.</p>
       </div>
     </div>
   </div>
@@ -1372,7 +1383,7 @@ html[lang="en"] .cmodal-card{ text-align:left; }
   btn.addEventListener('click', open);
   if(closeBtn) closeBtn.addEventListener('click', close);
   if(backdrop) backdrop.addEventListener('click', close);
-  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+  drawer.querySelectorAll('a, .drawer-lang').forEach(function(el){ el.addEventListener('click', close); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
   window.__closeDrawer = close;
 })();
@@ -1508,7 +1519,8 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
 (function(){
   "use strict";
   var LANG = 'he';
-  try{ LANG = localStorage.getItem('mg-lang') || 'he'; }catch(e){}
+  /* one key for every page - the language must survive moving between them */
+  try{ LANG = localStorage.getItem('hinenu-lang') || 'he'; }catch(e){}
   function applyLang(lang){
     LANG = lang === 'en' ? 'en' : 'he';
     document.documentElement.setAttribute('lang', LANG);
@@ -1529,7 +1541,7 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
         el.innerHTML = el.getAttribute('data-he-html');
       }
     });
-    ['alt','placeholder','aria-label','title'].forEach(function(attr){
+    ['alt','placeholder','aria-label','title','src'].forEach(function(attr){
       document.querySelectorAll('[data-en-' + attr + ']').forEach(function(el){
         var heKey = 'data-he-' + attr;
         if(LANG === 'en'){
@@ -1543,7 +1555,7 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
     document.querySelectorAll('#langToggle, #drawerLangToggle').forEach(function(btn){
       btn.textContent = LANG === 'en' ? 'עב' : 'EN';
     });
-    try{ localStorage.setItem('mg-lang', LANG); }catch(e){}
+    try{ localStorage.setItem('hinenu-lang', LANG); }catch(e){}
   }
   window.__mgApplyLang = applyLang;
   document.querySelectorAll('#langToggle, #drawerLangToggle').forEach(function(toggleBtn){

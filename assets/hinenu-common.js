@@ -24,8 +24,6 @@
   };
   var wantLecture = opt('lecture', 'yes') !== 'no';
   var applyHref   = opt('apply', '');           /* '' = use the page's own apply modal */
-  /* the contact form itself - Google shows its own confirmation on submit */
-  var CONTACT_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA/viewform';
 
   var WA   = 'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t';
   var IG   = 'https://www.instagram.com/hinenu_israel';
@@ -42,8 +40,9 @@
     wa:   '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M9 8.6c.3-.1.6 0 .8.3l.8 1.4c.1.3.1.6-.1.8l-.5.6c-.1.2-.2.4 0 .7.4.7 1.2 1.5 1.9 1.9.3.2.5.1.7-.1l.6-.5c.2-.2.5-.2.8-.1l1.4.8c.3.2.4.5.3.8-.2.7-.9 1.3-1.7 1.4-2.6.2-6.2-3.4-6-6 .1-.8.6-1.5 1.3-1.7z" fill="currentColor" stroke="none"/></svg>',
     form: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2.8h14v18.4H5z"/><path d="M8.4 8h7.2M8.4 12h7.2M8.4 16h4.4"/></svg>',
     up:   '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20V5"/><path d="M5.4 11.4 12 4.7l6.6 6.7"/></svg>',
-    mic:  '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.8a2.9 2.9 0 0 1 2.9 2.9v6a2.9 2.9 0 0 1-5.8 0v-6A2.9 2.9 0 0 1 12 2.8z"/><path d="M5.6 11.3a6.4 6.4 0 0 0 12.8 0"/><path d="M12 17.7V21M8.6 21h6.8"/></svg>',
-    fb:   '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4.6"/><path d="M15.4 8.2h-1.6c-.9 0-1.5.6-1.5 1.5V11h3l-.4 2.6h-2.6V21"/><path d="M10 13.6h2.3"/></svg>',
+    /* a megaphone, not a microphone - the button books a talk, it does not record one */
+    mic:  '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 9.4h3.4L17 4.6v14.8L7.4 14.6H4a1.5 1.5 0 0 1-1.5-1.5v-2.2A1.5 1.5 0 0 1 4 9.4z"/><path d="M7.4 14.6v3.1a2.1 2.1 0 0 0 2.1 2.1h.5a2.1 2.1 0 0 0 2.1-2.1v-1.4"/><path d="M20 9.1a4.2 4.2 0 0 1 0 5.8"/></svg>',
+    fb:   '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.9h2.78l-.44 2.91h-2.34v7.03C18.34 21.24 22 17.08 22 12.06z"/></svg>',
     a11y: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="4.3" r="1.9" fill="currentColor" stroke="none"/><path d="M4.4 8.2h15.2"/><path d="M12 8.6v5.2"/><path d="m12 13.8-3 7.1M12 13.8l3 7.1"/></svg>'
   };
 
@@ -153,6 +152,14 @@
 '.hn-cue i{display:block;width:1px;height:38px;background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,.9));position:relative;animation:hnCue 2.1s ease-in-out infinite}',
 '.hn-cue i::after{content:"";position:absolute;left:50%;bottom:0;width:10px;height:10px;border-left:1.4px solid #fff;border-bottom:1.4px solid #fff;transform:translate(-50%,4px) rotate(-45deg)}',
 '@keyframes hnCue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(8px);opacity:1}}',
+/* every row here already carries a drawn icon - the pages' channel masks must not
+   put a second one in front of it */
+'.hn-row::before{content:none !important}',
+
+/* the note that says a mail address was copied */
+'.hn-copied{position:fixed;left:50%;bottom:96px;z-index:90;max-width:calc(100vw - 32px);background:#14152A;color:#F2F0E9;border:1px solid rgba(242,240,233,.24);box-shadow:0 14px 40px rgba(0,0,0,.6);padding:13px 20px;font-family:"Heebo","Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:14.5px;line-height:1.45;text-align:center;opacity:0;pointer-events:none;transform:translateX(-50%) translateY(14px);transition:opacity .25s ease,transform .25s ease}',
+'.hn-copied.on{opacity:1;transform:translateX(-50%) translateY(0)}',
+'.hn-copied b{display:block;font-weight:800;direction:ltr;unicode-bidi:isolate;margin-top:3px}',
 /* the lectures page parks its own bar in the same spot */
 '.dock.on ~ .hn-cue{opacity:0}',
 /* the floating CTAs get out of the way once the footer is on screen */
@@ -265,7 +272,7 @@
             '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
               '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
               '<i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>' +
-            '<a class="hn-row" href="' + CONTACT_FORM + '" target="_blank" rel="noopener">' + ICON.form +
+            '<a class="hn-row" ' + applyAttr + '>' + ICON.form +
               '<span class="hn-row-txt"><b data-en="Leave your details">השארת פרטים</b></span></a>' +
           '</div>' +
         '</div>';
@@ -426,6 +433,77 @@
     document.body.style.overflow = 'hidden';
     okDlg.querySelector('.hn-ok-close').focus();
   };
+
+  /* ---------- mail links: never let the click go nowhere ----------
+     A mailto: link only does something when the machine has an application
+     registered for the protocol. Plenty of desktop visitors have none, and on
+     those the link is silently inert - no mail window, no error, nothing. The
+     href stays (a phone, or anyone with a mail client, still gets the compose
+     window), but every click also copies the address and says so, so the button
+     always does something visible. */
+  (function(){
+    var note = null, hideTimer = null;
+
+    function say(label, addr){
+      if(!note){
+        note = document.createElement('div');
+        note.className = 'hn-copied';
+        note.setAttribute('role', 'status');
+        note.setAttribute('aria-live', 'polite');
+        document.body.appendChild(note);
+      }
+      /* built here rather than marked up with data-en: applyLang() rewrites the
+         text of every [data-en] element and would eat the address with it */
+      note.textContent = label;
+      note.appendChild(document.createElement('b')).textContent = addr;
+      note.classList.add('on');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function(){ note.classList.remove('on'); }, 3600);
+    }
+
+    /* the async API is refused often enough - an unfocused document is enough to
+       get a NotAllowedError - that the old selection trick stays as a backstop */
+    function legacyCopy(text){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      try{ ta.setSelectionRange(0, text.length); }catch(e){}
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    function copy(text){
+      var fallback = function(){
+        return legacyCopy(text) ? Promise.resolve() : Promise.reject();
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext){
+        return navigator.clipboard.writeText(text).then(null, fallback);
+      }
+      return fallback();
+    }
+
+    document.addEventListener('click', function(e){
+      /* leave open-in-new-tab and middle clicks alone */
+      if(e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target && e.target.closest && e.target.closest('a[href^="mailto:"]');
+      if(!a) return;
+      var addr = a.getAttribute('href').slice(7).split('?')[0];
+      try{ addr = decodeURIComponent(addr); }catch(err){}
+      if(!addr) return;
+      var en = document.documentElement.getAttribute('lang') === 'en';
+      copy(addr).then(function(){
+        say(en ? 'Address copied' : 'הכתובת הועתקה', addr);
+      }, function(){
+        /* clipboard refused - at least put the address on screen to be read off */
+        say(en ? 'Write to us at' : 'כתבו לנו אל', addr);
+      });
+    });
+  })();
 
   /* ---------- idle scroll cue: shows itself once the reader has gone still ---------- */
   (function(){

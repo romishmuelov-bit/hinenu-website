@@ -100,18 +100,42 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - `.hn-foot` is a `<footer>`, and index/more still carry the old site's `footer{ padding:230px 0 52px }`
   rule. The shared footer resets `padding:0` and `font-weight:inherit` on its links to shake that
   off — an element selector from the page will keep reaching it, so watch for it.
-- "השארת פרטים" everywhere opens the contact Google Form
-  (`1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA`) in a new tab; Google shows its own
-  confirmation. The on-site apply modal still posts to its own form + Formspree. If that modal should
-  feed the contact form instead, its entry IDs are needed.
+- "השארת פרטים" (contact dialog row, on every page) opens the on-site apply modal
+  ("רוצים להתחיל? השאירו פרטים"), which posts into the contact Google Form
+  (`1FAIpQLScwekWYxeq32W6NTyIqAtag3YfI4pgbmclfrPuLaL5WLtj-pA`) + Formspree — see Forms above.
+  index/more: `href="#" data-apply`; harzaot (common.js fallback dialog, via `data-apply` on the
+  script tag) and mitzpe: `index.html#apply`, which opens the modal on arrival. Romi asked for
+  this on 11.9.2026 — it used to open the Google Form itself in a new tab.
 - The tracks section is laid **over** the end of the manifesto like a fresh sheet: `--cover`
   (82vh, 58vh on phones) is added as `padding-bottom` on `.letter-track` — which keeps the sticky
   letter pinned through it — and pulled straight back off with `margin-top:calc(-1 * var(--cover))`
   on `.tracks`, so the page is no taller than before. `updateLetter()` subtracts that same padding
-  from its scrollable range, so the handwriting finishes just before the sheet arrives. Change one
-  of the three and the other two have to follow.
+  from its scrollable range. Change one of the three and the other two have to follow.
+  Inside that range the ink is not linear: `WRITE_END` (0.5) is the share of it the handwriting
+  takes, and the rest is the finished letter held still in front of the reader before the sheet
+  starts to arrive. `buildLetter()` sizes `.letter-track` for all three stretches
+  (`190vh + 0.62vh per glyph`, `150 + 0.5` on phones) — sizing it for the writing alone leaves the
+  sheet landing on a half-written page.
+- **One language for the whole site.** All four pages read and write the same localStorage key,
+  `hinenu-lang` — they used to have three (`hinenu-lang`, `harzaot-lang`, `mg-lang`), so English
+  fell back to Hebrew every time you moved between pages. Each page's `applyLang()` also translates
+  `src`, which is how the header logo swaps to `assets/logo-white-en.png` in the English view.
 - The header bars carry only הנני + / צרו קשר / נגישות / EN — the ניווט + fan was removed from
   every page, and so was the matching ניווט section inside the ☰ drawer. What is left on all four
   pages is הנני (the five actions) and עוד (צרו קשר / נגישות / view switch / EN).
 - Accessibility officer of record: רומי שמואלוב (romishmuelov@gmail.com) — named in the toolbar,
   in the statement modal and on `mitzpe-gvolot/accessibility.html`.
+- The lectures page ends on the hora: the light "מתי תרצו שנגיע?" band (with the hill illustration
+  and its `#hill` parallax) is gone, and the single CTA now sits over the film inside `.history`.
+  That section carries `id="cta"` because the floating `.dock` hides itself once the real CTA is on
+  screen — repoint `ctaSec` if the CTA ever moves again.
+- The hero video's pause button is `display:none` under 760px. WCAG 2.2.2 is still satisfied there
+  by the accessibility toolbar's "עצירת אנימציות", which pauses every `<video>` on the page — don't
+  remove that from `hinenu-common.js` without putting the button back.
+- The ventures rail on `more.html` is a ring: the markup holds one set of seven cards (one
+  "את/אתה?" card, six founders) and the script appends two `aria-hidden` clones of it, keeping
+  `scrollLeft` folded into the middle lap (`vlap` = first clone's `offsetLeft` minus the first
+  original's). Drift, drag, wheel and the position bar all go through `vWrite()`/the `scroll`
+  handler, so nothing ever reaches the scroller's real ends and the seam is pixel-identical.
+  The edge fades (`.vrail::before/::after`, 120px) are always on — there is no start or end to
+  reveal. Don't add a second "you" card to the markup; the ring brings the first one back around.
