@@ -235,8 +235,7 @@
   '</div></section>';
 
   var foot = document.createElement('footer');
-  foot.className = 'hn-foot';
-  foot.setAttribute('dir', 'rtl');
+  foot.className = 'hn-foot';   /* direction comes from <html dir>, so the English view mirrors it too */
   foot.innerHTML = html;
   document.body.appendChild(foot);
 
@@ -253,7 +252,6 @@
       d.setAttribute('aria-modal', 'true');
       d.setAttribute('aria-label', 'צרו קשר');
       d.setAttribute('data-en-aria-label', 'Contact us');
-      d.setAttribute('dir', 'rtl');
       d.innerHTML =
         '<div class="hn-dlg-card">' +
           '<button type="button" class="hn-dlg-close" aria-label="סגירה" data-en-aria-label="Close">✕</button>' +
@@ -268,7 +266,7 @@
             '<a class="hn-row" href="' + IG + '" target="_blank" rel="noopener">' + ICON.ig +
               '<span class="hn-row-txt"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>' +
             '<a class="hn-row" href="' + FB + '" target="_blank" rel="noopener">' + ICON.fb +
-              '<span class="hn-row-txt"><b data-en="Facebook">פייסבוק</b><i>הננוּ</i></span></a>' +
+              '<span class="hn-row-txt"><b data-en="Facebook">פייסבוק</b><i data-en="Hinenu">הננוּ</i></span></a>' +
             '<a class="hn-row" href="' + WA + '" target="_blank" rel="noopener">' + ICON.wa +
               '<span class="hn-row-txt"><b data-en="WhatsApp group">קבוצת הוואטסאפ</b>' +
               '<i data-en="Updates on the entrepreneurship evenings">עדכונים על ערבי היזמות</i></span></a>' +
@@ -406,7 +404,6 @@
       okDlg.hidden = true;
       okDlg.setAttribute('role', 'dialog');
       okDlg.setAttribute('aria-modal', 'true');
-      okDlg.setAttribute('dir', 'rtl');
       okDlg.innerHTML =
         '<div class="hn-dlg-card hn-ok-card">' +
           '<div class="hn-ok-mark" aria-hidden="true">' +

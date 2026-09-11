@@ -5,8 +5,10 @@ One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כ
 
 - **Live:** https://hinenu-website.vercel.app — this is the deployment that is actually current.
   `hinenu-site.vercel.app` still resolves but is a build from before the shared footer landed
-  (`assets/hinenu-common.js` 404s there); it does not rebuild on push. The hardcoded `og:image`
-  URLs still point at that stale host, so share cards pull months-old images — worth fixing.
+  (`assets/hinenu-common.js` and the `og-*.jpg` images 404 there); it does not rebuild on push.
+  Canonical / `og:url` / `og:image` / `twitter:image` on all four pages point at the live host
+  since 11.9.2026 (share cards had no image at all before that). Facebook/WhatsApp cache a card
+  per URL — re-scrape at developers.facebook.com/tools/debug after changing any of it.
 - **Repos:** `romi` → github.com/romishmuelov-bit/hinenu-website is what `main` tracks and what
   Vercel builds; `origin` → github.com/Itamargend/hinenu-site is kept in sync by hand. Push both.
 - Local preview: Itamar runs a static server on `localhost:8934` from this folder.
@@ -87,7 +89,9 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   circle and a pale-blue ground baked in, which read as a ring inside the CSS circle. It is cropped
   from a 1206×1292 PNG that sits in `assets/` untracked; `roee-azizi.jpg` is still the signature photo
   on the manifesto.
-- `og:image` URLs are absolute and hardcoded to `hinenu-site.vercel.app`. A custom domain means updating them in all four pages.
+- `og:image` / canonical URLs are absolute and hardcoded to `hinenu-website.vercel.app`. A custom domain means updating them in all four pages.
+- The shared footer and the dialogs `hinenu-common.js` builds carry no `dir` of their own — they
+  inherit `<html dir>`, which each page's `applyLang()` flips, so the English view mirrors them.
 
 ## Open items
 - Google Form: turn on email notification per response (Formspree already mails each one, so this is belt-and-braces).
