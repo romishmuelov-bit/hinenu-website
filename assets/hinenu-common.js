@@ -119,6 +119,8 @@
 '#hnTop:hover svg{transform:translateY(-3px)}',
 '.hn-a11y-link{font-size:13px;color:#9A9C93;text-decoration:none;border-bottom:1px solid rgba(242,240,233,.3);padding-bottom:2px}',
 '.hn-a11y-link:hover{color:#fff;border-color:#fff}',
+/* the operator credit - a Latin string, so it stays LTR inside the RTL page */
+'.hn-legal{margin-top:-16px;padding:0 24px 30px;text-align:center;direction:ltr;font-size:11.5px;letter-spacing:.06em;color:#6E7066}',
 
 /* the fallback contact dialog, for a page with none of its own */
 '.hn-dlg{position:fixed;inset:0;z-index:120;display:flex;align-items:flex-start;justify-content:center;padding:8vh 20px 40px;background:rgba(10,12,24,.66);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);overflow-y:auto}',
@@ -232,7 +234,10 @@
     '<button type="button" class="hn-btn hn-btn-ghost" id="hnTop">' + ICON.up +
       '<span data-en="Back to top">חזרה למעלה</span></button>' +
     '<a class="hn-a11y-link" href="' + a11yHref + '" data-en="Accessibility statement">הצהרת נגישות</a>' +
-  '</div></section>';
+  '</div>' +
+  /* no data-en: the same Latin line in both languages */
+  '<div class="hn-legal">Operated by Community O (R. A.)</div>' +
+  '</section>';
 
   var foot = document.createElement('footer');
   foot.className = 'hn-foot';   /* direction comes from <html dir>, so the English view mirrors it too */

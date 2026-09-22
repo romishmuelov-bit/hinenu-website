@@ -3,12 +3,21 @@
 ## What this is
 One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כדרך חיים**: national-entrepreneurship evenings + an incubator (חממה) for young Israelis. Built July 2026 by Itamar + Claude. Fully redesigned 12.7 to a pitch-black cinematic one-pager.
 
-- **Live:** https://hinenu-website.vercel.app — this is the deployment that is actually current.
-  `hinenu-site.vercel.app` still resolves but is a build from before the shared footer landed
+- **Live:** https://www.hinenu.org.il — the custom domain, on the same Vercel project.
+  The apex 308s to `www`; `hinenu-website.vercel.app` still serves the same build.
+  `hinenu-site.vercel.app` also resolves but is from before the shared footer landed
   (`assets/hinenu-common.js` and the `og-*.jpg` images 404 there); it does not rebuild on push.
-  Canonical / `og:url` / `og:image` / `twitter:image` on all four pages point at the live host
-  since 11.9.2026 (share cards had no image at all before that). Facebook/WhatsApp cache a card
-  per URL — re-scrape at developers.facebook.com/tools/debug after changing any of it.
+  Canonical / `og:url` / `og:image` / `twitter:image` on all four pages point at
+  `www.hinenu.org.il` since 22.9.2026 (at the vercel.app host before that). Facebook/WhatsApp
+  cache a card per URL — re-scrape at developers.facebook.com/tools/debug after changing any of it.
+- **No `.html` in the home-page address.** `vercel.json` 301s `/(.*)index.html` → `/$1`, so
+  `/index.html` lands on `/` and `/mitzpe-gvolot/index.html` on `/mitzpe-gvolot/`. Every internal
+  link is root-absolute to match — `/`, `/#apply`, `/mitzpe-gvolot/`, `/mitzpe-gvolot/#overim` —
+  including `data-apply` on the script tags and the three `mitzpe-gvolot/*.html` redirect stubs.
+  Root-absolute means a local preview has to be served from this folder's root (not `file://`),
+  and the server has to answer a directory path with its `index.html`; `.claude/serve.ps1` does.
+  The other pages are still `/more.html` and `/harzaot.html` — turning those into `/more` and
+  `/harzaot` means `cleanUrls` in `vercel.json`, which a plain static server won't mirror.
 - **Repos:** `romi` → github.com/romishmuelov-bit/hinenu-website is what `main` tracks and what
   Vercel builds; `origin` → github.com/Itamargend/hinenu-site is kept in sync by hand. Push both.
 - Local preview: Itamar runs a static server on `localhost:8934` from this folder.
@@ -16,8 +25,10 @@ One-page RTL Hebrew marketing site for **הננו (Hinenu) — חלוציות כ
 ## Architecture — deliberately simple
 **Shared across every page:** `assets/hinenu-common.js` — a plain (non-defer) script included
 right before each page's own inline script. It injects the site footer (partners marquee with
-hover names, then one closing row: צרו קשר · הרצאות · חזרה למעלה · הצהרת נגישות, with nothing
-below it), the accessibility toolbar (font size, contrast, link highlight, readable font, stop-motion; saved in
+hover names, then one closing row: צרו קשר · הרצאות · חזרה למעלה · הצהרת נגישות, and under it
+the one quiet credit line `Operated by Community O (R. A.)` — `.hn-legal`, which is forced
+`direction:ltr` because it is a Latin string inside an RTL page and carries no `data-en`, being
+the same in both languages), the accessibility toolbar (font size, contrast, link highlight, readable font, stop-motion; saved in
 localStorage `hinenu-a11y`), and the idle scroll cue. The footer's צרו קשר opens the page's own
 `#contactModal` where there is one, and a dialog the script builds itself where there isn't
 (harzaot) — so the mail / Instagram / WhatsApp / leave-details rows exist in exactly one place. Everything it
@@ -89,7 +100,7 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
   circle and a pale-blue ground baked in, which read as a ring inside the CSS circle. It is cropped
   from a 1206×1292 PNG that sits in `assets/` untracked; `roee-azizi.jpg` is still the signature photo
   on the manifesto.
-- `og:image` / canonical URLs are absolute and hardcoded to `hinenu-website.vercel.app`. A custom domain means updating them in all four pages.
+- `og:image` / canonical URLs are absolute and hardcoded to `www.hinenu.org.il`. Another domain change means updating them in all four pages.
 - The shared footer and the dialogs `hinenu-common.js` builds carry no `dir` of their own — they
   inherit `<html dir>`, which each page's `applyLang()` flips, so the English view mirrors them.
 
@@ -100,7 +111,6 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 - Letter text may still be revised by Roee Azizi.
 - "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
 - Photos/videos wanted for כיף בעוטף + שמונה venture cards; videos from the 16.6 evening can be added to the past-event popup (`EV[2].gallery`).
-- Custom domain not configured.
 - `.hn-foot` is a `<footer>`, and index/more still carry the old site's `footer{ padding:230px 0 52px }`
   rule. The shared footer resets `padding:0` and `font-weight:inherit` on its links to shake that
   off — an element selector from the page will keep reaching it, so watch for it.
