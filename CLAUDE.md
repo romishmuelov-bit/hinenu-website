@@ -106,7 +106,8 @@ Everything else lives in **one `index.html`**: one `<style>` block, one vanilla-
 
 ## Open items
 - Google Form: turn on email notification per response (Formspree already mails each one, so this is belt-and-braces).
-- No analytics beyond the Meta pixel (`901591649440894`), which now fires `Lead` on submit plus `trackCustom` events via `data-track="Name"` on any element. GA4 still missing.
+- No analytics beyond two Meta pixels (`901591649440894` and, since 27.9.2026, `28469704542709696` —
+  both `init`ed in one snippet, so every `track` reaches both), which now fire `Lead` on submit plus `trackCustom` events via `data-track="Name"` on any element. GA4 still missing.
 - Phone-only "keep me posted" capture has nowhere to go — the quiet-channel strip links to the WhatsApp group instead. Needs its own Google Form if Romi wants the field.
 - Letter text may still be revised by Roee Azizi.
 - "אני רוצה עזרה לעבור לדרום או לצפון" fan item links to hinenupioneers.com pending a better target.
