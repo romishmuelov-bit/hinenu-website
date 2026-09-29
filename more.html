@@ -942,8 +942,8 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
   }
   .accel-cta:hover{ transform:translateY(-3px); background:#5468EE; box-shadow:0 22px 46px rgba(66,87,230,.55); }
   .events-grid{
-    display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
-    gap:24px; max-width:1080px; margin:46px auto 0;
+    display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:24px; max-width:1240px; margin:46px auto 0;
   }
   .ev-card{
     position:relative; border:none; background:none; padding:0; cursor:pointer;
@@ -1218,6 +1218,12 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
     font-family:var(--sans); font-weight:800; font-size:14px; letter-spacing:.04em;
     color:var(--dim); text-transform:none; margin:0 0 14px; text-align:center;
   }
+  .ev-dots{ display:none; justify-content:center; gap:8px; margin:0 0 6px; }
+  .ev-dots button{
+    width:8px; height:8px; padding:0; border:none; border-radius:50%; cursor:pointer;
+    background:rgba(255,255,255,.3); transition:background .2s ease, width .2s ease;
+  }
+  .ev-dots button[aria-current="true"]{ width:22px; border-radius:4px; background:var(--hl-blue); }
   .ev-strip-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
   .ev-shot{
     padding:0; border:none; background:none; cursor:pointer;
@@ -1544,7 +1550,18 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
     .event-wa-cta{ font-size:13px; padding:11px 16px; max-width:280px; }
     .accel-card{ padding:36px 24px; }
     .accel-cta{ font-size:14px; padding:14px 24px; }
-    .events-grid{ grid-template-columns:1fr; gap:22px; max-width:430px; }
+    /* phones: the evenings are a sideways swipe, one flyer at a time with the next peeking in */
+    .events-grid{
+      display:flex; gap:14px; max-width:none;
+      margin:30px -24px 0; padding:6px 24px 26px;
+      overflow-x:auto; overscroll-behavior-x:contain;
+      scroll-snap-type:x mandatory; scroll-padding-inline:24px;
+      scrollbar-width:none;
+    }
+    .events-grid::-webkit-scrollbar{ display:none; }
+    .events-grid .ev-card{ flex:0 0 min(72vw, 300px); scroll-snap-align:center; box-shadow:0 16px 30px rgba(0,0,0,.55); }
+    .events-grid .ev-card:hover{ transform:none; }
+    .ev-dots{ display:flex; }
     .ev-card img{ border-width:8px; }
     .ev-tag{ font-size:12px; }
     .ev-modal{ max-width:100%; }
@@ -1720,22 +1737,25 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
       </div>
       <div class="events-grid">
         <button type="button" class="ev-card reveal" data-ev="0" aria-haspopup="dialog">
-          <img src="assets/ev-orit.jpg" alt="ערב יזמות לאומית עם אורית קורמן נגרי - 7.9, תל אביב" data-en-alt="National entrepreneurship meet-up with Orit Korman Nagari - 7.9, Tel Aviv" loading="lazy">
+          <img src="assets/ev-sapir.webp" alt="ערב יזמות לאומית עם ספיר בלוזר - יום שני 12.10, 19:00, בית בן-גוריון תל אביב" data-en-alt="National entrepreneurship meet-up with Sapir Bluzer - Monday 12.10, 19:00, Beit Ben-Gurion Tel Aviv" loading="lazy">
         </button>
         <button type="button" class="ev-card reveal" data-ev="1" aria-haspopup="dialog">
+          <img src="assets/ev-orit.jpg" alt="ערב יזמות לאומית עם אורית קורמן נגרי - 7.9, תל אביב" data-en-alt="National entrepreneurship meet-up with Orit Korman Nagari - 7.9, Tel Aviv" loading="lazy">
+        </button>
+        <button type="button" class="ev-card reveal" data-ev="2" aria-haspopup="dialog">
           <img src="assets/ev-michael.webp" alt="ערב יזמות לאומית עם מייקל אייזנברג - 3.8, בית בן-גוריון תל אביב" data-en-alt="National entrepreneurship meet-up with Michael Eisenberg - 3.8, Beit Ben-Gurion Tel Aviv" loading="lazy">
         </button>
-        <button type="button" class="ev-card reveal" data-ev="2" style="--d:.08s" aria-haspopup="dialog">
+        <button type="button" class="ev-card reveal" data-ev="3" style="--d:.08s" aria-haspopup="dialog">
           <img src="assets/ev-yoel.webp" alt="ערב יזמות ציונית עם יואל זילברמן - 16.6, הרצליה" data-en-alt="Zionist entrepreneurship meet-up with Yoel Zilberman - 16.6, Herzliya" loading="lazy">
         </button>
       </div>
       <div class="ev-strip">
         <p class="ev-strip-lbl" data-en="Hinenu in action">מהערבים שהיו</p>
         <div class="ev-strip-row">
-          <button type="button" class="ev-shot" data-openev="0" data-track="GalleryOrit" aria-label="תמונות מהערב עם אורית קורמן נגרי" data-en-aria-label="Photos from the evening with Orit Korman Nagari"><img src="assets/ev-orit-2.jpg" alt="הקהל בערב היזמות עם אורית קורמן נגרי" data-en-alt="The audience at the meet-up with Orit Korman Nagari" loading="lazy"></button>
-          <button type="button" class="ev-shot" data-openev="0" data-track="GalleryOrit" aria-label="תמונות מהערב עם אורית קורמן נגרי" data-en-aria-label="Photos from the evening with Orit Korman Nagari"><img src="assets/ev-orit-3.jpg" alt="צעירים וצעירות מקשיבים בערב היזמות" data-en-alt="Young people listening at the meet-up" loading="lazy"></button>
-          <button type="button" class="ev-shot" data-openev="1" data-track="GalleryMichael" aria-label="תמונות מהערב עם מייקל אייזנברג" data-en-aria-label="Photos from the evening with Michael Eisenberg"><img src="assets/ev-michael-2-4.jpg" alt="הערב עם מייקל אייזנברג" data-en-alt="The evening with Michael Eisenberg" loading="lazy"></button>
-          <button type="button" class="ev-shot" data-openev="2" data-track="GalleryYoel" aria-label="תמונות מהערב עם יואל זילברמן" data-en-aria-label="Photos from the evening with Yoel Zilberman"><img src="assets/event-1.jpg" alt="הערב עם יואל זילברמן" data-en-alt="The evening with Yoel Zilberman" loading="lazy"></button>
+          <button type="button" class="ev-shot" data-openev="1" data-track="GalleryOrit" aria-label="תמונות מהערב עם אורית קורמן נגרי" data-en-aria-label="Photos from the evening with Orit Korman Nagari"><img src="assets/ev-orit-2.jpg" alt="הקהל בערב היזמות עם אורית קורמן נגרי" data-en-alt="The audience at the meet-up with Orit Korman Nagari" loading="lazy"></button>
+          <button type="button" class="ev-shot" data-openev="1" data-track="GalleryOrit" aria-label="תמונות מהערב עם אורית קורמן נגרי" data-en-aria-label="Photos from the evening with Orit Korman Nagari"><img src="assets/ev-orit-3.jpg" alt="צעירים וצעירות מקשיבים בערב היזמות" data-en-alt="Young people listening at the meet-up" loading="lazy"></button>
+          <button type="button" class="ev-shot" data-openev="2" data-track="GalleryMichael" aria-label="תמונות מהערב עם מייקל אייזנברג" data-en-aria-label="Photos from the evening with Michael Eisenberg"><img src="assets/ev-michael-2-4.jpg" alt="הערב עם מייקל אייזנברג" data-en-alt="The evening with Michael Eisenberg" loading="lazy"></button>
+          <button type="button" class="ev-shot" data-openev="3" data-track="GalleryYoel" aria-label="תמונות מהערב עם יואל זילברמן" data-en-aria-label="Photos from the evening with Yoel Zilberman"><img src="assets/event-1.jpg" alt="הערב עם יואל זילברמן" data-en-alt="The evening with Yoel Zilberman" loading="lazy"></button>
         </div>
       </div>
     </div>
@@ -2376,6 +2396,11 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
   /* ---- event: "learn more" toggle ---- */
   /* ---- evenings: cards open a popup ---- */
   var EV = [
+    { title:'ערב יזמות לאומית', guest:'עם ספיר בלוזר', status:'future',
+      chips:['יום שני · 12.10','19:00','בית בן-גוריון, תל אביב'],
+      lede:'ישראל גידלה דור מדהים מתוך משברים. עכשיו צריך לתת לו מסלול לבנות עתיד, ולא להיעלם בו. הננו מארחת את ספיר בלוזר - מייסדת ישראל 2050, מקימת פורום נשות המילואימניקים, לשעבר מנכ"לית התאחדות הסטודנטים הארצית, יזמת חברתית סדרתית.',
+      qs:['ערב ממוקד יזמות חברתית','הקמה של מיזמים חברתיים משני מציאות','האתגרים של יזמים חברתיים צעירים'],
+      wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t' },
     { title:'ערב יזמות לאומית', guest:'עם אורית קורמן נגרי', status:'past',
       chips:['יום שני · 7.9','19:00','תל אביב'],
       lede:'ישראל גידלה דור מדהים מתוך משברים. עכשיו צריך לתת לו מסלול לבנות עתיד, ולא להיעלם בו. הננו מארחת את אורית קורמן נגרי, סמנכ"לית במטה הלאומי לבינה מלאכותית.',
@@ -2390,6 +2415,11 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
       gallery:['assets/event-1.jpg','assets/event-2.jpg','assets/event-4.jpg','assets/event-3.jpg'] }
   ];
   var EV_EN = [
+    { title:'Meet-Up', guest:'with Sapir Bluzer', status:'future',
+      chips:['Monday · 12.10','19:00','Beit Ben-Gurion, Tel Aviv'],
+      lede:'Israel raised an incredible generation out of crises. Now it needs a path to build the future with it, not disappear into it. Hinenu hosts Sapir Bluzer - founder of Israel 2050, founder of the Reservists’ Wives Forum, former CEO of the National Student Union, serial social entrepreneur.',
+      qs:['An evening focused on social entrepreneurship','Building social ventures that change reality','The challenges facing young social entrepreneurs'],
+      wa:'https://chat.whatsapp.com/CubXiRIeUYWAgvHBDRQHbx?mode=gi_t' },
     { title:'Meet-Up', guest:'with Orit Korman Nagari', status:'past',
       chips:['Monday · 7.9','19:00','Tel Aviv'],
       lede:'Israel raised an incredible generation out of crises. Now it needs a path to build the future with it, not disappear into it. Hinenu hosts Orit Korman Nagari, deputy director at the National AI Program.',
@@ -2432,6 +2462,35 @@ src="https://www.facebook.com/tr?id=28469704542709696&ev=PageView&noscript=1"
   document.querySelectorAll('.ev-card').forEach(function(c){
     c.addEventListener('click', function(){ openEv(+c.dataset.ev); });
   });
+  /* phones swipe the evenings sideways: a dot per flyer shows where you are and jumps there */
+  var evGrid = document.querySelector('.events-grid');
+  if(evGrid){
+    var evCards = Array.prototype.slice.call(evGrid.querySelectorAll('.ev-card'));
+    var evDots = document.createElement('div');
+    evDots.className = 'ev-dots';
+    evCards.forEach(function(c, i){
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.setAttribute('aria-label', 'ערב ' + (i + 1));
+      d.setAttribute('data-en-aria-label', 'Evening ' + (i + 1));
+      d.addEventListener('click', function(){
+        evGrid.scrollBy({ left: c.getBoundingClientRect().left + c.offsetWidth / 2 - (evGrid.getBoundingClientRect().left + evGrid.clientWidth / 2), behavior:'smooth' });
+      });
+      evDots.appendChild(d);
+    });
+    evGrid.parentNode.insertBefore(evDots, evGrid.nextSibling);
+    var evMark = function(){
+      var mid = evGrid.getBoundingClientRect().left + evGrid.clientWidth / 2, best = 0, gap = Infinity;
+      evCards.forEach(function(c, i){
+        var r = c.getBoundingClientRect(), g = Math.abs(r.left + r.width / 2 - mid);
+        if(g < gap){ gap = g; best = i; }
+      });
+      Array.prototype.forEach.call(evDots.children, function(d, i){ d.setAttribute('aria-current', i === best ? 'true' : 'false'); });
+    };
+    evGrid.addEventListener('scroll', evMark, { passive:true });
+    window.addEventListener('resize', evMark);
+    evMark();
+  }
   document.querySelectorAll('[data-openev]').forEach(function(b){
     b.addEventListener('click', function(){ openEv(+b.dataset.openev); });
   });
