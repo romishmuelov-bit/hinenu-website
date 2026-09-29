@@ -29,7 +29,6 @@
   var IG   = 'https://www.instagram.com/hinenu_israel';
   var FB   = 'https://www.facebook.com/p/%D7%94%D7%A0%D7%A0%D7%95%D6%BC-61565788381476/';
   var MAIL = 'roee@hinenu.org.il';
-  var MAIL_SHAKED = 'shaked@hinenu.org.il';
   var A11Y_MAIL = 'romishmuelov@gmail.com';
   var a11yHref  = base + 'mitzpe-gvolot/accessibility.html';
 
@@ -265,9 +264,6 @@
             '<a class="hn-row" href="mailto:' + MAIL + '">' + ICON.mail +
               '<span class="hn-row-txt"><b data-en="Roee Azizi">רועי עזיזי</b>' +
               '<i data-en="Founder &amp; CEO · ' + MAIL + '">מייסד ומנכ״ל · ' + MAIL + '</i></span></a>' +
-            '<a class="hn-row" href="mailto:' + MAIL_SHAKED + '">' + ICON.mail +
-              '<span class="hn-row-txt"><b data-en="Shaked Wolk">שקד וולק</b>' +
-              '<i data-en="Director, the Pioneering Center · ' + MAIL_SHAKED + '">מנהלת המרכז לחלוציות · ' + MAIL_SHAKED + '</i></span></a>' +
             '<a class="hn-row" href="' + IG + '" target="_blank" rel="noopener">' + ICON.ig +
               '<span class="hn-row-txt"><b data-en="Instagram">אינסטגרם</b><i>@hinenu_israel</i></span></a>' +
             '<a class="hn-row" href="' + FB + '" target="_blank" rel="noopener">' + ICON.fb +
